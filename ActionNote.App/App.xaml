@@ -1,0 +1,19 @@
+﻿<uwpcCommon:UniversalApp
+    x:Class="ActionNote.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ActionNote.App"
+    xmlns:uwpcCommon="using:UWPCore.Framework.Common"
+    RequestedTheme="Dark">
+
+    <uwpcCommon:UniversalApp.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///UWPCore.Framework/Styles/ShellStyles.xaml"/>
+                <!--<ResourceDictionary Source="ms-appx:///UWPCore.Framework/Styles/SystemIcons.xaml" />
+                <ResourceDictionary Source="ms-appx:///UWPCore.Framework/Styles/CommonStyles.xaml"/>-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </uwpcCommon:UniversalApp.Resources>
+
+</uwpcCommon:UniversalApp>
