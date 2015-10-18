@@ -59,6 +59,12 @@ namespace ActionNote.App
                     Label = "Notes",
                     DestinationPage = typeof(MainPage)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = GlyphIcons.ListBlock,
+                    Label = "Archiv",
+                    DestinationPage = typeof(ArchivPage)
+                }
             };
         }
 
