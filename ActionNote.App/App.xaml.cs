@@ -1,4 +1,5 @@
 ﻿using ActionNote.App.Views;
+using ActionNote.Common.Modules;
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Controls;
@@ -18,7 +19,7 @@ namespace ActionNote.App
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
-            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, new DefaultModule())
+            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, new DefaultModule(), new AppModule())
         {
             InitializeComponent();
 
