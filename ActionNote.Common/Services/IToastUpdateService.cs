@@ -8,5 +8,6 @@ namespace ActionNote.Common.Services
 {
     public interface IToastUpdateService
     {
+        void Refresh();
     }
 }

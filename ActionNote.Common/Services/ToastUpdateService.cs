@@ -17,22 +17,26 @@ namespace ActionNote.Common.Services
         }
 
         // FIXME: just previous test code...
-        public void Test()
+        public void Refresh()
         {
-            var toastModel = GetContentToast("Content Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-            var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
-            toastNotification.SuppressPopup = true;
-            _toastService.Show(toastNotification);
+            _toastService.ClearHistory();
 
-            var toastModel2 = GetListToast("List Note", new List<string>() { "First item", "Second item", "Third item", "Fourth item", "Fifth item" });
-            var toastNotification2 = _toastService.AdaptiveFactory.Create(toastModel2);
-            toastNotification2.SuppressPopup = true;
-            _toastService.Show(toastNotification2);
+            // TODO: for each note, create an action center entry silently 
 
-            var toastModel3 = GetPictureToast("Picture Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "/Assets/Square150x150Logo.scale-200.png");
-            var toastNotification3 = _toastService.AdaptiveFactory.Create(toastModel3);
-            toastNotification3.SuppressPopup = true;
-            _toastService.Show(toastNotification3);
+            //var toastModel = GetContentToast("Content Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            //var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
+            //toastNotification.SuppressPopup = true;
+            //_toastService.Show(toastNotification);
+
+            //var toastModel2 = GetListToast("List Note", new List<string>() { "First item", "Second item", "Third item", "Fourth item", "Fifth item" });
+            //var toastNotification2 = _toastService.AdaptiveFactory.Create(toastModel2);
+            //toastNotification2.SuppressPopup = true;
+            //_toastService.Show(toastNotification2);
+
+            //var toastModel3 = GetPictureToast("Picture Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "/Assets/Square150x150Logo.scale-200.png");
+            //var toastNotification3 = _toastService.AdaptiveFactory.Create(toastModel3);
+            //toastNotification3.SuppressPopup = true;
+            //_toastService.Show(toastNotification3);
         }
 
         private AdaptiveToastModel GetContentToast(string title, string content)
