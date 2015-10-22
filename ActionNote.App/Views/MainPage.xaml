@@ -6,7 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
+    xmlns:localViewModels="using:ActionNote.App.ViewModels"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <localViewModels:MainViewModel />
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -31,6 +36,9 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <StackPanel Margin="16">
+                <Button Content="Action Center!" Command="{Binding TestPostNotification}" />
+            </StackPanel>
         </Grid>
     </Grid>
 </uwpcControls:UniversalPage>

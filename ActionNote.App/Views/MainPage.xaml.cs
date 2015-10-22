@@ -1,4 +1,5 @@
-﻿using UWPCore.Framework.Controls;
+﻿using ActionNote.App.ViewModels;
+using UWPCore.Framework.Controls;
 
 namespace ActionNote.App.Views
 {
