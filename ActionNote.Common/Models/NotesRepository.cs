@@ -8,7 +8,7 @@ namespace ActionNote.Common.Models
 {
     public class NotesRepository : INotesRepository
     {
-        private IList<NoteItem> _data;
+        private static IList<NoteItem> _data;
 
         public bool HasLoaded { get; private set; }
 
@@ -90,11 +90,11 @@ namespace ActionNote.Common.Models
             if (!HasLoaded)
             {
                 // TODO: load data from disk
-                Add(new NoteItem("Title 1", "Content 1"));
-                Add(new NoteItem("Title 2", "Content 2"));
-                Add(new NoteItem("Title 3", "Content 3"));
-                Add(new NoteItem("Title 4", "Content 4"));
-                Add(new NoteItem("Title 5", "Content 5"));
+                Add(new NoteItem("Title 1", "Content 1") { Id = "1" });
+                Add(new NoteItem("Title 2", "Content 2") { Id = "2" });
+                Add(new NoteItem("Title 3", "Content 3") { Id = "3" });
+                Add(new NoteItem("Title 4", "Content 4") { Id = "4" });
+                Add(new NoteItem("Title 5", "Content 5") { Id = "5" });
 
                 HasLoaded = true;
                 return true;

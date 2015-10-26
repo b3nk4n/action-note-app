@@ -20,15 +20,14 @@ namespace ActionNote.Common.Services
         {
             _toastService = toastService;
             _notesRepository = notesRepository;
+
+            // ensure the repository has been loaded
+            _notesRepository.Load(); // TODO: lazy load?
         }
 
-        // FIXME: just previous test code...
         public void Refresh()
         {
             _toastService.ClearHistory();
-
-            // ensure the repository has been loaded
-            _notesRepository.Load();
 
             foreach (var note in _notesRepository.GetAll())
             {
@@ -55,6 +54,34 @@ namespace ActionNote.Common.Services
             //var toastNotification3 = _toastService.AdaptiveFactory.Create(toastModel3);
             //toastNotification3.SuppressPopup = true;
             //_toastService.Show(toastNotification3);
+        }
+
+        public void DeleteNotesThatAreMissingInActionCenter()
+        {
+            // find IDs to remove
+            var noteIdsToRemove = GetAllNoteIds();
+            foreach (var historyItem in _toastService.History)
+            {
+                noteIdsToRemove.Remove(historyItem.Tag);
+            }
+
+            // remove from repository
+            foreach (var noteId in noteIdsToRemove)
+            {
+                _notesRepository.Remove(noteId);
+            }
+        }
+
+        private IList<string> GetAllNoteIds()
+        {
+            var idList = new List<string>();
+
+            foreach (var item in _notesRepository.GetAll())
+            {
+                idList.Add(item.Id);
+            }
+
+            return idList;
         }
 
         private AdaptiveToastModel GetContentToast(string title, string content)

@@ -1,11 +1,16 @@
-﻿using ActionNote.Common.Modules;
+﻿using ActionNote.Common;
+using ActionNote.Common.Models;
+using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
+using UWPCore.Framework.Logging;
+using UWPCore.Framework.Storage;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -28,11 +33,34 @@ namespace ActionNote.Tasks
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
             if (details != null)
             {
-                if (details.ChangeType != ToastHistoryChangedType.Added)
+                if (details.ChangeType == ToastHistoryChangedType.Cleared) // TODO: check, why the change type is never clear!?
                 {
-                    _toastUpdateService.Refresh();
+                    if (!AppSettings.AllowClearNotes.Value)
+                    {
+                        Logger.WriteLine("Clear - refresh");
+                        _toastUpdateService.Refresh();
+                    }
+                    else
+                    {
+                        Logger.WriteLine("Clear - delete missing refresh");
+                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter();
+                        _toastUpdateService.Refresh();
+                    }
                 }
-
+                else if (details.ChangeType == ToastHistoryChangedType.Removed)
+                {
+                    if (!AppSettings.AllowRemoveNotes.Value)
+                    {
+                        Logger.WriteLine("Remove - refresh");
+                        _toastUpdateService.Refresh();
+                    }
+                    else
+                    {
+                        Logger.WriteLine("Remove - delete missing refresh");
+                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter();
+                        _toastUpdateService.Refresh();
+                    }
+                }
             }
 
             deferral.Complete();
