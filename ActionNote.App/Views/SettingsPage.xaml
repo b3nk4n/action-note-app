@@ -6,7 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
+    xmlns:uwpcViewModels="using:ActionNote.App.ViewModels"
     mc:Ignorable="d">
+
+    <Page.DataContext>
+        <uwpcViewModels:SettingsViewModel />
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -22,7 +27,10 @@
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <ScrollViewer>
-                <StackPanel>
+                <StackPanel Margin="16">
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4" />
+                    <ToggleSwitch Header="Allow to remove a note" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" Margin="4" />
+                    <ToggleSwitch Header="Allow to clear all notes" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" Margin="4" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
