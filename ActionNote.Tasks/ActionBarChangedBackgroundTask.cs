@@ -26,7 +26,6 @@ namespace ActionNote.Tasks
             var deferral = taskInstance.GetDeferral();
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
-
             if (details != null)
             {
                 if (details.ChangeType != ToastHistoryChangedType.Added)

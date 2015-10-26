@@ -29,7 +29,7 @@
             <CommandBar.Content>
                 <uwpcControls:PageHeader>
                     <uwpcControls:PageHeader.HeaderContent>
-                        <TextBlock Text="UPW CORE FRAMEWORK" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                        <TextBlock Text="ACTION NOTE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
                     </uwpcControls:PageHeader.HeaderContent>
                 </uwpcControls:PageHeader>
             </CommandBar.Content>

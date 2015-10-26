@@ -107,15 +107,18 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\INotesRepository.cs" />
+    <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\IRepositoryItem.cs" />
+    <Compile Include="Models\NoteItem.cs" />
+    <Compile Include="Models\NotesRepository.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IToastUpdateService.cs" />
     <Compile Include="Services\ToastUpdateService.cs" />
     <Content Include="Properties\ActionNote.Common.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="C:\Projects\UWP\UWPCore.Framework\Framework\UWPCore.Framework\UWPCore.Framework.csproj">
       <Project>{a730354a-b009-4392-8d04-e065347e548a}</Project>

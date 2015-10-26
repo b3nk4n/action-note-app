@@ -1,4 +1,6 @@
-﻿using Ninject;
+﻿using ActionNote.Common.Models;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UWPCore.Framework.Notifications;
@@ -8,12 +10,16 @@ namespace ActionNote.Common.Services
 {
     public class ToastUpdateService : IToastUpdateService
     {
+        public const string GROUP_NOTE = "note";
+
         private IToastService _toastService;
+        private INotesRepository _notesRepository;
 
         [Inject]
-        public ToastUpdateService(IToastService toastService)
+        public ToastUpdateService(IToastService toastService, INotesRepository notesRepository)
         {
             _toastService = toastService;
+            _notesRepository = notesRepository;
         }
 
         // FIXME: just previous test code...
@@ -21,7 +27,19 @@ namespace ActionNote.Common.Services
         {
             _toastService.ClearHistory();
 
-            // TODO: for each note, create an action center entry silently 
+            // ensure the repository has been loaded
+            _notesRepository.Load();
+
+            foreach (var note in _notesRepository.GetAll())
+            {
+                var toastModel = GetContentToast(note.Title, note.Content);
+                var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
+                toastNotification.SuppressPopup = true;
+                toastNotification.Group = GROUP_NOTE;
+                toastNotification.Tag = note.Id;
+                
+                _toastService.Show(toastNotification);
+            }
 
             //var toastModel = GetContentToast("Content Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
             //var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
