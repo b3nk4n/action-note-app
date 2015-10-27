@@ -7,20 +7,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     xmlns:localViewModels="using:ActionNote.App.ViewModels"
+    xmlns:localControls="using:ActionNote.App.Controls"
     mc:Ignorable="d">
-
-    <Page.DataContext>
-        <localViewModels:MainViewModel />
-    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Add" Label="Add note"/>
+        <CommandBar x:Name="topBar" Grid.Row="0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
+            <AppBarButton Icon="Edit" Label="Edit note" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarSeparator/>
             <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
@@ -35,9 +33,13 @@
             </CommandBar.Content>
         </CommandBar>
 
+        <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
+            <AppBarButton Icon="Add" Label="Add note" Command="{Binding AddCommand}"/>
+        </CommandBar>
+
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <StackPanel Margin="16">
-                <ListView ItemsSource="{Binding NoteItems, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -49,5 +51,11 @@
                 </ListView>
             </StackPanel>
         </Grid>
+
+        <localControls:NoteControl x:Name="EditControl" Grid.Row="1" Margin="16" Visibility="Collapsed">
+            <!--<localControls:NoteControl.DataContext>
+                <localViewModels:NoteControlViewModel />
+            </localControls:NoteControl.DataContext>-->
+        </localControls:NoteControl>
     </Grid>
 </uwpcControls:UniversalPage>

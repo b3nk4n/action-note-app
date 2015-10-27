@@ -1,5 +1,4 @@
 ﻿using ActionNote.Common;
-using System;
 using UWPCore.Framework.Mvvm;
 
 namespace ActionNote.App.ViewModels

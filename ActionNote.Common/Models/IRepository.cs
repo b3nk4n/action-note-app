@@ -7,6 +7,7 @@ namespace ActionNote.Common.Models
         void Add(TEntity entity);
         TEntity Get(TKey id);
         IList<TEntity> GetAll();
+        bool Contains(TKey id);
         void Update(TEntity prototype);
         void Remove(TKey id);
         void Remove(TEntity entity);

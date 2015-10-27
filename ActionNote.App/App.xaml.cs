@@ -1,5 +1,4 @@
 ﻿using ActionNote.App.Views;
-using ActionNote.Common;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
@@ -97,13 +96,19 @@ namespace ActionNote.App
             {
                 new NavMenuItem()
                 {
-                    Symbol = GlyphIcons.List,
+                    Symbol = GlyphIcons.AllApps,
                     Label = "Notes",
                     DestinationPage = typeof(MainPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = GlyphIcons.ListBlock,
+                    Symbol = GlyphIcons.BrowsePhotos,
+                    Label = "Media",
+                    DestinationPage = null // TODO: idea for own page?
+                },
+                new NavMenuItem()
+                {
+                    Symbol = GlyphIcons.Delete,
                     Label = "Archiv",
                     DestinationPage = typeof(ArchivPage)
                 }

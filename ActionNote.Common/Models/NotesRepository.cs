@@ -38,6 +38,11 @@ namespace ActionNote.Common.Models
             return _data;
         }
 
+        public bool Contains(string id)
+        {
+            return Get(id) != null;
+        }
+
         public void Remove(NoteItem entity)
         {
             Remove(entity.Id);

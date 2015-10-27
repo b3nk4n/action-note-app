@@ -8,15 +8,25 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ActionNote.App.ViewModels
 {
+    public interface MainViewModelCallbacks
+    {
+        void ShowEditView(NoteItem noteItem);
+        void HideEditView();
+    }
+
     public class MainViewModel : ViewModelBase
     {
+        private MainViewModelCallbacks _callbacks;
+
         private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
 
         public ObservableCollection<NoteItem> NoteItems { get; private set; } = new ObservableCollection<NoteItem>();
 
-        public MainViewModel()
+        public MainViewModel(MainViewModelCallbacks callbacks)
         {
+            _callbacks = callbacks;
+
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
 
@@ -36,7 +46,16 @@ namespace ActionNote.App.ViewModels
 
             AddCommand = new DelegateCommand(() =>
             {
-                // TODO: show add new note view
+                _callbacks.ShowEditView(null);
+            });
+
+            EditCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            {
+                _callbacks.ShowEditView(noteItem);
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
             });
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
@@ -78,6 +97,8 @@ namespace ActionNote.App.ViewModels
         public ICommand ClearCommand { get; private set; }
 
         public ICommand AddCommand { get; private set; }
+
+        public ICommand EditCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
     }

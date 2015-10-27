@@ -41,5 +41,14 @@ namespace ActionNote.Common.Models
             guid = guid.Replace("-", "");
             return guid;
         }
+
+        public NoteItem Clone()
+        {
+            var clone = new NoteItem();
+            clone.Id = Id;
+            clone.Title = Title;
+            clone.Content = Content;
+            return clone;
+        }
     }
 }
