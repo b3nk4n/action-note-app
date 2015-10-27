@@ -61,6 +61,11 @@ namespace ActionNote.Common.Models
                 _data.RemoveAt(indexToRemove);
         }
 
+        public void Clear()
+        {
+            _data.Clear();
+        }
+
         public void Update(NoteItem prototype)
         {
             var entity = Get(prototype.Id);

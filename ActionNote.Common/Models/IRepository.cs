@@ -10,6 +10,7 @@ namespace ActionNote.Common.Models
         void Update(TEntity prototype);
         void Remove(TKey id);
         void Remove(TEntity entity);
+        void Clear();
 
         bool Save();
         bool Load();

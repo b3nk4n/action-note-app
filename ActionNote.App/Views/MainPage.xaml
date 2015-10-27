@@ -22,9 +22,9 @@
         <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
             <AppBarButton Icon="Add" Label="Add note"/>
             <AppBarSeparator/>
-            <AppBarButton Icon="Delete" Label="Delete"/>
+            <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Menu Item 1"/>
+                <AppBarButton Label="Clear all" Command="{Binding ClearCommand}"/>
             </CommandBar.SecondaryCommands>
             <CommandBar.Content>
                 <uwpcControls:PageHeader>
@@ -37,7 +37,16 @@
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <StackPanel Margin="16">
-                <Button Content="Action Center!" Command="{Binding TestPostNotification}" />
+                <ListView ItemsSource="{Binding NoteItems, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" />
+                                <TextBlock Text="{Binding Content}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </Grid>
     </Grid>
