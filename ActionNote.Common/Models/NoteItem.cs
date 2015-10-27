@@ -1,4 +1,5 @@
 ﻿using System;
+using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
 
 namespace ActionNote.Common.Models

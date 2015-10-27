@@ -109,8 +109,6 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Models\INotesRepository.cs" />
-    <Compile Include="Models\IRepository.cs" />
-    <Compile Include="Models\IRepositoryItem.cs" />
     <Compile Include="Models\NoteItem.cs" />
     <Compile Include="Models\NotesRepository.cs" />
     <Compile Include="Modules\AppModule.cs" />
