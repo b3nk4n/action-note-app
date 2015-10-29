@@ -36,7 +36,11 @@
                         MoreAppsText="More apps"
                         ShareAppText="Share link to this app"
                         FeedbackToEmail="apps@bsautermeister.de"
-                        PrivacyInfoUri="http://bsautermeister.de/privacy.php" />
+                        PrivacyInfoUri="http://bsautermeister.de/privacy.php" >
+                            <uwpcViewModels:AboutViewModel.Contributors>
+                                <uwpcModels:ContributorModel Title="Arthur Shlain (Noun Project)" Icon="/Assets/Images/noun_project.png" />
+                            </uwpcViewModels:AboutViewModel.Contributors>
+                        </uwpcViewModels:AboutViewModel>
                     </uwpcControls:AboutControl.DataContext>
                 </uwpcControls:AboutControl>
             </ScrollViewer>
