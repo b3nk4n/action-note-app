@@ -120,6 +120,10 @@ namespace ActionNote.Common.Services
                             }
                         }
                     }
+                },
+                Audio = new AdaptiveAudio()
+                {
+                    Silent = true,
                 }
             };
         }
