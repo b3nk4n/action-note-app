@@ -1,19 +1,47 @@
 ﻿using System;
+using System.ComponentModel;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
 
 namespace ActionNote.Common.Models
 {
+    public enum ColorCategory
+    {
+        [DefaultValue(true)]
+        Neutral, // = Transparent, Accent?
+        Red,
+        Blue,
+        Green,
+        Yellow,
+        Violett,
+        Orange
+    }
+
     public class NoteItem : BindableBase, IRepositoryItem<string>
     {
-        public string Id { get { return _id; } set { Set(ref _id, value); } }
+        public string Id {
+            get { return _id; }
+            set { Set(ref _id, value); }
+        }
         private string _id;
 
-        public string Title { get { return _title; } set { Set(ref _title, value); } }
+        public string Title {
+            get { return _title; }
+            set { Set(ref _title, value); }
+        }
         private string _title;
 
-        public string Content { get { return _content; } set { Set(ref _content, value); } }
+        public string Content {
+            get { return _content; }
+            set { Set(ref _content, value); }
+        }
         private string _content;
+
+        public ColorCategory? Color {
+            get { return _color; }
+            set { Set(ref _color, value); }
+        }
+        private ColorCategory? _color = ColorCategory.Neutral;
 
         public NoteItem()
         {
@@ -49,6 +77,7 @@ namespace ActionNote.Common.Models
             clone.Id = Id;
             clone.Title = Title;
             clone.Content = Content;
+            clone.Color = Color;
             return clone;
         }
     }

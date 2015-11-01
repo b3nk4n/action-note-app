@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Converters\ColorCategoryToImageConverter.cs" />
     <Compile Include="Models\INotesRepository.cs" />
     <Compile Include="Models\NoteItem.cs" />
     <Compile Include="Models\NotesRepository.cs" />

@@ -8,7 +8,13 @@
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     xmlns:localViewModels="using:ActionNote.App.ViewModels"
     xmlns:localControls="using:ActionNote.App.Controls"
+    xmlns:commonModels="using:ActionNote.Common.Models"
+    xmlns:commonConverters="using:ActionNote.Common.Converters"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -43,8 +49,11 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Title}" />
-                                <TextBlock Text="{Binding Content}" />
+                                <TextBlock Text="{Binding Title}" Margin="4" />
+                                <TextBlock Text="{Binding Content}" Margin="4" />
+                                
+                                <!-- color category -->
+                                <Image Source="{Binding Color, Converter={StaticResource colorImageConv}}" Width="32" Height="32" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

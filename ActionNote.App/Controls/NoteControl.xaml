@@ -6,12 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcConverters="using:UWPCore.Framework.Converters"
+    xmlns:commonConverters="using:ActionNote.Common.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    x:Name="self">
 
     <UserControl.Resources>
         <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
+        <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />
     </UserControl.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -19,6 +22,16 @@
             <StackPanel DataContext="{Binding SelectedNote}">
                 <TextBox PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" />
                 <TextBox PlaceholderText="Content..." Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" Height="200" Margin="4" />
+                <ComboBox ItemsSource="{Binding ElementName=self, Path=DataContext.ColorEnumSource.ItemsSource}" SelectedItem="{Binding Color, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="4">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Converter={StaticResource colorImageConv}}" Width="32" Height="32" Margin="4" />
+                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="4" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>

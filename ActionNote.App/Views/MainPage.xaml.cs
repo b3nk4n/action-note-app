@@ -19,7 +19,10 @@ namespace ActionNote.App.Views
 
         public void ShowEditView(NoteItem noteItem)
         {
-            EditControl.DataContext = new NoteControlViewModel(noteItem);
+            var noteViewModel = new NoteControlViewModel(noteItem);
+            noteViewModel.NotifyControlShown();
+            EditControl.DataContext = noteViewModel;
+
             EditControl.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
 

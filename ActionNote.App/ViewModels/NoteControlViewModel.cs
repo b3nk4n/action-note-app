@@ -1,7 +1,11 @@
 ﻿using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System.Windows.Input;
+using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
+using System.Collections.Generic;
+using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 namespace ActionNote.App.ViewModels
 {
@@ -9,6 +13,8 @@ namespace ActionNote.App.ViewModels
     {
         private INotesRepository _notesRepository;
         private IToastUpdateService _toastUpdateService;
+
+        public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
         public NoteControlViewModel()
             : this(null)
@@ -45,6 +51,11 @@ namespace ActionNote.App.ViewModels
             {
                 NavigationService.GoBack();
             });
+        }
+
+        public void NotifyControlShown() // TODO: remove when refactored?
+        {
+            ColorEnumSource.SelectedValue = SelectedNote.Color.ToString(); // TODO: this is never called: (1) nested view model (2) no navigation is performed! --> merge noteControl inside of main page?
         }
 
         /// <summary>

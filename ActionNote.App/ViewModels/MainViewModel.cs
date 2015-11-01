@@ -46,8 +46,7 @@ namespace ActionNote.App.ViewModels
 
             AddCommand = new DelegateCommand(() =>
             {
-                //_callbacks.ShowEditView(null);
-                _toastUpdateService.Refresh();
+                _callbacks.ShowEditView(null);
             });
 
             EditCommand = new DelegateCommand<NoteItem>((noteItem) =>
