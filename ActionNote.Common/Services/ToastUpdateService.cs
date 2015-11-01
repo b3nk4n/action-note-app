@@ -1,4 +1,5 @@
-﻿using ActionNote.Common.Models;
+﻿using ActionNote.Common.Converters;
+using ActionNote.Common.Models;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace ActionNote.Common.Services
 
             foreach (var note in _notesRepository.GetAll())
             {
-                var toastModel = GetContentToast(note.Title, note.Content);
+                var toastModel = GetToastModel(note);
                 var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
                 toastNotification.SuppressPopup = true;
                 toastNotification.Group = GROUP_NOTE;
@@ -84,7 +85,7 @@ namespace ActionNote.Common.Services
             return idList;
         }
 
-        private AdaptiveToastModel GetContentToast(string title, string content)
+        private AdaptiveToastModel GetToastModel(NoteItem noteItem)
         {
             return new AdaptiveToastModel()
             {
@@ -98,99 +99,23 @@ namespace ActionNote.Common.Services
                             Template = VisualTemplate.ToastGeneric,
                             Children =
                             {
-                                new AdaptiveText()
-                                {
-                                    Content = title,
-                                    HintStyle = TextStyle.Title,
-                                    HintMaxLines = 2,
-                                    HintWrap = true
-                                },
-                                new AdaptiveText()
-                                {
-                                    Content = content,
-                                    HintStyle = TextStyle.Base,
-                                    HintWrap = true
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-        }
-
-        private AdaptiveToastModel GetListToast(string title, IList<string> items)
-        {
-            var sb = new StringBuilder();
-
-            foreach (var item in items)
-            {
-                sb.AppendLine("▪ " + item);
-            }
-
-            return new AdaptiveToastModel()
-            {
-                Visual = new AdaptiveVisual()
-                {
-                    Branding = VisualBranding.None,
-                    Bindings =
-                    {
-                        new AdaptiveBinding()
-                        {
-                            Template = VisualTemplate.ToastGeneric,
-                            Children =
-                            {
-                                new AdaptiveText()
-                                {
-                                    Content = title,
-                                    HintStyle = TextStyle.Title,
-                                    HintMaxLines = 2,
-                                    HintWrap = true
-                                },
-                                new AdaptiveText()
-                                {
-                                    Content = sb.ToString(),
-                                    HintStyle = TextStyle.Base,
-                                    HintWrap = true
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-        }
-
-        private AdaptiveToastModel GetPictureToast(string title, string content, string picturePath)
-        {
-            return new AdaptiveToastModel()
-            {
-                Visual = new AdaptiveVisual()
-                {
-                    Branding = VisualBranding.None,
-                    Bindings =
-                    {
-                        new AdaptiveBinding()
-                        {
-                            Template = VisualTemplate.ToastGeneric,
-                            Children =
-                            {
-                                new AdaptiveText()
-                                {
-                                    Content = title,
-                                    HintStyle = TextStyle.Title,
-                                    HintMaxLines = 2,
-                                    HintWrap = true
-                                },
-                                new AdaptiveText()
-                                {
-                                    Content = content,
-                                    HintStyle = TextStyle.Base,
-                                    HintWrap = true
-                                },
                                 new AdaptiveImage()
                                 {
-                                    HintAlign = ImageHintAlign.Stretch,
-                                    Placement = ImagePlacement.Inline,
-                                    Source = picturePath
+                                    Placement = ImagePlacement.AppLogoOverride,
+                                    Source = (string)new ColorCategoryToImageConverter().Convert(noteItem.Color, null, null, null)
+                                },
+                                new AdaptiveText()
+                                {
+                                    Content = noteItem.Title,
+                                    HintStyle = TextStyle.Title,
+                                    HintMaxLines = 2,
+                                    HintWrap = true
+                                },
+                                new AdaptiveText()
+                                {
+                                    Content = noteItem.Content,
+                                    HintStyle = TextStyle.Base,
+                                    HintWrap = true
                                 }
                             }
                         }
@@ -198,5 +123,86 @@ namespace ActionNote.Common.Services
                 }
             };
         }
+
+        //private AdaptiveToastModel GetListToast(string title, IList<string> items)
+        //{
+        //    var sb = new StringBuilder();
+
+        //    foreach (var item in items)
+        //    {
+        //        sb.AppendLine("▪ " + item);
+        //    }
+
+        //    return new AdaptiveToastModel()
+        //    {
+        //        Visual = new AdaptiveVisual()
+        //        {
+        //            Branding = VisualBranding.None,
+        //            Bindings =
+        //            {
+        //                new AdaptiveBinding()
+        //                {
+        //                    Template = VisualTemplate.ToastGeneric,
+        //                    Children =
+        //                    {
+        //                        new AdaptiveText()
+        //                        {
+        //                            Content = title,
+        //                            HintStyle = TextStyle.Title,
+        //                            HintMaxLines = 2,
+        //                            HintWrap = true
+        //                        },
+        //                        new AdaptiveText()
+        //                        {
+        //                            Content = sb.ToString(),
+        //                            HintStyle = TextStyle.Base,
+        //                            HintWrap = true
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };
+        //}
+
+        //private AdaptiveToastModel GetPictureToast(string title, string content, string picturePath)
+        //{
+        //    return new AdaptiveToastModel()
+        //    {
+        //        Visual = new AdaptiveVisual()
+        //        {
+        //            Branding = VisualBranding.None,
+        //            Bindings =
+        //            {
+        //                new AdaptiveBinding()
+        //                {
+        //                    Template = VisualTemplate.ToastGeneric,
+        //                    Children =
+        //                    {
+        //                        new AdaptiveText()
+        //                        {
+        //                            Content = title,
+        //                            HintStyle = TextStyle.Title,
+        //                            HintMaxLines = 2,
+        //                            HintWrap = true
+        //                        },
+        //                        new AdaptiveText()
+        //                        {
+        //                            Content = content,
+        //                            HintStyle = TextStyle.Base,
+        //                            HintWrap = true
+        //                        },
+        //                        new AdaptiveImage()
+        //                        {
+        //                            HintAlign = ImageHintAlign.Stretch,
+        //                            Placement = ImagePlacement.Inline,
+        //                            Source = picturePath
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };
+        //}
     }
 }
