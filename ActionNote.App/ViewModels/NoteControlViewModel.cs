@@ -6,9 +6,17 @@ using UWPCore.Framework.Mvvm;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace ActionNote.App.ViewModels
 {
+    public interface INoteControlViewModelCallbacks
+    {
+        void NoteSaved(NoteItem noteItem);
+        void NoteUpdated(NoteItem noteItem);
+        void NoteDiscared();
+    }
+
     public class NoteControlViewModel : ViewModelBase
     {
         private INotesRepository _notesRepository;
@@ -16,13 +24,16 @@ namespace ActionNote.App.ViewModels
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
-        public NoteControlViewModel()
-            : this(null)
+        private INoteControlViewModelCallbacks _callbacks;
+
+        public NoteControlViewModel(INoteControlViewModelCallbacks callbacks)
+            : this(callbacks, null)
         {
         }
 
-        public NoteControlViewModel(NoteItem editItem)
+        public NoteControlViewModel(INoteControlViewModelCallbacks callbacks, NoteItem editItem)
         {
+            _callbacks = callbacks;
             SelectedNote = (editItem == null) ? new NoteItem() : editItem.Clone();
 
             _toastUpdateService = Injector.Get<IToastUpdateService>();
@@ -33,14 +44,14 @@ namespace ActionNote.App.ViewModels
                 if (_notesRepository.Contains(noteItem.Id))
                 {
                     _notesRepository.Update(noteItem);
+                    _callbacks.NoteUpdated(noteItem);
                 }
                 else
                 {
                     _notesRepository.Add(noteItem);
+                    _callbacks.NoteSaved(noteItem);
                 }
                 _toastUpdateService.Refresh();
-
-                // TODO: hide itself
             },
             (noteItem) =>
             {
@@ -49,13 +60,9 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                NavigationService.GoBack();
+                //NavigationService.GoBack();
+                _callbacks.NoteDiscared();
             });
-        }
-
-        public void NotifyControlShown() // TODO: remove when refactored?
-        {
-            ColorEnumSource.SelectedValue = SelectedNote.Color.ToString(); // TODO: this is never called: (1) nested view model (2) no navigation is performed! --> merge noteControl inside of main page?
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 namespace ActionNote.App.ViewModels
 {
@@ -21,7 +22,10 @@ namespace ActionNote.App.ViewModels
         private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
 
-        public ObservableCollection<NoteItem> NoteItems { get; private set; } = new ObservableCollection<NoteItem>();
+        public ObservableCollection<NoteItem> NoteItems {
+            get;
+            private set;
+        } = new ObservableCollection<NoteItem>();
 
         public MainViewModel(MainViewModelCallbacks callbacks)
         {
@@ -77,7 +81,22 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            _notesRepository.Load();
+            ReloadData();
+
+            // TODO: why do we have to manually raise the property? it's an observable collection!
+            RaisePropertyChanged("NoteItems");
+        }
+
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            await _notesRepository.Save();
+
+            await base.OnNavigatedFromAsync(state, suspending);
+        }
+
+        private void ReloadData()
+        {
+            NoteItems.Clear();
             foreach (var note in _notesRepository.GetAll())
             {
                 NoteItems.Add(note);

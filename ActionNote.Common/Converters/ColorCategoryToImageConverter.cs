@@ -13,6 +13,9 @@ namespace ActionNote.Common.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            if (value == null)
+                return "/Assets/Images/neutral.png"; // error
+
             var color = (ColorCategory)value;
             return string.Format("/Assets/Images/{0}.png", color.ToString().FirstLetterToLower());
         }

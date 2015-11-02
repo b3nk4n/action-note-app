@@ -43,25 +43,24 @@
             <AppBarButton Icon="Add" Label="Add note" Command="{Binding AddCommand}"/>
         </CommandBar>
 
-        <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
-            <StackPanel Margin="16">
-                <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+        <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Padding="16">
+            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock Text="{Binding Title}" Margin="4" />
                                 <TextBlock Text="{Binding Content}" Margin="4" />
-                                
+
                                 <!-- color category -->
                                 <Image Source="{Binding Color, Converter={StaticResource colorImageConv}}" Width="32" Height="32" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackPanel>
         </Grid>
 
         <localControls:NoteControl x:Name="EditControl" Grid.Row="1" Margin="16" Visibility="Collapsed">
+            <!-- created at runtime -->
             <!--<localControls:NoteControl.DataContext>
                 <localViewModels:NoteControlViewModel />
             </localControls:NoteControl.DataContext>-->
