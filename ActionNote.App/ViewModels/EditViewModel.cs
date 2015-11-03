@@ -120,6 +120,9 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
+            // color value must be used from the enum source
+            noteItem.Color = (ColorCategory)ColorEnumSource.SelectedItem;
+
             if (_notesRepository.Contains(noteItem.Id))
             {
                 _notesRepository.Update(noteItem);
@@ -164,15 +167,15 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatingFrom(args);
 
-            if (_blockBackEvent)
-                return;
-
-            if (args.NavigationMode == NavigationMode.Back)
+            if (!_blockBackEvent)
             {
-                if (AppSettings.SaveNoteOnBack.Value)
+                if (args.NavigationMode == NavigationMode.Back)
                 {
-                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
-                        await SaveNoteAsync(SelectedNote);
+                    if (AppSettings.SaveNoteOnBack.Value)
+                    {
+                        if (SelectedNote != null && !SelectedNote.IsEmtpy)
+                            await SaveNoteAsync(SelectedNote);
+                    }
                 }
             }
         }
