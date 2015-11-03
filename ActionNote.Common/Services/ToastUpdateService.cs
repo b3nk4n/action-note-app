@@ -59,7 +59,6 @@ namespace ActionNote.Common.Services
             var toastModel = new AdaptiveToastModel()
             {
                 ActivationType = ToastActivationType.Background,
-                Scenario = ToastScenario.Reminder,
                 Launch = noteItem.Id,
                 Visual = new AdaptiveVisual()
                 {
@@ -80,7 +79,6 @@ namespace ActionNote.Common.Services
                                 {
                                     Content = noteItem.Title,
                                     HintStyle = TextStyle.Title,
-                                    HintMaxLines = 2,
                                     HintWrap = true
                                 },
                                 new AdaptiveText()
@@ -126,6 +124,9 @@ namespace ActionNote.Common.Services
                     Placement = ImagePlacement.Inline,
                     Source = picturePath
                 });
+
+                // change szenario that the image is bigger
+                toastModel.Scenario = ToastScenario.Reminder;
             }
 
             return toastModel;

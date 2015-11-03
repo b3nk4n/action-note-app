@@ -88,7 +88,7 @@ namespace ActionNote.App.ViewModels
                 StorageFile file = await picker.PickSingleFileAsync();
                 if (file != null)
                 {
-                    var canonicalPrefix = DateTime.Now.Ticks + "-";
+                    var canonicalPrefix = noteItem.Id + '-';
                     var fileName = canonicalPrefix + file.Name;
 
                     if (await _localStorageService.WriteFile(AppConstants.ATTACHEMENT_BASE_PATH + fileName, file))
@@ -106,8 +106,12 @@ namespace ActionNote.App.ViewModels
 
             RemoveAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
+                var filename = noteItem.AttachementFile;
+
                 noteItem.AttachementFile = null;
+
+                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename);
+                
 
                 _toastUpdateService.Refresh(_notesRepository);
             },
