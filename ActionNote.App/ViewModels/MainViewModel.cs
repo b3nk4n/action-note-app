@@ -7,6 +7,9 @@ using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using ActionNote.App.Views;
+using UWPCore.Framework.Share;
+using UWPCore.Framework.Storage;
+using ActionNote.Common;
 
 namespace ActionNote.App.ViewModels
 {
@@ -14,6 +17,8 @@ namespace ActionNote.App.ViewModels
     {
         private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
+        private IShareContentService _shareContentService;
+        private IStorageService _localStorageSerivce;
 
         public ObservableCollection<NoteItem> NoteItems {
             get;
@@ -24,6 +29,8 @@ namespace ActionNote.App.ViewModels
         {
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
+            _shareContentService = Injector.Get<IShareContentService>();
+            _localStorageSerivce = Injector.Get<ILocalStorageService>();
 
             ClearCommand = new DelegateCommand(() =>
             {
@@ -65,6 +72,24 @@ namespace ActionNote.App.ViewModels
             (noteItem) =>
             {
                 return noteItem != null;
+            });
+
+            ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                if (noteItem.HasAttachement)
+                {
+                    var file = await _localStorageSerivce.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
+                    if (file != null)
+                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, "Bla bla..."); // TODO translate description
+                }
+                else
+                {
+                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, "Bla bla bla..."); // TODO translate description
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
             });
         }
 
@@ -109,5 +134,7 @@ namespace ActionNote.App.ViewModels
         public ICommand EditCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
+
+        public ICommand ShareCommand { get; private set; }
     }
 }

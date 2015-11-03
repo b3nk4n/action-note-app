@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     xmlns:localViewModels="using:ActionNote.App.ViewModels"
-    xmlns:localControls="using:ActionNote.App.Controls"
     xmlns:commonModels="using:ActionNote.Common.Models"
     xmlns:commonConverters="using:ActionNote.Common.Converters"
     mc:Ignorable="d">
@@ -30,6 +29,12 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
+            <AppBarButton Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarSeparator/>
             <AppBarButton Icon="Edit" Label="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarSeparator/>
