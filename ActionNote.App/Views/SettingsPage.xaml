@@ -26,8 +26,10 @@
         </uwpcControls:PageHeader>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
-            <ScrollViewer>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="16">
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="General" Margin="4" />
+                    <ToggleSwitch Header="Auto save notes when BACK was pressed" IsOn="{Binding SaveNoteOnBack, Mode=TwoWay}" Margin="4" />
                     <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4" />
                     <ToggleSwitch Header="Allow to remove a note" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" Margin="4" />
                     <ToggleSwitch Header="Allow to clear all notes" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" Margin="4" />

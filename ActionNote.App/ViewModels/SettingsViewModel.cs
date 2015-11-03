@@ -28,5 +28,17 @@ namespace ActionNote.App.ViewModels
                 AppSettings.AllowRemoveNotes.Value = value;
             }
         }
+
+        public bool SaveNoteOnBack
+        {
+            get
+            {
+                return AppSettings.SaveNoteOnBack.Value;
+            }
+            set
+            {
+                AppSettings.SaveNoteOnBack.Value = value;
+            }
+        }
     }
 }

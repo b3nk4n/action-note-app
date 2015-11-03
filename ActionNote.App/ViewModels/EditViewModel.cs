@@ -11,6 +11,7 @@ using UWPCore.Framework.Storage;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using UWPCore.Framework.Navigation;
 
 namespace ActionNote.App.ViewModels
 {
@@ -22,6 +23,12 @@ namespace ActionNote.App.ViewModels
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
+        /// <summary>
+        /// Flag that indicates that no save operation is needed on BACK event.
+        /// This is to prevent double saving.
+        /// </summary>
+        private bool _blockBackEvent;
+
         public EditViewModel()
         {
             _toastUpdateService = Injector.Get<IToastUpdateService>();
@@ -30,20 +37,8 @@ namespace ActionNote.App.ViewModels
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                if (_notesRepository.Contains(noteItem.Id))
-                {
-                    _notesRepository.Update(noteItem);
-                }
-                else
-                {
-                    _notesRepository.Add(noteItem);
-                }
-
-                await _notesRepository.Save();
-
-                _toastUpdateService.Refresh(_notesRepository);
-
-                NavigationService.GoBack();
+                await SaveNoteAsync(noteItem);
+                GoBackWithoutBackEvent();
             },
             (noteItem) =>
             {
@@ -52,16 +47,15 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                NavigationService.GoBack();
+                GoBackWithoutBackEvent();
             });
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
                 _notesRepository.Remove(noteItem.Id);
-
                 _toastUpdateService.Refresh(_notesRepository);
 
-                NavigationService.GoBack();
+                GoBackWithoutBackEvent();
             },
             (noteItem) =>
             {
@@ -113,6 +107,33 @@ namespace ActionNote.App.ViewModels
             });
         }
 
+        /// <summary>
+        /// Go back and prevent duplicated save.
+        /// </summary>
+        private void GoBackWithoutBackEvent()
+        {
+            // prevent duplicated save
+            _blockBackEvent = true;
+
+            NavigationService.GoBack();
+        }
+
+        private async Task SaveNoteAsync(NoteItem noteItem)
+        {
+            if (_notesRepository.Contains(noteItem.Id))
+            {
+                _notesRepository.Update(noteItem);
+            }
+            else
+            {
+                _notesRepository.Add(noteItem);
+            }
+
+            await _notesRepository.Save();
+
+            _toastUpdateService.Refresh(_notesRepository);
+        }
+
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
@@ -135,11 +156,25 @@ namespace ActionNote.App.ViewModels
                 SelectedNote = noteToEdit.Clone();
                 IsEditMode = true;
             }
+
+            ColorEnumSource.SelectedItem = SelectedNote.Color;
         }
 
-        public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        public override async void OnNavigatingFrom(NavigatingEventArgs args)
         {
-            return base.OnNavigatedFromAsync(state, suspending);
+            base.OnNavigatingFrom(args);
+
+            if (_blockBackEvent)
+                return;
+
+            if (args.NavigationMode == NavigationMode.Back)
+            {
+                if (AppSettings.SaveNoteOnBack.Value)
+                {
+                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
+                        await SaveNoteAsync(SelectedNote);
+                }
+            }
         }
 
         /// <summary>

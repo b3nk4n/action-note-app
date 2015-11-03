@@ -120,5 +120,13 @@ namespace ActionNote.Common.Models
                 return new BitmapImage(new Uri(path, UriKind.Absolute));
             }
         }
+
+        public bool IsEmtpy
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Title) && string.IsNullOrWhiteSpace(Content) && !HasAttachement;
+            }
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UWPCore.Framework.Storage;
+﻿using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common
 {
@@ -12,5 +7,7 @@ namespace ActionNote.Common
         public static StoredObjectBase<bool> AllowRemoveNotes = new LocalObject<bool>("allowRemoveNotes", true);
 
         public static StoredObjectBase<bool> AllowClearNotes = new LocalObject<bool>("allowClearNotes", false);
+
+        public static StoredObjectBase<bool> SaveNoteOnBack = new LocalObject<bool>("saveNoteOnBack", true);
     }
 }
