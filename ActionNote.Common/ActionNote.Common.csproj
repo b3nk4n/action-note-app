@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConstants.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="Converters\ColorCategoryToImageConverter.cs" />
     <Compile Include="Models\INotesRepository.cs" />

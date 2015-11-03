@@ -39,7 +39,7 @@ namespace ActionNote.App.ViewModels
                 _notesRepository.Clear();
                 NoteItems.Clear();
 
-                _toastUpdateService.Refresh();
+                _toastUpdateService.Refresh(_notesRepository);
 
                 SelectedNote = null;
             },
@@ -67,7 +67,7 @@ namespace ActionNote.App.ViewModels
                 _notesRepository.Remove(noteItem);
                 NoteItems.Remove(noteItem);
 
-                _toastUpdateService.Refresh();
+                _toastUpdateService.Refresh(_notesRepository);
 
                 SelectedNote = null;
             },
@@ -77,24 +77,22 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            await ReloadDataAsync();
+            ReloadData();
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
-            await _notesRepository.Save();
-
             await base.OnNavigatedFromAsync(state, suspending);
         }
 
-        private async Task ReloadDataAsync()
+        private void ReloadData()
         {
             // ensure the repository has been loaded
-            await _notesRepository.Load();
+            //await _notesRepository.Load(); data is loaded in app.xaml
 
             NoteItems.Clear();
             foreach (var note in _notesRepository.GetAll())

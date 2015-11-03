@@ -1,4 +1,5 @@
 ﻿using ActionNote.App.Views;
+using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
@@ -10,6 +11,7 @@ using UWPCore.Framework.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
+using Windows.ApplicationModel;
 
 namespace ActionNote.App
 {
@@ -19,9 +21,11 @@ namespace ActionNote.App
     sealed partial class App : UniversalApp
     {
         private static string BG_TASK_ACTIONCENTER = "ActionNote.ActionBarChangedBackgroundTask";
+        private static string BG_TASK_TOAST_TRIGGERED = "ActionNote.ActionTriggeredBackgroundTask";
 
         private IBackgroundTaskService _backgroundTaskService;
         private IToastUpdateService _toastUpdateService;
+        private INotesRepository _notesRepository;
 
         private DispatcherTimer _refreshActionCentertimer = new DispatcherTimer();
 
@@ -36,11 +40,12 @@ namespace ActionNote.App
 
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
             _toastUpdateService = Injector.Get<IToastUpdateService>();
+            _notesRepository = Injector.Get<INotesRepository>();
 
             _refreshActionCentertimer.Interval = TimeSpan.FromSeconds(3);
             _refreshActionCentertimer.Tick += (s, e) =>
             {
-                _toastUpdateService.Refresh();
+                _toastUpdateService.Refresh(_notesRepository);
                 _refreshActionCentertimer.Stop();
             };
 
@@ -62,28 +67,42 @@ namespace ActionNote.App
                     GetBottomDockedNavigationMenuItems());
             }
 
+            // load data
+            await _notesRepository.Load();
+
             // unregister previous one, to ensure the latest version is running
             if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))
                 _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER);
+            if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
+                _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
             if (args.Kind == ActivationKind.ToastNotification) 
             {
-                _toastUpdateService.Refresh();
+                _toastUpdateService.Refresh(_notesRepository);
             }
             else if (args.Kind == ActivationKind.Launch) // when launched from Action Center title
             {
-                _toastUpdateService.Refresh();
+                _toastUpdateService.Refresh(_notesRepository);
                 _refreshActionCentertimer.Start();
             }
 
-            // (re)register background task
+            // (re)register background tasks
             if (await _backgroundTaskService.RequestAccessAsync())
             {
                 _backgroundTaskService.Register(BG_TASK_ACTIONCENTER, "ActionNote.Tasks.ActionBarChangedBackgroundTask", new ToastNotificationHistoryChangedTrigger());
+                _backgroundTaskService.Register(BG_TASK_TOAST_TRIGGERED, "ActionNote.Tasks.ActionTriggeredBackgroundTask", new ToastNotificationActionTrigger());
             }
 
             // start the user experience
             NavigationService.Navigate(DefaultPage);
+        }
+
+        public async override Task OnSuspendingAsync(SuspendingEventArgs e)
+        {
+            await base.OnSuspendingAsync(e);
+
+            // save data
+            await _notesRepository.Save();
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Data;
+using UWPCore.Framework.IoC;
 using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Models
@@ -15,8 +16,9 @@ namespace ActionNote.Common.Models
 
         public NotesRepository()
         {
-            _localStorageService = UniversalApp.Injector.Get<ILocalStorageService>();
-            _serializationService = UniversalApp.Injector.Get<ISerializationService>();
+            IInjector injector = Injector.Instance;
+            _localStorageService = injector.Get<ILocalStorageService>();
+            _serializationService = injector.Get<ISerializationService>();
         }
 
         public override void Update(NoteItem prototype)
@@ -38,6 +40,11 @@ namespace ActionNote.Common.Models
                 if (prototype.Color != null)
                 {
                     entity.Color = prototype.Color;
+                }
+
+                if (prototype.AttachementFile != null)
+                {
+                    entity.AttachementFile = prototype.AttachementFile;
                 }
             }
         }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ActionNote.Common.Models;
 
 namespace ActionNote.Common.Services
 {
     public interface IToastUpdateService
     {
-        void Refresh();
-        void DeleteNotesThatAreMissingInActionCenter();
+        void Refresh(INotesRepository notesRepository);
+        void DeleteNotesThatAreMissingInActionCenter(INotesRepository notesRepository);
     }
 }

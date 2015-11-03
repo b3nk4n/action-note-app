@@ -1,12 +1,19 @@
-﻿using ActionNote.Common.Models;
+﻿using ActionNote.Common;
+using ActionNote.Common.Models;
 using ActionNote.Common.Services;
+using System;
 using System.Windows.Input;
+using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage;
+using System.Net.Http;
+using Windows.Storage.Pickers;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Navigation;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+using UWPCore.Framework.Storage;
 
 namespace ActionNote.App.ViewModels
 {
@@ -21,6 +28,7 @@ namespace ActionNote.App.ViewModels
     {
         private INotesRepository _notesRepository;
         private IToastUpdateService _toastUpdateService;
+        private IStorageService _localStorageService;
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
@@ -38,8 +46,9 @@ namespace ActionNote.App.ViewModels
 
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
+            _localStorageService = Injector.Get<ILocalStorageService>();
 
-            SaveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 if (_notesRepository.Contains(noteItem.Id))
                 {
@@ -51,7 +60,10 @@ namespace ActionNote.App.ViewModels
                     _notesRepository.Add(noteItem);
                     _callbacks.NoteSaved(noteItem);
                 }
-                _toastUpdateService.Refresh();
+
+                await _notesRepository.Save();
+
+                _toastUpdateService.Refresh(_notesRepository);
             },
             (noteItem) =>
             {
@@ -62,6 +74,46 @@ namespace ActionNote.App.ViewModels
             {
                 //NavigationService.GoBack();
                 _callbacks.NoteDiscared();
+            });
+
+            SelectAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                var picker = new FileOpenPicker();
+                picker.ViewMode = PickerViewMode.Thumbnail;
+                picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                picker.FileTypeFilter.Add(".jpg");
+                picker.FileTypeFilter.Add(".jpeg");
+                picker.FileTypeFilter.Add(".png");
+
+                StorageFile file = await picker.PickSingleFileAsync();
+                if (file != null)
+                {
+                    var canonicalPrefix = DateTime.Now.Ticks + "-";
+                    var fileName = canonicalPrefix + file.Name;
+
+                    if (await _localStorageService.WriteFile(AppConstants.ATTACHEMENT_BASE_PATH + fileName, file))
+                    {
+                        noteItem.AttachementFile = fileName;
+                    }
+                }
+
+                _toastUpdateService.Refresh(_notesRepository);
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
+
+            RemoveAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
+                noteItem.AttachementFile = null;
+
+                _toastUpdateService.Refresh(_notesRepository);
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && noteItem.HasAttachement;
             });
         }
 
@@ -78,5 +130,9 @@ namespace ActionNote.App.ViewModels
         public ICommand SaveCommand { get; private set; }
 
         public ICommand DiscardCommand { get; private set; }
+
+        public ICommand SelectAttachementCommand { get; private set; }
+
+        public ICommand RemoveAttachementCommand { get; private set; }
     }
 }

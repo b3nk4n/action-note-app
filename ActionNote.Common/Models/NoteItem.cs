@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
+using UWPCore.Framework.Storage;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace ActionNote.Common.Models
 {
@@ -50,6 +53,18 @@ namespace ActionNote.Common.Models
         }
         private ColorCategory? _color = ColorCategory.Neutral;
 
+        public string AttachementFile
+        {
+            get { return _attachementFile; }
+            set
+            {
+                Set(ref _attachementFile, value);
+                RaisePropertyChanged("HasAttachement");
+                RaisePropertyChanged("AttachementImage");
+            }
+        }
+        private string _attachementFile;
+
         public NoteItem()
         {
             Id = GenerateGuid();
@@ -85,7 +100,25 @@ namespace ActionNote.Common.Models
             clone.Title = Title;
             clone.Content = Content;
             clone.Color = Color;
+            clone.AttachementFile = AttachementFile;
             return clone;
+        }
+
+        public bool HasAttachement
+        {
+            get { return AttachementFile != null; }
+        }
+
+        public ImageSource AttachementImage
+        {
+            get
+            {
+                if (!HasAttachement)
+                    return null;
+
+                var path = string.Format("{0}/{1}", IOConstants.APPDATA_LOCAL_SCHEME, AppConstants.ATTACHEMENT_BASE_PATH + AttachementFile);
+                return new BitmapImage(new Uri(path, UriKind.Absolute));
+            }
         }
     }
 }

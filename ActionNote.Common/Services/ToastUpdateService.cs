@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using UWPCore.Framework.Notifications;
 using UWPCore.Framework.Notifications.Models;
+using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Services
 {
@@ -14,20 +15,18 @@ namespace ActionNote.Common.Services
         public const string GROUP_NOTE = "note";
 
         private IToastService _toastService;
-        private INotesRepository _notesRepository;
 
         [Inject]
-        public ToastUpdateService(IToastService toastService, INotesRepository notesRepository)
+        public ToastUpdateService(IToastService toastService)
         {
             _toastService = toastService;
-            _notesRepository = notesRepository;
         }
 
-        public void Refresh()
+        public void Refresh(INotesRepository notesRepository)
         {
             _toastService.ClearHistory();
 
-            foreach (var note in _notesRepository.GetAll())
+            foreach (var note in notesRepository.GetAll())
             {
                 var toastModel = GetToastModel(note);
                 var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
@@ -37,27 +36,12 @@ namespace ActionNote.Common.Services
                 
                 _toastService.Show(toastNotification);
             }
-
-            //var toastModel = GetContentToast("Content Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-            //var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
-            //toastNotification.SuppressPopup = true;
-            //_toastService.Show(toastNotification);
-
-            //var toastModel2 = GetListToast("List Note", new List<string>() { "First item", "Second item", "Third item", "Fourth item", "Fifth item" });
-            //var toastNotification2 = _toastService.AdaptiveFactory.Create(toastModel2);
-            //toastNotification2.SuppressPopup = true;
-            //_toastService.Show(toastNotification2);
-
-            //var toastModel3 = GetPictureToast("Picture Note", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "/Assets/Square150x150Logo.scale-200.png");
-            //var toastNotification3 = _toastService.AdaptiveFactory.Create(toastModel3);
-            //toastNotification3.SuppressPopup = true;
-            //_toastService.Show(toastNotification3);
         }
 
-        public void DeleteNotesThatAreMissingInActionCenter()
+        public void DeleteNotesThatAreMissingInActionCenter(INotesRepository notesRepository)
         {
             // find IDs to remove
-            var noteIdsToRemove = GetAllNoteIds();
+            var noteIdsToRemove = notesRepository.GetAllIds();
             foreach (var historyItem in _toastService.History)
             {
                 noteIdsToRemove.Remove(historyItem.Tag);
@@ -66,26 +50,17 @@ namespace ActionNote.Common.Services
             // remove from repository
             foreach (var noteId in noteIdsToRemove)
             {
-                _notesRepository.Remove(noteId);
+                notesRepository.Remove(noteId);
             }
-        }
-
-        private IList<string> GetAllNoteIds()
-        {
-            var idList = new List<string>();
-
-            foreach (var item in _notesRepository.GetAll())
-            {
-                idList.Add(item.Id);
-            }
-
-            return idList;
         }
 
         private AdaptiveToastModel GetToastModel(NoteItem noteItem)
         {
-            return new AdaptiveToastModel()
+            var toastModel = new AdaptiveToastModel()
             {
+                ActivationType = ToastActivationType.Background,
+                Scenario = ToastScenario.Reminder,
+                Launch = noteItem.Id,
                 Visual = new AdaptiveVisual()
                 {
                     Branding = VisualBranding.None,
@@ -113,8 +88,27 @@ namespace ActionNote.Common.Services
                                     Content = noteItem.Content,
                                     HintStyle = TextStyle.Base,
                                     HintWrap = true
-                                }
+                                },
+
                             }
+                        }
+                    }
+                },
+                Actions = new AdaptiveActions()
+                {
+                    Children =
+                    {
+                        new AdaptiveAction()
+                        {
+                            ActivationType = ToastActivationType.Foreground,
+                            Content = "Edit",
+                            Arguments = "edit",
+                        },
+                        new AdaptiveAction()
+                        {
+                            ActivationType = ToastActivationType.Background,
+                            Content = "Delete",
+                            Arguments = "delete",
                         }
                     }
                 },
@@ -123,87 +117,18 @@ namespace ActionNote.Common.Services
                     Silent = true,
                 }
             };
+
+            if (noteItem.HasAttachement)
+            {
+                var picturePath = IOConstants.APPDATA_LOCAL_SCHEME + "/" + AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile;
+                toastModel.Visual.Bindings[0].Children.Add(new AdaptiveImage()
+                {
+                    Placement = ImagePlacement.Inline,
+                    Source = picturePath
+                });
+            }
+
+            return toastModel;
         }
-
-        //private AdaptiveToastModel GetListToast(string title, IList<string> items)
-        //{
-        //    var sb = new StringBuilder();
-
-        //    foreach (var item in items)
-        //    {
-        //        sb.AppendLine("▪ " + item);
-        //    }
-
-        //    return new AdaptiveToastModel()
-        //    {
-        //        Visual = new AdaptiveVisual()
-        //        {
-        //            Branding = VisualBranding.None,
-        //            Bindings =
-        //            {
-        //                new AdaptiveBinding()
-        //                {
-        //                    Template = VisualTemplate.ToastGeneric,
-        //                    Children =
-        //                    {
-        //                        new AdaptiveText()
-        //                        {
-        //                            Content = title,
-        //                            HintStyle = TextStyle.Title,
-        //                            HintMaxLines = 2,
-        //                            HintWrap = true
-        //                        },
-        //                        new AdaptiveText()
-        //                        {
-        //                            Content = sb.ToString(),
-        //                            HintStyle = TextStyle.Base,
-        //                            HintWrap = true
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    };
-        //}
-
-        //private AdaptiveToastModel GetPictureToast(string title, string content, string picturePath)
-        //{
-        //    return new AdaptiveToastModel()
-        //    {
-        //        Visual = new AdaptiveVisual()
-        //        {
-        //            Branding = VisualBranding.None,
-        //            Bindings =
-        //            {
-        //                new AdaptiveBinding()
-        //                {
-        //                    Template = VisualTemplate.ToastGeneric,
-        //                    Children =
-        //                    {
-        //                        new AdaptiveText()
-        //                        {
-        //                            Content = title,
-        //                            HintStyle = TextStyle.Title,
-        //                            HintMaxLines = 2,
-        //                            HintWrap = true
-        //                        },
-        //                        new AdaptiveText()
-        //                        {
-        //                            Content = content,
-        //                            HintStyle = TextStyle.Base,
-        //                            HintWrap = true
-        //                        },
-        //                        new AdaptiveImage()
-        //                        {
-        //                            HintAlign = ImageHintAlign.Stretch,
-        //                            Placement = ImagePlacement.Inline,
-        //                            Source = picturePath
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    };
-        //}
     }
 }
