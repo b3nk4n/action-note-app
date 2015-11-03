@@ -3,28 +3,18 @@ using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System;
 using System.Windows.Input;
-using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage;
-using System.Net.Http;
 using Windows.Storage.Pickers;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
 using UWPCore.Framework.Storage;
+using System.Collections.Generic;
+using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 namespace ActionNote.App.ViewModels
 {
-    public interface INoteControlViewModelCallbacks
-    {
-        void NoteSaved(NoteItem noteItem);
-        void NoteUpdated(NoteItem noteItem);
-        void NoteDiscared();
-    }
-
-    public class NoteControlViewModel : ViewModelBase
+    public class EditViewModel : ViewModelBase
     {
         private INotesRepository _notesRepository;
         private IToastUpdateService _toastUpdateService;
@@ -32,18 +22,8 @@ namespace ActionNote.App.ViewModels
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
-        private INoteControlViewModelCallbacks _callbacks;
-
-        public NoteControlViewModel(INoteControlViewModelCallbacks callbacks)
-            : this(callbacks, null)
+        public EditViewModel()
         {
-        }
-
-        public NoteControlViewModel(INoteControlViewModelCallbacks callbacks, NoteItem editItem)
-        {
-            _callbacks = callbacks;
-            SelectedNote = (editItem == null) ? new NoteItem() : editItem.Clone();
-
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
             _localStorageService = Injector.Get<ILocalStorageService>();
@@ -53,17 +33,17 @@ namespace ActionNote.App.ViewModels
                 if (_notesRepository.Contains(noteItem.Id))
                 {
                     _notesRepository.Update(noteItem);
-                    _callbacks.NoteUpdated(noteItem);
                 }
                 else
                 {
                     _notesRepository.Add(noteItem);
-                    _callbacks.NoteSaved(noteItem);
                 }
 
                 await _notesRepository.Save();
 
                 _toastUpdateService.Refresh(_notesRepository);
+
+                NavigationService.GoBack();
             },
             (noteItem) =>
             {
@@ -72,8 +52,20 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                //NavigationService.GoBack();
-                _callbacks.NoteDiscared();
+                NavigationService.GoBack();
+            });
+
+            RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            {
+                _notesRepository.Remove(noteItem.Id);
+
+                _toastUpdateService.Refresh(_notesRepository);
+
+                NavigationService.GoBack();
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
             });
 
             SelectAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
@@ -121,6 +113,35 @@ namespace ActionNote.App.ViewModels
             });
         }
 
+        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            base.OnNavigatedTo(parameter, mode, state);
+
+            NoteItem noteToEdit = null;
+            if (parameter != null)
+            {
+                var noteId = (string)parameter;
+                noteToEdit = _notesRepository.Get(noteId);
+            }
+
+            // add new note, when no ID was passed. Also create a copy to be able to discard all the changes
+            if (noteToEdit == null)
+            {
+                SelectedNote = new NoteItem();
+                IsEditMode = false;
+            }
+            else
+            {
+                SelectedNote = noteToEdit.Clone();
+                IsEditMode = true;
+            }
+        }
+
+        public override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            return base.OnNavigatedFromAsync(state, suspending);
+        }
+
         /// <summary>
         /// Gets or sets the selected note.
         /// </summary>
@@ -131,7 +152,31 @@ namespace ActionNote.App.ViewModels
         }
         private NoteItem _selectedNote;
 
+        /// <summary>
+        /// Gets or sets whether the edit page is in EDIT mode or ADD mode. 
+        /// </summary>
+        public bool IsEditMode
+        {
+            get { return _isEditMode; }
+            private set
+            {
+                Set(ref _isEditMode, value);
+                RaisePropertyChanged("PageTitle");
+            }
+        }
+        private bool _isEditMode;
+
+        public string PageTitle
+        {
+            get
+            {
+                return IsEditMode ? "EDIT" : "NEW NOTE";
+            }
+        }
+
         public ICommand SaveCommand { get; private set; }
+
+        public ICommand RemoveCommand { get; private set; }
 
         public ICommand DiscardCommand { get; private set; }
 

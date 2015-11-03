@@ -115,7 +115,7 @@ namespace ActionNote.App
             {
                 new NavMenuItem()
                 {
-                    Symbol = GlyphIcons.AllApps,
+                    Symbol = GlyphIcons.Copy,
                     Label = "Notes",
                     DestinationPage = typeof(MainPage)
                 },
@@ -127,8 +127,8 @@ namespace ActionNote.App
                 },
                 new NavMenuItem()
                 {
-                    Symbol = GlyphIcons.Delete,
-                    Label = "Archiv",
+                    Symbol = GlyphIcons.Archive,
+                    Label = "Archive",
                     DestinationPage = typeof(ArchivPage)
                 }
             };

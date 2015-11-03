@@ -23,47 +23,36 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar x:Name="topBar" Grid.Row="0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Edit" Label="Edit note" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
-            <AppBarSeparator/>
-            <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Clear all" Command="{Binding ClearCommand}"/>
-            </CommandBar.SecondaryCommands>
-            <CommandBar.Content>
-                <uwpcControls:PageHeader>
-                    <uwpcControls:PageHeader.HeaderContent>
-                        <TextBlock Text="ACTION NOTE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    </uwpcControls:PageHeader.HeaderContent>
-                </uwpcControls:PageHeader>
-            </CommandBar.Content>
-        </CommandBar>
+        <uwpcControls:PageHeader>
+            <uwpcControls:PageHeader.HeaderContent>
+                <TextBlock Text="NOTES" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+            </uwpcControls:PageHeader.HeaderContent>
+        </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton Icon="Add" Label="Add note" Command="{Binding AddCommand}"/>
+            <AppBarButton Icon="Edit" Label="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="Add" Label="Add" Command="{Binding AddCommand}"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Delete all" Command="{Binding ClearCommand}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Padding="16">
             <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Title}" Margin="4" />
-                                <TextBlock Text="{Binding Content}" Margin="4" />
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" Margin="4" />
+                            <TextBlock Text="{Binding Content}" Margin="4" />
 
-                                <!-- color category -->
-                                <Image Source="{Binding Color, Converter={StaticResource colorImageConv}}" Width="32" Height="32" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            <!-- color category -->
+                            <Image Source="{Binding Color, Converter={StaticResource colorImageConv}}" Width="32" Height="32" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
-
-        <localControls:NoteControl x:Name="EditControl" Grid.Row="1" Margin="16" Visibility="Collapsed">
-            <!-- created at runtime -->
-            <!--<localControls:NoteControl.DataContext>
-                <localViewModels:NoteControlViewModel />
-            </localControls:NoteControl.DataContext>-->
-        </localControls:NoteControl>
     </Grid>
 </uwpcControls:UniversalPage>
