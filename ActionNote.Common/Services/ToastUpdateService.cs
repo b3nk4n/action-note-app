@@ -21,9 +21,6 @@ namespace ActionNote.Common.Services
         {
             _toastService = toastService;
             _notesRepository = notesRepository;
-
-            // ensure the repository has been loaded
-            _notesRepository.Load(); // TODO: load the data once on a specific point, not here (because could be called multiple times...)
         }
 
         public void Refresh()

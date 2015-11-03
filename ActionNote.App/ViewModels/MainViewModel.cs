@@ -77,14 +77,11 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            ReloadData();
-
-            // TODO: why do we have to manually raise the property? it's an observable collection!
-            RaisePropertyChanged("NoteItems");
+            await ReloadDataAsync();
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -94,8 +91,11 @@ namespace ActionNote.App.ViewModels
             await base.OnNavigatedFromAsync(state, suspending);
         }
 
-        private void ReloadData()
+        private async Task ReloadDataAsync()
         {
+            // ensure the repository has been loaded
+            await _notesRepository.Load();
+
             NoteItems.Clear();
             foreach (var note in _notesRepository.GetAll())
             {

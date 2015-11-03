@@ -19,20 +19,29 @@ namespace ActionNote.Tasks
     public sealed class ActionBarChangedBackgroundTask : IBackgroundTask
     {
         private IToastUpdateService _toastUpdateService;
+        private INotesRepository _notesRepository;
 
         public ActionBarChangedBackgroundTask()
         {
             IInjector injector = new Injector(new DefaultModule(), new AppModule());
             _toastUpdateService = injector.Get<IToastUpdateService>();
+            _notesRepository = injector.Get<INotesRepository>();
         }
 
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
             if (details != null)
             {
+                if (details.ChangeType == ToastHistoryChangedType.Cleared ||
+                    details.ChangeType == ToastHistoryChangedType.Removed)
+                {
+                    // load data
+                    await _notesRepository.Load();
+                }
+
                 if (details.ChangeType == ToastHistoryChangedType.Cleared) // TODO: check, why the change type is never clear!?
                 {
                     if (!AppSettings.AllowClearNotes.Value)
