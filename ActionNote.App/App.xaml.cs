@@ -92,7 +92,7 @@ namespace ActionNote.App
                     {
                         pageType = typeof(EditPage);
                     }
-                    else if (splitted[0] == "delete") // TODO: is this one launched in background?
+                    else if (splitted[0] == "delete") // TODO: is this one launched in background? or is there a way without these buttons?
                     {
                         // TODO foreground deleted launch
                     }
@@ -102,7 +102,7 @@ namespace ActionNote.App
                 // toast launch
                 else if (splitted.Length == 1)
                 {
-                    pageType = typeof(EditPage); // TODO: view page
+                    pageType = typeof(EditPage);
                     parameter = splitted[0];
                 }
             }

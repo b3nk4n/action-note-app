@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
+    xmlns:uwpcConverters="using:UWPCore.Framework.Converters"
     xmlns:localViewModels="using:ActionNote.App.ViewModels"
     xmlns:commonModels="using:ActionNote.Common.Models"
     xmlns:commonConverters="using:ActionNote.Common.Converters"
@@ -13,6 +14,7 @@
 
     <Page.Resources>
         <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />
+        <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -35,6 +37,8 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarSeparator/>
+            <AppBarButton Icon="Pin" Label="Pin to start" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
+            <AppBarButton Icon="UnPin" Label="Unpin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
             <AppBarButton Icon="Edit" Label="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarSeparator/>

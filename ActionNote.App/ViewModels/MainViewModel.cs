@@ -19,6 +19,7 @@ namespace ActionNote.App.ViewModels
         private INotesRepository _notesRepository;
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
+        private ITilePinService _tilePinService;
 
         public ObservableCollection<NoteItem> NoteItems {
             get;
@@ -31,6 +32,7 @@ namespace ActionNote.App.ViewModels
             _notesRepository = Injector.Get<INotesRepository>();
             _shareContentService = Injector.Get<IShareContentService>();
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
+            _tilePinService = Injector.Get<ITilePinService>();
 
             ClearCommand = new DelegateCommand(() =>
             {
@@ -68,6 +70,26 @@ namespace ActionNote.App.ViewModels
                 _toastUpdateService.Refresh(_notesRepository);
 
                 SelectedNote = null;
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
+
+            PinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.PinOrUpdateAsync(noteItem);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            UnpinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.UnpinAsync(noteItem.Id);
+                RaisePropertyChanged("IsSelectedNotePinned");
             },
             (noteItem) =>
             {
@@ -123,9 +145,24 @@ namespace ActionNote.App.ViewModels
         public NoteItem SelectedNote
         {
             get { return _selectedNote; }
-            set { Set(ref _selectedNote, value); }
+            set
+            {
+                Set(ref _selectedNote, value);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            }
         }
         private NoteItem _selectedNote;
+
+        public bool IsSelectedNotePinned
+        {
+            get
+            {
+                if (SelectedNote == null)
+                    return false;
+
+                return _tilePinService.Contains(SelectedNote.Id);
+            }
+        }
 
         public ICommand ClearCommand { get; private set; }
 
@@ -134,6 +171,10 @@ namespace ActionNote.App.ViewModels
         public ICommand EditCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
+
+        public ICommand PinCommand { get; private set; }
+
+        public ICommand UnpinCommand { get; private set; }
 
         public ICommand ShareCommand { get; private set; }
     }

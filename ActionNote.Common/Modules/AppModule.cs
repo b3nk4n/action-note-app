@@ -10,6 +10,7 @@ namespace ActionNote.Common.Modules
         {
             // services
             Bind<IToastUpdateService>().To<ToastUpdateService>().InSingletonScope();
+            Bind<ITilePinService>().To<TilePinService>().InSingletonScope();
 
             // repositories
             Bind<INotesRepository>().To<NotesRepository>().InSingletonScope();
