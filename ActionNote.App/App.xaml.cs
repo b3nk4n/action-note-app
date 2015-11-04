@@ -76,9 +76,35 @@ namespace ActionNote.App
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
+            var pageType = DefaultPage;
+            string parameter = null;
             if (args.Kind == ActivationKind.ToastNotification) 
             {
                 _toastUpdateService.Refresh(_notesRepository);
+                var toastArgs = args as ToastNotificationActivatedEventArgs;
+
+                var splitted = toastArgs.Argument.Split('-');
+
+                // toast button ([0] == command, [1] == id)
+                if (splitted.Length == 2)
+                {
+                    if (splitted[0] == "edit")
+                    {
+                        pageType = typeof(EditPage);
+                    }
+                    else if (splitted[0] == "delete") // TODO: is this one launched in background?
+                    {
+                        // TODO foreground deleted launch
+                    }
+
+                    parameter = splitted[1];
+                }
+                // toast launch
+                else if (splitted.Length == 1)
+                {
+                    pageType = typeof(EditPage); // TODO: view page
+                    parameter = splitted[0];
+                }
             }
             else if (args.Kind == ActivationKind.Launch) // when launched from Action Center title
             {
@@ -94,7 +120,7 @@ namespace ActionNote.App
             }
 
             // start the user experience
-            NavigationService.Navigate(DefaultPage);
+            NavigationService.Navigate(pageType, parameter);
         }
 
         public async override Task OnSuspendingAsync(SuspendingEventArgs e)

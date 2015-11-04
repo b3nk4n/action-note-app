@@ -32,8 +32,7 @@ namespace ActionNote.Common.Services
                 var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
                 toastNotification.SuppressPopup = true;
                 toastNotification.Group = GROUP_NOTE;
-                toastNotification.Tag = note.Id;
-                
+                toastNotification.Tag = note.Id; // just to find the notificication within this service
                 _toastService.Show(toastNotification);
             }
         }
@@ -58,8 +57,8 @@ namespace ActionNote.Common.Services
         {
             var toastModel = new AdaptiveToastModel()
             {
-                ActivationType = ToastActivationType.Background,
-                Launch = noteItem.Id,
+                ActivationType = ToastActivationType.Foreground,
+                Launch = noteItem.Id, // when clicked on it
                 Visual = new AdaptiveVisual()
                 {
                     Branding = VisualBranding.None,
@@ -99,14 +98,16 @@ namespace ActionNote.Common.Services
                         new AdaptiveAction()
                         {
                             ActivationType = ToastActivationType.Foreground,
-                            Content = "Edit",
-                            Arguments = "edit",
+                            Content = "",
+                            Arguments = "edit-" + noteItem.Id,
+                            ImageUri = "Assets/Images/edit.png"
                         },
                         new AdaptiveAction()
                         {
                             ActivationType = ToastActivationType.Background,
-                            Content = "Delete",
-                            Arguments = "delete",
+                            Content = "",
+                            Arguments = "delete-" + noteItem.Id,
+                            ImageUri = "Assets/Images/delete.png"
                         }
                     }
                 },

@@ -129,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\blue.png" />
+    <Content Include="Assets\Images\delete.png" />
+    <Content Include="Assets\Images\edit.png" />
     <Content Include="Assets\Images\green.png" />
     <Content Include="Assets\Images\neutral.png" />
     <Content Include="Assets\Images\noun_project.png" />
