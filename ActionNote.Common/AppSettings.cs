@@ -11,5 +11,7 @@ namespace ActionNote.Common
         public static StoredObjectBase<bool> AllowClearNotes = new LocalObject<bool>("allowClearNotes", false);
 
         public static StoredObjectBase<bool> SaveNoteOnBack = new LocalObject<bool>("saveNoteOnBack", true);
+
+        public static StoredObjectBase<bool> QuickNotesEnabled = new LocalObject<bool>("quickNote", true);
     }
 }

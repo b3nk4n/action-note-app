@@ -31,6 +31,21 @@ namespace ActionNote.Tasks
                 // load data
                 await _notesRepository.Load();
 
+                if (details.Argument == "quickNote")
+                {
+                    if (details.UserInput.ContainsKey("content"))
+                    {
+                        var content = (string)details.UserInput["content"];
+
+                        if (!string.IsNullOrWhiteSpace(content))
+                        {
+                            var noteItem = new NoteItem("Quick Note", content);
+                            _notesRepository.Add(noteItem);
+                            await _notesRepository.Save();
+                        }
+                    }
+                }
+
                 // re-add the item again
                 //var item = _notesRepository.Get(details.Argument);
                 Logger.WriteLine("ActionTriggeredBackgroundTask - Note {0} was clicked. Refreshing history...", details.Argument);

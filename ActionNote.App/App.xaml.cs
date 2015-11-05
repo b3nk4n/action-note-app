@@ -83,27 +83,24 @@ namespace ActionNote.App
                 _toastUpdateService.Refresh(_notesRepository);
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
 
-                var splitted = toastArgs.Argument.Split('-');
-
-                // toast button ([0] == command, [1] == id)
-                if (splitted.Length == 2)
-                {
-                    if (splitted[0] == "edit")
-                    {
-                        pageType = typeof(EditPage);
-                    }
-                    else if (splitted[0] == "delete") // TODO: is this one launched in background? or is there a way without these buttons?
-                    {
-                        // TODO foreground deleted launch
-                    }
-
-                    parameter = splitted[1];
-                }
-                // toast launch
-                else if (splitted.Length == 1)
+                if (toastArgs.Argument == "quickNote")
                 {
                     pageType = typeof(EditPage);
-                    parameter = splitted[0];
+                }
+                else if (toastArgs.Argument.StartsWith("edit"))
+                {
+                    var splitted = toastArgs.Argument.Split('-');
+                    pageType = typeof(EditPage);
+                    parameter = splitted[1];
+                }
+                else if (toastArgs.Argument.StartsWith("delete"))
+                {
+                    // TODO: foreground deleted launched
+                }
+                else
+                {
+                    pageType = typeof(EditPage);
+                    parameter = toastArgs.Argument;
                 }
             }
             else if (args.Kind == ActivationKind.Launch) // when launched from Action Center title
