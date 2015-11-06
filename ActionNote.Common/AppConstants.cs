@@ -15,5 +15,10 @@ namespace ActionNote.Common
         /// The base path of all attachement files.
         /// </summary>
         public const string ATTACHEMENT_BASE_PATH = "attachements/";
+
+        /// <summary>
+        /// The ID navigation parameter.
+        /// </summary>
+        public const string PARAM_ID = "id=";
     }
 }

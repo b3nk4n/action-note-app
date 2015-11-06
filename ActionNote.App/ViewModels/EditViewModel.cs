@@ -22,6 +22,7 @@ namespace ActionNote.App.ViewModels
         private IToastUpdateService _toastUpdateService;
         private IStorageService _localStorageService;
         private ISpeechService _speechService;
+        private ISerializationService _serializationService;
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
@@ -37,6 +38,7 @@ namespace ActionNote.App.ViewModels
             _notesRepository = Injector.Get<INotesRepository>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _speechService = Injector.Get<ISpeechService>();
+            _serializationService = Injector.Get<ISerializationService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -162,39 +164,31 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             NoteItem noteToEdit = null;
-            string content = null;
             if (parameter != null)
             {
                 var stringParam = (string)parameter;
 
-                if (stringParam.StartsWith("speech-content:"))
+                if (stringParam.StartsWith(AppConstants.PARAM_ID))
                 {
-                    content = stringParam.Remove(0, "speech-content:".Length);
-                }
-                else
-                {
-                    var noteId = (string)parameter;
-                    noteToEdit = _notesRepository.Get(noteId);
-                }
-            }
-
-            // add new note, when no ID was passed or a voice command result was passed
-            if (noteToEdit == null)
-            {
-                SelectedNote = new NoteItem(null, content);
-
-                if (content == null)
-                    IsEditMode = false;
-                else
+                    string noteId = stringParam.Remove(0, AppConstants.PARAM_ID.Length);
+                    noteToEdit = _notesRepository.Get(noteId).Clone();
                     IsEditMode = true;
+                }
+                else
+                {
+                    noteToEdit = _serializationService.DeserializeJson<NoteItem>(stringParam);
+                    IsEditMode = false;
+                }
             }
             else
             {
-                // create a copy to be able to discard all the changes
-                SelectedNote = noteToEdit.Clone();
-                IsEditMode = true;
+                noteToEdit = new NoteItem();
+                IsEditMode = false;
             }
 
+            SelectedNote = noteToEdit;
+
+            // select the color in the dropdown
             ColorEnumSource.SelectedItem = SelectedNote.Color;
         }
 
@@ -204,7 +198,8 @@ namespace ActionNote.App.ViewModels
 
             if (!_blockBackEvent)
             {
-                if (args.NavigationMode == NavigationMode.Back)
+                if (args.NavigationMode == NavigationMode.Back ||
+                    args.NavigationMode == NavigationMode.New) // when switching the tab in the hamburger menu
                 {
                     if (AppSettings.SaveNoteOnBack.Value)
                     {

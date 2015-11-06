@@ -55,7 +55,7 @@ namespace ActionNote.App.ViewModels
 
             EditCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
-                NavigationService.Navigate(typeof(EditPage), noteItem.Id);
+                NavigationService.Navigate(typeof(EditPage), AppConstants.PARAM_ID + noteItem.Id);
             },
             (noteItem) =>
             {

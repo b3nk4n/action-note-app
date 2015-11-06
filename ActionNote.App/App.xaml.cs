@@ -13,6 +13,9 @@ using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
 using UWPCore.Framework.Speech;
+using System.Runtime.Serialization;
+using UWPCore.Framework.Data;
+using ActionNote.Common;
 
 namespace ActionNote.App
 {
@@ -28,6 +31,7 @@ namespace ActionNote.App
         private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
         private ISpeechService _speechService;
+        private ISerializationService _serializationService;
 
         private DispatcherTimer _refreshActionCentertimer = new DispatcherTimer();
 
@@ -44,6 +48,7 @@ namespace ActionNote.App
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
             _speechService = Injector.Get<ISpeechService>();
+            _serializationService = Injector.Get<ISerializationService>();
 
             _refreshActionCentertimer.Interval = TimeSpan.FromSeconds(3);
             _refreshActionCentertimer.Tick += (s, e) =>
@@ -102,7 +107,7 @@ namespace ActionNote.App
                 {
                     var splitted = toastArgs.Argument.Split('-');
                     pageType = typeof(EditPage);
-                    parameter = splitted[1];
+                    parameter = AppConstants.PARAM_ID + splitted[1];
                 }
                 else if (toastArgs.Argument.StartsWith("delete"))
                 {
@@ -111,7 +116,7 @@ namespace ActionNote.App
                 else
                 {
                     pageType = typeof(EditPage);
-                    parameter = toastArgs.Argument;
+                    parameter = AppConstants.PARAM_ID + toastArgs.Argument;
                 }
             }
             else if (args.Kind == ActivationKind.Launch) // when launched from Action Center title
@@ -125,6 +130,8 @@ namespace ActionNote.App
                 var command = _speechService.GetVoiceCommand(args);
                 if (command != null)
                 {
+                    string content;
+                    string color;
                     switch (command.CommandName)
                     {
                         case "newNote":
@@ -132,9 +139,16 @@ namespace ActionNote.App
                             break;
 
                         case "newNoteWithContent":
-                            var content = command.Interpretations["naturalLanguage"];
+                            content = command.Interpretations["naturalLanguage"];
                             pageType = typeof(EditPage);
-                            parameter = "speech-content:" + content;
+                            parameter = _serializationService.SerializeJson(new NoteItem(null, content));
+                            break;
+
+                        case "newNoteWithContentAndColor":
+                            content = command.Interpretations["naturalLanguage"];
+                            color = command.Interpretations["colors"];
+                            pageType = typeof(EditPage);
+                            parameter = _serializationService.SerializeJson(new NoteItem(null, content) { Color = (ColorCategory)Enum.Parse(typeof(ColorCategory), color) });
                             break;
                     }
                 }

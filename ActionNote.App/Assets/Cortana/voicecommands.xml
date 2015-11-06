@@ -13,7 +13,7 @@
       <Navigate/>
     </Command>
 
-    <Command Name="newNoteWithContent">
+    <!--<Command Name="newNoteWithContent">                                             TBD when german voice commands are finished
       <Example> Create a new note with content 'Buy a gift for my sister.' </Example>
       <ListenFor> Create [a] new note with content {naturalLanguage} </ListenFor>
       <ListenFor> Add [a] new note with content {naturalLanguage} </ListenFor>
@@ -32,9 +32,53 @@
       <Item> Yellow </Item>
     </PhraseList>
 
-    <PhraseTopic Label="naturalLanguage" Scenario="Short Message"> <!-- Or Scenarion Natural Language???-->
+    <PhraseTopic Label="naturalLanguage" Scenario="Short Message">
       <Subject>Content</Subject>
-    </PhraseTopic>
+    </PhraseTopic>-->
+
+  </CommandSet>
+
+  <CommandSet xml:lang="de-de" Name="commandSet_de-de">
+    <CommandPrefix> Action Note, </CommandPrefix>
+    <Example> Erstelle neue Notiz </Example>
+
+    <Command Name="newNote">
+      <Example> Erstelle neue Notiz.  </Example>
+      <ListenFor> [Erstelle] [neue] Notiz </ListenFor>
+      <ListenFor> Notiz anlegen </ListenFor>
+      <Feedback> Erstelle neue Notiz... </Feedback>
+      <Navigate/>
+    </Command>
+
+    <Command Name="newNoteWithContent">
+      <Example> Erstelle neue Notiz mit Inhalt 'Milch im Supermarkt einkaufen'. </Example>
+      <ListenFor> Erstelle [neue] Notiz mit Inhalt {naturalLanguage} </ListenFor>
+      <ListenFor> Notiz mit Inhalt {naturalLanguage} </ListenFor>
+      <ListenFor> {naturalLanguage} </ListenFor>
+      <Feedback> Erstelle neue Notiz... </Feedback>
+      <Navigate/>
+    </Command>
+
+    <Command Name="newNoteWithContentAndColor">
+      <Example> Erstelle neue Notiz mit Inhalt 'Milch im Supermarkt einkaufen' Kategorie 'Rot'. </Example>
+      <ListenFor> Erstelle [neue] Notiz mit Inhalt {naturalLanguage} Kategorie {colors} </ListenFor>
+      <ListenFor> Notiz mit Inhalt {naturalLanguage} Kategorie {colors} </ListenFor>
+      <ListenFor> {naturalLanguage} Kategorie {colors} </ListenFor>
+      <Feedback> Erstelle neue Notiz... </Feedback>
+      <Navigate/>
+    </Command>
+
+    <PhraseList Label="colors">
+      <Item> Neutral </Item>
+      <Item> Red </Item>
+      <Item> Green </Item>
+      <Item> Blue </Item>
+      <Item> Violett </Item>
+      <Item> Orange </Item>
+      <Item> Yellow </Item>
+    </PhraseList>
+
+    <PhraseTopic Label="naturalLanguage" Scenario="Natural Language" />
 
   </CommandSet>
 
