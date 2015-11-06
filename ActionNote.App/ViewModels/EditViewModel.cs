@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using UWPCore.Framework.Navigation;
+using UWPCore.Framework.Speech;
 
 namespace ActionNote.App.ViewModels
 {
@@ -20,6 +21,7 @@ namespace ActionNote.App.ViewModels
         private INotesRepository _notesRepository;
         private IToastUpdateService _toastUpdateService;
         private IStorageService _localStorageService;
+        private ISpeechService _speechService;
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
@@ -34,6 +36,7 @@ namespace ActionNote.App.ViewModels
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
             _localStorageService = Injector.Get<ILocalStorageService>();
+            _speechService = Injector.Get<ISpeechService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -104,6 +107,23 @@ namespace ActionNote.App.ViewModels
             (noteItem) =>
             {
                 return noteItem != null && noteItem.HasAttachement;
+            });
+
+            VoiceToTextCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                var result = await _speechService.RecoginizeUI();
+
+                if (result != null)
+                {
+                    if (noteItem.Content == null)
+                        noteItem.Content = result.Text;
+                    else
+                        noteItem.Content += "\r\n" + result.Text;
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
             });
         }
 
@@ -236,5 +256,7 @@ namespace ActionNote.App.ViewModels
         public ICommand SelectAttachementCommand { get; private set; }
 
         public ICommand RemoveAttachementCommand { get; private set; }
+
+        public ICommand VoiceToTextCommand { get; private set; }
     }
 }

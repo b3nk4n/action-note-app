@@ -42,11 +42,12 @@
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <ScrollViewer>
                 <StackPanel>
+                    <Button Content="Voice to Text..." Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Margin="4" />
                     <StackPanel DataContext="{Binding SelectedNote}">
 
                         <TextBox PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" />
                         <TextBox PlaceholderText="Content..." Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" Height="200" Margin="4" />
-
+                        
                         <ComboBox ItemsSource="{Binding ElementName=self, Path=DataContext.ColorEnumSource.ItemsSource}" SelectedItem="{Binding ElementName=self, Path=DataContext.ColorEnumSource.SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="4">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>

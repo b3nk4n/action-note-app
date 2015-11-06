@@ -26,14 +26,14 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#0063B1" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
-          </BackgroundTasks>
-        </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
           <BackgroundTasks>
             <Task Type="general" />
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
+          <BackgroundTasks>
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
@@ -44,5 +44,6 @@
     <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary" />
     <uap:Capability Name="removableStorage" />
+    <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>
