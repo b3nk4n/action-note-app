@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
+  
+  <CommandSet xml:lang="en-us" Name="commandSet_en-us">
+    <CommandPrefix> Action Note, </CommandPrefix>
+    <Example> Create a new note </Example>
+
+    <Command Name="newNote">
+      <Example> Create a new note  </Example>
+      <ListenFor> Create [a] new note </ListenFor>
+      <ListenFor> Add [a] new note </ListenFor>
+      <Feedback> Creating a new note... </Feedback>
+      <Navigate/>
+    </Command>
+
+    <Command Name="newNoteWithContent">
+      <Example> Create a new note with content 'Buy a gift for my sister.' </Example>
+      <ListenFor> Create [a] new note with content {naturalLanguage} </ListenFor>
+      <ListenFor> Add [a] new note with content {naturalLanguage} </ListenFor>
+      <ListenFor> {naturalLanguage} </ListenFor>
+      <Feedback> Creating a new note... </Feedback>
+      <Navigate/>
+    </Command>
+
+    <PhraseList Label="colors">
+      <Item> Neutral </Item>
+      <Item> Red </Item>
+      <Item> Green </Item>
+      <Item> Blue </Item>
+      <Item> Violett </Item>
+      <Item> Orange </Item>
+      <Item> Yellow </Item>
+    </PhraseList>
+
+    <PhraseTopic Label="naturalLanguage" Scenario="Short Message"> <!-- Or Scenarion Natural Language???-->
+      <Subject>Content</Subject>
+    </PhraseTopic>
+
+  </CommandSet>
+
+  <!-- Other CommandSets for other languages -->
+
+</VoiceCommands>

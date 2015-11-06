@@ -142,20 +142,35 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             NoteItem noteToEdit = null;
+            string content = null;
             if (parameter != null)
             {
-                var noteId = (string)parameter;
-                noteToEdit = _notesRepository.Get(noteId);
+                var stringParam = (string)parameter;
+
+                if (stringParam.StartsWith("speech-content:"))
+                {
+                    content = stringParam.Remove(0, "speech-content:".Length);
+                }
+                else
+                {
+                    var noteId = (string)parameter;
+                    noteToEdit = _notesRepository.Get(noteId);
+                }
             }
 
-            // add new note, when no ID was passed. Also create a copy to be able to discard all the changes
+            // add new note, when no ID was passed or a voice command result was passed
             if (noteToEdit == null)
             {
-                SelectedNote = new NoteItem();
-                IsEditMode = false;
+                SelectedNote = new NoteItem(null, content);
+
+                if (content == null)
+                    IsEditMode = false;
+                else
+                    IsEditMode = true;
             }
             else
             {
+                // create a copy to be able to discard all the changes
                 SelectedNote = noteToEdit.Clone();
                 IsEditMode = true;
             }

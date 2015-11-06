@@ -12,6 +12,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
+using UWPCore.Framework.Speech;
 
 namespace ActionNote.App
 {
@@ -26,6 +27,7 @@ namespace ActionNote.App
         private IBackgroundTaskService _backgroundTaskService;
         private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
+        private ISpeechService _speechService;
 
         private DispatcherTimer _refreshActionCentertimer = new DispatcherTimer();
 
@@ -41,6 +43,7 @@ namespace ActionNote.App
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
+            _speechService = Injector.Get<ISpeechService>();
 
             _refreshActionCentertimer.Interval = TimeSpan.FromSeconds(3);
             _refreshActionCentertimer.Tick += (s, e) =>
@@ -55,8 +58,10 @@ namespace ActionNote.App
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
         }
 
-        public async override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+        public async override Task OnInitializeAsync(IActivatedEventArgs args)
         {
+            await base.OnInitializeAsync(args);
+
             // only add the app shell when the app was not already running
             if (args.PreviousExecutionState != ApplicationExecutionState.Running &&
                 args.PreviousExecutionState != ApplicationExecutionState.Suspended)
@@ -67,6 +72,12 @@ namespace ActionNote.App
                     GetBottomDockedNavigationMenuItems());
             }
 
+            _speechService = Injector.Get<ISpeechService>();
+            await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");
+        }
+
+        public async override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
+        {
             // load data
             await _notesRepository.Load();
 
@@ -107,6 +118,26 @@ namespace ActionNote.App
             {
                 _toastUpdateService.Refresh(_notesRepository);
                 _refreshActionCentertimer.Start();
+            }
+            else if (args.Kind == ActivationKind.VoiceCommand)
+            {
+                // check voice commands
+                var command = _speechService.GetVoiceCommand(args);
+                if (command != null)
+                {
+                    switch (command.CommandName)
+                    {
+                        case "newNote":
+                            pageType = typeof(EditPage);
+                            break;
+
+                        case "newNoteWithContent":
+                            var content = command.Interpretations["naturalLanguage"];
+                            pageType = typeof(EditPage);
+                            parameter = "speech-content:" + content;
+                            break;
+                    }
+                }
             }
 
             // (re)register background tasks

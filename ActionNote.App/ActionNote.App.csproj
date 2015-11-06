@@ -128,6 +128,7 @@
     <None Include="ActionNote.App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Cortana\voicecommands.xml" />
     <Content Include="Assets\Images\blue.png" />
     <Content Include="Assets\Images\delete.png" />
     <Content Include="Assets\Images\edit.png" />
