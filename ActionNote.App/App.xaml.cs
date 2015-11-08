@@ -16,6 +16,7 @@ using UWPCore.Framework.Speech;
 using System.Runtime.Serialization;
 using UWPCore.Framework.Data;
 using ActionNote.Common;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App
 {
@@ -130,6 +131,7 @@ namespace ActionNote.App
                 var command = _speechService.GetVoiceCommand(args);
                 if (command != null)
                 {
+                    string title;
                     string content;
                     string color;
                     switch (command.CommandName)
@@ -138,17 +140,30 @@ namespace ActionNote.App
                             pageType = typeof(EditPage);
                             break;
 
+                        case "newNoteWithTitle":
+                            title = command.Interpretations["naturalLanguageTitle"];
+                            pageType = typeof(EditPage);
+                            parameter = _serializationService.SerializeJson(new NoteItem(title, null));
+                            break;
+
                         case "newNoteWithContent":
-                            content = command.Interpretations["naturalLanguage"];
+                            content = command.Interpretations["naturalLanguageContent"];
                             pageType = typeof(EditPage);
                             parameter = _serializationService.SerializeJson(new NoteItem(null, content));
                             break;
 
+                        case "newNoteWithTitleAndContent":
+                            title = command.Interpretations["naturalLanguageTitle"];
+                            content = command.Interpretations["naturalLanguageContent"];
+                            pageType = typeof(EditPage);
+                            parameter = _serializationService.SerializeJson(new NoteItem(title, content));
+                            break;
+
                         case "newNoteWithContentAndColor":
-                            content = command.Interpretations["naturalLanguage"];
+                            content = command.Interpretations["naturalLanguageContent"];
                             color = command.Interpretations["colors"];
                             pageType = typeof(EditPage);
-                            parameter = _serializationService.SerializeJson(new NoteItem(null, content) { Color = (ColorCategory)Enum.Parse(typeof(ColorCategory), color) });
+                            parameter = _serializationService.SerializeJson(new NoteItem(null, content) { Color = ColorCategoryConverter.FromAnyString(color) });
                             break;
                     }
                 }
@@ -187,12 +202,12 @@ namespace ActionNote.App
                     Label = "Notes",
                     DestinationPage = typeof(MainPage)
                 },
-                new NavMenuItem()
-                {
-                    Symbol = GlyphIcons.BrowsePhotos,
-                    Label = "Media",
-                    DestinationPage = null // TODO: idea for own page?
-                },
+                //new NavMenuItem()
+                //{
+                //    Symbol = GlyphIcons.BrowsePhotos,
+                //    Label = "Media",
+                //    DestinationPage = null // TODO: idea for own page?
+                //},
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Archive,
