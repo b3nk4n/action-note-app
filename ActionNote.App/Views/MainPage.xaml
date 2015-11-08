@@ -24,6 +24,26 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="433" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SharePrimary.Visibility" Value="Visible" />
+                        <Setter Target="ShareSecondary.Visibility" Value="Collapsed" />
+                        <Setter Target="ShareSeperator.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
                 <TextBlock Text="NOTES" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
@@ -31,20 +51,20 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}">
+            <AppBarButton x:Name="SharePrimary" Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
                 <AppBarButton.Icon>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarSeparator/>
             <AppBarButton Icon="Pin" Label="Pin to start" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
             <AppBarButton Icon="UnPin" Label="Unpin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
             <AppBarButton Icon="Edit" Label="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
-            <AppBarSeparator/>
+            <AppBarSeparator x:Name="ShareSeperator" Visibility="Collapsed" />
             <AppBarButton Icon="Add" Label="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Delete all" Command="{Binding ClearCommand}"/>
+                <AppBarButton x:Name="ShareSecondary" Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
