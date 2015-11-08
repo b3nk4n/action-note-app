@@ -23,6 +23,7 @@ namespace ActionNote.App.ViewModels
         private IStorageService _localStorageService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
+        private ITilePinService _tilePinService;
 
         public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
@@ -39,6 +40,7 @@ namespace ActionNote.App.ViewModels
             _localStorageService = Injector.Get<ILocalStorageService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
+            _tilePinService = Injector.Get<ITilePinService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -166,7 +168,11 @@ namespace ActionNote.App.ViewModels
 
             await _notesRepository.Save();
 
+            // update action center
             _toastUpdateService.Refresh(_notesRepository);
+
+            // update tile in case it was pinned
+            _tilePinService.Update(noteItem);
         }
 
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)

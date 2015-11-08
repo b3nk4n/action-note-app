@@ -120,10 +120,26 @@ namespace ActionNote.App
                     parameter = AppConstants.PARAM_ID + toastArgs.Argument;
                 }
             }
-            else if (args.Kind == ActivationKind.Launch) // when launched from Action Center title
+            else if (args.Kind == ActivationKind.Launch)
             {
-                _toastUpdateService.Refresh(_notesRepository);
-                _refreshActionCentertimer.Start();
+                var cause = DetermineStartCause(args);
+
+                if (cause == AdditionalKinds.Primary)
+                {
+                    // refresh needed when launched from action center (which is like launching from main tile)
+                    _toastUpdateService.Refresh(_notesRepository); // TODO: refresh only when list is empty, because on primary-tile, the list is not deleted and a refresh is not necessary?
+                    _refreshActionCentertimer.Start();
+                }
+                else if (cause == AdditionalKinds.SecondaryTile)
+                {
+                    var lauchArgs = args as LaunchActivatedEventArgs;
+
+                    if (lauchArgs != null)
+                    {
+                        pageType = typeof(EditPage);
+                        parameter = AppConstants.PARAM_ID + lauchArgs.Arguments;
+                    }
+                }
             }
             else if (args.Kind == ActivationKind.VoiceCommand)
             {

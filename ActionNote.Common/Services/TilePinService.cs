@@ -46,12 +46,31 @@ namespace ActionNote.Common.Services
                 //secondaryTile.VisualElements.Wide310x150Logo = new Uri(IOConstants.APPX_SCHEME + "/Assets/Square310x150Logo.scale-200.png", UriKind.Absolute);
                 secondaryTile.VisualElements.ShowNameOnWide310x150Logo = true;
 
-                await _tileService.PinAsync(noteItem.Id, secondaryTile, "bla bla args"); // TODO: args needed?
+                await _tileService.PinAsync(noteItem.Id, secondaryTile, noteItem.Id); // TODO: args needed?
                 _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileSmall);
                 _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileMedium);
                 //_tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileWide); // TODO: fixme! updating a secondary tile, only the last updated tilesize is working. Updating a combines adaptive tile with various sizes also leads to that only the first listed size is updated, and the other only show the image.
             }
+        }
 
+        public void Update(NoteItem noteItem)
+        {
+            if (!_tileService.Exists(noteItem.Id))
+                return;
+
+            var tileSmallModel = GetTileSmallModel(noteItem);
+            var tileMediumModel = GetTileMediumModel(noteItem);
+            //var tileWideModel = GetTileWideModel(noteItem);
+            var tileSmall = _tileService.AdaptiveFactory.Create(tileSmallModel);
+            var tileMedium = _tileService.AdaptiveFactory.Create(tileMediumModel);
+            //var tileWide = _tileService.AdaptiveFactory.Create(tileWideModel);
+
+            if (_tileService.Exists(noteItem.Id))
+            {
+                _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileSmall);
+                _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileMedium);
+                //_tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tileWide);
+            }
         }
 
         public bool Contains(string noteId)
