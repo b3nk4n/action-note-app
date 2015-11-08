@@ -40,18 +40,14 @@ namespace ActionNote.Common.Models
         }
         private string _content;
 
-        public ColorCategory? Color {
+        public ColorCategory Color {
             get { return _color; }
             set
             {
-                // TODO: fixme! Something is setting this property to null, which is not a valid value!
-                if (value == null)
-                    return;
-
                 Set(ref _color, value);
             }
         }
-        private ColorCategory? _color = ColorCategory.Neutral;
+        private ColorCategory _color = ColorCategory.Neutral;
 
         public string AttachementFile
         {

@@ -1,0 +1,16 @@
+﻿<localViewModels:MainViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localViewModels="using:ActionNote.App.ViewModels"
+    xmlns:commonModels="using:ActionNote.Common.Models"
+    mc:Ignorable="d">
+
+    <localViewModels:MainViewModel.NoteItems>
+        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note in the list rendered in design time." Color="Red" />
+        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note." />
+        <commonModels:NoteItem Title="Title line" Content="A short note." Color="Blue" />
+    </localViewModels:MainViewModel.NoteItems>
+    
+</localViewModels:MainViewModel>

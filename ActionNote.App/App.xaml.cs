@@ -13,7 +13,6 @@ using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
 using UWPCore.Framework.Speech;
-using System.Runtime.Serialization;
 using UWPCore.Framework.Data;
 using ActionNote.Common;
 using ActionNote.Common.Helpers;

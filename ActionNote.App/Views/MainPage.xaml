@@ -10,7 +10,8 @@
     xmlns:localViewModels="using:ActionNote.App.ViewModels"
     xmlns:commonModels="using:ActionNote.Common.Models"
     xmlns:commonConverters="using:ActionNote.Common.Converters"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData Source=/SampleData/MainViewModelSampleData.xaml}">
 
     <Page.Resources>
         <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />

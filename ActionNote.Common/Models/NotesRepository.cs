@@ -37,10 +37,7 @@ namespace ActionNote.Common.Models
                     entity.Content = prototype.Content;
                 }
 
-                if (prototype.Color != null)
-                {
-                    entity.Color = prototype.Color;
-                }
+                entity.Color = prototype.Color;
 
                 if (prototype.AttachementFile != null)
                 {
