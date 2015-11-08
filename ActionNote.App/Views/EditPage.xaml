@@ -36,6 +36,7 @@
             <AppBarButton Icon="Save" Label="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Clear all" Command="{Binding ClearCommand}"/>
+                <AppBarButton Label="Read aloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
 

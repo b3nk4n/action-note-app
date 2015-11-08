@@ -127,6 +127,16 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null;
             });
+
+            ReadNoteCommand = new DelegateCommand<NoteItem>(async (noteItem) => // TODO: enabled state is not updated when note is changed. Create a NoteItemViewModel which bundles the functionality of a note?
+            {
+                var text = noteItem.Title + ". " + noteItem.Content;
+                await _speechService.SpeakTextAsync(text);
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !string.IsNullOrWhiteSpace(noteItem.Content) && !string.IsNullOrWhiteSpace(noteItem.Content);
+            });
         }
 
         /// <summary>
@@ -238,7 +248,7 @@ namespace ActionNote.App.ViewModels
         {
             get
             {
-                return IsEditMode ? "EDIT" : "NEW NOTE";
+                return IsEditMode ? "EDIT" : "NEW NOTE"; // TODO: translate
             }
         }
 
@@ -253,5 +263,7 @@ namespace ActionNote.App.ViewModels
         public ICommand RemoveAttachementCommand { get; private set; }
 
         public ICommand VoiceToTextCommand { get; private set; }
+
+        public ICommand ReadNoteCommand { get; private set; }
     }
 }
