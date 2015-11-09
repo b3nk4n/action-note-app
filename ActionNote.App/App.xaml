@@ -13,6 +13,16 @@
                 <ResourceDictionary Source="ms-appx:///UWPCore.Framework/Styles/SystemIcons.xaml" />
                 <!--<ResourceDictionary Source="ms-appx:///UWPCore.Framework/Styles/CommonStyles.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Accent color overrides -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="SystemAccentColor">#0063B1</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <!-- Light theme overrides go here... -->
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </uwpcCommon:UniversalApp.Resources>
 
