@@ -20,7 +20,7 @@
                     <Color x:Key="SystemAccentColor">#0063B1</Color>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
-                    <!-- Light theme overrides go here... -->
+                    <Color x:Key="SystemAccentColor">#0063B1</Color>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

@@ -17,6 +17,7 @@ using UWPCore.Framework.Data;
 using ActionNote.Common;
 using ActionNote.Common.Helpers;
 using Windows.UI;
+using UWPCore.Framework.UI;
 
 namespace ActionNote.App
 {
@@ -41,7 +42,7 @@ namespace ActionNote.App
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
-            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, new AppColorProperties(Color.FromArgb(255, 0, 99, 177), Colors.White, Colors.Black), new DefaultModule(), new AppModule())
+            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, new DefaultModule(), new AppModule())
         {
             InitializeComponent();
 
@@ -67,6 +68,9 @@ namespace ActionNote.App
         public async override Task OnInitializeAsync(IActivatedEventArgs args)
         {
             await base.OnInitializeAsync(args);
+
+            // setup theme colors (mainly for title bar)
+            ColorProperties = new AutoAppColorProperties();
 
             // only add the app shell when the app was not already running
             if (args.PreviousExecutionState != ApplicationExecutionState.Running &&
