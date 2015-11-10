@@ -14,7 +14,7 @@
     d:DataContext="{d:DesignData Source=/SampleData/MainViewModelSampleData.xaml}">
 
     <Page.Resources>
-        <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />
+        <commonConverters:ColorCategoryToBrushConverter x:Key="colorToBrushConv" />
         <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
     </Page.Resources>
 
@@ -71,15 +71,27 @@
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Padding="16">
             <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" Margin="4" />
-                            <TextBlock Text="{Binding Content}" Margin="4" />
-
-                            <!-- color category -->
-                            <Image Source="{Binding Color, Converter={StaticResource colorImageConv}}" Width="32" Height="32" />
-                        </StackPanel>
+                        <Grid Margin="0,4,-12,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="12" CornerRadius="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,8,4" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextBlockStyle}" FontWeight="SemiBold" Margin="4" />
+                                <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" />
+                            </StackPanel>
+                            <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
+                        </Grid>
+                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

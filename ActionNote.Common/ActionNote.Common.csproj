@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Converters\ColorCategoryToBrushConverter.cs" />
     <Compile Include="Converters\ColorCategoryToImageConverter.cs" />
     <Compile Include="Helpers\ColorCategoryConverter.cs" />
     <Compile Include="Models\INotesRepository.cs" />
