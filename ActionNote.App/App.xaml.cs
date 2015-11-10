@@ -18,6 +18,7 @@ using ActionNote.Common;
 using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
+using System.Collections.Generic;
 
 namespace ActionNote.App
 {
@@ -42,7 +43,7 @@ namespace ActionNote.App
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
-            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, new DefaultModule(), new AppModule())
+            : base(typeof(MainPage), AppBackButtonBehaviour.KeepAlive, true, new DefaultModule(), new AppModule())
         {
             InitializeComponent();
 
@@ -69,18 +70,9 @@ namespace ActionNote.App
         {
             await base.OnInitializeAsync(args);
 
-            // setup theme colors (mainly for title bar)
-            ColorProperties = new AutoAppColorProperties();
-
-            // only add the app shell when the app was not already running
-            if (args.PreviousExecutionState != ApplicationExecutionState.Running &&
-                args.PreviousExecutionState != ApplicationExecutionState.Suspended)
-            {
-                Window.Current.Content = new AppShell(
-                    RootFrame,
-                    GetNavigationMenuItems(),
-                    GetBottomDockedNavigationMenuItems());
-            }
+            // setup theme colors (mainly for title bar)63B1
+            ColorPropertiesDark = new AppColorProperties(Color.FromArgb(255, 0, 99, 177), Colors.White, Colors.Black);
+            ColorPropertiesLight = new AppColorProperties(Color.FromArgb(255, 0, 99, 177), Colors.Black, Colors.White);
 
             _speechService = Injector.Get<ISpeechService>();
             await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");
@@ -212,7 +204,7 @@ namespace ActionNote.App
         /// Gets the navigation menu items.
         /// </summary>
         /// <returns>The navigation menu items.</returns>
-        private static NavMenuItem[] GetNavigationMenuItems()
+        protected override IEnumerable<NavMenuItem> CreateNavigationMenuItems()
         {
             return new[]
             {
@@ -241,7 +233,7 @@ namespace ActionNote.App
         /// Gets the navigation menu items that are docked at the bottom.
         /// </summary>
         /// <returns>The navigation menu items.</returns>
-        private static NavMenuItem[] GetBottomDockedNavigationMenuItems()
+        protected override IEnumerable<NavMenuItem> CreateBottomDockedNavigationMenuItems()
         {
             return new[]
             {

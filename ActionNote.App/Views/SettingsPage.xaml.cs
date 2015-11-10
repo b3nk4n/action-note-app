@@ -1,4 +1,7 @@
-﻿using UWPCore.Framework.Controls;
+﻿using UWPCore.Framework.Common;
+using UWPCore.Framework.Controls;
+using UWPCore.Framework.Data;
+using Windows.UI.Xaml.Navigation;
 
 namespace ActionNote.App.Views
 {
