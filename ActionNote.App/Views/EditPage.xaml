@@ -41,20 +41,20 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
-            <ScrollViewer>
-                <StackPanel>
+            <ScrollViewer Padding="16,0">
+                <StackPanel Padding="0,16">
                     <Button Content="Voice to Text..." Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Margin="4" />
                     <StackPanel DataContext="{Binding SelectedNote}">
 
                         <TextBox PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" />
                         <TextBox PlaceholderText="Content..." Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" Height="200" Margin="4" />
-                        
-                        <ComboBox ItemsSource="{Binding ElementName=self, Path=DataContext.ColorEnumSource.ItemsSource}" SelectedItem="{Binding ElementName=self, Path=DataContext.ColorEnumSource.SelectedItem, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="4">
+
+                        <ComboBox ItemsSource="{Binding ElementName=self, Path=DataContext.ColorEnumSource.ItemsSource}" SelectedItem="{Binding ElementName=self, Path=DataContext.ColorEnumSource.SelectedItem, Mode=TwoWay}" HorizontalAlignment="Left" Margin="4">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="{Binding Converter={StaticResource colorImageConv}}" Width="32" Height="32" Margin="4" />
-                                        <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="4" />
+                                        <Image Source="{Binding Converter={StaticResource colorImageConv}}" Width="16" Margin="4" />
+                                        <!--<TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="4" />-->
                                     </StackPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>

@@ -69,8 +69,8 @@
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
-        <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Padding="16">
-            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+        <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="16">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
