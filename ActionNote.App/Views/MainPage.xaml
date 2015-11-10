@@ -86,7 +86,7 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="12" CornerRadius="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,8,4" />
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Title}" Style="{StaticResource TitleTextBlockStyle}" FontWeight="SemiBold" Margin="4" />
+                                <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Margin="4" />
                                 <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" />
                             </StackPanel>
                             <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
