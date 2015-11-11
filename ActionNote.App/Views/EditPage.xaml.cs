@@ -1,5 +1,8 @@
 ﻿using ActionNote.App.ViewModels;
 using UWPCore.Framework.Controls;
+using Windows.System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 
 namespace ActionNote.App.Views
 {
@@ -15,9 +18,18 @@ namespace ActionNote.App.Views
             DataContext = new EditViewModel();
         }
 
-        private void ColorFlyoutClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void ColorFlyoutClicked(object sender, RoutedEventArgs e)
         {
             ColorFlyout.Hide();
+        }
+
+        private void TitleTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                ContentTextBox.Focus(FocusState.Programmatic);
+                ContentTextBox.Select(ContentTextBox.Text.Length, 0);
+            }
         }
     }
 }

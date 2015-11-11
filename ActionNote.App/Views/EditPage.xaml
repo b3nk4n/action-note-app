@@ -476,11 +476,11 @@
                 <StackPanel Padding="0,16">
                     <StackPanel DataContext="{Binding SelectedNote}">
 
-                        <TextBox PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" />
+                        <TextBox x:Name="TitleTextBox" PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
 
-                        <Rectangle Height="2" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
+                        <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
 
-                        <TextBox PlaceholderText="Details" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
+                        <TextBox x:Name="ContentTextBox" PlaceholderText="Details" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
                     </StackPanel>
 
                     <Grid>
