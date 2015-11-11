@@ -2,7 +2,6 @@
 using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System;
-using System.Windows.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using UWPCore.Framework.Data;
@@ -13,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using UWPCore.Framework.Navigation;
 using UWPCore.Framework.Speech;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.ViewModels
 {
@@ -24,8 +24,6 @@ namespace ActionNote.App.ViewModels
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
         private ITilePinService _tilePinService;
-
-        public EnumSource<ColorCategory> ColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
         /// <summary>
         /// Flag that indicates that no save operation is needed on BACK event.
@@ -91,6 +89,8 @@ namespace ActionNote.App.ViewModels
                 }
 
                 _toastUpdateService.Refresh(_notesRepository);
+
+                RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
             (noteItem) =>
             {
@@ -103,10 +103,12 @@ namespace ActionNote.App.ViewModels
 
                 noteItem.AttachementFile = null;
 
-                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename);
+                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename); // TODO: fixme: raises exception !?!
                 
 
                 _toastUpdateService.Refresh(_notesRepository);
+
+                RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
             (noteItem) =>
             {
@@ -139,6 +141,17 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null && !string.IsNullOrWhiteSpace(noteItem.Content) && !string.IsNullOrWhiteSpace(noteItem.Content);
             });
+
+            ColorSelectedCommand = new DelegateCommand<string> ((colorString) =>
+            {
+                var category = ColorCategoryConverter.FromAnyString(colorString);
+
+                SelectedNote.Color = category;
+            },
+            (colorString) =>
+            {
+                return SelectedNote != null;
+            });
         }
 
         /// <summary>
@@ -154,9 +167,6 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
-            // color value must be used from the enum source
-            noteItem.Color = (ColorCategory)ColorEnumSource.SelectedItem;
-
             if (_notesRepository.Contains(noteItem.Id))
             {
                 _notesRepository.Update(noteItem);
@@ -203,9 +213,6 @@ namespace ActionNote.App.ViewModels
             }
 
             SelectedNote = noteToEdit;
-
-            // select the color in the dropdown
-            ColorEnumSource.SelectedItem = SelectedNote.Color;
         }
 
         public override async void OnNavigatingFrom(NavigatingEventArgs args)
@@ -271,5 +278,7 @@ namespace ActionNote.App.ViewModels
         public ICommand VoiceToTextCommand { get; private set; }
 
         public ICommand ReadNoteCommand { get; private set; }
+
+        public ICommand ColorSelectedCommand { get; private set; }
     }
 }

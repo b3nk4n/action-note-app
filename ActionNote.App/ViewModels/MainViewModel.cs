@@ -2,7 +2,6 @@
 using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;

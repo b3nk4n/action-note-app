@@ -14,5 +14,10 @@ namespace ActionNote.App.Views
             InitializeComponent();
             DataContext = new EditViewModel();
         }
+
+        private void ColorFlyoutClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ColorFlyout.Hide();
+        }
     }
 }
