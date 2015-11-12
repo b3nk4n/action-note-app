@@ -28,6 +28,5 @@ namespace ActionNote.Common
         public readonly static Color COLOR_BLUE = Color.FromArgb(255, 73, 191, 255);
         public readonly static Color COLOR_YELLOW = Color.FromArgb(255, 246, 255, 73);
         public readonly static Color COLOR_VIOLETT = Color.FromArgb(255, 200, 73, 255);
-        public readonly static Color COLOR_ORANGE = Color.FromArgb(255, 255, 164, 73);
     }
 }

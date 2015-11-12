@@ -3,6 +3,8 @@ using System;
 using Windows.UI.Xaml.Data;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using UWPCore.Framework.Common;
+using Windows.UI.Xaml;
 
 namespace ActionNote.Common.Converters
 {
@@ -11,9 +13,6 @@ namespace ActionNote.Common.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             Color color;
-
-            if (value == null)
-                color = Colors.White;
 
             var colorCategory = (ColorCategory)value;
 
@@ -34,11 +33,12 @@ namespace ActionNote.Common.Converters
                 case ColorCategory.Violett:
                     color = AppConstants.COLOR_VIOLETT;
                     break;
-                case ColorCategory.Orange:
-                    color = AppConstants.COLOR_ORANGE;
-                    break;
                 default:
-                    color = AppConstants.COLOR_WHITE;
+                    var theme = UniversalApp.Current.PageTheme;
+                    if (theme == ElementTheme.Light)
+                        color = Colors.Black;
+                    else
+                        color = Colors.White;
                     break;
             }
 

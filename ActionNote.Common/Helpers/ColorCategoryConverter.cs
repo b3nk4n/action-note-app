@@ -43,10 +43,6 @@ namespace ActionNote.Common.Helpers
                         color = ColorCategory.Violett;
                         break;
 
-                    case "orange":
-                        color = ColorCategory.Orange;
-                        break;
-
                     default:
                         color = ColorCategory.Neutral;
                         break;

@@ -16,8 +16,7 @@ namespace ActionNote.Common.Models
         Blue,
         Green,
         Yellow,
-        Violett,
-        Orange
+        Violett
     }
 
     public class NoteItem : BindableBase, IRepositoryItem<string>
