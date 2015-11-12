@@ -87,7 +87,7 @@ namespace ActionNote.Common.Services
                                 new AdaptiveImage()
                                 {
                                     Placement = ImagePlacement.AppLogoOverride,
-                                    Source = (string)new ColorCategoryToImageConverter().Convert(noteItem.Color, null, null, null)
+                                    Source = noteItem.GetIconImagePath()
                                 },
                                 new AdaptiveText()
                                 {

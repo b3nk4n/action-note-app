@@ -5,6 +5,7 @@ using UWPCore.Framework.Mvvm;
 using UWPCore.Framework.Storage;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using UWPCore.Framework.Common;
 
 namespace ActionNote.Common.Models
 {
@@ -70,6 +71,11 @@ namespace ActionNote.Common.Models
         {
             Title = title;
             Content = content;
+        }
+
+        public string GetIconImagePath()
+        {
+            return string.Format("/Assets/Images/{0}{1}.png", Color.ToString().FirstLetterToLower(), (HasAttachement ? "_att" : string.Empty));
         }
 
         /// <summary>

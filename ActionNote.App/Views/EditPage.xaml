@@ -13,7 +13,6 @@
 
     <Page.Resources>
         <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
-        <commonConverters:ColorCategoryToImageConverter x:Key="colorImageConv" />
         <commonConverters:ColorCategoryToBrushConverter x:Key="colorBrushConv" />
 
         <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
