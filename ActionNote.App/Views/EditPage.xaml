@@ -489,6 +489,10 @@
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
 
                         <TextBox x:Name="ContentTextBox" PlaceholderText="Details" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
+
+                        <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
+
+                        <Image Source="{Binding AttachementImage}" HorizontalAlignment="Left" Stretch="UniformToFill" MaxWidth="1024" MaxHeight="1024" Margin="4" />
                     </StackPanel>
 
                     <Grid>
