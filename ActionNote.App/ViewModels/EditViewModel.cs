@@ -16,8 +16,15 @@ using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.ViewModels
 {
+    public interface EditViewModelCallbacks
+    {
+        void SelectTitle();
+    }
+
     public class EditViewModel : ViewModelBase
     {
+        private EditViewModelCallbacks _callbacks;
+
         private INotesRepository _notesRepository;
         private IToastUpdateService _toastUpdateService;
         private IStorageService _localStorageService;
@@ -31,8 +38,10 @@ namespace ActionNote.App.ViewModels
         /// </summary>
         private bool _blockBackEvent;
 
-        public EditViewModel()
+        public EditViewModel(EditViewModelCallbacks callbacks)
         {
+            _callbacks = callbacks;
+
             _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
             _localStorageService = Injector.Get<ILocalStorageService>();
@@ -211,6 +220,9 @@ namespace ActionNote.App.ViewModels
                 noteToEdit = new NoteItem();
                 IsEditMode = false;
             }
+
+            if (!IsEditMode)
+                _callbacks.SelectTitle();
 
             SelectedNote = noteToEdit;
         }

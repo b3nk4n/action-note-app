@@ -484,7 +484,7 @@
                 <StackPanel Padding="0,16">
                     <StackPanel DataContext="{Binding SelectedNote}">
 
-                        <TextBox x:Name="TitleTextBox" PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
+                        <TextBox x:Name="TitleTextBox" TabIndex="0" PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
 
