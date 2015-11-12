@@ -300,7 +300,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="CommandBarFlyoutPresenterStyle" TargetType="FlyoutPresenter">
+        <Style x:Key="CommandBarFlyoutPresenterBaseStyle" TargetType="FlyoutPresenter">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="IsTabStop" Value="False"/>
@@ -308,7 +308,6 @@
             <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeHighBrush}"/>
             <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}"/>
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,4,0,0"/>
             <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}"/>
             <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}"/>
             <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}"/>
@@ -330,6 +329,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="CommandBarFlyoutPresenterBottomStyle" TargetType="FlyoutPresenter" BasedOn="{StaticResource CommandBarFlyoutPresenterBaseStyle}">
+            <Setter Property="Margin" Value="0,4,0,0"/>
+        </Style>
+        <Style x:Key="CommandBarFlyoutPresenterTopStyle" TargetType="FlyoutPresenter" BasedOn="{StaticResource CommandBarFlyoutPresenterBaseStyle}">
+            <Setter Property="Margin" Value="0,-4,0,0"/>
+        </Style>
+        
         <Style x:Key="CommandBarFlyoutButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -404,54 +410,62 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock Text="{Binding PageTitle}" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding PageTitle}" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                    <AppBarButton Grid.Column="1" Width="62" Foreground="{Binding SelectedNote.Color, Converter={StaticResource colorBrushConv}}"  Style="{StaticResource ColorfulAppBarButtonStyle}">
+                        <AppBarButton.Icon>
+                            <PathIcon Width="20" Data="M10,0.5L11.9145803451538,0.693006455898285 13.697826385498,1.24655771255493 16.7175121307373,3.28248739242554 18.7534427642822,6.30217313766479 19.3069934844971,8.08541965484619 19.5,10 19.3069934844971,11.9145803451538 18.7534427642822,13.697826385498 16.7175121307373,16.7175121307373 13.697826385498,18.7534427642822 11.9145803451538,19.3069934844971 10,19.5 8.08541965484619,19.3069934844971 6.30217313766479,18.7534427642822 3.28248739242554,16.7175121307373 1.24655771255493,13.697826385498 0.693006455898285,11.9145803451538 0.5,10 0.693006455898285,8.08541965484619 1.24655771255493,6.30217313766479 3.28248739242554,3.28248739242554 6.30217313766479,1.24655771255493 8.08541965484619,0.693006455898285 10,0.5z" />
+                        </AppBarButton.Icon>
+                        <AppBarButton.Flyout>
+                            <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource CommandBarFlyoutPresenterTopStyle}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Neutral">
+                                        <Ellipse Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                    <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Red">
+                                        <Ellipse Fill="#FF4949" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                    <Button Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Blue">
+                                        <Ellipse Fill="#49BFFF" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                    <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Green">
+                                        <Ellipse Fill="#61FF49" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                    <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Violett">
+                                        <Ellipse Fill="#C849FF" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                    <Button Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Yellow">
+                                        <Ellipse Fill="#F6FF49" Width="16" Height="16" Margin="4" />
+                                    </Button>
+                                </Grid>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                </Grid>
             </uwpcControls:PageHeader.HeaderContent>
+            
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton Width="62" Foreground="{Binding SelectedNote.Color, Converter={StaticResource colorBrushConv}}" Label="Category" Style="{StaticResource ColorfulAppBarButtonStyle}">
-                <AppBarButton.Icon>
-                    <PathIcon Width="20" Data="M10,0.5L11.9145803451538,0.693006455898285 13.697826385498,1.24655771255493 16.7175121307373,3.28248739242554 18.7534427642822,6.30217313766479 19.3069934844971,8.08541965484619 19.5,10 19.3069934844971,11.9145803451538 18.7534427642822,13.697826385498 16.7175121307373,16.7175121307373 13.697826385498,18.7534427642822 11.9145803451538,19.3069934844971 10,19.5 8.08541965484619,19.3069934844971 6.30217313766479,18.7534427642822 3.28248739242554,16.7175121307373 1.24655771255493,13.697826385498 0.693006455898285,11.9145803451538 0.5,10 0.693006455898285,8.08541965484619 1.24655771255493,6.30217313766479 3.28248739242554,3.28248739242554 6.30217313766479,1.24655771255493 8.08541965484619,0.693006455898285 10,0.5z" />
-                </AppBarButton.Icon>
-                <AppBarButton.Flyout>
-                    <Flyout x:Name="ColorFlyout" FlyoutPresenterStyle="{StaticResource CommandBarFlyoutPresenterStyle}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Neutral">
-                                <Ellipse Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Width="16" Height="16" Margin="4" />
-                            </Button>
-                            <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Red">
-                                <Ellipse Fill="#FF4949" Width="16" Height="16" Margin="4" />
-                            </Button>
-                            <Button Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Blue">
-                                <Ellipse Fill="#49BFFF" Width="16" Height="16" Margin="4" />
-                            </Button>
-                            <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Green">
-                                <Ellipse Fill="#61FF49" Width="16" Height="16" Margin="4" />
-                            </Button>
-                            <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Violett">
-                                <Ellipse Fill="#C849FF" Width="16" Height="16" Margin="4" />
-                            </Button>
-                            <Button Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Yellow">
-                                <Ellipse Fill="#F6FF49" Width="16" Height="16" Margin="4" />
-                            </Button>
-                        </Grid>
-                    </Flyout>
-                </AppBarButton.Flyout>
-            </AppBarButton>
+            <AppBarButton Width="62" Label="Microphone" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" />
             <AppBarButton Width="62" Label="Add attachement" Icon="Attach">
                 <AppBarButton.Flyout>
                     <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterStyle}">
-                        <MenuFlyoutItem Text="Select attachement" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
-                        <MenuFlyoutItem Text="Remove attachement" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
+                        <MenuFlyoutItem Text="Select" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
+                        <MenuFlyoutItem Text="Remove" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
@@ -484,8 +498,6 @@
                         </Grid.ColumnDefinitions>
                     </Grid>
 
-                    <Image DataContext="{Binding SelectedNote}" Source="{Binding AttachementImage}" HorizontalAlignment="Stretch" Stretch="UniformToFill"  Margin="4" />
-                    <Button Content="Voice to Text..." Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Margin="4" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
