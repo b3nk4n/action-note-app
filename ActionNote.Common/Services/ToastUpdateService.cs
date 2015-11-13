@@ -87,6 +87,7 @@ namespace ActionNote.Common.Services
                                 new AdaptiveImage()
                                 {
                                     Placement = ImagePlacement.AppLogoOverride,
+                                    HintCrop = ImageHintCrop.Circle,
                                     Source = noteItem.GetIconImagePath()
                                 },
                                 new AdaptiveText()
