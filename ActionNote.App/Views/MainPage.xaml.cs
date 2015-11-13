@@ -1,5 +1,7 @@
 ﻿using ActionNote.App.ViewModels;
+using ActionNote.Common.Models;
 using UWPCore.Framework.Controls;
+using Windows.UI.Xaml.Controls;
 
 namespace ActionNote.App.Views
 {
@@ -8,10 +10,25 @@ namespace ActionNote.App.Views
     /// </summary>
     public sealed partial class MainPage : UniversalPage
     {
+        private MainViewModel ViewModel { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            ViewModel = new MainViewModel();
+            DataContext = ViewModel;
+        }
+
+        private void NoteItemClicked(object sender, ItemClickEventArgs e)
+        {
+            var clickedNoteItem = e.ClickedItem as NoteItem;
+
+            // go to edit page when selected item is clicked again
+            if (clickedNoteItem != null &&
+                clickedNoteItem == ViewModel.SelectedNote)
+            {
+                ViewModel.EditCommand.Execute(clickedNoteItem);
+            }
         }
     }
 }
