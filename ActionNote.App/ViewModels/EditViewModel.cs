@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using UWPCore.Framework.Navigation;
 using UWPCore.Framework.Speech;
 using ActionNote.Common.Helpers;
+using ActionNote.App.Views;
 
 namespace ActionNote.App.ViewModels
 {
@@ -52,7 +53,7 @@ namespace ActionNote.App.ViewModels
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 await SaveNoteAsync(noteItem);
-                GoBackWithoutBackEvent();
+                GoBackToMainPageWithoutBackEvent();
             },
             (noteItem) =>
             {
@@ -61,7 +62,7 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                GoBackWithoutBackEvent();
+                GoBackToMainPageWithoutBackEvent();
             });
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
@@ -69,7 +70,7 @@ namespace ActionNote.App.ViewModels
                 _notesRepository.Remove(noteItem.Id);
                 _toastUpdateService.Refresh(_notesRepository);
 
-                GoBackWithoutBackEvent();
+                GoBackToMainPageWithoutBackEvent();
             },
             (noteItem) =>
             {
@@ -166,12 +167,15 @@ namespace ActionNote.App.ViewModels
         /// <summary>
         /// Go back and prevent duplicated save.
         /// </summary>
-        private void GoBackWithoutBackEvent()
+        private void GoBackToMainPageWithoutBackEvent()
         {
             // prevent duplicated save
             _blockBackEvent = true;
 
-            NavigationService.GoBack();
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            else
+                NavigationService.Navigate(typeof(MainPage));
         }
 
         private async Task SaveNoteAsync(NoteItem noteItem)

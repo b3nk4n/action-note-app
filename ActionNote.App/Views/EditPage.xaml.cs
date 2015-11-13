@@ -4,7 +4,6 @@ using UWPCore.Framework.Controls;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 
 namespace ActionNote.App.Views
@@ -15,7 +14,7 @@ namespace ActionNote.App.Views
     public sealed partial class EditPage : UniversalPage, EditViewModelCallbacks
     {
         public EditPage()
-            : base()
+            : base(typeof(MainPage))
         {
             InitializeComponent();
             DataContext = new EditViewModel(this);

@@ -22,6 +22,7 @@ namespace ActionNote.Common
         /// </summary>
         public const string PARAM_ID = "id=";
 
+        public readonly static Color COLOR_ACCENT = Color.FromArgb(255, 0, 99, 177);
         public readonly static Color COLOR_WHITE = Colors.White;
         public readonly static Color COLOR_RED = Color.FromArgb(255, 255, 73, 73);
         public readonly static Color COLOR_GREEN = Color.FromArgb(255, 97, 255, 73);

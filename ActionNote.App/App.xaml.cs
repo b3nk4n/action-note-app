@@ -70,9 +70,9 @@ namespace ActionNote.App
         {
             await base.OnInitializeAsync(args);
 
-            // setup theme colors (mainly for title bar)63B1
-            ColorPropertiesDark = new AppColorProperties(Color.FromArgb(255, 0, 99, 177), Colors.White, Colors.Black);
-            ColorPropertiesLight = new AppColorProperties(Color.FromArgb(255, 0, 99, 177), Colors.Black, Colors.White);
+            // setup theme colors (mainly for title bar)
+            ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black);
+            ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White);
 
             _speechService = Injector.Get<ISpeechService>();
             await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");
@@ -89,7 +89,7 @@ namespace ActionNote.App
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
-            var pageType = DefaultPage;
+            var pageType = typeof(EditPage);
             string parameter = null;
             if (args.Kind == ActivationKind.ToastNotification) 
             {

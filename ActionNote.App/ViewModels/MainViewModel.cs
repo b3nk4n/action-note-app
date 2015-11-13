@@ -117,7 +117,7 @@ namespace ActionNote.App.ViewModels
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
-
+            
             ReloadData();
         }
 
