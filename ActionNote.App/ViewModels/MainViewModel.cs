@@ -35,6 +35,13 @@ namespace ActionNote.App.ViewModels
 
             ClearCommand = new DelegateCommand(() =>
             {
+                // unpin all tiles
+                foreach (var noteItem in _notesRepository.GetAll())
+                {
+                    if (_tilePinService.Contains(noteItem.Id))
+                        _tilePinService.UnpinAsync(noteItem.Id);
+                }
+
                 _notesRepository.Clear();
                 NoteItems.Clear();
 
@@ -63,6 +70,10 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
+                // unpin tile
+                if (_tilePinService.Contains(noteItem.Id))
+                    _tilePinService.UnpinAsync(noteItem.Id);
+
                 _notesRepository.Remove(noteItem);
                 NoteItems.Remove(noteItem);
 
@@ -101,11 +112,11 @@ namespace ActionNote.App.ViewModels
                 {
                     var file = await _localStorageSerivce.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
                     if (file != null)
-                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, "Bla bla..."); // TODO translate description
+                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, "Share note with your friends"); // TODO translate description
                 }
                 else
                 {
-                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, "Bla bla bla..."); // TODO translate description
+                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, "Share note with your friends"); // TODO translate description
                 }
             },
             (noteItem) =>

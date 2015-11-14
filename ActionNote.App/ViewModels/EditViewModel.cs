@@ -70,6 +70,9 @@ namespace ActionNote.App.ViewModels
                 _notesRepository.Remove(noteItem.Id);
                 _toastUpdateService.Refresh(_notesRepository);
 
+                if (_tilePinService.Contains(noteItem.Id))
+                    _tilePinService.UnpinAsync(noteItem.Id);
+
                 GoBackToMainPageWithoutBackEvent();
             },
             (noteItem) =>
@@ -211,8 +214,14 @@ namespace ActionNote.App.ViewModels
                 if (stringParam.StartsWith(AppConstants.PARAM_ID))
                 {
                     string noteId = stringParam.Remove(0, AppConstants.PARAM_ID.Length);
-                    noteToEdit = _notesRepository.Get(noteId).Clone();
-                    IsEditMode = true;
+
+                    var note = _notesRepository.Get(noteId);
+
+                    if (note != null)
+                    {
+                        noteToEdit = note.Clone();
+                        IsEditMode = true;
+                    }
                 }
                 else
                 {
@@ -220,7 +229,8 @@ namespace ActionNote.App.ViewModels
                     IsEditMode = false;
                 }
             }
-            else
+            
+            if (noteToEdit == null)
             {
                 noteToEdit = new NoteItem();
                 IsEditMode = false;
