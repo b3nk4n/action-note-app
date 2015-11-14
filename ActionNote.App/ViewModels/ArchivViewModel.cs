@@ -21,6 +21,30 @@ namespace ActionNote.App.ViewModels
         public ArchivViewModel()
         {
             _dataService = Injector.Get<INoteDataService>();
+
+            ClearCommand = new DelegateCommand(() =>
+            {
+                _dataService.Archiv.Clear();
+                NoteItems.Clear();
+
+                SelectedNote = null;
+            },
+            () =>
+            {
+                return _dataService.Archiv.Count > 0;
+            });
+
+            RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            {
+                _dataService.Archiv.Remove(noteItem);
+                NoteItems.Remove(noteItem);
+
+                SelectedNote = null;
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
         }
 
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -55,5 +79,9 @@ namespace ActionNote.App.ViewModels
             }
         }
         private NoteItem _selectedNote;
+
+        public ICommand ClearCommand { get; private set; }
+
+        public ICommand RemoveCommand { get; private set; }
     }
 }

@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <uwpcControls:PageHeader>
@@ -19,6 +20,13 @@
                 <TextBlock Text="ARCHIV" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
+
+        <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
+            <AppBarButton Width="62" Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Delete all" Command="{Binding ClearCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="16"
