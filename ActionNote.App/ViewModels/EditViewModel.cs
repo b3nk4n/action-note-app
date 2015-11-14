@@ -26,7 +26,7 @@ namespace ActionNote.App.ViewModels
     {
         private EditViewModelCallbacks _callbacks;
 
-        private INotesRepository _notesRepository;
+        private INoteDataService _dataService;
         private IToastUpdateService _toastUpdateService;
         private IStorageService _localStorageService;
         private ISpeechService _speechService;
@@ -44,7 +44,7 @@ namespace ActionNote.App.ViewModels
             _callbacks = callbacks;
 
             _toastUpdateService = Injector.Get<IToastUpdateService>();
-            _notesRepository = Injector.Get<INotesRepository>();
+            _dataService = Injector.Get<INoteDataService>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
@@ -67,8 +67,8 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
-                _notesRepository.Remove(noteItem.Id);
-                _toastUpdateService.Refresh(_notesRepository);
+                _dataService.Notes.Remove(noteItem.Id);
+                _toastUpdateService.Refresh(_dataService.Notes);
 
                 if (_tilePinService.Contains(noteItem.Id))
                     _tilePinService.UnpinAsync(noteItem.Id);
@@ -101,7 +101,7 @@ namespace ActionNote.App.ViewModels
                     }
                 }
 
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
 
                 RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
@@ -110,16 +110,16 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
-            RemoveAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            RemoveAttachementCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
                 var filename = noteItem.AttachementFile;
 
                 noteItem.AttachementFile = null;
 
-                await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename); // TODO: fixme: raises exception !?!
+                //await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename); // TODO: fixme: raises exception !?!
                 
 
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
 
                 RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
@@ -183,20 +183,20 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
-            if (_notesRepository.Contains(noteItem.Id))
+            if (_dataService.Notes.Contains(noteItem.Id))
             {
-                _notesRepository.Update(noteItem);
+                _dataService.Notes.Update(noteItem);
             }
             else
             {
-                _notesRepository.Add(noteItem);
+                _dataService.Notes.Add(noteItem);
             }
 
             //await _notesRepository.Save();
-            await _notesRepository.Save(noteItem);
+            await _dataService.Notes.Save(noteItem);
 
             // update action center
-            _toastUpdateService.Refresh(_notesRepository);
+            _toastUpdateService.Refresh(_dataService.Notes);
 
             // update tile in case it was pinned
             await _tilePinService.UpdateAsync(noteItem);
@@ -215,7 +215,7 @@ namespace ActionNote.App.ViewModels
                 {
                     string noteId = stringParam.Remove(0, AppConstants.PARAM_ID.Length);
 
-                    var note = _notesRepository.Get(noteId);
+                    var note = _dataService.Notes.Get(noteId);
 
                     if (note != null)
                     {

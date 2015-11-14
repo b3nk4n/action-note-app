@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Storage;
@@ -9,10 +7,10 @@ namespace ActionNote.Common.Models
 {
     public class NotesRepository : RepositoryBase<NoteItem, string>, INotesRepository
     {
-        public const string DATA_FOLDER = "data/";
-
         private IStorageService _localStorageService;
         private ISerializationService _serializationService;
+
+        public string BaseFolder { private get; set; }
 
         public NotesRepository()
         {
@@ -39,10 +37,7 @@ namespace ActionNote.Common.Models
 
                 entity.Color = prototype.Color;
 
-                if (prototype.AttachementFile != null)
-                {
-                    entity.AttachementFile = prototype.AttachementFile;
-                }
+                entity.AttachementFile = prototype.AttachementFile;
             }
         }
 
@@ -59,7 +54,7 @@ namespace ActionNote.Common.Models
         public async Task<bool> Save(NoteItem item)
         {
             var jsonData = _serializationService.SerializeJson(item);
-            var filePath = DATA_FOLDER + item.Id;
+            var filePath = BaseFolder + item.Id;
             await _localStorageService.WriteFile(filePath, jsonData);
 
             return true;
@@ -70,13 +65,13 @@ namespace ActionNote.Common.Models
             // clear memory-data only, but not the files
             base.Clear();
 
-            var dataFiles = await _localStorageService.GetFilesAsync(DATA_FOLDER);
+            var dataFiles = await _localStorageService.GetFilesAsync(BaseFolder);
 
             if (dataFiles != null)
             {
                 foreach (var dataFile in dataFiles)
                 {
-                    var jsonData = await _localStorageService.ReadFile(DATA_FOLDER + dataFile.Name);
+                    var jsonData = await _localStorageService.ReadFile(BaseFolder + dataFile.Name);
                     var note = _serializationService.DeserializeJson<NoteItem>(jsonData);
 
                     if (note != null)
@@ -92,14 +87,14 @@ namespace ActionNote.Common.Models
         {
             base.Remove(id);
 
-            _localStorageService.DeleteFileAsync(DATA_FOLDER + id);
+            _localStorageService.DeleteFileAsync(BaseFolder + id);
         }
 
         public override void Clear()
         {
             base.Clear();
 
-            _localStorageService.DeleteFolderAsync(DATA_FOLDER);
+            _localStorageService.DeleteFolderAsync(BaseFolder);
         }
     }
 }

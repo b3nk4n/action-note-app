@@ -19,6 +19,7 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
+using UWPCore.Framework.Storage;
 
 namespace ActionNote.App
 {
@@ -32,7 +33,7 @@ namespace ActionNote.App
 
         private IBackgroundTaskService _backgroundTaskService;
         private IToastUpdateService _toastUpdateService;
-        private INotesRepository _notesRepository;
+        private INoteDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
 
@@ -49,14 +50,14 @@ namespace ActionNote.App
 
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
             _toastUpdateService = Injector.Get<IToastUpdateService>();
-            _notesRepository = Injector.Get<INotesRepository>();
+            _dataService = Injector.Get<INoteDataService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
 
             _refreshActionCentertimer.Interval = TimeSpan.FromSeconds(3);
             _refreshActionCentertimer.Tick += (s, e) =>
             {
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
                 _refreshActionCentertimer.Stop();
             };
 
@@ -81,7 +82,7 @@ namespace ActionNote.App
         public async override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // load data
-            await _notesRepository.Load();
+            await _dataService.Notes.Load();
 
             // unregister previous one, to ensure the latest version is running
             if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))
@@ -93,7 +94,7 @@ namespace ActionNote.App
             string parameter = null;
             if (args.Kind == ActivationKind.ToastNotification) 
             {
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
 
                 if (toastArgs.Argument == "quickNote")
@@ -123,7 +124,7 @@ namespace ActionNote.App
                 if (cause == AdditionalKinds.Primary)
                 {
                     // refresh needed when launched from action center (which is like launching from main tile)
-                    _toastUpdateService.Refresh(_notesRepository); // TODO: refresh only when list is empty, because on primary-tile, the list is not deleted and a refresh is not necessary?
+                    _toastUpdateService.Refresh(_dataService.Notes); // TODO: refresh only when list is empty, because on primary-tile, the list is not deleted and a refresh is not necessary?
                     _refreshActionCentertimer.Start();
                 }
                 else if (cause == AdditionalKinds.SecondaryTile)
@@ -196,8 +197,7 @@ namespace ActionNote.App
         {
             await base.OnSuspendingAsync(e);
 
-            // save data
-            //await _notesRepository.Save();
+            await _dataService.CleanUpAttachementFilesAsync();
         }
 
         /// <summary>
@@ -214,12 +214,6 @@ namespace ActionNote.App
                     Label = "Notes",
                     DestinationPage = typeof(MainPage)
                 },
-                //new NavMenuItem()
-                //{
-                //    Symbol = GlyphIcons.BrowsePhotos,
-                //    Label = "Media",
-                //    DestinationPage = null // TODO: idea for own page?
-                //},
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Archive,

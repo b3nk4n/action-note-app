@@ -15,7 +15,7 @@ namespace ActionNote.App.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private IToastUpdateService _toastUpdateService;
-        private INotesRepository _notesRepository;
+        private INoteDataService _dataService;
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
@@ -28,7 +28,7 @@ namespace ActionNote.App.ViewModels
         public MainViewModel()
         {
             _toastUpdateService = Injector.Get<IToastUpdateService>();
-            _notesRepository = Injector.Get<INotesRepository>();
+            _dataService = Injector.Get<INoteDataService>();
             _shareContentService = Injector.Get<IShareContentService>();
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
             _tilePinService = Injector.Get<ITilePinService>();
@@ -36,22 +36,22 @@ namespace ActionNote.App.ViewModels
             ClearCommand = new DelegateCommand(() =>
             {
                 // unpin all tiles
-                foreach (var noteItem in _notesRepository.GetAll())
+                foreach (var noteItem in _dataService.Notes.GetAll())
                 {
                     if (_tilePinService.Contains(noteItem.Id))
                         _tilePinService.UnpinAsync(noteItem.Id);
                 }
 
-                _notesRepository.Clear();
+                _dataService.Notes.Clear();
                 NoteItems.Clear();
 
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
 
                 SelectedNote = null;
             },
             () =>
             {
-                return _notesRepository.Count > 0;
+                return _dataService.Notes.Count > 0;
             });
 
             AddCommand = new DelegateCommand(() =>
@@ -74,10 +74,10 @@ namespace ActionNote.App.ViewModels
                 if (_tilePinService.Contains(noteItem.Id))
                     _tilePinService.UnpinAsync(noteItem.Id);
 
-                _notesRepository.Remove(noteItem);
+                _dataService.Notes.Remove(noteItem);
                 NoteItems.Remove(noteItem);
 
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
 
                 SelectedNote = null;
             },
@@ -143,7 +143,7 @@ namespace ActionNote.App.ViewModels
             //await _notesRepository.Load(); data is loaded in app.xaml
 
             NoteItems.Clear();
-            foreach (var note in _notesRepository.GetAll())
+            foreach (var note in _dataService.Notes.GetAll())
             {
                 NoteItems.Add(note);
             }

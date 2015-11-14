@@ -1,5 +1,4 @@
 ﻿using ActionNote.Common;
-using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System.Threading.Tasks;
@@ -13,14 +12,14 @@ namespace ActionNote.Tasks
     public sealed class ActionBarChangedBackgroundTask : IBackgroundTask
     {
         private IToastUpdateService _toastUpdateService;
-        private INotesRepository _notesRepository;
+        private INoteDataService _dataService;
 
         public ActionBarChangedBackgroundTask()
         {
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
             _toastUpdateService = injector.Get<IToastUpdateService>();
-            _notesRepository = injector.Get<INotesRepository>();
+            _dataService = injector.Get<INoteDataService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -38,7 +37,7 @@ namespace ActionNote.Tasks
                     details.ChangeType == ToastHistoryChangedType.Removed)
                 {
                     // load data
-                    await _notesRepository.Load();
+                    await _dataService.Notes.Load();
                 }
 
                 if (details.ChangeType == ToastHistoryChangedType.Cleared) // TODO: check, why the change type is never clear!?
@@ -46,13 +45,13 @@ namespace ActionNote.Tasks
                     if (!AppSettings.AllowClearNotes.Value)
                     {
                         Logger.WriteLine("Clear - refresh");
-                        _toastUpdateService.Refresh(_notesRepository);
+                        _toastUpdateService.Refresh(_dataService.Notes);
                     }
                     else
                     {
                         Logger.WriteLine("Clear - delete missing refresh");
-                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_notesRepository);
-                        _toastUpdateService.Refresh(_notesRepository);
+                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
+                        _toastUpdateService.Refresh(_dataService.Notes);
                     }
                 }
                 else if (details.ChangeType == ToastHistoryChangedType.Removed)
@@ -60,21 +59,21 @@ namespace ActionNote.Tasks
                     if (!AppSettings.AllowRemoveNotes.Value)
                     {
                         Logger.WriteLine("Remove - refresh");
-                        _toastUpdateService.Refresh(_notesRepository);
+                        _toastUpdateService.Refresh(_dataService.Notes);
                     }
                     else
                     {
                         Logger.WriteLine("Remove - delete missing refresh");
-                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_notesRepository);
-                        _toastUpdateService.Refresh(_notesRepository);
+                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
+                        _toastUpdateService.Refresh(_dataService.Notes);
                     }
                 }
 
                 if (details.ChangeType == ToastHistoryChangedType.Cleared ||
                     details.ChangeType == ToastHistoryChangedType.Removed)
                 {
-                    // load data
-                    await _notesRepository.Save();
+                    // save data
+                    //await _dataService.Notes.Save(); // since single files not necessary anymore?
                 }
             }
 

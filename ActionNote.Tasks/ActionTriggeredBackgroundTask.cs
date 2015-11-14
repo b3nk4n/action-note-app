@@ -11,14 +11,14 @@ namespace ActionNote.Tasks
     public sealed class ActionTriggeredBackgroundTask : IBackgroundTask
     {
         private IToastUpdateService _toastUpdateService;
-        private INotesRepository _notesRepository;
+        private INoteDataService _dataService;
 
         public ActionTriggeredBackgroundTask()
         {
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
             _toastUpdateService = injector.Get<IToastUpdateService>();
-            _notesRepository = injector.Get<INotesRepository>();
+            _dataService = injector.Get<INoteDataService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -29,7 +29,7 @@ namespace ActionNote.Tasks
             if (details != null)
             {
                 // load data
-                await _notesRepository.Load();
+                await _dataService.Notes.Load();
 
                 if (details.Argument == "quickNote")
                 {
@@ -40,8 +40,8 @@ namespace ActionNote.Tasks
                         if (!string.IsNullOrWhiteSpace(content))
                         {
                             var noteItem = new NoteItem("Quick Note", content);
-                            _notesRepository.Add(noteItem);
-                            await _notesRepository.Save();
+                            _dataService.Notes.Add(noteItem);
+                            await _dataService.Notes.Save();
                         }
                     }
                 }
@@ -50,7 +50,7 @@ namespace ActionNote.Tasks
                 //var item = _notesRepository.Get(details.Argument);
                 Logger.WriteLine("ActionTriggeredBackgroundTask - Note {0} was clicked. Refreshing history...", details.Argument);
 
-                _toastUpdateService.Refresh(_notesRepository);
+                _toastUpdateService.Refresh(_dataService.Notes);
             }
 
             deferral.Complete();

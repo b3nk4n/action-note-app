@@ -9,6 +9,11 @@ namespace ActionNote.Common.Models
     public interface INotesRepository : IRepository<NoteItem, string>
     {
         /// <summary>
+        /// Sets the base folder.
+        /// </summary>
+        string BaseFolder { set; }
+
+        /// <summary>
         /// Saves the repository data to disk.
         /// </summary>
         /// <returns>Returns True for success, else False.</returns>
