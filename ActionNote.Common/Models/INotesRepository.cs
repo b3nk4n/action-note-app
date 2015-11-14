@@ -1,4 +1,5 @@
-﻿using UWPCore.Framework.Data;
+﻿using System.Threading.Tasks;
+using UWPCore.Framework.Data;
 
 namespace ActionNote.Common.Models
 {
@@ -7,5 +8,10 @@ namespace ActionNote.Common.Models
     /// </summary>
     public interface INotesRepository : IRepository<NoteItem, string>
     {
+        /// <summary>
+        /// Saves the repository data to disk.
+        /// </summary>
+        /// <returns>Returns True for success, else False.</returns>
+        Task<bool> Save(NoteItem item);
     }
 }

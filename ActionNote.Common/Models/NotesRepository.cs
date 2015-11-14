@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using UWPCore.Framework.Common;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Storage;
@@ -9,7 +9,7 @@ namespace ActionNote.Common.Models
 {
     public class NotesRepository : RepositoryBase<NoteItem, string>, INotesRepository
     {
-        public const string DATA_FILE = "data.json";
+        public const string DATA_FOLDER = "data/";
 
         private IStorageService _localStorageService;
         private ISerializationService _serializationService;
@@ -48,28 +48,58 @@ namespace ActionNote.Common.Models
 
         public override async Task<bool> Save()
         {
-            var data = _serializationService.SerializeJson(GetAll());
-            await _localStorageService.WriteFile(DATA_FILE, data);
+            foreach (var note in GetAll())
+            {
+                await Save(note);
+            }
+
+            return true;
+        }
+
+        public async Task<bool> Save(NoteItem item)
+        {
+            var jsonData = _serializationService.SerializeJson(item);
+            var filePath = DATA_FOLDER + item.Id;
+            await _localStorageService.WriteFile(filePath, jsonData);
+
             return true;
         }
 
         public override async Task<bool> Reload()
         {
-            Clear();
+            // clear memory-data only, but not the files
+            base.Clear();
 
-            var data = await _localStorageService.ReadFile(DATA_FILE);
+            var dataFiles = await _localStorageService.GetFilesAsync(DATA_FOLDER);
 
-            if (!string.IsNullOrEmpty(data))
+            if (dataFiles != null)
             {
-                var modelData = _serializationService.DeserializeJson<List<NoteItem>>(data);
-                foreach (var item in modelData)
+                foreach (var dataFile in dataFiles)
                 {
-                    Add(item);
+                    var jsonData = await _localStorageService.ReadFile(DATA_FOLDER + dataFile.Name);
+                    var note = _serializationService.DeserializeJson<NoteItem>(jsonData);
+
+                    if (note != null)
+                        Add(note);
                 }
             }
 
             HasLoaded = true;
             return true;
+        }
+
+        public override void Remove(string id)
+        {
+            base.Remove(id);
+
+            _localStorageService.DeleteFileAsync(DATA_FOLDER + id);
+        }
+
+        public override void Clear()
+        {
+            base.Clear();
+
+            _localStorageService.DeleteFolderAsync(DATA_FOLDER);
         }
     }
 }

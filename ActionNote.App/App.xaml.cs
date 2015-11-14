@@ -89,7 +89,7 @@ namespace ActionNote.App
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
-            var pageType = typeof(EditPage);
+            var pageType = DefaultPage;
             string parameter = null;
             if (args.Kind == ActivationKind.ToastNotification) 
             {
@@ -197,7 +197,7 @@ namespace ActionNote.App
             await base.OnSuspendingAsync(e);
 
             // save data
-            await _notesRepository.Save();
+            //await _notesRepository.Save();
         }
 
         /// <summary>

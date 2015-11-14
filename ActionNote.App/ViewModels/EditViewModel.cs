@@ -189,13 +189,14 @@ namespace ActionNote.App.ViewModels
                 _notesRepository.Add(noteItem);
             }
 
-            await _notesRepository.Save();
+            //await _notesRepository.Save();
+            await _notesRepository.Save(noteItem);
 
             // update action center
             _toastUpdateService.Refresh(_notesRepository);
 
             // update tile in case it was pinned
-            _tilePinService.Update(noteItem);
+            await _tilePinService.UpdateAsync(noteItem);
         }
 
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
