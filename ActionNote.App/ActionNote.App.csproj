@@ -101,6 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ArchivViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

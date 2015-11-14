@@ -19,6 +19,12 @@ namespace ActionNote.Common.Services
         INotesRepository Archiv { get; }
 
         /// <summary>
+        /// Moves the note to the archive.
+        /// </summary>
+        /// <param name="noteItem">The note item to delete.</param>
+        void MoveToArchiv(NoteItem noteItem);
+
+        /// <summary>
         /// Cleans up the unreferences attachement files.
         /// </summary>
         Task CleanUpAttachementFilesAsync();

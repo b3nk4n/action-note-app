@@ -21,10 +21,14 @@
         </uwpcControls:PageHeader>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
-            <ScrollViewer>
-                <StackPanel>
-                </StackPanel>
-            </ScrollViewer>
+            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="16"
+                      ItemTemplate="{StaticResource NoteListDataTemplate}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </Grid>
     </Grid>
 </uwpcControls:UniversalPage>

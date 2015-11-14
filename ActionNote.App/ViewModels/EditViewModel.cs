@@ -67,7 +67,7 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
-                _dataService.Notes.Remove(noteItem.Id);
+                _dataService.MoveToArchiv(noteItem);
                 _toastUpdateService.Refresh(_dataService.Notes);
 
                 if (_tilePinService.Contains(noteItem.Id))
@@ -115,9 +115,7 @@ namespace ActionNote.App.ViewModels
                 var filename = noteItem.AttachementFile;
 
                 noteItem.AttachementFile = null;
-
-                //await _localStorageService.DeleteFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + filename); // TODO: fixme: raises exception !?!
-                
+                // file is physically deleted on app-suspend
 
                 _toastUpdateService.Refresh(_dataService.Notes);
 

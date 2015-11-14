@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ActionNote.App"
     xmlns:uwpcCommon="using:UWPCore.Framework.Common"
+    xmlns:uwpcConverters="using:UWPCore.Framework.Converters"
+    xmlns:commonConverters="using:ActionNote.Common.Converters"
     RequestedTheme="Dark">
 
     <uwpcCommon:UniversalApp.Resources>
@@ -23,7 +25,28 @@
                     <Color x:Key="SystemAccentColor">#0063B1</Color>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+
+            <commonConverters:ColorCategoryToBrushConverter x:Key="colorToBrushConv" />
+            <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
+
+            <DataTemplate x:Key="NoteListDataTemplate">
+                <Grid Margin="0,4,-12,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="12" CornerRadius="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,8,4" />
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Margin="4" />
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" />
+                    </StackPanel>
+                    <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
+                </Grid>
+            </DataTemplate>
+
         </ResourceDictionary>
+
     </uwpcCommon:UniversalApp.Resources>
 
 </uwpcCommon:UniversalApp>

@@ -30,6 +30,14 @@ namespace ActionNote.Common.Services
             _localStorageService = localStorageService;
         }
 
+        public void MoveToArchiv(NoteItem noteItem)
+        {
+            Archiv.Add(noteItem);
+            Archiv.Save(noteItem);
+
+            Notes.Remove(noteItem);
+        }
+
         public async Task CleanUpAttachementFilesAsync()
         {
             var referencedAttachements = new List<string>();

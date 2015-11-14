@@ -40,9 +40,9 @@ namespace ActionNote.App.ViewModels
                 {
                     if (_tilePinService.Contains(noteItem.Id))
                         _tilePinService.UnpinAsync(noteItem.Id);
-                }
 
-                _dataService.Notes.Clear();
+                    _dataService.MoveToArchiv(noteItem);
+                }
                 NoteItems.Clear();
 
                 _toastUpdateService.Refresh(_dataService.Notes);
@@ -74,7 +74,7 @@ namespace ActionNote.App.ViewModels
                 if (_tilePinService.Contains(noteItem.Id))
                     _tilePinService.UnpinAsync(noteItem.Id);
 
-                _dataService.Notes.Remove(noteItem);
+                _dataService.MoveToArchiv(noteItem);
                 NoteItems.Remove(noteItem);
 
                 _toastUpdateService.Refresh(_dataService.Notes);
@@ -130,11 +130,6 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
             
             ReloadData();
-        }
-
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
-        {
-            await base.OnNavigatedFromAsync(state, suspending);
         }
 
         private void ReloadData()
