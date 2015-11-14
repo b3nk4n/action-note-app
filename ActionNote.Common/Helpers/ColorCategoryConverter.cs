@@ -1,5 +1,8 @@
 ﻿using ActionNote.Common.Models;
 using System;
+using UWPCore.Framework.Common;
+using Windows.UI;
+using Windows.UI.Xaml;
 
 namespace ActionNote.Common.Helpers
 {
@@ -50,6 +53,45 @@ namespace ActionNote.Common.Helpers
             }
 
             return color.Value;
+        }
+
+        public static Color ToColor(ColorCategory category, bool useTheming = true)
+        {
+            Color color;
+            switch (category)
+            {
+                case ColorCategory.Red:
+                    color = AppConstants.COLOR_RED;
+                    break;
+                case ColorCategory.Blue:
+                    color = AppConstants.COLOR_BLUE;
+                    break;
+                case ColorCategory.Green:
+                    color = AppConstants.COLOR_GREEN;
+                    break;
+                case ColorCategory.Yellow:
+                    color = AppConstants.COLOR_YELLOW;
+                    break;
+                case ColorCategory.Violett:
+                    color = AppConstants.COLOR_VIOLETT;
+                    break;
+                default:
+                    if (useTheming)
+                    {
+                        var theme = UniversalApp.Current.PageTheme;
+                        if (theme == ElementTheme.Light)
+                            color = Colors.Black;
+                        else
+                            color = Colors.White;
+                    }
+                    else
+                    {
+                        color = Colors.White;
+                    }       
+                    break;
+            }
+
+            return color;
         }
     }
 }
