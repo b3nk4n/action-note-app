@@ -9,7 +9,7 @@
 
     <localViewModels:MainViewModel.NoteItems>
         <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note in the list rendered in design time." Color="Red" />
-        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note." />
+        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note." IsImportant="True" />
         <commonModels:NoteItem Title="Title line" Content="A short note." Color="Blue" />
     </localViewModels:MainViewModel.NoteItems>
     

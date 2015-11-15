@@ -42,12 +42,23 @@ namespace ActionNote.Common.Models
 
         public ColorCategory Color {
             get { return _color; }
-            set
-            {
-                Set(ref _color, value);
-            }
+            set { Set(ref _color, value);  }
         }
         private ColorCategory _color = ColorCategory.Neutral;
+
+        public bool IsImportant
+        {
+            get { return _isImportant; }
+            set { Set(ref _isImportant, value); }
+        }
+        private bool _isImportant;
+
+        public DateTimeOffset ChangedDate
+        {
+            get { return _changedDate; }
+            set { Set(ref _changedDate, value); }
+        }
+        private DateTimeOffset _changedDate;
 
         public string AttachementFile
         {
@@ -102,6 +113,8 @@ namespace ActionNote.Common.Models
             clone.Content = Content;
             clone.Color = Color;
             clone.AttachementFile = AttachementFile;
+            clone.IsImportant = IsImportant;
+            clone.ChangedDate = ChangedDate;
             return clone;
         }
 

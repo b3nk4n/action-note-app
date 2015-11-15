@@ -41,7 +41,7 @@ namespace ActionNote.Tasks
                         {
                             var noteItem = new NoteItem("Quick Note", content);
                             _dataService.Notes.Add(noteItem);
-                            await _dataService.Notes.Save();
+                            await _dataService.Notes.Save(noteItem);
                         }
                     }
                 }

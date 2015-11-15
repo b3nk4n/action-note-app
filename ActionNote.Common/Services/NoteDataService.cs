@@ -48,6 +48,7 @@ namespace ActionNote.Common.Services
                     referencedAttachements.Add(note.AttachementFile);
             }
 
+            await Archiv.Load(); // ensure archiv data has loaded
             foreach (var note in Archiv.GetAll())
             {
                 if (note.HasAttachement)
@@ -55,17 +56,22 @@ namespace ActionNote.Common.Services
             }
 
             var attachementFiles = await _localStorageService.GetFilesAsync(AppConstants.ATTACHEMENT_BASE_PATH);
-            foreach (var attachementFile in attachementFiles)
+
+            if (attachementFiles != null)
             {
-                if (!referencedAttachements.Contains(attachementFile.Name))
+                foreach (var attachementFile in attachementFiles)
                 {
-                    try
+                    if (!referencedAttachements.Contains(attachementFile.Name))
                     {
-                        await attachementFile.DeleteAsync();
+                        try
+                        {
+                            await attachementFile.DeleteAsync();
+                        }
+                        catch (Exception) { }
                     }
-                    catch (Exception) { }
                 }
             }
+            
         }
     }
 }

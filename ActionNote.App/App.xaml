@@ -28,6 +28,7 @@
 
             <commonConverters:ColorCategoryToBrushConverter x:Key="colorToBrushConv" />
             <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
+            <uwpcConverters:DateTimeConverter x:Key="dateTimeConverter" />
 
             <DataTemplate x:Key="NoteListDataTemplate">
                 <Grid Margin="0,4,-12,4">

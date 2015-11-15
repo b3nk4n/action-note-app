@@ -4,6 +4,7 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using UWPCore.Framework.Notifications;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
@@ -23,15 +24,17 @@ namespace ActionNote.Common.Services
             _toastService = toastService;
         }
 
-        public void Refresh(INotesRepository notesRepository)
+        public async void Refresh(INotesRepository notesRepository)
         {
             _toastService.ClearHistory();
-
 
             var allNotes = notesRepository.GetAll();
             for (int i = allNotes.Count - 1; i >= 0; --i)
             {
                 var note = allNotes[i];
+
+                if (i != 0)
+                    await Task.Delay(10);
 
                 var toastModel = GetToastModel(note);
                 var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
@@ -40,6 +43,8 @@ namespace ActionNote.Common.Services
                 toastNotification.Tag = note.Id; // just to find the notificication within this service
                 _toastService.Show(toastNotification);
             }
+
+            await Task.Delay(10);
 
             if (AppSettings.QuickNotesEnabled.Value)
             {

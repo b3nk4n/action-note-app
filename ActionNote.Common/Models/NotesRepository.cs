@@ -37,8 +37,10 @@ namespace ActionNote.Common.Models
                 }
 
                 entity.Color = prototype.Color;
-
                 entity.AttachementFile = prototype.AttachementFile;
+                entity.IsImportant = prototype.IsImportant;
+
+                entity.ChangedDate = DateTimeOffset.Now;
             }
         }
 
@@ -52,8 +54,10 @@ namespace ActionNote.Common.Models
             return true;
         }
 
-        public async Task<bool> Save(NoteItem item)
+        public async Task<bool> Save(NoteItem item) // TODO: detect to save only when a note has changed?
         {
+            item.ChangedDate = DateTimeOffset.Now;
+
             var jsonData = _serializationService.SerializeJson(item);
             var filePath = BaseFolder + item.Id;
             await _localStorageService.WriteFile(filePath, jsonData);

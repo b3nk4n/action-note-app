@@ -39,6 +39,11 @@ namespace ActionNote.App.ViewModels
         /// </summary>
         private bool _blockBackEvent;
 
+        // For sample data only
+        public EditViewModel()
+            : this(null)
+        { }
+
         public EditViewModel(EditViewModelCallbacks callbacks)
         {
             _callbacks = callbacks;
