@@ -32,6 +32,8 @@
                         <AdaptiveTrigger MinWindowWidth="433" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="SharePrimary.Visibility" Value="Visible" />
+                        <Setter Target="ShareSecondary.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -57,6 +59,7 @@
             <AppBarButton Width="62" Icon="Add" Label="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Delete all" Command="{Binding ClearCommand}"/>
+                <AppBarButton x:Name="ShareSecondary" Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
