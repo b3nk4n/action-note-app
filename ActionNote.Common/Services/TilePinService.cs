@@ -7,6 +7,7 @@ using UWPCore.Framework.Storage;
 using System;
 using Windows.UI.StartScreen;
 using ActionNote.Common.Helpers;
+using Windows.UI;
 
 namespace ActionNote.Common.Services
 {
@@ -67,12 +68,17 @@ namespace ActionNote.Common.Services
 
         private static void UpdateSecondaryTileColor(NoteItem noteItem, SecondaryTileModel secondaryTile)
         {
-            var color = ColorCategoryConverter.ToColor(noteItem.Color, false);
-            secondaryTile.VisualElements.BackgroundColor = ColorCategoryConverter.ToColor(noteItem.Color, false);
-            if (color == AppConstants.COLOR_WHITE && !noteItem.HasAttachement)
-                secondaryTile.VisualElements.ForegroundText = ForegroundText.Dark;
-            else
+            if (noteItem.Color == ColorCategory.Neutral)
+            {
+                secondaryTile.VisualElements.BackgroundColor = Colors.Transparent;
                 secondaryTile.VisualElements.ForegroundText = ForegroundText.Light;
+            }
+            else
+            {
+                var color = ColorCategoryConverter.ToColor(noteItem.Color, false);
+                secondaryTile.VisualElements.BackgroundColor = ColorCategoryConverter.ToColor(noteItem.Color, false);
+                secondaryTile.VisualElements.ForegroundText = ForegroundText.Light;
+            }
         }
 
         public bool Contains(string noteId)
