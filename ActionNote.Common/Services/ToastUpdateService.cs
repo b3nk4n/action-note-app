@@ -1,10 +1,7 @@
-﻿using ActionNote.Common.Converters;
-using ActionNote.Common.Models;
+﻿using ActionNote.Common.Models;
 using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.Notifications;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
@@ -15,6 +12,8 @@ namespace ActionNote.Common.Services
     {
         public const string GROUP_NOTE = "note";
         public const string GROUP_QUICK_NOTE = "quickNote";
+
+        private Localizer _localizer = new Localizer("ActionNote.Common");
 
         private IToastService _toastService;
 
@@ -176,7 +175,7 @@ namespace ActionNote.Common.Services
                                 },
                                 new AdaptiveText()
                                 {
-                                    Content = "QuickNotes",
+                                    Content = _localizer.Get("QuickNotes"),
                                     HintStyle = TextStyle.Title
                                 },
                             }
@@ -190,13 +189,13 @@ namespace ActionNote.Common.Services
                         new AdaptiveInput()
                         {
                             Type = InputType.Text,
-                            PlaceHolderContent = "Content...",
+                            PlaceHolderContent = _localizer.Get("NoteContent.PlaceholderText"),
                             Id = "content",
                         },
                         new AdaptiveAction()
                         {
                             ActivationType = ToastActivationType.Background,
-                            Content = "Save",
+                            Content = _localizer.Get("Save.Label"),
                             HintInputId = "content",
                             Arguments = "quickNote",
                             ImageUri = "Assets/Images/save.png"

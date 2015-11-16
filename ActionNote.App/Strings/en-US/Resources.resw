@@ -117,8 +117,157 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DUMMY" xml:space="preserve">
-    <value />
-    <comment>dummy data</comment>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>Action Note is not just note taking app. It integrates with your Action Center and gives you the fastest access to all of your notes. Even across all your Windows 10 devices. </value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>Contributors:</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>More apps</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>Rate and review</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>Send feedback</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>Share app</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>Privicy info</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>ABOUT</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>Add</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>ARCHIVE</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>Attache-
+ment</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>Remove</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>Select</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>Delete</value>
+    <comment>CommandBar</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>Delete all</value>
+    <comment>CommandBar</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>Discard</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>Discard changes</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>Edit</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>EDIT</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>NOTES</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>About</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>Archive</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>Notes</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>NEW NOTE</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>Pin to start</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>Read aloud</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>Action Center</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>Auto save notes</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>General</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>Personalization</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>Enable “QuickNotes“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>Theme color</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>SETTINGS</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>Share</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>Share note with your friends</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>Speech input</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>Unpin</value>
+    <comment>MainPage</comment>
   </data>
 </root>

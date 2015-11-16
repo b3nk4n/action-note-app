@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
-using System.Threading.Tasks;
 using ActionNote.App.Views;
 using UWPCore.Framework.Share;
 using UWPCore.Framework.Storage;
 using ActionNote.Common;
+using UWPCore.Framework.Common;
 
 namespace ActionNote.App.ViewModels
 {
@@ -19,6 +19,8 @@ namespace ActionNote.App.ViewModels
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
+
+        private Localizer _localizer = new Localizer();
 
         public ObservableCollection<NoteItem> NoteItems {
             get;
@@ -108,15 +110,16 @@ namespace ActionNote.App.ViewModels
 
             ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
+                var description = _localizer.Get("ShareContentDescription");
                 if (noteItem.HasAttachement)
                 {
                     var file = await _localStorageSerivce.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
                     if (file != null)
-                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, "Share note with your friends"); // TODO translate description
+                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, description);
                 }
                 else
                 {
-                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, "Share note with your friends"); // TODO translate description
+                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, description);
                 }
             },
             (noteItem) =>

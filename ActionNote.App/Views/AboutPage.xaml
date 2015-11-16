@@ -26,7 +26,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <uwpcControls:AboutControl Margin="16">
                     <uwpcControls:AboutControl.DataContext>
-                        <uwpcViewModels:AboutViewModel
+                        <uwpcViewModels:AboutViewModel x:Uid="About"
                         AppDeveloper="Benjamin Sautermeister"
                         AppDescription="The description goes here and still needs to be translated."
                         AppIcon="/Assets/Square150x150Logo.png"

@@ -29,6 +29,7 @@
             <commonConverters:ColorCategoryToBrushConverter x:Key="colorToBrushConv" />
             <uwpcConverters:BooleanToVisibilityConverter x:Key="boolToVisConv" />
             <uwpcConverters:BooleanToDoubleConverter x:Key="boolToDoubleConv" />
+            <uwpcConverters:BooleanToStringConverter x:Key="boolToStringConv" />
             <uwpcConverters:DateTimeConverter x:Key="dateTimeConverter" />
 
             <DataTemplate x:Key="NoteListDataTemplate">

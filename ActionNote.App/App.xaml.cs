@@ -19,7 +19,6 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
-using UWPCore.Framework.Storage;
 
 namespace ActionNote.App
 {
@@ -38,6 +37,8 @@ namespace ActionNote.App
         private ISerializationService _serializationService;
 
         private DispatcherTimer _refreshActionCentertimer = new DispatcherTimer();
+
+        private Localizer _localizer;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -70,6 +71,9 @@ namespace ActionNote.App
         public async override Task OnInitializeAsync(IActivatedEventArgs args)
         {
             await base.OnInitializeAsync(args);
+
+            // create localizer here, because the Core Windows has to be initialized
+            _localizer = new Localizer();
 
             // setup theme colors (mainly for title bar)
             ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black);
@@ -211,13 +215,13 @@ namespace ActionNote.App
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Copy,
-                    Label = "Notes",
+                    Label = _localizer.Get("Nav.Notes"),
                     DestinationPage = typeof(MainPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Archive,
-                    Label = "Archive",
+                    Label = _localizer.Get("Nav.Archive"),
                     DestinationPage = typeof(ArchivPage)
                 }
             };
@@ -234,13 +238,13 @@ namespace ActionNote.App
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Info,
-                    Label = "About",
+                    Label = _localizer.Get("Nav.About"),
                     DestinationPage = typeof(AboutPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = GlyphIcons.Setting,
-                    Label = "Settings",
+                    Label = _localizer.Get("Nav.Settings"),
                     DestinationPage = typeof(SettingsPage)
                 }
             };

@@ -15,6 +15,7 @@ using UWPCore.Framework.Speech;
 using ActionNote.Common.Helpers;
 using ActionNote.App.Views;
 using UWPCore.Framework.Graphics;
+using UWPCore.Framework.Common;
 
 namespace ActionNote.App.ViewModels
 {
@@ -34,6 +35,8 @@ namespace ActionNote.App.ViewModels
         private ISerializationService _serializationService;
         private ITilePinService _tilePinService;
         private IGraphicsService _graphicsService;
+
+        private Localizer _localizer = new Localizer();
 
         /// <summary>
         /// Flag that indicates that no save operation is needed on BACK event.
@@ -300,7 +303,7 @@ namespace ActionNote.App.ViewModels
         {
             get
             {
-                return IsEditMode ? "EDIT" : "NEW NOTE"; // TODO: translate
+                return IsEditMode ? _localizer.Get("EditTitle.Text") : _localizer.Get("NewTitle.Text");
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Logging;
 using Windows.ApplicationModel.Background;
@@ -12,6 +13,8 @@ namespace ActionNote.Tasks
     {
         private IToastUpdateService _toastUpdateService;
         private INoteDataService _dataService;
+
+        private Localizer _localizer = new Localizer("ActionNote.Common");
 
         public ActionTriggeredBackgroundTask()
         {
@@ -39,7 +42,7 @@ namespace ActionNote.Tasks
 
                         if (!string.IsNullOrWhiteSpace(content))
                         {
-                            var noteItem = new NoteItem("Quick Note", content);
+                            var noteItem = new NoteItem(_localizer.Get("QuickNote"), content);
                             _dataService.Notes.Add(noteItem);
                             await _dataService.Notes.Save(noteItem);
                         }

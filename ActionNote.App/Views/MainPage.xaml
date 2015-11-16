@@ -41,25 +41,25 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock Text="NOTES" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <TextBlock x:Uid="MainTitle" Text="NOTES" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton x:Name="SharePrimary" Width="62" Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
+            <AppBarButton x:Name="SharePrimary" x:Uid="Share" Width="62" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
                 <AppBarButton.Icon>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton Width="62" Icon="Pin" Label="Pin to start" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
-            <AppBarButton Width="62" Icon="UnPin" Label="Unpin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
-            <AppBarButton Width="62" Icon="Edit" Label="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
-            <AppBarButton Width="62" Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="Pin" Width="62" Icon="Pin" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
+            <AppBarButton x:Uid="Unpin"  Width="62" Icon="UnPin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
+            <AppBarButton x:Uid="Edit"  Width="62" Icon="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="Delete"  Width="62" Icon="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <AppBarSeparator Style="{StaticResource ThinAppBarSeparatorStyle}" />
-            <AppBarButton Width="62" Icon="Add" Label="Add" Command="{Binding AddCommand}"/>
+            <AppBarButton x:Uid="Add"  Width="62" Icon="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Delete all" Command="{Binding ClearCommand}"/>
-                <AppBarButton x:Name="ShareSecondary" Label="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
+                <AppBarButton x:Uid="DeleteAll" Command="{Binding ClearCommand}"/>
+                <AppBarButton x:Name="ShareSecondary" x:Uid="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
 

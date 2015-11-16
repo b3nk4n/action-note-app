@@ -434,22 +434,22 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton Width="62" Label="Microphone" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" />
-            <AppBarButton Width="62" Label="Add attachement" Icon="Attach">
+            <AppBarButton x:Uid="SpeechInput" Width="62" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" />
+            <AppBarButton x:Uid="Attachement" Width="62" Icon="Attach">
                 <AppBarButton.Flyout>
                     <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterStyle}">
-                        <MenuFlyoutItem Text="Select" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
-                        <MenuFlyoutItem Text="Remove" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
+                        <MenuFlyoutItem x:Uid="AttachementSelect" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
+                        <MenuFlyoutItem x:Uid="AttachementRemove" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
             <AppBarSeparator Style="{StaticResource ThinAppBarSeparatorStyle}" />
-            <AppBarButton Width="62" Icon="Clear" Label="Discard" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" CommandParameter="{Binding SelectedNote}"/>
-            <AppBarButton Width="62" Icon="Clear" Label="Discard changes" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" />
-            <AppBarButton Width="62" Icon="Save" Label="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="Discard" Width="62" Icon="Clear" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="DiscardChanges" Width="62" Icon="Clear" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" />
+            <AppBarButton x:Uid="ActionNote.Common/Resources/Save" Width="62" Icon="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Read aloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
-                <AppBarButton Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" CommandParameter="{Binding SelectedNote}"/>
+                <AppBarButton x:Uid="ReadAloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
+                <AppBarButton x:Uid="Delete" Command="{Binding RemoveCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" CommandParameter="{Binding SelectedNote}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
 
@@ -459,11 +459,11 @@
                     <StackPanel DataContext="{Binding SelectedNote}">
                         <TextBlock Text="{Binding ChangedDate, Converter={StaticResource dateTimeConverter}}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" Opacity="{Binding ElementName=self, Path=DataContext.IsEditMode, Converter={StaticResource boolToDoubleConv}, ConverterParameter=1;0}" FontSize="11" HorizontalAlignment="Right" Margin="4,-8,4,4" />
                         
-                        <TextBox x:Name="TitleTextBox" TabIndex="0" PlaceholderText="Title" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
+                        <TextBox x:Name="TitleTextBox" x:Uid="ActionNote.Common/Resources/NoteTitle" TabIndex="0" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
 
-                        <TextBox x:Name="ContentTextBox" PlaceholderText="Details" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
+                        <TextBox x:Name="ContentTextBox" x:Uid="ActionNote.Common/Resources/NoteContent" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
 
