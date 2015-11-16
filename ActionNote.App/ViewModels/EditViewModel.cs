@@ -14,6 +14,7 @@ using UWPCore.Framework.Navigation;
 using UWPCore.Framework.Speech;
 using ActionNote.Common.Helpers;
 using ActionNote.App.Views;
+using UWPCore.Framework.Graphics;
 
 namespace ActionNote.App.ViewModels
 {
@@ -32,6 +33,7 @@ namespace ActionNote.App.ViewModels
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
         private ITilePinService _tilePinService;
+        private IGraphicsService _graphicsService;
 
         /// <summary>
         /// Flag that indicates that no save operation is needed on BACK event.
@@ -54,6 +56,7 @@ namespace ActionNote.App.ViewModels
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
             _tilePinService = Injector.Get<ITilePinService>();
+            _graphicsService = Injector.Get<IGraphicsService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -100,7 +103,13 @@ namespace ActionNote.App.ViewModels
                     var canonicalPrefix = noteItem.Id + '-';
                     var fileName = canonicalPrefix + file.Name;
 
-                    if (await _localStorageService.WriteFile(AppConstants.ATTACHEMENT_BASE_PATH + fileName, file))
+                    //if (await _localStorageService.WriteFile(AppConstants.ATTACHEMENT_BASE_PATH + fileName, file))
+                    //{
+                    //    noteItem.AttachementFile = fileName;
+                    //}
+
+                    var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
+                    if (await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
                     {
                         noteItem.AttachementFile = fileName;
                     }
