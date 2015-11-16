@@ -43,8 +43,10 @@ namespace ActionNote.Common.Services
 
                 UpdateSecondaryTileColor(noteItem, secondaryTile);
 
-                await _tileService.PinAsync(noteItem.Id, secondaryTile, noteItem.Id);
-                _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
+                if (await _tileService.PinAsync(noteItem.Id, secondaryTile, noteItem.Id))
+                {
+                    _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
+                }
             }
         }
 
