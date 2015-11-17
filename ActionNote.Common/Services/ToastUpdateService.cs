@@ -9,6 +9,9 @@ using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Services
 {
+    /// <summary>
+    /// Service class to manage the action center.
+    /// </summary>
     public class ToastUpdateService : IToastUpdateService
     {
         public const string GROUP_NOTE = "note";
@@ -51,14 +54,24 @@ namespace ActionNote.Common.Services
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                // add the quick note toast
-                var quickNoteToastModel = GetQuickNoteToastModel();
-                var quickNoteToastNotification = _toastService.AdaptiveFactory.Create(quickNoteToastModel);
-                quickNoteToastNotification.SuppressPopup = true;
-                quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
-                quickNoteToastNotification.Tag = "quickNote"; // just to find the notificication within this service
-                _toastService.Show(quickNoteToastNotification);
+                AddQuickNotes();
             }
+        }
+
+        public void AddQuickNotes()
+        {
+            // add the quick note toast
+            var quickNoteToastModel = GetQuickNoteToastModel();
+            var quickNoteToastNotification = _toastService.AdaptiveFactory.Create(quickNoteToastModel);
+            quickNoteToastNotification.SuppressPopup = true;
+            quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
+            quickNoteToastNotification.Tag = "quickNote"; // just to find the notificication within this service
+            _toastService.Show(quickNoteToastNotification);
+        }
+
+        public void RemoveQuickNotes()
+        {
+            _toastService.RemoveGroupeFromHistory(GROUP_QUICK_NOTE);
         }
 
         public void DeleteNotesThatAreMissingInActionCenter(INotesRepository notesRepository)

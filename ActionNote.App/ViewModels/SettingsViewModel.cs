@@ -71,9 +71,10 @@ namespace ActionNote.App.ViewModels
             {
                 AppSettings.QuickNotesEnabled.Value = value;
 
-                // update action center
-                _toastUpdateService.Refresh(_notesRepository);
-                // TODO: add function that only adds/removes the QuickNotes toast? Instead of a full refresh
+                if (value)
+                    _toastUpdateService.AddQuickNotes();
+                else
+                    _toastUpdateService.RemoveQuickNotes();
             }
         }
 
