@@ -18,9 +18,19 @@ namespace ActionNote.App.ViewModels
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
+        public StringComboBoxSource SortInActionCenterStringSource { get; private set; }
+
+        private Localizer _localizer = new Localizer();
+
         public SettingsViewModel()
         {
             _notesRepository = Injector.Get<INotesRepository>();
+
+            // localize string source
+            SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
+                new SourceComboBoxItem(AppConstants.SORT_DATE, _localizer.Get("SortByDate.Text")),
+                new SourceComboBoxItem(AppConstants.SORT_CATEGORY, _localizer.Get("SortByCategory.Text"))
+            });
         }
 
         public bool SyncWithActionCenter
@@ -76,6 +86,7 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
+            SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -83,8 +94,9 @@ namespace ActionNote.App.ViewModels
             await base.OnNavigatedFromAsync(state, suspending);
 
             UniversalPage.PageTheme.Value = ThemeEnumSource.SelectedValue;
-
             UniversalApp.Current.UpdateTheme();
+
+            AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
         }
     }
 }

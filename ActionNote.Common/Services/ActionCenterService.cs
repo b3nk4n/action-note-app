@@ -55,7 +55,7 @@ namespace ActionNote.Common.Services
 
             var allNotes = notesRepository.GetAll();
 
-            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteBy.Value).Reverse().ToList();
+            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
 
             for (int i = 0; i < sorted.Count; ++i)
             {
