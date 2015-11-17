@@ -2,6 +2,7 @@
 using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
 using ActionNote.App.Views;
@@ -9,6 +10,7 @@ using UWPCore.Framework.Share;
 using UWPCore.Framework.Storage;
 using ActionNote.Common;
 using UWPCore.Framework.Common;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.ViewModels
 {
@@ -126,12 +128,25 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null && !noteItem.IsEmtpy;
             });
+
+            SortCommand = new DelegateCommand<string>((sortType) =>
+            {
+                AppSettings.SortNoteBy.Value = sortType;
+
+                var sorted = NoteUtils.Sort(NoteItems, sortType);
+                NoteItems = new ObservableCollection<NoteItem>(sorted);
+                RaisePropertyChanged("NoteItems");
+            },
+            (sortType) =>
+            {
+                return NoteItems.Count > 0;
+            });
         }
 
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
-            
+
             ReloadData();
         }
 
@@ -141,9 +156,13 @@ namespace ActionNote.App.ViewModels
             //await _notesRepository.Load(); data is loaded in app.xaml
 
             NoteItems.Clear();
-            foreach (var note in _dataService.Notes.GetAll())
+            var data = _dataService.Notes.GetAll(); // TODO: reload all from disk?
+
+            if (data != null)
             {
-                NoteItems.Add(note);
+                var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
+                NoteItems = new ObservableCollection<NoteItem>(sorted);
+                RaisePropertyChanged("NoteItems");
             }
         }
 
@@ -185,5 +204,7 @@ namespace ActionNote.App.ViewModels
         public ICommand UnpinCommand { get; private set; }
 
         public ICommand ShareCommand { get; private set; }
+
+        public ICommand SortCommand { get; private set;}
     }
 }

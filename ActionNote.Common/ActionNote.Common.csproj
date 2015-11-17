@@ -113,6 +113,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Converters\ColorCategoryToBrushConverter.cs" />
     <Compile Include="Helpers\ColorCategoryConverter.cs" />
+    <Compile Include="Helpers\NoteUtils.cs" />
     <Compile Include="Models\INotesRepository.cs" />
     <Compile Include="Models\NoteItem.cs" />
     <Compile Include="Models\NotesRepository.cs" />

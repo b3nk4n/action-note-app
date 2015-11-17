@@ -11,13 +11,13 @@ namespace ActionNote.Common.Models
 {
     public enum ColorCategory
     {
-        [DefaultValue(true)]
-        Neutral, // = Transparent, Accent?
         Red,
         Blue,
         Green,
         Yellow,
-        Violett
+        Violett,
+        [DefaultValue(true)]
+        Neutral
     }
 
     public class NoteItem : BindableBase, IRepositoryItem<string>

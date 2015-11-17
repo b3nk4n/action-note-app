@@ -1,4 +1,6 @@
-﻿using ActionNote.Common.Models;
+﻿using ActionNote.Common;
+using ActionNote.Common.Helpers;
+using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,6 +47,19 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null;
             });
+
+            SortCommand = new DelegateCommand<string>((sortType) =>
+            {
+                AppSettings.SortNoteBy.Value = sortType;
+
+                var sorted = NoteUtils.Sort(NoteItems, sortType);
+                NoteItems = new ObservableCollection<NoteItem>(sorted);
+                RaisePropertyChanged("NoteItems");
+            },
+            (sortType) =>
+            {
+                return NoteItems.Count > 0;
+            });
         }
 
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -60,9 +75,13 @@ namespace ActionNote.App.ViewModels
             await _dataService.Archiv.Load();
 
             NoteItems.Clear();
-            foreach (var note in _dataService.Archiv.GetAll())
+            var data = _dataService.Archiv.GetAll(); // TODO: reload all from disk?
+
+            if (data != null)
             {
-                NoteItems.Add(note);
+                var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
+                NoteItems = new ObservableCollection<NoteItem>(sorted);
+                RaisePropertyChanged("NoteItems");
             }
         }
 
@@ -83,5 +102,7 @@ namespace ActionNote.App.ViewModels
         public ICommand ClearCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
+
+        public ICommand SortCommand { get; private set; }
     }
 }

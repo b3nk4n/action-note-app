@@ -172,11 +172,11 @@ ment</value>
   </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
-    <comment>CommandBar</comment>
+    <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
     <value>Delete all</value>
-    <comment>CommandBar</comment>
+    <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
     <value>Discard</value>
@@ -261,6 +261,14 @@ ment</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Share note with your friends</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>Category</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>Change date</value>
+    <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
     <value>Speech input</value>

@@ -171,11 +171,11 @@
   </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Löschen</value>
-    <comment>CommandBar</comment>
+    <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
     <value>Alle löschen</value>
-    <comment>CommandBar</comment>
+    <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
     <value>Verwerfen</value>
@@ -260,6 +260,14 @@
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Notiz mit Freunden teilen</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>Kategorie</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>Änderungsdatum</value>
+    <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
     <value>Sprach-

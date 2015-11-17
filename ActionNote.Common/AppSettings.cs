@@ -13,5 +13,7 @@ namespace ActionNote.Common
         public static StoredObjectBase<bool> SaveNoteOnBack = new LocalObject<bool>("saveNoteOnBack", true);
 
         public static StoredObjectBase<bool> QuickNotesEnabled = new LocalObject<bool>("quickNote", true);
+
+        public static StoredObjectBase<string> SortNoteBy = new LocalObject<string>("sortNotes", AppConstants.SORT_DATE);
     }
 }

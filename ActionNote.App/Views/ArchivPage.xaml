@@ -17,7 +17,21 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock x:Uid="ArchivTitle" Text="ARCHIVE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" x:Uid="ArchiveTitle" Text="ARCHIVE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                    <AppBarButton Grid.Column="1" Width="62" Icon="Sort">
+                        <AppBarButton.Flyout>
+                            <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
+                                <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />
+                                <MenuFlyoutItem x:Uid="SortByCategory" Command="{Binding SortCommand}" CommandParameter="category" />
+                            </MenuFlyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                </Grid>
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
 
