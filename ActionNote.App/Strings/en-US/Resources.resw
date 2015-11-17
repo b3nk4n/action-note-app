@@ -230,6 +230,10 @@ ment</value>
     <value>Action Center</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>Allow to delete notes</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
     <value>Auto save notes</value>
     <comment>SettingsPage</comment>

@@ -37,8 +37,7 @@
                     <ToggleSwitch x:Uid="SettingsAutoSave" Header="Auto save notes" IsOn="{Binding SaveNoteOnBack, Mode=TwoWay}" Margin="4" />
                     <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsQuickNotes" Header="Enable QuickNotes in action center" IsOn="{Binding QuickNotesEnabled, Mode=TwoWay}" Margin="4" />
-                    <ToggleSwitch Header="Allow to remove a note TRANSLATE" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" Margin="4" />
-                    <ToggleSwitch Header="Allow to clear all notes TRANSLATE" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" Margin="4" />
+                    <ToggleSwitch x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" Margin="4" />
                     <TextBlock x:Uid="SettingsPersonalization" Style="{StaticResource TitleTextBlockStyle}" Text="Personalization" Margin="4" />
                     <ComboBox x:Uid="SettingsThemeColor" Header="Theme color" Margin="4" ItemsSource="{Binding ThemeEnumSource.ItemsSource}"
                           SelectedItem="{Binding ThemeEnumSource.SelectedItem, Mode=TwoWay}">

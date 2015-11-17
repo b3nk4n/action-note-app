@@ -229,6 +229,10 @@
     <value>Action Center</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>Löschen von Notizen erlauben</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
     <value>Automatisches Speichern von Notizen</value>
     <comment>SettingsPage</comment>

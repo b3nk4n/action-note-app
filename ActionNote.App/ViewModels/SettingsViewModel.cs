@@ -23,18 +23,6 @@ namespace ActionNote.App.ViewModels
             _notesRepository = Injector.Get<INotesRepository>();
         }
 
-        public bool AllowClearNotes
-        {
-            get
-            {
-                return AppSettings.AllowClearNotes.Value;
-            }
-            set
-            {
-                AppSettings.AllowClearNotes.Value = value;
-            }
-        }
-
         public bool AllowRemoveNotes
         {
             get
