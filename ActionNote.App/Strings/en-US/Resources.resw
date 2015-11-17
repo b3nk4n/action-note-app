@@ -250,6 +250,10 @@ ment</value>
     <value>Enable “QuickNotes“</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsSyncNotes.Header" xml:space="preserve">
+    <value>Synchronize notes</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
     <value>Theme color</value>
     <comment>SettingsPage</comment>

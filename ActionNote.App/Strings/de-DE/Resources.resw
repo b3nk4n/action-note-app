@@ -249,6 +249,10 @@
     <value>„Kurznotizen“ für schnelle Notizen</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsSyncNotes.Header" xml:space="preserve">
+    <value>Notizen synchronisieren</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
     <value>Design auswählen</value>
     <comment>SettingsPage</comment>

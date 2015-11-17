@@ -1,10 +1,11 @@
-﻿using System;
-using UWPCore.Framework.Storage;
+﻿using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common
 {
     public class AppSettings
     {
+        public static StoredObjectBase<bool> SyncWithActionCenter = new LocalObject<bool>("syncActionCenter", true);
+
         public static StoredObjectBase<bool> AllowRemoveNotes = new LocalObject<bool>("allowRemoveNotes", true);
 
         public static StoredObjectBase<bool> SaveNoteOnBack = new LocalObject<bool>("saveNoteOnBack", true);

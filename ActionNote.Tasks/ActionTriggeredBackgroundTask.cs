@@ -1,4 +1,5 @@
-﻿using ActionNote.Common.Models;
+﻿using ActionNote.Common;
+using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using UWPCore.Framework.Common;
@@ -29,7 +30,8 @@ namespace ActionNote.Tasks
             var deferral = taskInstance.GetDeferral();
 
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
-            if (details != null)
+            if (details != null &&
+                AppSettings.SyncWithActionCenter.Value)
             {
                 // load data
                 await _dataService.Notes.Load();

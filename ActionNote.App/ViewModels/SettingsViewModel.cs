@@ -23,6 +23,18 @@ namespace ActionNote.App.ViewModels
             _notesRepository = Injector.Get<INotesRepository>();
         }
 
+        public bool SyncWithActionCenter
+        {
+            get
+            {
+                return AppSettings.SyncWithActionCenter.Value;
+            }
+            set
+            {
+                AppSettings.SyncWithActionCenter.Value = value;
+            }
+        }
+
         public bool AllowRemoveNotes
         {
             get
