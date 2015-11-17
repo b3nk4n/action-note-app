@@ -1,4 +1,5 @@
-﻿using ActionNote.Common.Models;
+﻿using ActionNote.Common.Helpers;
+using ActionNote.Common.Models;
 using Ninject;
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
@@ -28,12 +29,15 @@ namespace ActionNote.Common.Services
             _toastService.ClearHistory();
 
             var allNotes = notesRepository.GetAll();
+
+            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteBy.Value);
+
             for (int i = allNotes.Count - 1; i >= 0; --i)
             {
                 var note = allNotes[i];
 
                 if (i != 0)
-                    await Task.Delay(10);
+                    await Task.Delay(100);
 
                 var toastModel = GetToastModel(note);
                 var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
@@ -43,7 +47,7 @@ namespace ActionNote.Common.Services
                 _toastService.Show(toastNotification);
             }
 
-            await Task.Delay(10);
+            await Task.Delay(100);
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
