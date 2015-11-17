@@ -29,7 +29,6 @@ namespace ActionNote.App.ViewModels
         private EditViewModelCallbacks _callbacks;
 
         private INoteDataService _dataService;
-        private IToastUpdateService _toastUpdateService;
         private IStorageService _localStorageService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
@@ -53,7 +52,6 @@ namespace ActionNote.App.ViewModels
         {
             _callbacks = callbacks;
 
-            _toastUpdateService = Injector.Get<IToastUpdateService>();
             _dataService = Injector.Get<INoteDataService>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _speechService = Injector.Get<ISpeechService>();
@@ -79,7 +77,6 @@ namespace ActionNote.App.ViewModels
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
                 _dataService.MoveToArchiv(noteItem);
-                _toastUpdateService.Refresh(_dataService.Notes);
 
                 if (_tilePinService.Contains(noteItem.Id))
                     _tilePinService.UnpinAsync(noteItem.Id);
@@ -106,19 +103,12 @@ namespace ActionNote.App.ViewModels
                     var canonicalPrefix = noteItem.Id + '-';
                     var fileName = canonicalPrefix + file.Name;
 
-                    //if (await _localStorageService.WriteFile(AppConstants.ATTACHEMENT_BASE_PATH + fileName, file))
-                    //{
-                    //    noteItem.AttachementFile = fileName;
-                    //}
-
                     var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
                     if (await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
                     {
                         noteItem.AttachementFile = fileName;
                     }
                 }
-
-                _toastUpdateService.Refresh(_dataService.Notes);
 
                 RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
@@ -131,10 +121,7 @@ namespace ActionNote.App.ViewModels
             {
                 var filename = noteItem.AttachementFile;
 
-                noteItem.AttachementFile = null;
-                // file is physically deleted on app-suspend
-
-                _toastUpdateService.Refresh(_dataService.Notes);
+                noteItem.AttachementFile = null; // remember: file is physically deleted on app-suspend
 
                 RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
@@ -160,7 +147,7 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
-            ReadNoteCommand = new DelegateCommand<NoteItem>(async (noteItem) => // TODO: enabled state is not updated when note is changed. Create a NoteItemViewModel which bundles the functionality of a note?
+            ReadNoteCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 var text = noteItem.Title + ". " + noteItem.Content;
                 await _speechService.SpeakTextAsync(text);
@@ -207,11 +194,7 @@ namespace ActionNote.App.ViewModels
                 _dataService.Notes.Add(noteItem);
             }
 
-            //await _notesRepository.Save();
             await _dataService.Notes.Save(noteItem);
-
-            // update action center
-            _toastUpdateService.Refresh(_dataService.Notes);
 
             // update tile in case it was pinned
             await _tilePinService.UpdateAsync(noteItem);

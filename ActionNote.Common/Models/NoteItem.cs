@@ -99,8 +99,13 @@ namespace ActionNote.Common.Models
         private string GenerateGuid()
         {
             // 598723c4-fa3e-448e-b3c0-5e43d389ac25 ==> 598723c4fa3e448e
+            //var guid = Guid.NewGuid().ToString();
+            //guid = guid.Substring(0, 18);
+            //guid = guid.Replace("-", "");
+            //return guid;
+            // trimmed, because schedules tag is shorter than toast-id :(
             var guid = Guid.NewGuid().ToString();
-            guid = guid.Substring(0, 18);
+            guid = guid.Substring(0, 13);
             guid = guid.Replace("-", "");
             return guid;
         }

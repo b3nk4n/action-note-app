@@ -9,7 +9,7 @@ namespace ActionNote.Common.Modules
         public override void Load()
         {
             // services
-            Bind<IToastUpdateService>().To<ToastUpdateService>().InSingletonScope();
+            Bind<IActionCenterService>().To<ActionCenterService>().InSingletonScope();
             Bind<ITilePinService>().To<TilePinService>().InSingletonScope();
             Bind<INoteDataService>().To<NoteDataService>().InSingletonScope();
 

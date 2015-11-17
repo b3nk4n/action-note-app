@@ -1,6 +1,7 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
+using System;
 using System.Threading.Tasks;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Logging;
@@ -11,14 +12,14 @@ namespace ActionNote.Tasks
 {
     public sealed class ActionBarChangedBackgroundTask : IBackgroundTask
     {
-        private IToastUpdateService _toastUpdateService;
+        private IActionCenterService _actionCenterService;
         private INoteDataService _dataService;
 
         public ActionBarChangedBackgroundTask()
         {
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
-            _toastUpdateService = injector.Get<IToastUpdateService>();
+            _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<INoteDataService>();
         }
 
@@ -28,53 +29,38 @@ namespace ActionNote.Tasks
 
             // wait to ensure ActionTriggeredBackgroundTask is running first, that restores items that have
             // been deleted by clicking on them.
-            await Task.Delay(2000);
+            await Task.Delay(1000); // TODO: still needed?
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
-            if (details != null)
+
+            if (details != null &&
+                !_actionCenterService.IsRemoveBlocked() &&
+                details.ChangeType == ToastHistoryChangedType.Removed) // Remark: ToastHistoryChangedType.Cleared seems not to be supported up to now?
             {
-                if (details.ChangeType == ToastHistoryChangedType.Cleared ||
-                    details.ChangeType == ToastHistoryChangedType.Removed)
-                {
-                    // load data
-                    await _dataService.Notes.Load();
-                }
+                // load data
+                await _dataService.Notes.Load();
 
-                if (details.ChangeType == ToastHistoryChangedType.Cleared) // TODO: check, why the change type is never clear!?
+                if (AppSettings.AllowRemoveNotes.Value)
                 {
-                    if (!AppSettings.AllowClearNotes.Value)
-                    {
-                        Logger.WriteLine("Clear - refresh");
-                        _toastUpdateService.Refresh(_dataService.Notes);
-                    }
-                    else
-                    {
-                        Logger.WriteLine("Clear - delete missing refresh");
-                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
-                        _toastUpdateService.Refresh(_dataService.Notes);
-                    }
-                }
-                else if (details.ChangeType == ToastHistoryChangedType.Removed)
-                {
-                    if (!AppSettings.AllowRemoveNotes.Value)
-                    {
-                        Logger.WriteLine("Remove - refresh");
-                        _toastUpdateService.Refresh(_dataService.Notes);
-                    }
-                    else
-                    {
-                        Logger.WriteLine("Remove - delete missing refresh");
-                        _toastUpdateService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
-                        _toastUpdateService.Refresh(_dataService.Notes);
-                    }
-                }
+                    Logger.WriteLine("Remove - delete missing refresh");
+                    _actionCenterService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
 
-                if (details.ChangeType == ToastHistoryChangedType.Cleared ||
-                    details.ChangeType == ToastHistoryChangedType.Removed)
-                {
-                    // save data
-                    //await _dataService.Notes.Save(); // since single files not necessary anymore?
+                    if (AppSettings.QuickNotesEnabled.Value &&
+                        !_actionCenterService.ContainsQuickNotes())
+                    {
+                        // add quick notes when it was removed by klicking on it or using it.
+                        _actionCenterService.AddQuickNotes();
+                    }
                 }
+                else
+                {
+                    Logger.WriteLine("Remove - refresh");
+                    await _actionCenterService.RefreshAsync(_dataService.Notes); // TODO: not sure here?
+                }
+            }
+            else
+            {
+                Logger.WriteLine("BG TASK BLOCKED!");
             }
 
             deferral.Complete();

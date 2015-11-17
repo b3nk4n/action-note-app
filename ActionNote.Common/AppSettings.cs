@@ -1,4 +1,5 @@
-﻿using UWPCore.Framework.Storage;
+﻿using System;
+using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common
 {

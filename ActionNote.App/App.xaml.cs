@@ -10,7 +10,6 @@ using UWPCore.Framework.IoC;
 using UWPCore.Framework.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Xaml;
 using Windows.ApplicationModel;
 using UWPCore.Framework.Speech;
 using UWPCore.Framework.Data;
@@ -31,12 +30,10 @@ namespace ActionNote.App
         private static string BG_TASK_TOAST_TRIGGERED = "ActionNote.ActionTriggeredBackgroundTask";
 
         private IBackgroundTaskService _backgroundTaskService;
-        private IToastUpdateService _toastUpdateService;
+        private IActionCenterService _actionCenterService;
         private INoteDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
-
-        private DispatcherTimer _refreshActionCentertimer = new DispatcherTimer();
 
         private Localizer _localizer;
 
@@ -50,17 +47,10 @@ namespace ActionNote.App
             InitializeComponent();
 
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
-            _toastUpdateService = Injector.Get<IToastUpdateService>();
+            _actionCenterService = Injector.Get<IActionCenterService>();
             _dataService = Injector.Get<INoteDataService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
-
-            _refreshActionCentertimer.Interval = TimeSpan.FromSeconds(3);
-            _refreshActionCentertimer.Tick += (s, e) =>
-            {
-                _toastUpdateService.Refresh(_dataService.Notes);
-                _refreshActionCentertimer.Stop();
-            };
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
@@ -94,26 +84,18 @@ namespace ActionNote.App
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
+            _actionCenterService.StartTemporaryRemoveBlocking();
+            _actionCenterService.Clear();
+
             var pageType = DefaultPage;
             string parameter = null;
             if (args.Kind == ActivationKind.ToastNotification) 
             {
-                _toastUpdateService.Refresh(_dataService.Notes);
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
 
                 if (toastArgs.Argument == "quickNote")
                 {
                     pageType = typeof(EditPage);
-                }
-                else if (toastArgs.Argument.StartsWith("edit"))
-                {
-                    var splitted = toastArgs.Argument.Split('-');
-                    pageType = typeof(EditPage);
-                    parameter = AppConstants.PARAM_ID + splitted[1];
-                }
-                else if (toastArgs.Argument.StartsWith("delete"))
-                {
-                    // TODO: foreground deleted launched
                 }
                 else
                 {
@@ -125,13 +107,7 @@ namespace ActionNote.App
             {
                 var cause = DetermineStartCause(args);
 
-                if (cause == AdditionalKinds.Primary)
-                {
-                    // refresh needed when launched from action center (which is like launching from main tile)
-                    _toastUpdateService.Refresh(_dataService.Notes); // TODO: refresh only when list is empty, because on primary-tile, the list is not deleted and a refresh is not necessary?
-                    _refreshActionCentertimer.Start();
-                }
-                else if (cause == AdditionalKinds.SecondaryTile)
+                if (cause == AdditionalKinds.SecondaryTile)
                 {
                     var lauchArgs = args as LaunchActivatedEventArgs;
 
@@ -200,6 +176,8 @@ namespace ActionNote.App
         public async override Task OnSuspendingAsync(SuspendingEventArgs e)
         {
             await base.OnSuspendingAsync(e);
+
+            await _actionCenterService.RefreshAsync(_dataService.Notes);
 
             await _dataService.CleanUpAttachementFilesAsync();
         }

@@ -121,10 +121,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\INoteDataService.cs" />
     <Compile Include="Services\ITilePinService.cs" />
-    <Compile Include="Services\IToastUpdateService.cs" />
+    <Compile Include="Services\IActionCenterService.cs" />
     <Compile Include="Services\NoteDataService.cs" />
     <Compile Include="Services\TilePinService.cs" />
-    <Compile Include="Services\ToastUpdateService.cs" />
+    <Compile Include="Services\ActionCenterService.cs" />
     <Content Include="Properties\ActionNote.Common.rd.xml" />
   </ItemGroup>
   <ItemGroup />

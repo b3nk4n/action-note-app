@@ -16,7 +16,6 @@ namespace ActionNote.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private IToastUpdateService _toastUpdateService;
         private INoteDataService _dataService;
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
@@ -31,7 +30,6 @@ namespace ActionNote.App.ViewModels
 
         public MainViewModel()
         {
-            _toastUpdateService = Injector.Get<IToastUpdateService>();
             _dataService = Injector.Get<INoteDataService>();
             _shareContentService = Injector.Get<IShareContentService>();
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
@@ -48,8 +46,6 @@ namespace ActionNote.App.ViewModels
                     _dataService.MoveToArchiv(noteItem);
                 }
                 NoteItems.Clear();
-
-                _toastUpdateService.Refresh(_dataService.Notes);
 
                 SelectedNote = null;
             },
@@ -80,8 +76,6 @@ namespace ActionNote.App.ViewModels
 
                 _dataService.MoveToArchiv(noteItem);
                 NoteItems.Remove(noteItem);
-
-                _toastUpdateService.Refresh(_dataService.Notes);
 
                 SelectedNote = null;
             },

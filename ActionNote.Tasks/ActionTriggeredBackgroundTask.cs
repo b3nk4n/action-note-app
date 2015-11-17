@@ -11,7 +11,7 @@ namespace ActionNote.Tasks
 {
     public sealed class ActionTriggeredBackgroundTask : IBackgroundTask
     {
-        private IToastUpdateService _toastUpdateService;
+        private IActionCenterService _actionCenterService;
         private INoteDataService _dataService;
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
@@ -20,7 +20,7 @@ namespace ActionNote.Tasks
         {
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
-            _toastUpdateService = injector.Get<IToastUpdateService>();
+            _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<INoteDataService>();
         }
 
@@ -45,15 +45,12 @@ namespace ActionNote.Tasks
                             var noteItem = new NoteItem(_localizer.Get("QuickNote"), content);
                             _dataService.Notes.Add(noteItem);
                             await _dataService.Notes.Save(noteItem);
+
+                            // add it into the action center at the beginning
+                            _actionCenterService.AddToTop(noteItem);
                         }
                     }
                 }
-
-                // re-add the item again
-                //var item = _notesRepository.Get(details.Argument);
-                Logger.WriteLine("ActionTriggeredBackgroundTask - Note {0} was clicked. Refreshing history...", details.Argument);
-
-                _toastUpdateService.Refresh(_dataService.Notes);
             }
 
             deferral.Complete();

@@ -2,18 +2,22 @@
 using ActionNote.Common.Models;
 using Ninject;
 using System.Threading.Tasks;
+using System.Linq;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Notifications;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
+using System;
 
 namespace ActionNote.Common.Services
 {
     /// <summary>
     /// Service class to manage the action center.
     /// </summary>
-    public class ToastUpdateService : IToastUpdateService
+    public class ActionCenterService : IActionCenterService
     {
+        public static StoredObjectBase<DateTimeOffset> BackgroundTaskToastRemoveBlockingUntil = new LocalObject<DateTimeOffset>("toastBlocking", DateTimeOffset.MinValue);
+
         public const string GROUP_NOTE = "note";
         public const string GROUP_QUICK_NOTE = "quickNote";
 
@@ -22,40 +26,68 @@ namespace ActionNote.Common.Services
         private IToastService _toastService;
 
         [Inject]
-        public ToastUpdateService(IToastService toastService)
+        public ActionCenterService(IToastService toastService)
         {
             _toastService = toastService;
         }
 
-        public async void Refresh(INotesRepository notesRepository)
+        public void AddToTop(NoteItem noteItem)
+        {
+            var containsQuickNotes = ContainsQuickNotes();
+
+            if (containsQuickNotes)
+                RemoveQuickNotes();
+
+            AddNotification(noteItem);
+
+            if (containsQuickNotes)
+                AddQuickNotes();
+        }
+
+        public void Clear()
+        {
+            _toastService.ClearHistory();
+        }
+
+        public async Task RefreshAsync(INotesRepository notesRepository)
         {
             _toastService.ClearHistory();
 
             var allNotes = notesRepository.GetAll();
 
-            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteBy.Value);
+            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteBy.Value).Reverse().ToList();
 
-            for (int i = allNotes.Count - 1; i >= 0; --i)
+            for (int i = 0; i < sorted.Count; ++i)
             {
-                var note = allNotes[i];
+                var note = sorted[i];
 
                 if (i != 0)
-                    await Task.Delay(100);
+                    await Task.Delay(10);
 
-                var toastModel = GetToastModel(note);
-                var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
-                toastNotification.SuppressPopup = true;
-                toastNotification.Group = GROUP_NOTE;
-                toastNotification.Tag = note.Id; // just to find the notificication within this service
-                _toastService.Show(toastNotification);
+                AddNotification(note);
             }
-
-            await Task.Delay(100);
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
+                await Task.Delay(10);
+
                 AddQuickNotes();
             }
+        }
+
+        private void AddNotification(NoteItem note)
+        {
+            var toastModel = GetToastModel(note);
+            var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
+            toastNotification.SuppressPopup = true;
+            toastNotification.Group = GROUP_NOTE;
+            toastNotification.Tag = note.Id; // just to find the notificication within this service
+            _toastService.Show(toastNotification);
+        }
+
+        public bool ContainsQuickNotes()
+        {
+            return _toastService.GetByGroupFromHistory(GROUP_QUICK_NOTE).Count() > 0;
         }
 
         public void AddQuickNotes()
@@ -66,7 +98,7 @@ namespace ActionNote.Common.Services
             quickNoteToastNotification.SuppressPopup = true;
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote"; // just to find the notificication within this service
-            _toastService.Show(quickNoteToastNotification);
+            _toastService.Show(quickNoteToastNotification);//, DateTimeOffset.Now.AddSeconds(3)); // TODO ...
         }
 
         public void RemoveQuickNotes()
@@ -88,6 +120,16 @@ namespace ActionNote.Common.Services
             {
                 notesRepository.Remove(noteId);
             }
+        }
+
+        public void StartTemporaryRemoveBlocking()
+        {
+            BackgroundTaskToastRemoveBlockingUntil.Value = DateTimeOffset.Now.AddSeconds(10);
+        }
+
+        public bool IsRemoveBlocked()
+        {
+            return BackgroundTaskToastRemoveBlockingUntil.Value < DateTimeOffset.Now;
         }
 
         private AdaptiveToastModel GetToastModel(NoteItem noteItem)
@@ -128,26 +170,26 @@ namespace ActionNote.Common.Services
                         }
                     }
                 },
-                Actions = new AdaptiveActions()
-                {
-                    Children =
-                    {
-                        new AdaptiveAction()
-                        {
-                            ActivationType = ToastActivationType.Foreground,
-                            Content = "",
-                            Arguments = "edit-" + noteItem.Id,
-                            ImageUri = "Assets/Images/edit.png"
-                        },
-                        new AdaptiveAction()
-                        {
-                            ActivationType = ToastActivationType.Background,
-                            Content = "",
-                            Arguments = "delete-" + noteItem.Id,
-                            ImageUri = "Assets/Images/delete.png"
-                        }
-                    }
-                },
+                //Actions = new AdaptiveActions()
+                //{
+                //    Children =
+                //    {
+                //        new AdaptiveAction()
+                //        {
+                //            ActivationType = ToastActivationType.Foreground,
+                //            Content = "",
+                //            Arguments = "edit-" + noteItem.Id,
+                //            ImageUri = "Assets/Images/edit.png"
+                //        },
+                //        new AdaptiveAction()
+                //        {
+                //            ActivationType = ToastActivationType.Background,
+                //            Content = "",
+                //            Arguments = "delete-" + noteItem.Id,
+                //            ImageUri = "Assets/Images/delete.png"
+                //        }
+                //    }
+                //},
                 Audio = new AdaptiveAudio()
                 {
                     Silent = true,
@@ -164,7 +206,7 @@ namespace ActionNote.Common.Services
                 });
 
                 // change szenario that the image is bigger
-                toastModel.Scenario = ToastScenario.Reminder;
+                //toastModel.Scenario = ToastScenario.Reminder;
             }
 
             return toastModel;

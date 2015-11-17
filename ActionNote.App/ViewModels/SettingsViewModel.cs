@@ -14,14 +14,12 @@ namespace ActionNote.App.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private IToastUpdateService _toastUpdateService;
         private INotesRepository _notesRepository;
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
         public SettingsViewModel()
         {
-            _toastUpdateService = Injector.Get<IToastUpdateService>();
             _notesRepository = Injector.Get<INotesRepository>();
         }
 
@@ -70,11 +68,6 @@ namespace ActionNote.App.ViewModels
             set
             {
                 AppSettings.QuickNotesEnabled.Value = value;
-
-                if (value)
-                    _toastUpdateService.AddQuickNotes();
-                else
-                    _toastUpdateService.RemoveQuickNotes();
             }
         }
 
