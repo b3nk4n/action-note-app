@@ -122,14 +122,22 @@ namespace ActionNote.Common.Services
             }
         }
 
-        public void StartTemporaryRemoveBlocking()
+        public void StartTemporaryRemoveBlocking(int seconds)
         {
-            BackgroundTaskToastRemoveBlockingUntil.Value = DateTimeOffset.Now.AddSeconds(10);
+            BackgroundTaskToastRemoveBlockingUntil.Value = DateTimeOffset.Now.AddSeconds(seconds);
         }
 
         public bool IsRemoveBlocked()
         {
-            return BackgroundTaskToastRemoveBlockingUntil.Value < DateTimeOffset.Now;
+            return BackgroundTaskToastRemoveBlockingUntil.Value > DateTimeOffset.Now;
+        }
+
+        public int NotesCount
+        {
+            get
+            {
+                return _toastService.GetByGroupFromHistory(GROUP_NOTE).Count();
+            }
         }
 
         private AdaptiveToastModel GetToastModel(NoteItem noteItem)

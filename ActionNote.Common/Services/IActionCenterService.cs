@@ -50,12 +50,18 @@ namespace ActionNote.Common.Services
         /// <summary>
         /// Starts the remove blicking timer via a global setting.
         /// </summary>
-        void StartTemporaryRemoveBlocking();
+        /// <param name="seconds">The block duration.</param>
+        void StartTemporaryRemoveBlocking(int seconds);
 
         /// <summary>
         /// Check whether the action center is remove-blocked.
         /// </summary>
         /// <returns>Returns True when it is remove blocked, else False.</returns>
         bool IsRemoveBlocked();
+
+        /// <summary>
+        /// Gets the number of notes (without the quicknotes notification).
+        /// </summary>
+        int NotesCount { get; }
     }
 }

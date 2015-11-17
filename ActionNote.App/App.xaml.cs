@@ -84,7 +84,7 @@ namespace ActionNote.App
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
 
-            _actionCenterService.StartTemporaryRemoveBlocking();
+            _actionCenterService.StartTemporaryRemoveBlocking(10);
             _actionCenterService.Clear();
 
             var pageType = DefaultPage;

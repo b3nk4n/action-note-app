@@ -1,10 +1,8 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
-using System;
 using System.Threading.Tasks;
 using UWPCore.Framework.IoC;
-using UWPCore.Framework.Logging;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -29,7 +27,7 @@ namespace ActionNote.Tasks
 
             // wait to ensure ActionTriggeredBackgroundTask is running first, that restores items that have
             // been deleted by clicking on them.
-            await Task.Delay(1000); // TODO: still needed?
+            await Task.Delay(1000);
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
 
@@ -42,7 +40,6 @@ namespace ActionNote.Tasks
 
                 if (AppSettings.AllowRemoveNotes.Value)
                 {
-                    Logger.WriteLine("Remove - delete missing refresh");
                     _actionCenterService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
 
                     if (AppSettings.QuickNotesEnabled.Value &&
@@ -54,13 +51,20 @@ namespace ActionNote.Tasks
                 }
                 else
                 {
-                    Logger.WriteLine("Remove - refresh");
-                    await _actionCenterService.RefreshAsync(_dataService.Notes); // TODO: not sure here?
+                    // only refresh when there has been a change (because the bgtask is called multiple times when we do multiple remove operations)
+                    if (_actionCenterService.NotesCount == _dataService.Notes.Count)
+                    {
+                        // when only the quick notes was removed, just re-add it
+                        if (AppSettings.QuickNotesEnabled.Value && !_actionCenterService.ContainsQuickNotes())
+                        {
+                            _actionCenterService.AddQuickNotes();
+                        }
+                    }
+                    else
+                    {
+                        await _actionCenterService.RefreshAsync(_dataService.Notes);
+                    }
                 }
-            }
-            else
-            {
-                Logger.WriteLine("BG TASK BLOCKED!");
             }
 
             deferral.Complete();
