@@ -32,5 +32,8 @@ namespace ActionNote.Common
 
         public const string SORT_DATE = "date";
         public const string SORT_CATEGORY = "category";
+
+        public const string QUICK_NOTES_CONTENT = "content";
+        public const string QUICK_NOTES_TITLE_AND_CONTENT = "titlecontent";
     }
 }

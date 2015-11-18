@@ -35,11 +35,11 @@
                 <StackPanel Margin="16">
                     <TextBlock x:Uid="SettingsGeneral" Style="{StaticResource TitleTextBlockStyle}" Text="General" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsAutoSave" Header="Auto save notes" IsOn="{Binding SaveNoteOnBack, Mode=TwoWay}" Margin="4" />
-                    <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4" />
+                    
+                    <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="SyncNotesWithActionCenterToggle" x:Uid="SettingsSyncNotes" Header="Synchronize notes" IsOn="{Binding SyncWithActionCenter, Mode=TwoWay}" Margin="4" />
-                    <ToggleSwitch x:Uid="SettingsQuickNotes" Header="Enable QuickNotes in action center" IsOn="{Binding QuickNotesEnabled, Mode=TwoWay}" IsEnabled="{Binding ElementName=SyncNotesWithActionCenterToggle, Path=IsOn}" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=SyncNotesWithActionCenterToggle, Path=IsOn}" Margin="4" />
-                    <ComboBox Header="Order notes by" Width="160" Margin="4" IsEnabled="{Binding ElementName=SyncNotesWithActionCenterToggle, Path=IsOn}"
+                    <ComboBox x:Uid="OrderNotesBy" Header="Order notes by" Width="240" Margin="4,4,4,12" IsEnabled="{Binding ElementName=SyncNotesWithActionCenterToggle, Path=IsOn}"
                               ItemsSource="{Binding SortInActionCenterStringSource.ItemsSource}" SelectedItem="{Binding SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -47,8 +47,19 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBlock x:Uid="SettingsPersonalization" Style="{StaticResource TitleTextBlockStyle}" Text="Personalization" Margin="4" />
-                    <ComboBox x:Uid="SettingsThemeColor" Header="Theme color" Margin="4" Width="160"
+                    <ToggleSwitch x:Name="QuickNotesEnabled" x:Uid="SettingsQuickNotes" Header="Enable QuickNotes in action center" IsOn="{Binding QuickNotesEnabled, Mode=TwoWay}" IsEnabled="{Binding ElementName=SyncNotesWithActionCenterToggle, Path=IsOn}" Margin="4" />
+                    <ComboBox x:Uid="QuickNotesInputType" Header="QuickNotes input type" Width="240" Margin="4,4,4,12" IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsEnabled}"
+                              Visibility="{Binding ElementName=QuickNotesEnabled, Path=IsOn, Converter={StaticResource boolToVisConv}}"
+                              ItemsSource="{Binding QuickNoteContentTypeStringSource.ItemsSource}" SelectedItem="{Binding QuickNoteContentTypeStringSource.SelectedItem, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Translation}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <TextBlock x:Uid="SettingsPersonalization" Style="{StaticResource TitleTextBlockStyle}" Text="Personalization" Margin="4,12,4,4" />
+                    <ComboBox x:Uid="SettingsThemeColor" Header="Theme color" Margin="4,4,4,12" Width="240"
                               ItemsSource="{Binding ThemeEnumSource.ItemsSource}" SelectedItem="{Binding ThemeEnumSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>

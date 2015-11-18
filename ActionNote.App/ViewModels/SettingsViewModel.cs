@@ -20,6 +20,8 @@ namespace ActionNote.App.ViewModels
 
         public StringComboBoxSource SortInActionCenterStringSource { get; private set; }
 
+        public StringComboBoxSource QuickNoteContentTypeStringSource { get; private set; }
+
         private Localizer _localizer = new Localizer();
 
         public SettingsViewModel()
@@ -30,6 +32,10 @@ namespace ActionNote.App.ViewModels
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
                 new SourceComboBoxItem(AppConstants.SORT_DATE, _localizer.Get("SortByDate.Text")),
                 new SourceComboBoxItem(AppConstants.SORT_CATEGORY, _localizer.Get("SortByCategory.Text"))
+            });
+            QuickNoteContentTypeStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
+                new SourceComboBoxItem(AppConstants.QUICK_NOTES_CONTENT, _localizer.Get("QuickNotesTypeContent.Text")),
+                new SourceComboBoxItem(AppConstants.QUICK_NOTES_TITLE_AND_CONTENT, _localizer.Get("QuickNotesTypeTitleAndContent.Text"))
             });
         }
 
@@ -87,6 +93,7 @@ namespace ActionNote.App.ViewModels
 
             ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
             SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
+            QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -97,6 +104,7 @@ namespace ActionNote.App.ViewModels
             UniversalApp.Current.UpdateTheme();
 
             AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
+            AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
         }
     }
 }

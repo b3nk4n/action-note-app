@@ -197,6 +197,30 @@
     <value>NOTIZEN</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>Schaut etwas leer aus, nicht wahr? Eine Notiz ohne Inhalt kann leider nicht gespeichert werden.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>Nein</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>Ja</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>Sollen wirklich alle Notizen gelöscht werden?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>Information</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>Warnung</value>
+    <comment>MessageDialog</comment>
+  </data>
   <data name="Nav.About" xml:space="preserve">
     <value>Info</value>
     <comment>Navigation</comment>
@@ -217,9 +241,25 @@
     <value>NEUE NOTIZ</value>
     <comment>EditPage</comment>
   </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>Sortiere Notizen nach</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Pin.Label" xml:space="preserve">
     <value>An „Start“ anheften</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>Eingabemethode bei „Kurznotizen“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>Nur Inhalt</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>Titel und Inhalt</value>
+    <comment>SettingsPage</comment>
   </data>
   <data name="ReadAloud.Label" xml:space="preserve">
     <value>Vorlesen</value>

@@ -252,6 +252,14 @@ namespace ActionNote.Common.Services
                 }
             };
 
+            string contentText;
+            if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
+                contentText = string.Format("{0}\r\n{1}", _localizer.Get("NoteTitle.PlaceholderText"), _localizer.Get("NoteContent.PlaceholderText"));
+            else
+                contentText = _localizer.Get("NoteContent.PlaceholderText");
+
+            (toastModel.Actions.Children[0] as AdaptiveInput).PlaceHolderContent = contentText;
+
             return toastModel;
         }
     }

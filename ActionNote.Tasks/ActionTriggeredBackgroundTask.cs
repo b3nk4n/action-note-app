@@ -4,7 +4,6 @@ using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
-using UWPCore.Framework.Logging;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -40,16 +39,50 @@ namespace ActionNote.Tasks
                 {
                     if (details.UserInput.ContainsKey("content"))
                     {
-                        var content = (string)details.UserInput["content"];
+                        string content = null;
+                        string title = null;
+                        var input = details.UserInput["content"] as string;
 
-                        if (!string.IsNullOrWhiteSpace(content))
+
+                        if (!string.IsNullOrWhiteSpace(input))
                         {
-                            var noteItem = new NoteItem(_localizer.Get("QuickNote"), content);
-                            _dataService.Notes.Add(noteItem);
-                            await _dataService.Notes.Save(noteItem);
+                            if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
+                            {
+                                var splitIndex = input.IndexOf("\r\n");
 
-                            // add it into the action center at the beginning
-                            _actionCenterService.AddToTop(noteItem);
+                                if (splitIndex != -1)
+                                {
+                                    title = input.Substring(0, splitIndex);
+                                    content = input.Substring(splitIndex + 2, input.Length - splitIndex - 2);
+                                }
+
+                                if (string.IsNullOrWhiteSpace(content))
+                                {
+                                    title = _localizer.Get("QuickNote");
+                                    content = title;
+                                }
+                                else if (string.IsNullOrWhiteSpace(title))
+                                {
+                                    title = _localizer.Get("QuickNote");
+                                    content = title;
+                                }
+                            }
+                            else
+                            {
+                                title = _localizer.Get("QuickNote");
+                                content = input;
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(title) ||
+                                !string.IsNullOrWhiteSpace(content))
+                            {
+                                var noteItem = new NoteItem(title, content);
+                                _dataService.Notes.Add(noteItem);
+                                await _dataService.Notes.Save(noteItem);
+
+                                // add it into the action center at the beginning
+                                _actionCenterService.AddToTop(noteItem);
+                            }
                         }
                     }
                 }

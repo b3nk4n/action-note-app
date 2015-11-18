@@ -5,7 +5,10 @@ using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.Mvvm;
+using UWPCore.Framework.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 
 namespace ActionNote.App.ViewModels
@@ -13,6 +16,9 @@ namespace ActionNote.App.ViewModels
     public class ArchivViewModel : ViewModelBase
     {
         private INoteDataService _dataService;
+        private IDialogService _dialogService;
+
+        private Localizer _localizer = new Localizer();
 
         public ObservableCollection<NoteItem> NoteItems
         {
@@ -23,9 +29,19 @@ namespace ActionNote.App.ViewModels
         public ArchivViewModel()
         {
             _dataService = Injector.Get<INoteDataService>();
+            _dialogService = Injector.Get<IDialogService>();
 
-            ClearCommand = new DelegateCommand(() =>
+            ClearCommand = new DelegateCommand(async () =>
             {
+                var result = await _dialogService.ShowAsync(
+                    _localizer.Get("Message.ReallyDeleteAll"),
+                    _localizer.Get("Message.Title.Warning"),
+                    0, 1,
+                    new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
+                    new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
+                if (result.Id.ToString().Equals("n"))
+                    return;
+
                 _dataService.Archiv.Clear();
                 NoteItems.Clear();
 

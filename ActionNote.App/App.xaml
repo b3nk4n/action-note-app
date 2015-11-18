@@ -31,6 +31,7 @@
             <uwpcConverters:BooleanToDoubleConverter x:Key="boolToDoubleConv" />
             <uwpcConverters:BooleanToStringConverter x:Key="boolToStringConv" />
             <uwpcConverters:DateTimeConverter x:Key="dateTimeConverter" />
+            <uwpcConverters:EmptyStringToVisibilityConverter x:Key="emptyStringToVisConv" />
 
             <DataTemplate x:Key="NoteListDataTemplate">
                 <Grid Margin="0,4,-12,4">
@@ -50,7 +51,7 @@
                             <FontIcon Grid.Column="1" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                             <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                         </Grid>
-                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" />
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}" />
                     </StackPanel>
                 </Grid>
             </DataTemplate>

@@ -9,8 +9,12 @@
 
     <localViewModels:MainViewModel.NoteItems>
         <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note in the list rendered in design time." Color="Red" />
-        <commonModels:NoteItem Title="Title line with very much bla bla bla bla" Content="This is the sample content of a note." IsImportant="True" />
+        <commonModels:NoteItem Title="Title line with very much bla bla bla bla" Color="Blue" Content="This is the sample content of a note." IsImportant="True" />
         <commonModels:NoteItem Title="Title line" Content="A short note." Color="Blue" />
+        <commonModels:NoteItem Title="Title line with very much bla bla bla bla" Content="This is the sample content of a note." Color="Violett" IsImportant="True" AttachementFile="pseudopath" />
+
+        <commonModels:NoteItem Title="Title only" Content="" Color="Violett" IsImportant="True" AttachementFile="pseudopath" />
+        <commonModels:NoteItem Title="" Content="Content only" Color="Red" IsImportant="True" AttachementFile="pseudopath" />
     </localViewModels:MainViewModel.NoteItems>
     
 </localViewModels:MainViewModel>

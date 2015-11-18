@@ -198,6 +198,30 @@ ment</value>
     <value>NOTES</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>Looks empty, right? A note without content cannot be saved.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>No</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>Yes</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>Do you really want to delete all notes?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>Information</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>Warning</value>
+    <comment>MessageDialog</comment>
+  </data>
   <data name="Nav.About" xml:space="preserve">
     <value>About</value>
     <comment>Navigation</comment>
@@ -218,9 +242,25 @@ ment</value>
     <value>NEW NOTE</value>
     <comment>EditPage</comment>
   </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>Order notes by</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Pin.Label" xml:space="preserve">
     <value>Pin to start</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>Input method of „QuickNotes“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>Details only</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>Title and details</value>
+    <comment>SettingsPage</comment>
   </data>
   <data name="ReadAloud.Label" xml:space="preserve">
     <value>Read aloud</value>

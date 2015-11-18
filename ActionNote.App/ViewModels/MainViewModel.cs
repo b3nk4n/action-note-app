@@ -11,6 +11,8 @@ using UWPCore.Framework.Storage;
 using ActionNote.Common;
 using UWPCore.Framework.Common;
 using ActionNote.Common.Helpers;
+using UWPCore.Framework.UI;
+using Windows.UI.Popups;
 
 namespace ActionNote.App.ViewModels
 {
@@ -20,6 +22,7 @@ namespace ActionNote.App.ViewModels
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
+        private IDialogService _dialogService;
 
         private Localizer _localizer = new Localizer();
 
@@ -34,13 +37,23 @@ namespace ActionNote.App.ViewModels
             _shareContentService = Injector.Get<IShareContentService>();
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
             _tilePinService = Injector.Get<ITilePinService>();
+            _dialogService = Injector.Get<IDialogService>();
 
-            ClearCommand = new DelegateCommand(() =>
+            ClearCommand = new DelegateCommand(async () =>
             {
+                var result = await _dialogService.ShowAsync(
+                    _localizer.Get("Message.ReallyDeleteAll"),
+                    _localizer.Get("Message.Title.Warning"),
+                    0, 1,
+                    new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
+                    new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
+                if (result.Id.ToString().Equals("n"))
+                    return;
+
                 // unpin all tiles
                 foreach (var noteItem in _dataService.Notes.GetAll())
                 {
-                    _tilePinService.UnpinAsync(noteItem.Id);
+                    await _tilePinService.UnpinAsync(noteItem.Id);
 
                     _dataService.MoveToArchiv(noteItem);
                 }

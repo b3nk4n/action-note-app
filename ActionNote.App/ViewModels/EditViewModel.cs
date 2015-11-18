@@ -16,6 +16,7 @@ using ActionNote.Common.Helpers;
 using ActionNote.App.Views;
 using UWPCore.Framework.Graphics;
 using UWPCore.Framework.Common;
+using UWPCore.Framework.UI;
 
 namespace ActionNote.App.ViewModels
 {
@@ -34,8 +35,10 @@ namespace ActionNote.App.ViewModels
         private ISerializationService _serializationService;
         private ITilePinService _tilePinService;
         private IGraphicsService _graphicsService;
+        private IDialogService _dialogService;
 
         private Localizer _localizer = new Localizer();
+        private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
 
         /// <summary>
         /// Flag that indicates that no save operation is needed on BACK event.
@@ -58,15 +61,21 @@ namespace ActionNote.App.ViewModels
             _serializationService = Injector.Get<ISerializationService>();
             _tilePinService = Injector.Get<ITilePinService>();
             _graphicsService = Injector.Get<IGraphicsService>();
+            _dialogService = Injector.Get<IDialogService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                await SaveNoteAsync(noteItem);
-                GoBackToMainPageWithoutBackEvent();
-            },
-            (noteItem) =>
-            {
-                return noteItem != null;
+                if (!noteItem.IsEmtpy)
+                {
+                    await SaveNoteAsync(noteItem);
+                    GoBackToMainPageWithoutBackEvent();
+                }
+                else
+                {
+                    await _dialogService.ShowAsync(
+                        _localizer.Get("Message.CanNotSaveEmpty"),
+                        _localizer.Get("Message.Title.Info"));
+                }
             });
 
             DiscardCommand = new DelegateCommand(() =>
@@ -184,6 +193,11 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
+            if (string.IsNullOrWhiteSpace(noteItem.Title))
+            {
+                noteItem.Title = _commonLocalizer.Get("QuickNote");
+            }
+
             if (_dataService.Notes.Contains(noteItem.Id))
             {
                 _dataService.Notes.Update(noteItem);
