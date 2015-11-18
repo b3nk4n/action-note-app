@@ -8,6 +8,7 @@ using UWPCore.Framework.Notifications;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
 using System;
+using System.Collections.Generic;
 
 namespace ActionNote.Common.Services
 {
@@ -49,13 +50,11 @@ namespace ActionNote.Common.Services
             _toastService.ClearHistory();
         }
 
-        public async Task RefreshAsync(INotesRepository notesRepository)
+        public async Task RefreshAsync(IList<NoteItem> noteItems)
         {
             _toastService.ClearHistory();
 
-            var allNotes = notesRepository.GetAll();
-
-            var sorted = NoteUtils.Sort(allNotes, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
+            var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
 
             for (int i = 0; i < sorted.Count; ++i)
             {
@@ -98,7 +97,7 @@ namespace ActionNote.Common.Services
             quickNoteToastNotification.SuppressPopup = true;
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote"; // just to find the notificication within this service
-            _toastService.Show(quickNoteToastNotification);//, DateTimeOffset.Now.AddSeconds(3)); // TODO ...
+            _toastService.Show(quickNoteToastNotification);
         }
 
         public void RemoveQuickNotes()
@@ -106,20 +105,18 @@ namespace ActionNote.Common.Services
             _toastService.RemoveGroupeFromHistory(GROUP_QUICK_NOTE);
         }
 
-        public void DeleteNotesThatAreMissingInActionCenter(INotesRepository notesRepository)
+        public IList<string> DiffWithNotesInActionCenter(IList<NoteItem> noteItems)
         {
             // find IDs to remove
-            var noteIdsToRemove = notesRepository.GetAllIds();
-            foreach (var historyItem in _toastService.History)
+            var idsToRemove = new List<string>();
+            foreach (var item in noteItems)
             {
-                noteIdsToRemove.Remove(historyItem.Tag);
+                var toastItemsInHistory = _toastService.GetByTagFromHistory(item.Id);
+                if (toastItemsInHistory == null || toastItemsInHistory.Count() == 0)
+                    idsToRemove.Add(item.Id);
             }
 
-            // remove from repository
-            foreach (var noteId in noteIdsToRemove)
-            {
-                notesRepository.Remove(noteId);
-            }
+            return idsToRemove;
         }
 
         public void StartTemporaryRemoveBlocking(int seconds)
@@ -178,26 +175,6 @@ namespace ActionNote.Common.Services
                         }
                     }
                 },
-                //Actions = new AdaptiveActions()
-                //{
-                //    Children =
-                //    {
-                //        new AdaptiveAction()
-                //        {
-                //            ActivationType = ToastActivationType.Foreground,
-                //            Content = "",
-                //            Arguments = "edit-" + noteItem.Id,
-                //            ImageUri = "Assets/Images/edit.png"
-                //        },
-                //        new AdaptiveAction()
-                //        {
-                //            ActivationType = ToastActivationType.Background,
-                //            Content = "",
-                //            Arguments = "delete-" + noteItem.Id,
-                //            ImageUri = "Assets/Images/delete.png"
-                //        }
-                //    }
-                //},
                 Audio = new AdaptiveAudio()
                 {
                     Silent = true,
@@ -214,7 +191,7 @@ namespace ActionNote.Common.Services
                 });
 
                 // change szenario that the image is bigger
-                //toastModel.Scenario = ToastScenario.Reminder;
+                toastModel.Scenario = ToastScenario.Reminder;
             }
 
             return toastModel;

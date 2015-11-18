@@ -1,4 +1,5 @@
 ﻿using ActionNote.Common.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ActionNote.Common.Services
@@ -22,8 +23,8 @@ namespace ActionNote.Common.Services
         /// <summary>
         /// Refreshes the whole action center.
         /// </summary>
-        /// <param name="notesRepository">The notes repository to get the data.</param>
-        Task RefreshAsync(INotesRepository notesRepository);
+        /// <param name="noteItems">The notes items that are in the repo and have to be in the action center.</param>
+        Task RefreshAsync(IList<NoteItem> noteItems);
 
         /// <summary>
         /// Gets whether the quick notes are in the action center or not.
@@ -44,8 +45,9 @@ namespace ActionNote.Common.Services
         /// <summary>
         /// Deletes all notes from the repository that are not referenced in the action center.
         /// </summary>
-        /// <param name="notesRepository">The notes repository to get and remove the data.</param>
-        void DeleteNotesThatAreMissingInActionCenter(INotesRepository notesRepository);
+        /// <param name="noteItems">The notes items that are in the repository.</param>
+        /// <returns>Returns the list of IDs that have to be moved to trash.</returns>
+        IList<string> DiffWithNotesInActionCenter(IList<NoteItem> noteItems);
 
         /// <summary>
         /// Starts the remove blicking timer via a global setting.

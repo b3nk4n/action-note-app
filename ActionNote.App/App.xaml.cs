@@ -178,7 +178,7 @@ namespace ActionNote.App
             await base.OnSuspendingAsync(e);
 
             if (AppSettings.SyncWithActionCenter.Value)
-                await _actionCenterService.RefreshAsync(_dataService.Notes);
+                await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
 
             await _dataService.CleanUpAttachementFilesAsync();
         }

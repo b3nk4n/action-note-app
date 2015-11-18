@@ -78,8 +78,7 @@ namespace ActionNote.App.ViewModels
             {
                 _dataService.MoveToArchiv(noteItem);
 
-                if (_tilePinService.Contains(noteItem.Id))
-                    _tilePinService.UnpinAsync(noteItem.Id);
+                _tilePinService.UnpinAsync(noteItem.Id);
 
                 GoBackToMainPageWithoutBackEvent();
             },

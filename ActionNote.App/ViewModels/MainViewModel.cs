@@ -40,8 +40,7 @@ namespace ActionNote.App.ViewModels
                 // unpin all tiles
                 foreach (var noteItem in _dataService.Notes.GetAll())
                 {
-                    if (_tilePinService.Contains(noteItem.Id))
-                        _tilePinService.UnpinAsync(noteItem.Id);
+                    _tilePinService.UnpinAsync(noteItem.Id);
 
                     _dataService.MoveToArchiv(noteItem);
                 }
@@ -70,9 +69,7 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
-                // unpin tile
-                if (_tilePinService.Contains(noteItem.Id))
-                    _tilePinService.UnpinAsync(noteItem.Id);
+                _tilePinService.UnpinAsync(noteItem.Id);
 
                 _dataService.MoveToArchiv(noteItem);
                 NoteItems.Remove(noteItem);

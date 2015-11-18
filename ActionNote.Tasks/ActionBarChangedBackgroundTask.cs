@@ -12,6 +12,7 @@ namespace ActionNote.Tasks
     {
         private IActionCenterService _actionCenterService;
         private INoteDataService _dataService;
+        private ITilePinService _tilePinService;
 
         public ActionBarChangedBackgroundTask()
         {
@@ -19,6 +20,7 @@ namespace ActionNote.Tasks
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<INoteDataService>();
+            _tilePinService = injector.Get<ITilePinService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -41,7 +43,13 @@ namespace ActionNote.Tasks
 
                 if (AppSettings.AllowRemoveNotes.Value)
                 {
-                    _actionCenterService.DeleteNotesThatAreMissingInActionCenter(_dataService.Notes);
+                    var diff = _actionCenterService.DiffWithNotesInActionCenter(_dataService.Notes.GetAll());
+
+                    foreach (var noteId in diff)
+                    {
+                        await _tilePinService.UnpinAsync(noteId);
+                        _dataService.MoveToArchiv(_dataService.Notes.Get(noteId));
+                    }
 
                     if (AppSettings.QuickNotesEnabled.Value &&
                         !_actionCenterService.ContainsQuickNotes())
@@ -63,7 +71,7 @@ namespace ActionNote.Tasks
                     }
                     else
                     {
-                        await _actionCenterService.RefreshAsync(_dataService.Notes);
+                        await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
                     }
                 }
             }
