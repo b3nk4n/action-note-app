@@ -253,20 +253,34 @@ namespace ActionNote.App.ViewModels
             SelectedNote = noteToEdit;
         }
 
-        public override async void OnNavigatingFrom(NavigatingEventArgs args)
+        public override void OnNavigatingFrom(NavigatingEventArgs args)
         {
             base.OnNavigatingFrom(args);
 
+            //if (!_blockBackEvent)
+            //{
+            //    if (args.NavigationMode == NavigationMode.Back ||
+            //        args.NavigationMode == NavigationMode.New) // when switching the tab in the hamburger menu
+            //    {
+            //        if (AppSettings.SaveNoteOnBack.Value)
+            //        {
+            //            if (SelectedNote != null && !SelectedNote.IsEmtpy)
+            //                await SaveNoteAsync(SelectedNote);
+            //        }
+            //    }
+            //}
+        }
+
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            await base.OnNavigatedFromAsync(state, suspending);
+
             if (!_blockBackEvent)
             {
-                if (args.NavigationMode == NavigationMode.Back ||
-                    args.NavigationMode == NavigationMode.New) // when switching the tab in the hamburger menu
+                if (AppSettings.SaveNoteOnBack.Value)
                 {
-                    if (AppSettings.SaveNoteOnBack.Value)
-                    {
-                        if (SelectedNote != null && !SelectedNote.IsEmtpy)
-                            await SaveNoteAsync(SelectedNote);
-                    }
+                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
+                        await SaveNoteAsync(SelectedNote);
                 }
             }
         }
