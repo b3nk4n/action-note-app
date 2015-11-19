@@ -43,7 +43,7 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
-            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="16"
+            <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="8,16"
                       ItemTemplate="{StaticResource NoteListDataTemplate}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
