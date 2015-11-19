@@ -18,6 +18,7 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.App
 {
@@ -34,6 +35,7 @@ namespace ActionNote.App
         private INoteDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
+        private IStatusBarService _statusBarService;
 
         private Localizer _localizer;
 
@@ -68,6 +70,10 @@ namespace ActionNote.App
             // setup theme colors (mainly for title bar)
             ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black);
             ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White);
+
+            _statusBarService = Injector.Get<IStatusBarService>();
+            var color = (Color)Current.Resources["SystemChromeMediumColor"];
+            _statusBarService.BackgroundColor = color;
 
             _speechService = Injector.Get<ISpeechService>();
             await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");

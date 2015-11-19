@@ -2,7 +2,6 @@
 using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
 using ActionNote.App.Views;
@@ -13,6 +12,7 @@ using UWPCore.Framework.Common;
 using ActionNote.Common.Helpers;
 using UWPCore.Framework.UI;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 namespace ActionNote.App.ViewModels
 {
@@ -147,17 +147,17 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            ReloadData();
+            await ReloadDataAsync();
         }
 
-        private void ReloadData()
+        private async Task ReloadDataAsync()
         {
-            // ensure the repository has been loaded
-            //await _notesRepository.Load(); data is loaded in app.xaml
+            // ensure the repository has been loaded (which is required after suspend-shutdown)
+            await _dataService.Notes.Load();
 
             NoteItems.Clear();
             var data = _dataService.Notes.GetAll(); // TODO: reload all from disk?

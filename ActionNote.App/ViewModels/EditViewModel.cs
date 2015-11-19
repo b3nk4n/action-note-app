@@ -247,28 +247,23 @@ namespace ActionNote.App.ViewModels
                 IsEditMode = false;
             }
 
-            if (!IsEditMode)
-                _callbacks.SelectTitle();
+            if (state.Count > 0)
+            {
+                noteToEdit.Id = state["id"] as string;
+                noteToEdit.Title = state["title"] as string;
+                noteToEdit.Content = state["content"] as string;
+                noteToEdit.AttachementFile = state["attachementFile"] as string;
+                noteToEdit.IsImportant = (bool)state["isImportant"];
+                noteToEdit.Color = (ColorCategory)Enum.Parse(typeof(ColorCategory), state["color"] as string);
+            }
+            else
+            {
+                // only select title when app is not resumed
+                if (!IsEditMode)
+                    _callbacks.SelectTitle();
+            }
 
             SelectedNote = noteToEdit;
-        }
-
-        public override void OnNavigatingFrom(NavigatingEventArgs args)
-        {
-            base.OnNavigatingFrom(args);
-
-            //if (!_blockBackEvent)
-            //{
-            //    if (args.NavigationMode == NavigationMode.Back ||
-            //        args.NavigationMode == NavigationMode.New) // when switching the tab in the hamburger menu
-            //    {
-            //        if (AppSettings.SaveNoteOnBack.Value)
-            //        {
-            //            if (SelectedNote != null && !SelectedNote.IsEmtpy)
-            //                await SaveNoteAsync(SelectedNote);
-            //        }
-            //    }
-            //}
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -282,7 +277,16 @@ namespace ActionNote.App.ViewModels
                     if (SelectedNote != null && !SelectedNote.IsEmtpy)
                         await SaveNoteAsync(SelectedNote);
                 }
-            }
+                else if (suspending)
+                {
+                    state["id"] = SelectedNote.Id;
+                    state["title"] = SelectedNote.Title;
+                    state["content"] = SelectedNote.Content;
+                    state["attachementFile"] = SelectedNote.AttachementFile;
+                    state["isImportant"] = SelectedNote.IsImportant;
+                    state["color"] = SelectedNote.Color.ToString();
+                }
+            }  
         }
 
         /// <summary>
