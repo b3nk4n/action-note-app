@@ -79,9 +79,10 @@ namespace ActionNote.Tasks
                                 var noteItem = new NoteItem(title, content);
                                 _dataService.Notes.Add(noteItem);
                                 await _dataService.Notes.Save(noteItem);
+                                _dataService.FlagNotesHaveChangedInBackground();
 
                                 // add it into the action center at the beginning
-                                _actionCenterService.AddToTop(noteItem);
+                                _actionCenterService.AddToTop(noteItem); // TODO: not at the top, when we have category ordering!
                             }
                         }
                     }

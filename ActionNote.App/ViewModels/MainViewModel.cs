@@ -157,7 +157,7 @@ namespace ActionNote.App.ViewModels
         private async Task ReloadDataAsync()
         {
             // ensure the repository has been loaded (which is required after suspend-shutdown)
-            await _dataService.Notes.Load();
+            await _dataService.LoadNotesAsync();
 
             NoteItems.Clear();
             var data = _dataService.Notes.GetAll(); // TODO: reload all from disk?

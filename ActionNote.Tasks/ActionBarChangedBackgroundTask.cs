@@ -49,6 +49,8 @@ namespace ActionNote.Tasks
                     {
                         await _tilePinService.UnpinAsync(noteId);
                         _dataService.MoveToArchiv(_dataService.Notes.Get(noteId));
+                        _dataService.FlagNotesHaveChangedInBackground();
+                        _dataService.FlagArchiveHasChangedInBackground();
                     }
 
                     if (AppSettings.QuickNotesEnabled.Value &&

@@ -72,17 +72,41 @@ namespace ActionNote.App
             ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White);
 
             _statusBarService = Injector.Get<IStatusBarService>();
-            var color = (Color)Current.Resources["SystemChromeMediumColor"];
-            _statusBarService.BackgroundColor = color;
+            UpdateStatusBarTheme();
 
             _speechService = Injector.Get<ISpeechService>();
             await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");
         }
 
+        public void UpdateStatusBarTheme()
+        {
+            if (_statusBarService.IsSupported)
+            {
+                if (PageTheme == Windows.UI.Xaml.ElementTheme.Light)
+                {
+                    _statusBarService.BackgroundColor = Color.FromArgb(255, 230, 230, 230);
+                    _statusBarService.ForegroundColor = Colors.Black;
+                }
+                else
+                {
+                    _statusBarService.BackgroundColor = (Color)Current.Resources["SystemChromeMediumColor"];
+                    _statusBarService.ForegroundColor = Colors.White;
+                }
+            }
+        }
+
+        public override void OnResuming(object args)
+        {
+            base.OnResuming(args);
+
+            // refresh the page, so that the OnNavigatedTo event is fired on the current page.
+            NavigationService.Refresh();
+        }
+
         public async override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            // load data
-            await _dataService.Notes.Load();
+            // reload data
+            await _dataService.LoadNotesAsync();
 
             // unregister previous one, to ensure the latest version is running
             if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))

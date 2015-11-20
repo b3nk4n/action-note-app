@@ -88,7 +88,7 @@ namespace ActionNote.App.ViewModels
         private async Task ReloadData()
         {
             // ensure the repository has been loaded
-            await _dataService.Archiv.Load();
+            await _dataService.LoadArchiveAsync();
 
             NoteItems.Clear();
             var data = _dataService.Archiv.GetAll(); // TODO: reload all from disk?

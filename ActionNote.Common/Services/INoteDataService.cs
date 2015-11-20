@@ -28,5 +28,13 @@ namespace ActionNote.Common.Services
         /// Cleans up the unreferences attachement files.
         /// </summary>
         Task CleanUpAttachementFilesAsync();
+
+        Task<bool> LoadNotesAsync();
+
+        Task<bool> LoadArchiveAsync();
+
+        void FlagNotesHaveChangedInBackground();
+
+        void FlagArchiveHasChangedInBackground();
     }
 }

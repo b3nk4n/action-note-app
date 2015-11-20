@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWPCore.Framework.Logging;
 using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Services
@@ -18,6 +19,9 @@ namespace ActionNote.Common.Services
 
         public INotesRepository Notes { get; private set; }
         public INotesRepository Archiv { get; private set; }
+
+        private StoredObjectBase<bool> _notesChangedInBackgroundFlag = new LocalObject<bool>("_notesChangedInBackground_", false);
+        private StoredObjectBase<bool> _archiveChangedInBackgroundFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
 
         [Inject]
         public NoteDataService(INotesRepository notesRepository, INotesRepository archivRepository, ILocalStorageService localStorageService)
@@ -71,7 +75,50 @@ namespace ActionNote.Common.Services
                     }
                 }
             }
-            
+        }
+
+        public async Task<bool> LoadNotesAsync()
+        {
+            bool result;
+            _notesChangedInBackgroundFlag.Invalidate();
+            if (_notesChangedInBackgroundFlag.Value)
+            {
+                Logger.WriteLine("NOTES RELOAD");
+                result = await Notes.Reload();
+                _notesChangedInBackgroundFlag.Value = false;
+            }
+            else
+            {
+                Logger.WriteLine("NOTES LOAD");
+                result = await Notes.Load();
+            }
+            return result;
+        }
+
+        public async Task<bool> LoadArchiveAsync()
+        {
+            bool result;
+            _notesChangedInBackgroundFlag.Invalidate();
+            if (_archiveChangedInBackgroundFlag.Value)
+            {
+                result = await Archiv.Reload();
+                _archiveChangedInBackgroundFlag.Value = false;
+            }
+            else
+            {
+                result = await Archiv.Load();
+            }
+            return result;
+        }
+
+        public void FlagNotesHaveChangedInBackground()
+        {
+            _notesChangedInBackgroundFlag.Value = true;
+        }
+
+        public void FlagArchiveHasChangedInBackground()
+        {
+            _archiveChangedInBackgroundFlag.Value = true;
         }
     }
 }
