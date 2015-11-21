@@ -169,8 +169,7 @@ namespace ActionNote.Common.Services
                                     Content = noteItem.Content,
                                     HintStyle = TextStyle.Base,
                                     HintWrap = true
-                                },
-
+                                }
                             }
                         }
                     }
@@ -221,6 +220,12 @@ namespace ActionNote.Common.Services
                                 {
                                     Content = _localizer.Get("QuickNotes"),
                                     HintStyle = TextStyle.Title
+                                },
+                                new AdaptiveText()
+                                {
+                                    Content = _localizer.Get("QuickNotesDescription"),
+                                    HintStyle = TextStyle.Base,
+                                    HintWrap = true
                                 },
                             }
                         }

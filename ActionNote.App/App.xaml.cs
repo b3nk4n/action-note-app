@@ -75,7 +75,7 @@ namespace ActionNote.App
             UpdateStatusBarTheme();
 
             _speechService = Injector.Get<ISpeechService>();
-            await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml");
+            //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // TODO: caused app not starting on phone (after Cortana setup !?!)
         }
 
         public void UpdateStatusBarTheme()

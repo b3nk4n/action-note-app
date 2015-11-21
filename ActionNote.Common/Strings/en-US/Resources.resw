@@ -133,6 +133,10 @@
     <value>Quick Notes</value>
     <comment>BackgroundTask</comment>
   </data>
+  <data name="QuickNotesDescription" xml:space="preserve">
+    <value>Create new note...</value>
+    <comment>BackgroundTask</comment>
+  </data>
   <data name="Save.Label" xml:space="preserve">
     <value>Save</value>
     <comment>EditPage</comment>

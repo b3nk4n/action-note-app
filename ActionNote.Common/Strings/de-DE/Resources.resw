@@ -133,6 +133,10 @@
     <value>Kurznotizen</value>
     <comment>BackgroundTask</comment>
   </data>
+  <data name="QuickNotesDescription" xml:space="preserve">
+    <value>Erstelle neue Notiz...</value>
+    <comment>BackgroundTask</comment>
+  </data>
   <data name="Save.Label" xml:space="preserve">
     <value>Speichern</value>
     <comment>EditPage</comment>

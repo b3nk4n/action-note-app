@@ -86,7 +86,10 @@ namespace ActionNote.Common.Models
 
         public string GetIconImagePath()
         {
-            return string.Format("/Assets/Images/{0}{1}.png", Color.ToString().FirstLetterToLower(), (HasAttachement ? "_att" : string.Empty));
+            return string.Format("/Assets/Images/{0}{1}{2}.png", 
+                Color.ToString().FirstLetterToLower(), 
+                (HasAttachement ? "_att" : string.Empty),
+                (IsImportant ? "_flag" : string.Empty));
         }
 
         /// <summary>
