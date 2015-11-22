@@ -104,8 +104,9 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".jpg");
                 picker.FileTypeFilter.Add(".jpeg");
                 picker.FileTypeFilter.Add(".png");
+                StorageFile file = await picker.PickSingleFileAsync(); // TODO: not correctly working on mobile!
+                // read: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/13002ba6-6e59-47b8-a746-c05525953c5a/uwpfileopenpicker-bugs-in-win-10-mobile-when-not-debugging?forum=wpdevelop
 
-                StorageFile file = await picker.PickSingleFileAsync();
                 if (file != null)
                 {
                     var canonicalPrefix = noteItem.Id + '-';

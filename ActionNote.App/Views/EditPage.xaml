@@ -173,22 +173,22 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Neutral">
+                                    <Button Grid.Column="0" Grid.Row="0" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Neutral">
                                         <Ellipse Fill="{ThemeResource SystemControlForegroundBaseHighBrush}" Width="16" Height="16" Margin="4" />
                                     </Button>
-                                    <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Red">
+                                    <Button Grid.Column="1" Grid.Row="0" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Red">
                                         <Ellipse Fill="#FF4949" Width="16" Height="16" Margin="4" />
                                     </Button>
-                                    <Button Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Blue">
+                                    <Button Grid.Column="2" Grid.Row="0" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Blue">
                                         <Ellipse Fill="#49BFFF" Width="16" Height="16" Margin="4" />
                                     </Button>
-                                    <Button Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Green">
+                                    <Button Grid.Column="0" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Green">
                                         <Ellipse Fill="#61FF49" Width="16" Height="16" Margin="4" />
                                     </Button>
-                                    <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Violett">
+                                    <Button Grid.Column="1" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Violett">
                                         <Ellipse Fill="#C849FF" Width="16" Height="16" Margin="4" />
                                     </Button>
-                                    <Button Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Yellow">
+                                    <Button Grid.Column="2" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Yellow">
                                         <Ellipse Fill="#F6FF49" Width="16" Height="16" Margin="4" />
                                     </Button>
                                 </Grid>
