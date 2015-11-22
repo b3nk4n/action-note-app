@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.IoC;
@@ -10,6 +11,8 @@ namespace ActionNote.Common.Models
     {
         private IStorageService _localStorageService;
         private ISerializationService _serializationService;
+
+        private object _sync = new object();
 
         public string BaseFolder { private get; set; }
 
@@ -67,11 +70,10 @@ namespace ActionNote.Common.Models
 
         public override async Task<bool> Reload()
         {
-            // clear memory-data only, but not the files
-            base.Clear();
+            HasLoaded = true;
 
             var dataFiles = await _localStorageService.GetFilesAsync(BaseFolder);
-
+            var noteList = new List<NoteItem>();
             if (dataFiles != null)
             {
                 foreach (var dataFile in dataFiles)
@@ -80,11 +82,22 @@ namespace ActionNote.Common.Models
                     var note = _serializationService.DeserializeJson<NoteItem>(jsonData);
 
                     if (note != null)
-                        Add(note);
+                        noteList.Add(note);
                 }
             }
 
-            HasLoaded = true;
+            // lock, to make sure that items are not added multiple times when there are multiple calls to this method
+            lock (_sync)
+            {
+                // clear memory-data only, but not the files
+                base.Clear();
+
+                foreach (var note in noteList)
+                {
+                    Add(note);
+                }
+            }
+
             return true;
         }
 

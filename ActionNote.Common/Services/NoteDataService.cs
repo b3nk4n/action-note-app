@@ -84,8 +84,8 @@ namespace ActionNote.Common.Services
             if (_notesChangedInBackgroundFlag.Value)
             {
                 Logger.WriteLine("NOTES RELOAD");
-                result = await Notes.Reload();
                 _notesChangedInBackgroundFlag.Value = false;
+                result = await Notes.Reload();
             }
             else
             {
@@ -101,8 +101,8 @@ namespace ActionNote.Common.Services
             _notesChangedInBackgroundFlag.Invalidate();
             if (_archiveChangedInBackgroundFlag.Value)
             {
-                result = await Archiv.Reload();
                 _archiveChangedInBackgroundFlag.Value = false;
+                result = await Archiv.Reload();
             }
             else
             {
