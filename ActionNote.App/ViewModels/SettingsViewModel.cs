@@ -102,7 +102,6 @@ namespace ActionNote.App.ViewModels
 
             UniversalPage.PageTheme.Value = ThemeEnumSource.SelectedValue;
             UniversalApp.Current.UpdateTheme();
-            (UniversalApp.Current as App).UpdateStatusBarTheme();
 
             AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
             AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;

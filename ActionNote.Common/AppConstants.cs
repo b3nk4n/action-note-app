@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
+﻿using Windows.UI;
 
 namespace ActionNote.Common
 {
@@ -27,7 +22,7 @@ namespace ActionNote.Common
         public readonly static Color COLOR_RED = Color.FromArgb(255, 255, 73, 73);
         public readonly static Color COLOR_GREEN = Color.FromArgb(255, 97, 255, 73);
         public readonly static Color COLOR_BLUE = Color.FromArgb(255, 73, 191, 255);
-        public readonly static Color COLOR_YELLOW = Color.FromArgb(255, 246, 255, 73);
+        public readonly static Color COLOR_ORANGE = Color.FromArgb(255, 255, 164, 73);
         public readonly static Color COLOR_VIOLETT = Color.FromArgb(255, 200, 73, 255);
 
         public const string SORT_DATE = "date";

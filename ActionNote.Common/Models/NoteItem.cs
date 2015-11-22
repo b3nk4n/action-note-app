@@ -15,7 +15,7 @@ namespace ActionNote.Common.Models
         Red,
         Blue,
         Green,
-        Yellow,
+        Orange,
         Violett,
         [DefaultValue(true)]
         Neutral

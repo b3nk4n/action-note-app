@@ -38,8 +38,8 @@ namespace ActionNote.Common.Helpers
                         color = ColorCategory.Blue;
                         break;
 
-                    case "gelb":
-                        color = ColorCategory.Yellow;
+                    case "orange":
+                        color = ColorCategory.Orange;
                         break;
 
                     case "violett":
@@ -69,8 +69,8 @@ namespace ActionNote.Common.Helpers
                 case ColorCategory.Green:
                     color = AppConstants.COLOR_GREEN;
                     break;
-                case ColorCategory.Yellow:
-                    color = AppConstants.COLOR_YELLOW;
+                case ColorCategory.Orange:
+                    color = AppConstants.COLOR_ORANGE;
                     break;
                 case ColorCategory.Violett:
                     color = AppConstants.COLOR_VIOLETT;

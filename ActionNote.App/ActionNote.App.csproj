@@ -145,6 +145,10 @@
     <Content Include="Assets\Images\neutral_att_flag.png" />
     <Content Include="Assets\Images\neutral_flag.png" />
     <Content Include="Assets\Images\noun_project.png" />
+    <Content Include="Assets\Images\orange.png" />
+    <Content Include="Assets\Images\orange_att.png" />
+    <Content Include="Assets\Images\orange_att_flag.png" />
+    <Content Include="Assets\Images\orange_flag.png" />
     <Content Include="Assets\Images\red.png" />
     <Content Include="Assets\Images\red_att.png" />
     <Content Include="Assets\Images\red_att_flag.png" />
@@ -154,10 +158,6 @@
     <Content Include="Assets\Images\violett_att.png" />
     <Content Include="Assets\Images\violett_att_flag.png" />
     <Content Include="Assets\Images\violett_flag.png" />
-    <Content Include="Assets\Images\yellow.png" />
-    <Content Include="Assets\Images\yellow_att.png" />
-    <Content Include="Assets\Images\yellow_att_flag.png" />
-    <Content Include="Assets\Images\yellow_flag.png" />
     <Content Include="Assets\Square310x310Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
     <Content Include="Assets\Square71x71Logo.scale-200.png" />

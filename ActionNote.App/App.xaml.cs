@@ -35,7 +35,6 @@ namespace ActionNote.App
         private INoteDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
-        private IStatusBarService _statusBarService;
 
         private Localizer _localizer;
 
@@ -68,31 +67,11 @@ namespace ActionNote.App
             _localizer = new Localizer();
 
             // setup theme colors (mainly for title bar)
-            ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black);
-            ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White);
-
-            _statusBarService = Injector.Get<IStatusBarService>();
-            UpdateStatusBarTheme();
+            ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black, Colors.White, Color.FromArgb(255, 31, 31, 31));
+            ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White, Colors.Black, Color.FromArgb(255, 230, 230, 230));
 
             _speechService = Injector.Get<ISpeechService>();
             //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // TODO: caused app not starting on phone (after Cortana setup !?!)
-        }
-
-        public void UpdateStatusBarTheme()
-        {
-            if (_statusBarService.IsSupported)
-            {
-                if (ApplicationTheme == Windows.UI.Xaml.ApplicationTheme.Light)
-                {
-                    _statusBarService.BackgroundColor = Color.FromArgb(255, 230, 230, 230);
-                    _statusBarService.ForegroundColor = Colors.Black;
-                }
-                else
-                {
-                    _statusBarService.BackgroundColor = Color.FromArgb(255, 31, 31, 31);
-                    _statusBarService.ForegroundColor = Colors.White;
-                }
-            }
         }
 
         public override void OnResuming(object args)
