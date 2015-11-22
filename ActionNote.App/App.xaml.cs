@@ -82,14 +82,14 @@ namespace ActionNote.App
         {
             if (_statusBarService.IsSupported)
             {
-                if (PageTheme == Windows.UI.Xaml.ElementTheme.Light)
+                if (ApplicationTheme == Windows.UI.Xaml.ApplicationTheme.Light)
                 {
                     _statusBarService.BackgroundColor = Color.FromArgb(255, 230, 230, 230);
                     _statusBarService.ForegroundColor = Colors.Black;
                 }
                 else
                 {
-                    _statusBarService.BackgroundColor = (Color)Current.Resources["SystemChromeMediumColor"];
+                    _statusBarService.BackgroundColor = Color.FromArgb(255, 31, 31, 31);
                     _statusBarService.ForegroundColor = Colors.White;
                 }
             }

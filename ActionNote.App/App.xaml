@@ -5,8 +5,7 @@
     xmlns:local="using:ActionNote.App"
     xmlns:uwpcCommon="using:UWPCore.Framework.Common"
     xmlns:uwpcConverters="using:UWPCore.Framework.Converters"
-    xmlns:commonConverters="using:ActionNote.Common.Converters"
-    RequestedTheme="Dark">
+    xmlns:commonConverters="using:ActionNote.Common.Converters">
 
     <uwpcCommon:UniversalApp.Resources>
         <ResourceDictionary>

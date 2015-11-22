@@ -78,8 +78,8 @@ namespace ActionNote.Common.Helpers
                 default:
                     if (useTheming)
                     {
-                        var theme = UniversalApp.Current.PageTheme;
-                        if (theme == ElementTheme.Light)
+                        var theme = UniversalApp.Current.ApplicationTheme;
+                        if (theme == ApplicationTheme.Light)
                             color = Colors.Black;
                         else
                             color = Colors.White;
