@@ -81,8 +81,16 @@ namespace ActionNote.Tasks
                                 await _dataService.Notes.Save(noteItem);
                                 _dataService.FlagNotesHaveChangedInBackground();
 
-                                // add it into the action center at the beginning
-                                _actionCenterService.AddToTop(noteItem); // TODO: not at the top, when we have category ordering!
+                                if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
+                                {
+                                    // add it into the action center at the beginning when we order for date.
+                                    await _actionCenterService.AddToTop(noteItem);
+                                }
+                                else
+                                {
+                                    // refresh all, because new note could be not at the top of the list
+                                    await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
+                                }
                             }
                         }
                     }

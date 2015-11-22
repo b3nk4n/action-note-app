@@ -13,7 +13,7 @@ namespace ActionNote.Common.Services
         /// Adds a new notification at the top, even when there is the quick notes already.
         /// </summary>
         /// <param name="noteItem">The note item to add.</param>
-        void AddToTop(NoteItem noteItem);
+        Task AddToTop(NoteItem noteItem);
 
         /// <summary>
         /// Clears the action center history.

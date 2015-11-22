@@ -32,17 +32,22 @@ namespace ActionNote.Common.Services
             _toastService = toastService;
         }
 
-        public void AddToTop(NoteItem noteItem)
+        public async Task AddToTop(NoteItem noteItem)
         {
             var containsQuickNotes = ContainsQuickNotes();
 
             if (containsQuickNotes)
                 RemoveQuickNotes();
 
+            await Task.Delay(10);
+
             AddNotification(noteItem);
 
             if (containsQuickNotes)
+            {
+                await Task.Delay(10);
                 AddQuickNotes();
+            }  
         }
 
         public void Clear()
