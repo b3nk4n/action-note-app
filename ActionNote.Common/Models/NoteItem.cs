@@ -6,6 +6,7 @@ using UWPCore.Framework.Storage;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using UWPCore.Framework.Common;
+using System.Runtime.Serialization;
 
 namespace ActionNote.Common.Models
 {
@@ -20,32 +21,38 @@ namespace ActionNote.Common.Models
         Neutral
     }
 
+    [DataContract]
     public class NoteItem : BindableBase, IRepositoryItem<string>
     {
+        [DataMember(Name = "_id")]
         public string Id {
             get { return _id; }
             set { Set(ref _id, value); }
         }
         private string _id;
 
+        [DataMember(Name = "title")]
         public string Title {
             get { return _title; }
             set { Set(ref _title, value); }
         }
         private string _title;
 
+        [DataMember(Name = "content")]
         public string Content {
             get { return _content; }
             set { Set(ref _content, value); }
         }
         private string _content;
 
+        [DataMember(Name = "color")]
         public ColorCategory Color {
             get { return _color; }
             set { Set(ref _color, value);  }
         }
         private ColorCategory _color = ColorCategory.Neutral;
 
+        [DataMember(Name = "flag")]
         public bool IsImportant
         {
             get { return _isImportant; }
@@ -53,6 +60,7 @@ namespace ActionNote.Common.Models
         }
         private bool _isImportant;
 
+        [DataMember(Name = "date")]
         public DateTimeOffset ChangedDate
         {
             get { return _changedDate; }
@@ -60,6 +68,7 @@ namespace ActionNote.Common.Models
         }
         private DateTimeOffset _changedDate;
 
+        [DataMember(Name = "file")]
         public string AttachementFile
         {
             get { return _attachementFile; }
