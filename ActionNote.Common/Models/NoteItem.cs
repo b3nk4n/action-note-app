@@ -31,6 +31,15 @@ namespace ActionNote.Common.Models
         }
         private string _id;
 
+        /// <summary>
+        /// Short ID is used internally to 
+        /// </summary>
+        [IgnoreDataMember]
+        public string ShortId
+        {
+            get { return _id.Substring(0, 16); }
+        }
+
         [DataMember(Name = "title")]
         public string Title {
             get { return _title; }
@@ -110,14 +119,9 @@ namespace ActionNote.Common.Models
         /// <returns></returns>
         private string GenerateGuid()
         {
-            // 598723c4-fa3e-448e-b3c0-5e43d389ac25 ==> 598723c4fa3e448e
-            //var guid = Guid.NewGuid().ToString();
-            //guid = guid.Substring(0, 18);
-            //guid = guid.Replace("-", "");
-            //return guid;
-            // trimmed, because schedules tag is shorter than toast-id :(
+            // 598723c4-fa3e-448e-b3c0-5e43d389ac25 ==> 598723c4fa3e448eb3c05e43 (24 digits for mongodb)
             var guid = Guid.NewGuid().ToString();
-            guid = guid.Substring(0, 13);
+            guid = guid.Substring(0, 28);
             guid = guid.Replace("-", "");
             return guid;
         }

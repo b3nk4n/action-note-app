@@ -15,6 +15,7 @@ namespace ActionNote.Common.Modules
 
             // repositories
             Bind<INotesRepository>().To<NotesRepository>();
+            Bind<IUnsyncedRepository>().To<UnsyncedRepository>();
         }
     }
 }

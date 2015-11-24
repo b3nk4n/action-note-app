@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UWPCore.Framework.Data;
-using UWPCore.Framework.IoC;
 using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Models
@@ -16,11 +16,11 @@ namespace ActionNote.Common.Models
 
         public string BaseFolder { private get; set; }
 
-        public NotesRepository()
+        [Inject]
+        public NotesRepository(ILocalStorageService storageService, ISerializationService serializationService)
         {
-            IInjector injector = Injector.Instance;
-            _localStorageService = injector.Get<ILocalStorageService>();
-            _serializationService = injector.Get<ISerializationService>();
+            _localStorageService = storageService;
+            _serializationService = serializationService;
         }
 
         public override void Update(NoteItem prototype)
@@ -42,8 +42,7 @@ namespace ActionNote.Common.Models
                 entity.Color = prototype.Color;
                 entity.AttachementFile = prototype.AttachementFile;
                 entity.IsImportant = prototype.IsImportant;
-
-                entity.ChangedDate = DateTimeOffset.Now;
+                entity.ChangedDate = prototype.ChangedDate;
             }
         }
 
@@ -57,10 +56,8 @@ namespace ActionNote.Common.Models
             return true;
         }
 
-        public async Task<bool> Save(NoteItem item) // TODO: detect to save only when a note has changed?
+        public async Task<bool> Save(NoteItem item) // TODO: detect to save only when a note has changed? Reminder: DateTime.Now is set outside of here...
         {
-            item.ChangedDate = DateTimeOffset.Now;
-
             var jsonData = _serializationService.SerializeJson(item);
             var filePath = BaseFolder + item.Id;
             await _localStorageService.WriteFile(filePath, jsonData);

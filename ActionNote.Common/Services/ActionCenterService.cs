@@ -85,7 +85,7 @@ namespace ActionNote.Common.Services
             var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
             toastNotification.SuppressPopup = true;
             toastNotification.Group = GROUP_NOTE;
-            toastNotification.Tag = note.Id; // just to find the notificication within this service
+            toastNotification.Tag = note.ShortId; // just to find the notificication within this service,.shortid because it has a limited size
             _toastService.Show(toastNotification);
         }
 
@@ -101,7 +101,7 @@ namespace ActionNote.Common.Services
             var quickNoteToastNotification = _toastService.AdaptiveFactory.Create(quickNoteToastModel);
             quickNoteToastNotification.SuppressPopup = true;
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
-            quickNoteToastNotification.Tag = "quickNote"; // just to find the notificication within this service
+            quickNoteToastNotification.Tag = "quickNote";
             _toastService.Show(quickNoteToastNotification);
         }
 
@@ -116,7 +116,7 @@ namespace ActionNote.Common.Services
             var idsToRemove = new List<string>();
             foreach (var item in noteItems)
             {
-                var toastItemsInHistory = _toastService.GetByTagFromHistory(item.Id);
+                var toastItemsInHistory = _toastService.GetByTagFromHistory(item.ShortId);
                 if (toastItemsInHistory == null || toastItemsInHistory.Count() == 0)
                     idsToRemove.Add(item.Id);
             }
@@ -271,6 +271,27 @@ namespace ActionNote.Common.Services
             (toastModel.Actions.Children[0] as AdaptiveInput).PlaceHolderContent = contentText;
 
             return toastModel;
+        }
+
+        /// <summary>
+        /// Gets the full ID of a short ID by expection everything is unique.
+        /// Workaround is needed because Action Center does not support full ID lengths.
+        /// </summary>
+        /// <param name="ids">The ID list.</param>
+        /// <param name="shortId">The short ID to find.</param>
+        /// <returns></returns>
+        public static string GetIdFromShortId(IList<string> ids, string shortId)
+        {
+            if (ids == null)
+                return null;
+
+            foreach (var id in ids)
+            {
+                if (id.StartsWith(shortId))
+                    return id;
+            }
+
+            return null;
         }
     }
 }

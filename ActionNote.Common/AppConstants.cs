@@ -12,6 +12,12 @@ namespace ActionNote.Common
         /// </summary>
         public const string ATTACHEMENT_BASE_PATH = "attachements/";
 
+        // local
+        //public const string SERVER_BASE_PATH = "http://localhost:64302/";
+
+        // productive
+        public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
+
         /// <summary>
         /// The ID navigation parameter.
         /// </summary>

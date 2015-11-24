@@ -26,7 +26,8 @@ namespace ActionNote.App.ViewModels
 
         private Localizer _localizer = new Localizer();
 
-        public ObservableCollection<NoteItem> NoteItems {
+        public ObservableCollection<NoteItem> NoteItems
+        {
             get;
             private set;
         } = new ObservableCollection<NoteItem>();
@@ -51,11 +52,11 @@ namespace ActionNote.App.ViewModels
                     return;
 
                 // unpin all tiles
-                foreach (var noteItem in _dataService.Notes.GetAll())
+                foreach (var noteItem in await _dataService.GetAllNotes())
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
 
-                    _dataService.MoveToArchiv(noteItem);
+                    await _dataService.MoveToArchivAsync(noteItem);
                 }
                 NoteItems.Clear();
 
@@ -63,7 +64,8 @@ namespace ActionNote.App.ViewModels
             },
             () =>
             {
-                return _dataService.Notes.Count > 0;
+                //return (await _dataService.NotesCount()) > 0;
+                return true; // TODO: count without async?
             });
 
             AddCommand = new DelegateCommand(() =>
@@ -80,11 +82,11 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
-            RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                _tilePinService.UnpinAsync(noteItem.Id);
+                await _tilePinService.UnpinAsync(noteItem.Id);
 
-                _dataService.MoveToArchiv(noteItem);
+                await _dataService.MoveToArchivAsync(noteItem);
                 NoteItems.Remove(noteItem);
 
                 SelectedNote = null;
@@ -145,6 +147,30 @@ namespace ActionNote.App.ViewModels
             {
                 return NoteItems.Count > 0;
             });
+
+            SyncCommand = new DelegateCommand(async () =>
+            {
+                // sync notes
+                if (await _dataService.SyncNotesAsync())
+                {
+                    await ReloadDataAsync();
+                }
+                else
+                {
+                    // TODO: Dialog: sync not possible. check internet connection
+                }
+
+                // test: download note image:
+                //await _dataService.DownloadAttachement(new NoteItem() { AttachementFile = "test.jpg" });
+
+                // test: upload image:
+                //if (SelectedNote != null)
+                //    await _dataService.UploadAttachement(SelectedNote);
+            },
+            () =>
+            {
+                return true;
+            });
         }
 
         public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -160,7 +186,7 @@ namespace ActionNote.App.ViewModels
             await _dataService.LoadNotesAsync();
 
             NoteItems.Clear();
-            var data = _dataService.Notes.GetAll(); // TODO: reload all from disk?
+            var data = await _dataService.GetAllNotes(); // TODO: reload all from disk?
 
             if (data != null)
             {
@@ -209,6 +235,8 @@ namespace ActionNote.App.ViewModels
 
         public ICommand ShareCommand { get; private set; }
 
-        public ICommand SortCommand { get; private set;}
+        public ICommand SortCommand { get; private set; }
+
+        public ICommand SyncCommand { get; private set; }
     }
 }

@@ -83,11 +83,11 @@ namespace ActionNote.App.ViewModels
                 GoBackToMainPageWithoutBackEvent();
             });
 
-            RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                _dataService.MoveToArchiv(noteItem);
+                await _dataService.MoveToArchivAsync(noteItem);
 
-                _tilePinService.UnpinAsync(noteItem.Id);
+                await _tilePinService.UnpinAsync(noteItem.Id);
 
                 GoBackToMainPageWithoutBackEvent();
             },
@@ -199,22 +199,22 @@ namespace ActionNote.App.ViewModels
                 noteItem.Title = _commonLocalizer.Get("QuickNote");
             }
 
-            if (_dataService.Notes.Contains(noteItem.Id))
+            if (await _dataService.ContainsNote(noteItem.Id))
             {
-                _dataService.Notes.Update(noteItem);
+                //_dataService.Notes.Update(noteItem);
+                await _dataService.UpdateNoteAsync(noteItem);
             }
             else
             {
-                _dataService.Notes.Add(noteItem);
+                //_dataService.Notes.Add(noteItem);
+                await _dataService.AddNoteAsync(noteItem);
             }
-
-            await _dataService.Notes.Save(noteItem);
 
             // update tile in case it was pinned
             await _tilePinService.UpdateAsync(noteItem);
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
@@ -227,7 +227,7 @@ namespace ActionNote.App.ViewModels
                 {
                     string noteId = stringParam.Remove(0, AppConstants.PARAM_ID.Length);
 
-                    var note = _dataService.Notes.Get(noteId);
+                    var note = await _dataService.GetNote(noteId);
 
                     if (note != null)
                     {

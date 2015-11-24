@@ -115,10 +115,16 @@
     <Compile Include="Helpers\ColorCategoryConverter.cs" />
     <Compile Include="Helpers\NoteUtils.cs" />
     <Compile Include="Models\INotesRepository.cs" />
+    <Compile Include="Models\IUnsyncedRepository.cs" />
     <Compile Include="Models\NoteItem.cs" />
     <Compile Include="Models\NotesRepository.cs" />
+    <Compile Include="Models\UnsyncedItem.cs" />
+    <Compile Include="Models\UnsyncedRepository.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Communication\SyncDataRequest.cs" />
+    <Compile Include="Services\Communication\SyncDataRequestItem.cs" />
+    <Compile Include="Services\Communication\SyncDataResponse.cs" />
     <Compile Include="Services\INoteDataService.cs" />
     <Compile Include="Services\ITilePinService.cs" />
     <Compile Include="Services\IActionCenterService.cs" />

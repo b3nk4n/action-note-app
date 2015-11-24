@@ -18,7 +18,6 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
-using UWPCore.Framework.Devices;
 
 namespace ActionNote.App
 {
@@ -109,7 +108,15 @@ namespace ActionNote.App
                 else
                 {
                     pageType = typeof(EditPage);
-                    parameter = AppConstants.PARAM_ID + toastArgs.Argument;
+
+                    // workaround (because of short key)
+                    var noteIds = await _dataService.GetAllNoteIds();
+
+                    var id = ActionCenterService.GetIdFromShortId(noteIds, toastArgs.Argument);
+                    if (id != null)
+                    {
+                        parameter = AppConstants.PARAM_ID + id;
+                    }
                 }
             }
             else if (args.Kind == ActivationKind.Launch)
@@ -187,7 +194,11 @@ namespace ActionNote.App
             await base.OnSuspendingAsync(e);
 
             if (AppSettings.SyncWithActionCenter.Value)
-                await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
+            {
+                var notes = await _dataService.GetAllNotes();
+                if (notes != null)
+                    await _actionCenterService.RefreshAsync(notes);
+            }
 
             await _dataService.CleanUpAttachementFilesAsync();
         }

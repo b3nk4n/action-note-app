@@ -39,31 +39,36 @@ namespace ActionNote.Tasks
                 details.ChangeType == ToastHistoryChangedType.Removed) // Remark: ToastHistoryChangedType.Cleared seems not to be supported up to now?
             {
                 // load data
-                await _dataService.Notes.Load();
+                //await _dataService.Notes.Load();
 
                 if (AppSettings.AllowRemoveNotes.Value)
                 {
-                    var diff = _actionCenterService.DiffWithNotesInActionCenter(_dataService.Notes.GetAll());
+                    var notes = await _dataService.GetAllNotes();
 
-                    foreach (var noteId in diff)
+                    if (notes != null)
                     {
-                        await _tilePinService.UnpinAsync(noteId);
-                        _dataService.MoveToArchiv(_dataService.Notes.Get(noteId));
-                        _dataService.FlagNotesHaveChangedInBackground();
-                        _dataService.FlagArchiveHasChangedInBackground();
-                    }
+                        var diff = _actionCenterService.DiffWithNotesInActionCenter(notes);
 
-                    if (AppSettings.QuickNotesEnabled.Value &&
-                        !_actionCenterService.ContainsQuickNotes())
-                    {
-                        // add quick notes when it was removed by klicking on it or using it.
-                        _actionCenterService.AddQuickNotes();
+                        foreach (var noteId in diff)
+                        {
+                            await _tilePinService.UnpinAsync(noteId);
+                            await _dataService.MoveToArchivAsync(await _dataService.GetNote(noteId));
+                            _dataService.FlagNotesHaveChangedInBackground();
+                            _dataService.FlagArchiveHasChangedInBackground();
+                        }
+
+                        if (AppSettings.QuickNotesEnabled.Value &&
+                            !_actionCenterService.ContainsQuickNotes())
+                        {
+                            // add quick notes when it was removed by klicking on it or using it.
+                            _actionCenterService.AddQuickNotes();
+                        }
                     }
                 }
                 else
                 {
                     // only refresh when there has been a change (because the bgtask is called multiple times when we do multiple remove operations)
-                    if (_actionCenterService.NotesCount == _dataService.Notes.Count)
+                    if (_actionCenterService.NotesCount == await _dataService.NotesCount())
                     {
                         // when only the quick notes was removed, just re-add it
                         if (AppSettings.QuickNotesEnabled.Value && !_actionCenterService.ContainsQuickNotes())
@@ -73,7 +78,10 @@ namespace ActionNote.Tasks
                     }
                     else
                     {
-                        await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
+                        var notes = await _dataService.GetAllNotes();
+                        
+                        if (notes != null)
+                            await _actionCenterService.RefreshAsync(notes);
                     }
                 }
             }

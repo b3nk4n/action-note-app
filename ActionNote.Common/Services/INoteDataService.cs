@@ -1,4 +1,5 @@
 ﻿using ActionNote.Common.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ActionNote.Common.Services
@@ -10,19 +11,31 @@ namespace ActionNote.Common.Services
     {
         /// <summary>
         /// Gets the notes.
+        /// Indirect access here, bacause the notes are synched.
         /// </summary>
-        INotesRepository Notes { get; }
+        //INotesRepository Notes { get; }
 
         /// <summary>
         /// Gets the notes archiv.
+        /// Direct access here, because the archive is not synced.
         /// </summary>
         INotesRepository Archiv { get; }
+
+        Task<IList<string>> GetAllNoteIds();
+
+        Task<IList<NoteItem>> GetAllNotes();
+
+        Task<int> NotesCount();
+
+        Task<NoteItem> GetNote(string id);
+
+        Task<bool> ContainsNote(string id);
 
         /// <summary>
         /// Moves the note to the archive.
         /// </summary>
         /// <param name="noteItem">The note item to delete.</param>
-        void MoveToArchiv(NoteItem noteItem);
+        Task<bool> MoveToArchivAsync(NoteItem noteItem);
 
         /// <summary>
         /// Cleans up the unreferences attachement files.
@@ -36,5 +49,15 @@ namespace ActionNote.Common.Services
         void FlagNotesHaveChangedInBackground();
 
         void FlagArchiveHasChangedInBackground();
+
+        Task<bool> AddNoteAsync(NoteItem item);
+
+        Task<bool> UpdateNoteAsync(NoteItem item);
+
+        Task<bool> SyncNotesAsync();
+
+        Task<bool> UploadAttachement(NoteItem noteItem);
+
+        Task<bool> DownloadAttachement(NoteItem noteItem);
     }
 }

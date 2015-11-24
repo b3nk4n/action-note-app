@@ -33,7 +33,7 @@ namespace ActionNote.Tasks
                 AppSettings.SyncWithActionCenter.Value)
             {
                 // load data
-                await _dataService.Notes.Load();
+                //await _dataService.Notes.Load();
 
                 if (details.Argument == "quickNote")
                 {
@@ -77,8 +77,7 @@ namespace ActionNote.Tasks
                                 !string.IsNullOrWhiteSpace(content))
                             {
                                 var noteItem = new NoteItem(title, content);
-                                _dataService.Notes.Add(noteItem);
-                                await _dataService.Notes.Save(noteItem);
+                                await _dataService.AddNoteAsync(noteItem);
                                 _dataService.FlagNotesHaveChangedInBackground();
 
                                 if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
@@ -89,7 +88,9 @@ namespace ActionNote.Tasks
                                 else
                                 {
                                     // refresh all, because new note could be not at the top of the list
-                                    await _actionCenterService.RefreshAsync(_dataService.Notes.GetAll());
+                                    var notes = await _dataService.GetAllNotes();
+                                    if (notes != null)
+                                        await _actionCenterService.RefreshAsync(notes);
                                 }
                             }
                         }
