@@ -234,8 +234,10 @@
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
 
-                        <Image Source="{Binding AttachementImage}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />
+                        <!--<Image Source="{Binding AttachementImage}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />-->
                     </StackPanel>
+                    
+                    <Image Source="{Binding SelectedAttachementImageOrReload}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />
 
                     <Grid>
                         <Grid.ColumnDefinitions>

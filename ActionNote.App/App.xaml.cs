@@ -48,9 +48,9 @@ namespace ActionNote.App
 
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
             _actionCenterService = Injector.Get<IActionCenterService>();
-            _dataService = Injector.Get<INoteDataService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
+            _dataService = Injector.Get<INoteDataService>();
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
@@ -76,6 +76,9 @@ namespace ActionNote.App
         public override void OnResuming(object args)
         {
             base.OnResuming(args);
+
+            _actionCenterService.StartTemporaryRemoveBlocking(5);
+            _actionCenterService.Clear();
 
             // refresh the page, so that the OnNavigatedTo event is fired on the current page.
             NavigationService.Refresh();

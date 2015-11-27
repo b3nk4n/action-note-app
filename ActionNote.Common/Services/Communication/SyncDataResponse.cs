@@ -15,5 +15,8 @@ namespace ActionNote.Common.Services.Communication
 
         [DataMember(Name = "deleted")]
         public IList<NoteItem> Deleted { get; set; } = new List<NoteItem>();
+
+        [DataMember(Name = "missingIds")]
+        public IList<string> MissingIds { get; set; } = new List<string>();
     }
 }

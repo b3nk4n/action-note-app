@@ -13,6 +13,7 @@ using ActionNote.Common.Helpers;
 using UWPCore.Framework.UI;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.App.ViewModels
 {
@@ -23,6 +24,7 @@ namespace ActionNote.App.ViewModels
         private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
         private IDialogService _dialogService;
+        private IStatusBarService _statusBarService;
 
         private Localizer _localizer = new Localizer();
 
@@ -39,6 +41,7 @@ namespace ActionNote.App.ViewModels
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
             _tilePinService = Injector.Get<ITilePinService>();
             _dialogService = Injector.Get<IDialogService>();
+            _statusBarService = Injector.Get<IStatusBarService>();
 
             ClearCommand = new DelegateCommand(async () =>
             {
@@ -150,6 +153,8 @@ namespace ActionNote.App.ViewModels
 
             SyncCommand = new DelegateCommand(async () =>
             {
+                await _statusBarService.StartProgressAsync("Syncing...", true); // TODO: translate
+
                 // sync notes
                 if (await _dataService.SyncNotesAsync())
                 {
@@ -159,6 +164,8 @@ namespace ActionNote.App.ViewModels
                 {
                     // TODO: Dialog: sync not possible. check internet connection
                 }
+
+                await _statusBarService.StopProgressAsync();
 
                 // test: download note image:
                 //await _dataService.DownloadAttachement(new NoteItem() { AttachementFile = "test.jpg" });

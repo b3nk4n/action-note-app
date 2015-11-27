@@ -13,10 +13,15 @@ namespace ActionNote.Common
         public const string ATTACHEMENT_BASE_PATH = "attachements/";
 
         // local
-        //public const string SERVER_BASE_PATH = "http://localhost:64302/";
+        public const string SERVER_BASE_PATH = "http://localhost:64302/";
 
         // productive
-        public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
+        //public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
+
+        /// <summary>
+        /// The pro version key.
+        /// </summary>
+        public const string IAP_PRO_VERSION = "actionnote_pro";
 
         /// <summary>
         /// The ID navigation parameter.

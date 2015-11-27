@@ -6,6 +6,10 @@ using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common.Models
 {
+    /// <summary>
+    /// Remember: We always store unsynced changes, even in the offline version. So that we know which items we have to upload
+    ///           after upgrading to the pro version.
+    /// </summary>
     public class UnsyncedRepository : RepositoryBase<UnsyncedItem, string>, IUnsyncedRepository
     {
         public const string DATA_FILE = "unsynced.data";

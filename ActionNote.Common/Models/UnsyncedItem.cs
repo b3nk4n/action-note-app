@@ -5,8 +5,6 @@ namespace ActionNote.Common.Models
 {
     public enum UnsyncedType
     {
-        Added,
-        Updated,
         Deleted,
         FileUpload,
         FileDownload

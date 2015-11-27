@@ -8,7 +8,7 @@ using UWPCore.Framework.Data;
 using UWPCore.Framework.Logging;
 using UWPCore.Framework.Networking;
 using UWPCore.Framework.Storage;
-
+using UWPCore.Framework.Store;
 using Windows.Web.Http;
 
 namespace ActionNote.Common.Services
@@ -29,13 +29,14 @@ namespace ActionNote.Common.Services
         private IHttpService _httpService;
         private ISerializationService _serializationService;
         private INetworkInfoService _networkInfoService;
+        private ILicenseService _licenseService;
 
         private StoredObjectBase<bool> _notesChangedInBackgroundFlag = new LocalObject<bool>("_notesChangedInBackground_", false);
         private StoredObjectBase<bool> _archiveChangedInBackgroundFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
 
         [Inject]
         public NoteDataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
-            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService)
+            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ILicenseService licenseService)
         {
             Notes = notesRepository;
             Notes.BaseFolder = "data/";
@@ -48,6 +49,7 @@ namespace ActionNote.Common.Services
             _httpService = httpService;
             _serializationService = serializationService;
             _networkInfoService = networkInfoService;
+            _licenseService = licenseService;
         }
 
         public async Task<IList<NoteItem>> GetAllNotes()
@@ -108,7 +110,8 @@ namespace ActionNote.Common.Services
             {
                 Notes.Add(item);
 
-                if (_networkInfoService.HasInternet)
+                if (IsSynchronizationActive &&
+                    _networkInfoService.HasInternet)
                 {
                     var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/add/XXXXXXXXXX"), item, DEFAULT_TIMEOUT);
 
@@ -120,9 +123,13 @@ namespace ActionNote.Common.Services
                 }
 
                 // sync error handling
-                var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Added);
-                Unsynced.Add(unsyncedItem);
-                await Unsynced.Save(unsyncedItem);
+                //await Unsynced.Load(); // ensure loaded
+                //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Added);
+                //if (Unsynced.Contains(item.Id))
+                //    Unsynced.Update(unsyncedItem);
+                //else
+                //    Unsynced.Add(unsyncedItem);    
+                //await Unsynced.Save(unsyncedItem);
             }
             
             return false;
@@ -141,30 +148,53 @@ namespace ActionNote.Common.Services
             {
                 Notes.Update(item);
 
-                if (_networkInfoService.HasInternet)
+                if (IsSynchronizationActive &&
+                    _networkInfoService.HasInternet)
                 {
                     var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/update/XXXXXXXXXX"), item, DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
                     {
+                        var jsonResponse = await res.Content.ReadAsStringAsync();
+                        var serverResponse = _serializationService.DeserializeJson<ServerResponse>(jsonResponse);
+
+                        if (serverResponse != null)
+                        {
+                            if (serverResponse.Message == ServerResponse.DELETED)
+                            {
+                                // TODO: show dialog: data has been deleted on other device. Device might be out of sync
+
+                                await MoveToArchivInternalAsync(item);
+                                return false;
+                            }
+                        }
+
                         return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
 
                 // sync error handling
-                await Unsynced.Load(); // ensure loaded
-                var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Updated);
-                Unsynced.Add(unsyncedItem);
-                await Unsynced.Save(unsyncedItem);
+                //await Unsynced.Load(); // ensure loaded
+                //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Updated);
+                //if (Unsynced.Contains(item.Id))
+                //    Unsynced.Update(unsyncedItem);
+                //else
+                //    Unsynced.Add(unsyncedItem);
+                //await Unsynced.Save(unsyncedItem);
             }
             
-            return false;
+            return true;
         }
 
         public async Task<bool> SyncNotesAsync()
         {
-            if (!_networkInfoService.HasInternet)
+            if (!IsSynchronizationActive ||
+                !_networkInfoService.HasInternet)
             {
                 // no error handling needed here
                 return false;
@@ -220,6 +250,11 @@ namespace ActionNote.Common.Services
                             await MoveToArchivInternalAsync(note);
                         }
                     }
+
+                    foreach (var note in syncDataResult.MissingIds)
+                    {
+                        // TODO: upload missing notes.
+                    }
                 }
                 return true;
             }
@@ -234,7 +269,8 @@ namespace ActionNote.Common.Services
             if (!item.HasAttachement)
                 return true;
 
-            if (_networkInfoService.HasInternet)
+            if (IsSynchronizationActive &&
+                _networkInfoService.HasInternet)
             {
                 string filePath = AppConstants.ATTACHEMENT_BASE_PATH + item.AttachementFile;
                 var file = await _localStorageService.GetFileAsync(filePath);
@@ -256,17 +292,21 @@ namespace ActionNote.Common.Services
             // sync error handling
             await Unsynced.Load(); // ensure loaded
             var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
-            Unsynced.Add(unsyncedItem);
+            if (Unsynced.Contains(item.Id))
+                Unsynced.Update(unsyncedItem);
+            else
+                Unsynced.Add(unsyncedItem);
             await Unsynced.Save(unsyncedItem);
             return false;
         }
 
         public async Task<bool> DownloadAttachement(NoteItem item)
         {
-            if (!item.HasAttachement)
+            if (!IsSynchronizationActive || // do not create a snyc log here, because it can even be downloaded later
+                !item.HasAttachement)
                 return true;
 
-            if (_networkInfoService.HasInternet)
+            if ( _networkInfoService.HasInternet)
             {
                 var res = await _httpService.GetAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/XXXXXXXXXX/" + item.AttachementFile), 5000);
 
@@ -286,7 +326,10 @@ namespace ActionNote.Common.Services
             // TODO: no sync error handling needed, in case we would load as needed? think about what is best
             await Unsynced.Load(); // ensure loaded
             var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
-            Unsynced.Add(unsyncedItem);
+            if (Unsynced.Contains(item.Id))
+                Unsynced.Update(unsyncedItem);
+            else
+                Unsynced.Add(unsyncedItem);
             await Unsynced.Save(unsyncedItem);
             return false;
         }
@@ -295,21 +338,27 @@ namespace ActionNote.Common.Services
         {
             if (await MoveToArchivInternalAsync(item))
             {
-                var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/markdelete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
+                if (IsSynchronizationActive)
+                {
+                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/markdelete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
 
-                if (res != null &&
-                    res.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    // sync error handling
-                    await Unsynced.Load(); // ensure loaded
-                    var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Deleted);
-                    Unsynced.Add(unsyncedItem);
-                    await Unsynced.Save(unsyncedItem);
-                    return false;
+                    if (res != null &&
+                        res.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        // sync error handling
+                        await Unsynced.Load(); // ensure loaded
+                        var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Deleted);
+                        if (Unsynced.Contains(item.Id))
+                            Unsynced.Update(unsyncedItem);
+                        else
+                            Unsynced.Add(unsyncedItem);
+                        await Unsynced.Save(unsyncedItem);
+                        return false;
+                    }
                 }
             }
 
@@ -327,10 +376,17 @@ namespace ActionNote.Common.Services
             if (!Archiv.HasLoaded)
                 await Archiv.Load();
 
+            // update the timestamp
+            item.ChangedDate = DateTimeOffset.Now;
+
             if (await Archiv.Save(item))
             {
                 Notes.Remove(item);
-                Archiv.Add(item);
+
+                if (Archiv.Contains(item.Id))
+                    Archiv.Update(item);
+                else
+                    Archiv.Add(item);
                 return true;
             }
             
@@ -361,6 +417,10 @@ namespace ActionNote.Common.Services
                     referencedAttachements.Add(note.AttachementFile);
             }
 
+            // ensure archiv data has loaded
+            if (!Unsynced.HasLoaded)
+                await Archiv.Load();
+
             var attachementFiles = await _localStorageService.GetFilesAsync(AppConstants.ATTACHEMENT_BASE_PATH);
 
             if (attachementFiles != null)
@@ -372,6 +432,10 @@ namespace ActionNote.Common.Services
                         try
                         {
                             await attachementFile.DeleteAsync();
+
+                            // remove unsynced file
+                            if (Unsynced.Contains(attachementFile.Name))
+                                Unsynced.Remove(attachementFile.Name);
                         }
                         catch (Exception) { }
                     }
@@ -421,6 +485,15 @@ namespace ActionNote.Common.Services
         public void FlagArchiveHasChangedInBackground()
         {
             _archiveChangedInBackgroundFlag.Value = true;
+        }
+
+        public bool IsSynchronizationActive
+        {
+            get
+            {
+                //return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
+                return true; // TODO: fixme, use real inapp product
+            }
         }
     }
 }

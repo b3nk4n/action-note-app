@@ -17,6 +17,8 @@ using ActionNote.App.Views;
 using UWPCore.Framework.Graphics;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.UI;
+using Windows.UI.Xaml.Media;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.App.ViewModels
 {
@@ -36,9 +38,12 @@ namespace ActionNote.App.ViewModels
         private ITilePinService _tilePinService;
         private IGraphicsService _graphicsService;
         private IDialogService _dialogService;
+        private IStatusBarService _statusBarService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
+
+        private Random _random = new Random();
 
         /// <summary>
         /// Flag that indicates that no save operation is needed on BACK event.
@@ -62,6 +67,7 @@ namespace ActionNote.App.ViewModels
             _tilePinService = Injector.Get<ITilePinService>();
             _graphicsService = Injector.Get<IGraphicsService>();
             _dialogService = Injector.Get<IDialogService>();
+            _statusBarService = Injector.Get<IStatusBarService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -109,7 +115,7 @@ namespace ActionNote.App.ViewModels
 
                 if (file != null)
                 {
-                    var canonicalPrefix = noteItem.Id + '-';
+                    var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
                     var fileName = canonicalPrefix + file.Name;
 
                     var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
@@ -194,24 +200,35 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
-            if (string.IsNullOrWhiteSpace(noteItem.Title))
+            if (noteItem.HasContentChanged)
             {
-                noteItem.Title = _commonLocalizer.Get("QuickNote");
+                if (string.IsNullOrWhiteSpace(noteItem.Title))
+                {
+                    noteItem.Title = _commonLocalizer.Get("QuickNote");
+                }
+
+                if (await _dataService.ContainsNote(noteItem.Id))
+                {
+                    await _dataService.UpdateNoteAsync(noteItem);
+                }
+                else
+                {
+                    await _dataService.AddNoteAsync(noteItem);
+                }
             }
 
-            if (await _dataService.ContainsNote(noteItem.Id))
+            if (noteItem.HasAttachement &&
+                noteItem.HasAttachementChanged)
             {
-                //_dataService.Notes.Update(noteItem);
-                await _dataService.UpdateNoteAsync(noteItem);
+                await _statusBarService.StartProgressAsync("Uploading file...", true); // TODO: translate
+                await _dataService.UploadAttachement(noteItem);
+                await _statusBarService.StopProgressAsync();
             }
-            else
-            {
-                //_dataService.Notes.Add(noteItem);
-                await _dataService.AddNoteAsync(noteItem);
-            }
+            
 
-            // update tile in case it was pinned
-            await _tilePinService.UpdateAsync(noteItem);
+            // update tile in case it was pinned and has changed
+            if (noteItem.HasContentChanged || noteItem.HasAttachementChanged)
+                await _tilePinService.UpdateAsync(noteItem);
         }
 
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -241,7 +258,7 @@ namespace ActionNote.App.ViewModels
                     IsEditMode = false;
                 }
             }
-            
+
             if (noteToEdit == null)
             {
                 noteToEdit = new NoteItem();
@@ -265,6 +282,26 @@ namespace ActionNote.App.ViewModels
             }
 
             SelectedNote = noteToEdit;
+
+            await CheckAndDownloadAttachement();
+        }
+
+        private async Task CheckAndDownloadAttachement()
+        {
+            if (SelectedNote == null ||
+                !SelectedNote.HasAttachement)
+                return;
+
+            var attachementFile = AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile;
+            if (!await _localStorageService.ContainsFile(attachementFile))
+            {
+                await _statusBarService.StartProgressAsync("Downloading file...", true); // TODO translate
+                if (await _dataService.DownloadAttachement(SelectedNote))
+                {
+                    RaisePropertyChanged("SelectedAttachementImageOrReload");
+                }
+                await _statusBarService.StopProgressAsync();
+            }
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -319,6 +356,17 @@ namespace ActionNote.App.ViewModels
             get
             {
                 return IsEditMode ? _localizer.Get("EditTitle.Text") : _localizer.Get("NewTitle.Text");
+            }
+        }
+
+        public ImageSource SelectedAttachementImageOrReload
+        {
+            get
+            {
+                if (_selectedNote == null)
+                    return null;
+
+                return _selectedNote.AttachementImage;
             }
         }
 

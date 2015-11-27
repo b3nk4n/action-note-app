@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UWPCore.Framework.Data;
@@ -23,7 +22,7 @@ namespace ActionNote.Common.Models
             _serializationService = serializationService;
         }
 
-        public override void Update(NoteItem prototype)
+        public override void Update(NoteItem prototype) // TODO: detect note has changed?
         {
             var entity = Get(prototype.Id);
 
@@ -56,7 +55,7 @@ namespace ActionNote.Common.Models
             return true;
         }
 
-        public async Task<bool> Save(NoteItem item) // TODO: detect to save only when a note has changed? Reminder: DateTime.Now is set outside of here...
+        public async Task<bool> Save(NoteItem item) // TODO: dectect note has changed?
         {
             var jsonData = _serializationService.SerializeJson(item);
             var filePath = BaseFolder + item.Id;

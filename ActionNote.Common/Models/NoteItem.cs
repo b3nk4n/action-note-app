@@ -24,6 +24,9 @@ namespace ActionNote.Common.Models
     [DataContract]
     public class NoteItem : BindableBase, IRepositoryItem<string>
     {
+        private bool _hasContentChanged = false;
+        private bool _hasAttachementChanged = false;
+
         [DataMember(Name = "_id")]
         public string Id {
             get { return _id; }
@@ -43,21 +46,30 @@ namespace ActionNote.Common.Models
         [DataMember(Name = "title")]
         public string Title {
             get { return _title; }
-            set { Set(ref _title, value); }
+            set {
+                Set(ref _title, value);
+                _hasContentChanged = true;
+            }
         }
         private string _title;
 
         [DataMember(Name = "content")]
         public string Content {
             get { return _content; }
-            set { Set(ref _content, value); }
+            set {
+                Set(ref _content, value);
+                _hasContentChanged = true;
+            }
         }
         private string _content;
 
         [DataMember(Name = "color")]
         public ColorCategory Color {
             get { return _color; }
-            set { Set(ref _color, value);  }
+            set {
+                Set(ref _color, value);
+                _hasContentChanged = true;
+            }
         }
         private ColorCategory _color = ColorCategory.Neutral;
 
@@ -65,7 +77,10 @@ namespace ActionNote.Common.Models
         public bool IsImportant
         {
             get { return _isImportant; }
-            set { Set(ref _isImportant, value); }
+            set {
+                Set(ref _isImportant, value);
+                _hasContentChanged = true;
+            }
         }
         private bool _isImportant;
 
@@ -73,7 +88,9 @@ namespace ActionNote.Common.Models
         public DateTimeOffset ChangedDate
         {
             get { return _changedDate; }
-            set { Set(ref _changedDate, value); }
+            set {
+                Set(ref _changedDate, value);
+            }
         }
         private DateTimeOffset _changedDate;
 
@@ -84,6 +101,7 @@ namespace ActionNote.Common.Models
             set
             {
                 Set(ref _attachementFile, value);
+                _hasAttachementChanged = true;
                 RaisePropertyChanged("HasAttachement");
                 RaisePropertyChanged("AttachementImage");
             }
@@ -136,14 +154,17 @@ namespace ActionNote.Common.Models
             clone.AttachementFile = AttachementFile;
             clone.IsImportant = IsImportant;
             clone.ChangedDate = ChangedDate;
+            clone.MarkAsUnchanged();
             return clone;
         }
 
+        [IgnoreDataMember]
         public bool HasAttachement
         {
             get { return AttachementFile != null; }
         }
 
+        [IgnoreDataMember]
         public ImageSource AttachementImage
         {
             get
@@ -156,12 +177,37 @@ namespace ActionNote.Common.Models
             }
         }
 
+        [IgnoreDataMember]
         public bool IsEmtpy
         {
             get
             {
                 return string.IsNullOrWhiteSpace(Title) && string.IsNullOrWhiteSpace(Content) && !HasAttachement;
             }
+        }
+
+        [IgnoreDataMember]
+        public bool HasContentChanged
+        {
+            get
+            {
+                return _hasContentChanged;
+            }
+        }
+
+        [IgnoreDataMember]
+        public bool HasAttachementChanged
+        {
+            get
+            {
+                return _hasAttachementChanged;
+            }
+        }
+
+        public void MarkAsUnchanged()
+        {
+            _hasContentChanged = false;
+            _hasAttachementChanged = false;
         }
     }
 }
