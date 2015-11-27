@@ -39,6 +39,7 @@ namespace ActionNote.App.ViewModels
         private IGraphicsService _graphicsService;
         private IDialogService _dialogService;
         private IStatusBarService _statusBarService;
+        private IDeviceInfoService _deviceInfoService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -68,6 +69,7 @@ namespace ActionNote.App.ViewModels
             _graphicsService = Injector.Get<IGraphicsService>();
             _dialogService = Injector.Get<IDialogService>();
             _statusBarService = Injector.Get<IStatusBarService>();
+            _deviceInfoService = Injector.Get<IDeviceInfoService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -220,9 +222,9 @@ namespace ActionNote.App.ViewModels
             if (noteItem.HasAttachement &&
                 noteItem.HasAttachementChanged)
             {
-                await _statusBarService.StartProgressAsync("Uploading file...", true); // TODO: translate
+                await StartProgressAsync("Uploading file...");  // TODO: translate
                 await _dataService.UploadAttachement(noteItem);
-                await _statusBarService.StopProgressAsync();
+                await StopProgressAsync();
             }
             
 
@@ -295,12 +297,12 @@ namespace ActionNote.App.ViewModels
             var attachementFile = AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile;
             if (!await _localStorageService.ContainsFile(attachementFile))
             {
-                await _statusBarService.StartProgressAsync("Downloading file...", true); // TODO translate
+                await StartProgressAsync("Downloading file..."); // TODO translate
                 if (await _dataService.DownloadAttachement(SelectedNote))
                 {
                     RaisePropertyChanged("SelectedAttachementImageOrReload");
                 }
-                await _statusBarService.StopProgressAsync();
+                await StopProgressAsync();
             }
         }
 
@@ -327,13 +329,34 @@ namespace ActionNote.App.ViewModels
             }  
         }
 
+        private async Task StartProgressAsync(string message)
+        {
+            if (_deviceInfoService.IsWindows)
+            {
+                ShowProgress = true;
+            }
+            else
+            {
+                await _statusBarService.StartProgressAsync(message, true);
+            }
+        }
+
+        private async Task StopProgressAsync()
+        {
+            await _statusBarService.StopProgressAsync();
+            ShowProgress = false;
+        }
+
         /// <summary>
         /// Gets or sets the selected note.
         /// </summary>
         public NoteItem SelectedNote
         {
             get { return _selectedNote; }
-            set { Set(ref _selectedNote, value); }
+            set {
+                Set(ref _selectedNote, value);
+                RaisePropertyChanged("SelectedAttachementImageOrReload");
+            }
         }
         private NoteItem _selectedNote;
 
@@ -369,6 +392,19 @@ namespace ActionNote.App.ViewModels
                 return _selectedNote.AttachementImage;
             }
         }
+
+        /// <summary>
+        /// Gets or sets whether to show the progress bar (used on non-mobile only)
+        /// </summary>
+        public bool ShowProgress
+        {
+            get { return _showProgress; }
+            private set
+            {
+                Set(ref _showProgress, value);
+            }
+        }
+        private bool _showProgress;
 
         public ICommand SaveCommand { get; private set; }
 

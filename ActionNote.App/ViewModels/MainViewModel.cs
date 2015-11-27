@@ -25,6 +25,7 @@ namespace ActionNote.App.ViewModels
         private ITilePinService _tilePinService;
         private IDialogService _dialogService;
         private IStatusBarService _statusBarService;
+        private IDeviceInfoService _deviceInfoService;
 
         private Localizer _localizer = new Localizer();
 
@@ -42,6 +43,7 @@ namespace ActionNote.App.ViewModels
             _tilePinService = Injector.Get<ITilePinService>();
             _dialogService = Injector.Get<IDialogService>();
             _statusBarService = Injector.Get<IStatusBarService>();
+            _deviceInfoService = Injector.Get<IDeviceInfoService>();
 
             ClearCommand = new DelegateCommand(async () =>
             {
@@ -153,7 +155,7 @@ namespace ActionNote.App.ViewModels
 
             SyncCommand = new DelegateCommand(async () =>
             {
-                await _statusBarService.StartProgressAsync("Syncing...", true); // TODO: translate
+                await StartProgressAsync("Syncing...");  // TODO: translate
 
                 // sync notes
                 if (await _dataService.SyncNotesAsync())
@@ -165,14 +167,7 @@ namespace ActionNote.App.ViewModels
                     // TODO: Dialog: sync not possible. check internet connection
                 }
 
-                await _statusBarService.StopProgressAsync();
-
-                // test: download note image:
-                //await _dataService.DownloadAttachement(new NoteItem() { AttachementFile = "test.jpg" });
-
-                // test: upload image:
-                //if (SelectedNote != null)
-                //    await _dataService.UploadAttachement(SelectedNote);
+                await StopProgressAsync();
             },
             () =>
             {
@@ -203,6 +198,24 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        private async Task StartProgressAsync(string message)
+        {
+            if (_deviceInfoService.IsWindows)
+            {
+                ShowProgress = true;
+            }
+            else
+            {
+                await _statusBarService.StartProgressAsync(message, true);
+            }
+        }
+
+        private async Task StopProgressAsync()
+        {
+            await _statusBarService.StopProgressAsync();
+            ShowProgress = false;
+        }
+
         /// <summary>
         /// Gets or sets the selected note.
         /// </summary>
@@ -227,6 +240,19 @@ namespace ActionNote.App.ViewModels
                 return _tilePinService.Contains(SelectedNote.Id);
             }
         }
+
+        /// <summary>
+        /// Gets or sets whether to show the progress bar (used on non-mobile only)
+        /// </summary>
+        public bool ShowProgress
+        {
+            get { return _showProgress; }
+            private set
+            {
+                Set(ref _showProgress, value);
+            }
+        }
+        private bool _showProgress;
 
         public ICommand ClearCommand { get; private set; }
 

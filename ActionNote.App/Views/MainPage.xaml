@@ -79,6 +79,8 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{Binding ShowProgress, Converter={StaticResource boolToVisConv}}" />
+            
             <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="8,16" IsItemClickEnabled="True" ItemClick="NoteItemClicked"
                       ItemTemplate="{StaticResource NoteListDataTemplate}">
                 <ListView.ItemContainerStyle>

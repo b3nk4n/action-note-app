@@ -221,6 +221,8 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{Binding ShowProgress, Converter={StaticResource boolToVisConv}}" />
+            
             <ScrollViewer Padding="16,0">
                 <StackPanel Padding="0,16">
                     <StackPanel DataContext="{Binding SelectedNote}">
@@ -233,10 +235,8 @@
                         <TextBox x:Name="ContentTextBox" x:Uid="/ActionNote.Common/Resources/NoteContent" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
-
-                        <!--<Image Source="{Binding AttachementImage}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />-->
                     </StackPanel>
-                    
+
                     <Image Source="{Binding SelectedAttachementImageOrReload}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />
 
                     <Grid>
