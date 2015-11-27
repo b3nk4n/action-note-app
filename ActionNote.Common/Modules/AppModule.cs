@@ -11,7 +11,7 @@ namespace ActionNote.Common.Modules
             // services
             Bind<IActionCenterService>().To<ActionCenterService>().InSingletonScope();
             Bind<ITilePinService>().To<TilePinService>().InSingletonScope();
-            Bind<INoteDataService>().To<NoteDataService>().InSingletonScope();
+            Bind<IDataService>().To<DataService>().InSingletonScope();
 
             // repositories
             Bind<INotesRepository>().To<NotesRepository>();

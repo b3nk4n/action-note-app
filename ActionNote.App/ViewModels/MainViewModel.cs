@@ -19,7 +19,7 @@ namespace ActionNote.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private INoteDataService _dataService;
+        private IDataService _dataService;
         private IShareContentService _shareContentService;
         private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
@@ -37,7 +37,7 @@ namespace ActionNote.App.ViewModels
 
         public MainViewModel()
         {
-            _dataService = Injector.Get<INoteDataService>();
+            _dataService = Injector.Get<IDataService>();
             _shareContentService = Injector.Get<IShareContentService>();
             _localStorageSerivce = Injector.Get<ILocalStorageService>();
             _tilePinService = Injector.Get<ITilePinService>();
@@ -188,7 +188,7 @@ namespace ActionNote.App.ViewModels
             await _dataService.LoadNotesAsync();
 
             NoteItems.Clear();
-            var data = await _dataService.GetAllNotes(); // TODO: reload all from disk?
+            var data = await _dataService.GetAllNotes();
 
             if (data != null)
             {

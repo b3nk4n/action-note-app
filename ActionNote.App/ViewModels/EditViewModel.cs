@@ -31,7 +31,7 @@ namespace ActionNote.App.ViewModels
     {
         private EditViewModelCallbacks _callbacks;
 
-        private INoteDataService _dataService;
+        private IDataService _dataService;
         private IStorageService _localStorageService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
@@ -61,7 +61,7 @@ namespace ActionNote.App.ViewModels
         {
             _callbacks = callbacks;
 
-            _dataService = Injector.Get<INoteDataService>();
+            _dataService = Injector.Get<IDataService>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();

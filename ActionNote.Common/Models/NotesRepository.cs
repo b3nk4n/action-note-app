@@ -22,7 +22,7 @@ namespace ActionNote.Common.Models
             _serializationService = serializationService;
         }
 
-        public override void Update(NoteItem prototype) // TODO: detect note has changed?
+        public override void Update(NoteItem prototype)
         {
             var entity = Get(prototype.Id);
 
@@ -55,7 +55,7 @@ namespace ActionNote.Common.Models
             return true;
         }
 
-        public async Task<bool> Save(NoteItem item) // TODO: dectect note has changed?
+        public async Task<bool> Save(NoteItem item)
         {
             var jsonData = _serializationService.SerializeJson(item);
             var filePath = BaseFolder + item.Id;

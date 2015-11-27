@@ -7,7 +7,7 @@ namespace ActionNote.Common.Services
     /// <summary>
     /// Note data service interface, to build a facade around notes repository and archive repository.
     /// </summary>
-    public interface INoteDataService
+    public interface IDataService
     {
         /// <summary>
         /// Gets the notes.

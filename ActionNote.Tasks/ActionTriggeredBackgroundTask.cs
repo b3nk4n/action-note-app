@@ -12,7 +12,7 @@ namespace ActionNote.Tasks
     public sealed class ActionTriggeredBackgroundTask : IBackgroundTask
     {
         private IActionCenterService _actionCenterService;
-        private INoteDataService _dataService;
+        private IDataService _dataService;
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
@@ -21,7 +21,7 @@ namespace ActionNote.Tasks
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
-            _dataService = injector.Get<INoteDataService>();
+            _dataService = injector.Get<IDataService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)

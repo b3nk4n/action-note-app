@@ -12,8 +12,6 @@ namespace ActionNote.Common.Models
     /// </summary>
     public class UnsyncedRepository : RepositoryBase<UnsyncedItem, string>, IUnsyncedRepository
     {
-        public const string DATA_FILE = "unsynced.data";
-
         private IStorageService _localStorageService;
         private ISerializationService _serializationService;
 
@@ -71,7 +69,7 @@ namespace ActionNote.Common.Models
             return true;
         }
 
-        public async Task<bool> Save(UnsyncedItem unsyncedItem) // TODO: detect to save only when a data has changed? Reminder: DateTime.Now is set outside of here...
+        public async Task<bool> Save(UnsyncedItem unsyncedItem)
         {
             var jsonData = _serializationService.SerializeJson(unsyncedItem);
             var filePath = BaseFolder + unsyncedItem.Id;

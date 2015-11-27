@@ -31,7 +31,7 @@ namespace ActionNote.App
 
         private IBackgroundTaskService _backgroundTaskService;
         private IActionCenterService _actionCenterService;
-        private INoteDataService _dataService;
+        private IDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
 
@@ -50,7 +50,7 @@ namespace ActionNote.App
             _actionCenterService = Injector.Get<IActionCenterService>();
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
-            _dataService = Injector.Get<INoteDataService>();
+            _dataService = Injector.Get<IDataService>();
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(

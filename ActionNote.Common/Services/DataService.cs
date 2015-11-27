@@ -16,7 +16,7 @@ namespace ActionNote.Common.Services
     /// <summary>
     /// Note data service class, to build a facade around notes repository and archive repository.
     /// </summary>
-    public class NoteDataService : INoteDataService
+    public class DataService : IDataService
     {
         private const int DEFAULT_TIMEOUT = 5000;
 
@@ -35,7 +35,7 @@ namespace ActionNote.Common.Services
         private StoredObjectBase<bool> _archiveChangedInBackgroundFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
 
         [Inject]
-        public NoteDataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
+        public DataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
             IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ILicenseService licenseService)
         {
             Notes = notesRepository;
@@ -164,6 +164,7 @@ namespace ActionNote.Common.Services
                             if (serverResponse.Message == ServerResponse.DELETED)
                             {
                                 // TODO: show dialog: data has been deleted on other device. Device might be out of sync
+                                // --> show dialog outside of service ... return server response message?
 
                                 await MoveToArchivInternalAsync(item);
                                 return false;
@@ -233,12 +234,20 @@ namespace ActionNote.Common.Services
                     if (!Archiv.HasLoaded)
                         await Archiv.Load();
 
+                    var unsyncedDeleteIds = new List<string>();
                     foreach (var note in syncDataResult.Added)
                     {
-                        if (!Notes.Contains(note.Id) &&
-                            !Archiv.Contains(note.Id))
+                        if (!Notes.Contains(note.Id))
                         {
-                            Notes.Add(note);
+                            if (!Archiv.Contains(note.Id))
+                            {
+                                // add when we are sure we did not delete it locally
+                                Notes.Add(note);
+                            }
+                            else
+                            {
+                                unsyncedDeleteIds.Add(note.Id);
+                            }
                         }
                         await Notes.Save(note);
                     }
@@ -251,9 +260,44 @@ namespace ActionNote.Common.Services
                         }
                     }
 
-                    foreach (var note in syncDataResult.MissingIds)
+                    if (syncDataResult.MissingIds.Count > 0)
                     {
-                        // TODO: upload missing notes.
+                        var unsyncedAddNotes = new List<NoteItem>();
+
+                        foreach (var noteId in syncDataResult.MissingIds)
+                        {
+                            var note = Notes.Get(noteId);
+
+                            if (note != null)
+                                unsyncedAddNotes.Add(note);
+                        }
+
+                        var addResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/addrange/XXXXXXXXXX"), unsyncedAddNotes, DEFAULT_TIMEOUT);
+
+                        if (addResult != null &&
+                            addResult.IsSuccessStatusCode)
+                        {
+                            // do noting
+                        }
+                        else
+                        {
+                            // ignore error and retry the next time
+                        }
+                    }
+
+                    if (unsyncedDeleteIds.Count > 0)
+                    {
+                        var deleteResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/XXXXXXXXXX"), unsyncedDeleteIds, DEFAULT_TIMEOUT);
+
+                        if (deleteResult != null &&
+                            deleteResult.IsSuccessStatusCode)
+                        {
+                            // do noting
+                        }
+                        else
+                        {
+                            // ignore error and retry the next time
+                        }
                     }
                 }
                 return true;
@@ -323,9 +367,8 @@ namespace ActionNote.Common.Services
             }
 
             // sync error handling
-            // TODO: no sync error handling needed, in case we would load as needed? think about what is best
             await Unsynced.Load(); // ensure loaded
-            var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
+            var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileDownload);
             if (Unsynced.Contains(item.Id))
                 Unsynced.Update(unsyncedItem);
             else
@@ -340,7 +383,8 @@ namespace ActionNote.Common.Services
             {
                 if (IsSynchronizationActive)
                 {
-                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/markdelete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
+                    // mark notes as deleted
+                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
@@ -350,16 +394,17 @@ namespace ActionNote.Common.Services
                     else
                     {
                         // sync error handling
-                        await Unsynced.Load(); // ensure loaded
-                        var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Deleted);
-                        if (Unsynced.Contains(item.Id))
-                            Unsynced.Update(unsyncedItem);
-                        else
-                            Unsynced.Add(unsyncedItem);
-                        await Unsynced.Save(unsyncedItem);
-                        return false;
+                        //await Unsynced.Load(); // ensure loaded
+                        //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Deleted);
+                        //if (Unsynced.Contains(item.Id))
+                        //    Unsynced.Update(unsyncedItem);
+                        //else
+                        //    Unsynced.Add(unsyncedItem);
+                        //await Unsynced.Save(unsyncedItem);
                     }
                 }
+
+                return true;
             }
 
             // here we did not even moved the file locally

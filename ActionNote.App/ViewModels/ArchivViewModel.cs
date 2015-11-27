@@ -15,7 +15,7 @@ namespace ActionNote.App.ViewModels
 {
     public class ArchivViewModel : ViewModelBase
     {
-        private INoteDataService _dataService;
+        private IDataService _dataService;
         private IDialogService _dialogService;
 
         private Localizer _localizer = new Localizer();
@@ -28,7 +28,7 @@ namespace ActionNote.App.ViewModels
 
         public ArchivViewModel()
         {
-            _dataService = Injector.Get<INoteDataService>();
+            _dataService = Injector.Get<IDataService>();
             _dialogService = Injector.Get<IDialogService>();
 
             ClearCommand = new DelegateCommand(async () =>
@@ -42,6 +42,8 @@ namespace ActionNote.App.ViewModels
                 if (result.Id.ToString().Equals("n"))
                     return;
 
+                // TODO: ensure server knows about deleted items (else: sync problem!)
+
                 _dataService.Archiv.Clear();
                 NoteItems.Clear();
 
@@ -54,6 +56,8 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
             {
+                // TODO: ensure server knows about deleted items  (else: sync problem!)
+
                 _dataService.Archiv.Remove(noteItem);
                 NoteItems.Remove(noteItem);
 
@@ -91,7 +95,7 @@ namespace ActionNote.App.ViewModels
             await _dataService.LoadArchiveAsync();
 
             NoteItems.Clear();
-            var data = _dataService.Archiv.GetAll(); // TODO: reload all from disk?
+            var data = _dataService.Archiv.GetAll();
 
             if (data != null)
             {

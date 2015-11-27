@@ -11,7 +11,7 @@ namespace ActionNote.Tasks
     public sealed class ActionBarChangedBackgroundTask : IBackgroundTask
     {
         private IActionCenterService _actionCenterService;
-        private INoteDataService _dataService;
+        private IDataService _dataService;
         private ITilePinService _tilePinService;
 
         public ActionBarChangedBackgroundTask()
@@ -19,7 +19,7 @@ namespace ActionNote.Tasks
             IInjector injector = Injector.Instance;
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
-            _dataService = injector.Get<INoteDataService>();
+            _dataService = injector.Get<IDataService>();
             _tilePinService = injector.Get<ITilePinService>();
         }
 

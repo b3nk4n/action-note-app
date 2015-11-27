@@ -126,10 +126,10 @@
     <Compile Include="Services\Communication\SyncDataRequest.cs" />
     <Compile Include="Services\Communication\SyncDataRequestItem.cs" />
     <Compile Include="Services\Communication\SyncDataResponse.cs" />
-    <Compile Include="Services\INoteDataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\ITilePinService.cs" />
     <Compile Include="Services\IActionCenterService.cs" />
-    <Compile Include="Services\NoteDataService.cs" />
+    <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\TilePinService.cs" />
     <Compile Include="Services\ActionCenterService.cs" />
     <Content Include="Properties\ActionNote.Common.rd.xml" />
