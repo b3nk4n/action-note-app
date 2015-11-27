@@ -194,8 +194,11 @@ namespace ActionNote.Common.Services
 
         public async Task<bool> SyncNotesAsync()
         {
-            if (!IsSynchronizationActive ||
-                !_networkInfoService.HasInternet)
+            // paranoia blocker
+            if (!IsSynchronizationActive)
+                return true;
+
+            if (!_networkInfoService.HasInternet)
             {
                 // no error handling needed here
                 return false;
@@ -536,8 +539,11 @@ namespace ActionNote.Common.Services
         {
             get
             {
-                //return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
-                return true; // TODO: fixme, use real inapp product
+#if DEBUG
+                return true;
+#else
+                return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
+#endif
             }
         }
     }

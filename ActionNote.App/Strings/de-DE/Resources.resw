@@ -213,6 +213,10 @@
     <value>Sollen wirklich alle Notizen gelöscht werden?</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>Die Synchronisation der Daten konnte nicht erfolgreich durchgeführt werden. Bitte prüfen Sie ihre Internet-Verbindung oder versichen Sie es später noch einmal.</value>
+    <comment>MainPage</comment>
+  </data>
   <data name="Message.Title.Info" xml:space="preserve">
     <value>Information</value>
     <comment>MessageDialog</comment>
@@ -248,6 +252,18 @@
   <data name="Pin.Label" xml:space="preserve">
     <value>An „Start“ anheften</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>Empfange Datei...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>Synchronisiere...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>Sende Datei...</value>
+    <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
     <value>Eingabemethode bei „Kurznotizen“</value>

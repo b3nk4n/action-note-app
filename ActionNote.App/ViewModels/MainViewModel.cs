@@ -155,7 +155,7 @@ namespace ActionNote.App.ViewModels
 
             SyncCommand = new DelegateCommand(async () =>
             {
-                await StartProgressAsync("Syncing...");  // TODO: translate
+                await StartProgressAsync(_localizer.Get("Progress.Syncing"));
 
                 // sync notes
                 if (await _dataService.SyncNotesAsync())
@@ -164,7 +164,8 @@ namespace ActionNote.App.ViewModels
                 }
                 else
                 {
-                    // TODO: Dialog: sync not possible. check internet connection
+                    await _dialogService.ShowAsync(_localizer.Get("Message.SyncFailed"),
+                        _localizer.Get("Message.Title.Warning"));
                 }
 
                 await StopProgressAsync();

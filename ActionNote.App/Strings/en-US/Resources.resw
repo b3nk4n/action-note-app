@@ -214,6 +214,10 @@ ment</value>
     <value>Do you really want to delete all notes?</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>The synchronization process was not successful. Please check your internet connection or try again later.</value>
+    <comment>MainPage</comment>
+  </data>
   <data name="Message.Title.Info" xml:space="preserve">
     <value>Information</value>
     <comment>MessageDialog</comment>
@@ -249,6 +253,18 @@ ment</value>
   <data name="Pin.Label" xml:space="preserve">
     <value>Pin to start</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>Downloading file...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>Syncing...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>Uploading file...</value>
+    <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
     <value>Input method of „QuickNotes“</value>

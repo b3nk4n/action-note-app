@@ -112,7 +112,7 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".jpg");
                 picker.FileTypeFilter.Add(".jpeg");
                 picker.FileTypeFilter.Add(".png");
-                StorageFile file = await picker.PickSingleFileAsync(); // TODO: not correctly working on mobile!
+                StorageFile file = await picker.PickSingleFileAsync(); // TODO: not correctly working on mobile yet!
                 // read: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/13002ba6-6e59-47b8-a746-c05525953c5a/uwpfileopenpicker-bugs-in-win-10-mobile-when-not-debugging?forum=wpdevelop
 
                 if (file != null)
@@ -222,7 +222,7 @@ namespace ActionNote.App.ViewModels
             if (noteItem.HasAttachement &&
                 noteItem.HasAttachementChanged)
             {
-                await StartProgressAsync("Uploading file...");  // TODO: translate
+                await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
                 await _dataService.UploadAttachement(noteItem);
                 await StopProgressAsync();
             }
@@ -297,7 +297,7 @@ namespace ActionNote.App.ViewModels
             var attachementFile = AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile;
             if (!await _localStorageService.ContainsFile(attachementFile))
             {
-                await StartProgressAsync("Downloading file..."); // TODO translate
+                await StartProgressAsync(_localizer.Get("Progress.DownloadingFile"));
                 if (await _dataService.DownloadAttachement(SelectedNote))
                 {
                     RaisePropertyChanged("SelectedAttachementImageOrReload");
