@@ -160,6 +160,9 @@ namespace ActionNote.App.ViewModels
                 // sync notes
                 if (await _dataService.SyncNotesAsync())
                 {
+                    await _dataService.UploadMissingAttachements();
+                    await _dataService.DownloadMissingAttachements();
+
                     await ReloadDataAsync();
                 }
                 else

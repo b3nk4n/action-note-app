@@ -58,6 +58,10 @@ namespace ActionNote.Common.Services
 
         Task<bool> UploadAttachement(NoteItem noteItem);
 
+        Task UploadMissingAttachements();
+
         Task<bool> DownloadAttachement(NoteItem noteItem);
+
+        Task DownloadMissingAttachements();
     }
 }

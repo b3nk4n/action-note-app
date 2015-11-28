@@ -194,7 +194,6 @@ namespace ActionNote.Common.Services
 
         public async Task<bool> SyncNotesAsync()
         {
-            // paranoia blocker
             if (!IsSynchronizationActive)
                 return true;
 
@@ -347,6 +346,29 @@ namespace ActionNote.Common.Services
             return false;
         }
 
+        public async Task UploadMissingAttachements()
+        {
+            if (!IsSynchronizationActive ||
+                !_networkInfoService.HasInternet)
+                return;
+
+            await Notes.Load(); // ensure loaded
+            await Unsynced.Load(); // ensure loaded
+
+            var unsyncedFiles = Unsynced.GetAll();
+
+            foreach (var unsyncedFile in unsyncedFiles)
+            {
+                if (unsyncedFile.Type == UnsyncedType.FileUpload)
+                {
+                    var note = Notes.Get(unsyncedFile.Id);
+
+                    if (note != null)
+                        await UploadAttachement(note);
+                }
+            }
+        }
+
         public async Task<bool> DownloadAttachement(NoteItem item)
         {
             if (!IsSynchronizationActive || // do not create a snyc log here, because it can even be downloaded later
@@ -370,14 +392,34 @@ namespace ActionNote.Common.Services
             }
 
             // sync error handling
-            await Unsynced.Load(); // ensure loaded
-            var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileDownload);
-            if (Unsynced.Contains(item.Id))
-                Unsynced.Update(unsyncedItem);
-            else
-                Unsynced.Add(unsyncedItem);
-            await Unsynced.Save(unsyncedItem);
+            //await Unsynced.Load(); // ensure loaded
+            //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileDownload);
+            //if (Unsynced.Contains(item.Id))
+            //    Unsynced.Update(unsyncedItem);
+            //else
+            //    Unsynced.Add(unsyncedItem);
+            //await Unsynced.Save(unsyncedItem);
             return false;
+        }
+
+        public async Task DownloadMissingAttachements()
+        {
+            if (!IsSynchronizationActive ||
+                !_networkInfoService.HasInternet)
+                return;
+
+            foreach (var noteItem in Notes.GetAll())
+            {
+                if (noteItem.HasAttachement)
+                {
+                    string filePath = AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile;
+
+                    if (!await _localStorageService.ContainsFile(filePath))
+                    {
+                        await DownloadAttachement(noteItem);
+                    }
+                }
+            }
         }
 
         public async Task<bool> MoveToArchivAsync(NoteItem item)

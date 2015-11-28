@@ -6,7 +6,7 @@ namespace ActionNote.Common.Models
     public enum UnsyncedType
     {
         FileUpload,
-        FileDownload
+        //FileDownload --> done by iterating over all note items
     }
 
     [DataContract]
@@ -15,7 +15,7 @@ namespace ActionNote.Common.Models
         /// <summary>
         /// Gets or sets the resource ID, which can be the note ID or a unique file name.
         /// </summary>
-        [DataMember(Name = "resourceId")]
+        [DataMember(Name = "id")]
         public string Id { get; set; }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace ActionNote.Common.Models
 
         public UnsyncedItem() { }
 
-        public UnsyncedItem(string resourceId, UnsyncedType type)
+        public UnsyncedItem(string id, UnsyncedType type)
         {
-            Id = resourceId;
+            Id = id;
             Type = type;
         }
     }
