@@ -26,6 +26,7 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             var items = await _licenseService.LoadProductsAsync(new[] { AppConstants.IAP_PRO_VERSION }, "XXX"); // TODO translate
+            // TODO: IAP simulation not working
             
             if (items.Count > 0)
             {

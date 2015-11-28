@@ -285,6 +285,10 @@
     <value>Vorlesen</value>
     <comment>EditPage</comment>
   </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>Synchronisiere mit allen Geräten</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
     <value>Action Center</value>
     <comment>SettingsPage</comment>
@@ -301,6 +305,10 @@
     <value>Allgemein</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>Online Synchronisation</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">
     <value>Personalisierung</value>
     <comment>SettingsPage</comment>
@@ -309,8 +317,16 @@
     <value>„Kurznotizen“ für schnelle Notizen</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>Notizen im Hintergrund synchronisieren</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsSyncNotes.Header" xml:space="preserve">
     <value>Notizen synchronisieren</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>Synchronisation beim Starten der App</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">

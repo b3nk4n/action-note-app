@@ -17,5 +17,13 @@ namespace ActionNote.Common
         public static StoredObjectBase<string> SortNoteBy = new LocalObject<string>("sortNotes", AppConstants.SORT_DATE);
 
         public static StoredObjectBase<string> SortNoteInActionCenterBy = new LocalObject<string>("sortNotesInActionCenter", AppConstants.SORT_DATE);
+
+        // *** Pro Version only: ***
+
+        public static StoredObjectBase<bool> SyncEnabled = new LocalObject<bool>("proSyncNotes", false);
+
+        public static StoredObjectBase<bool> SyncOnStart = new LocalObject<bool>("proSyncOnStart", true);
+
+        public static StoredObjectBase<bool> SyncInBackground = new LocalObject<bool>("proSyncInBackground", true);
     }
 }

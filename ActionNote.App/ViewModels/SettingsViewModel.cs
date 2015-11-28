@@ -9,12 +9,14 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using UWPCore.Framework.Controls;
 using UWPCore.Framework.Common;
+using UWPCore.Framework.Store;
+using ActionNote.App.Views;
 
 namespace ActionNote.App.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private INotesRepository _notesRepository;
+        private ILicenseService _licenseService;
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
@@ -26,7 +28,7 @@ namespace ActionNote.App.ViewModels
 
         public SettingsViewModel()
         {
-            _notesRepository = Injector.Get<INotesRepository>();
+            _licenseService = Injector.Get<ILicenseService>();
 
             // localize string source
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
@@ -37,6 +39,28 @@ namespace ActionNote.App.ViewModels
                 new SourceComboBoxItem(AppConstants.QUICK_NOTES_CONTENT, _localizer.Get("QuickNotesTypeContent.Text")),
                 new SourceComboBoxItem(AppConstants.QUICK_NOTES_TITLE_AND_CONTENT, _localizer.Get("QuickNotesTypeTitleAndContent.Text"))
             });
+        }
+
+        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            base.OnNavigatedTo(parameter, mode, state);
+
+            ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
+            SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
+            QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+
+            IsProVersion = await _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
+        }
+
+        public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            await base.OnNavigatedFromAsync(state, suspending);
+
+            UniversalPage.PageTheme.Value = ThemeEnumSource.SelectedValue;
+            UniversalApp.Current.UpdateTheme();
+
+            AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
+            AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
         }
 
         public bool SyncWithActionCenter
@@ -87,24 +111,56 @@ namespace ActionNote.App.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public bool SyncEnabled
         {
-            base.OnNavigatedTo(parameter, mode, state);
-
-            ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
-            SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
-            QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+            get
+            {
+                return AppSettings.SyncEnabled.Value;
+            }
+            set
+            {
+                if (!IsProVersion && value)
+                {
+                    // if we want to activate it and we are not running the pro version
+                    AppSettings.SyncEnabled.Value = false;
+                    NavigationService.Navigate(typeof(UpgradePage));
+                }
+                else
+                {
+                    AppSettings.SyncEnabled.Value = value;
+                }
+            }
         }
 
-        public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        public bool SyncOnStart
         {
-            await base.OnNavigatedFromAsync(state, suspending);
-
-            UniversalPage.PageTheme.Value = ThemeEnumSource.SelectedValue;
-            UniversalApp.Current.UpdateTheme();
-
-            AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
-            AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
+            get
+            {
+                return AppSettings.SyncOnStart.Value;
+            }
+            set
+            {
+                AppSettings.SyncOnStart.Value = value;
+            }
         }
+
+        public bool SyncInBackground
+        {
+            get
+            {
+                return AppSettings.SyncInBackground.Value;
+            }
+            set
+            {
+                AppSettings.SyncInBackground.Value = value;
+            }
+        }
+
+        public bool IsProVersion
+        {
+            get { return _isProVersion; }
+            set { Set(ref _isProVersion, value); }
+        }
+        private bool _isProVersion;
     }
 }
