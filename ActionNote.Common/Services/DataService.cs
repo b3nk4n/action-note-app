@@ -70,13 +70,15 @@ namespace ActionNote.Common.Services
             return Notes.GetAllIds();
         }
 
-        public async Task<int> NotesCount()
+        /// <summary>
+        /// Attention: It is not ensured, that the data has loaded!!!
+        /// </summary>
+        public int NotesCount
         {
-            // ensure loaded
-            if (!Notes.HasLoaded)
-                await Notes.Load();
-
-            return Notes.Count;
+            get
+            {
+                return Notes.Count;
+            }
         }
 
         public async Task<NoteItem> GetNote(string id)
@@ -363,10 +365,24 @@ namespace ActionNote.Common.Services
                 {
                     var note = Notes.Get(unsyncedFile.Id);
 
-                    if (note != null)
-                        await UploadAttachement(note);
+                    if (note != null &&
+                        note.HasAttachement)
+                    {
+                        if (await UploadAttachement(note))
+                        {
+                            // we can remove, because we are iterating a copy
+                            Unsynced.Remove(unsyncedFile);
+                        }
+                    }
                 }
             }
+        }
+
+        public async Task RemoveUnsyncedEntry(NoteItem item)
+        {
+            await Unsynced.Load(); // ensure loaded
+
+            Unsynced.Remove(item.Id);
         }
 
         public async Task<bool> DownloadAttachement(NoteItem item)

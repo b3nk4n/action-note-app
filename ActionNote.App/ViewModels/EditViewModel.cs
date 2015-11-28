@@ -93,11 +93,12 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                await _dataService.MoveToArchivAsync(noteItem);
+                if (await _dataService.MoveToArchivAsync(noteItem))
+                {
+                    await _tilePinService.UnpinAsync(noteItem.Id);
 
-                await _tilePinService.UnpinAsync(noteItem.Id);
-
-                GoBackToMainPageWithoutBackEvent();
+                    GoBackToMainPageWithoutBackEvent();
+                }
             },
             (noteItem) =>
             {
@@ -123,6 +124,11 @@ namespace ActionNote.App.ViewModels
                     var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
                     if (await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
                     {
+                        if (noteItem.AttachementFile != null)
+                        {
+                            await RemoveAttachement(noteItem);
+                        }
+
                         noteItem.AttachementFile = fileName;
                     }
                 }
@@ -134,11 +140,9 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
-            RemoveAttachementCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            RemoveAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                var filename = noteItem.AttachementFile;
-
-                noteItem.AttachementFile = null; // remember: file is physically deleted on app-suspend
+                await RemoveAttachement(noteItem);
 
                 RemoveAttachementCommand.RaiseCanExecuteChanged();
             },
@@ -184,6 +188,12 @@ namespace ActionNote.App.ViewModels
             {
                 return SelectedNote != null;
             });
+        }
+
+        private async Task RemoveAttachement(NoteItem noteItem)
+        {
+            noteItem.AttachementFile = null; // remember: file is physically deleted on app-suspend
+            await _dataService.RemoveUnsyncedEntry(noteItem);
         }
 
         /// <summary>

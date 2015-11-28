@@ -61,11 +61,13 @@ namespace ActionNote.App.ViewModels
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
 
-                    await _dataService.MoveToArchivAsync(noteItem);
+                    await _dataService.MoveToArchivAsync(noteItem); // TODO: moveAllToArchive method? --> only 1 REST API call
                 }
                 NoteItems.Clear();
 
                 SelectedNote = null;
+
+                RaisePropertyChanged("HasNoNotes");
             },
             () =>
             {
@@ -89,12 +91,15 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                await _tilePinService.UnpinAsync(noteItem.Id);
+                if (await _dataService.MoveToArchivAsync(noteItem))
+                {
+                    SelectedNote = null;
+                    NoteItems.Remove(noteItem);
 
-                await _dataService.MoveToArchivAsync(noteItem);
-                NoteItems.Remove(noteItem);
+                    await _tilePinService.UnpinAsync(noteItem.Id);
+                }
 
-                SelectedNote = null;
+                RaisePropertyChanged("HasNoNotes");
             },
             (noteItem) =>
             {
@@ -199,6 +204,7 @@ namespace ActionNote.App.ViewModels
                 var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
                 NoteItems = new ObservableCollection<NoteItem>(sorted);
                 RaisePropertyChanged("NoteItems");
+                RaisePropertyChanged("HasNoNotes");
             }
         }
 
@@ -257,6 +263,14 @@ namespace ActionNote.App.ViewModels
             }
         }
         private bool _showProgress;
+
+        public bool HasNoNotes
+        {
+            get
+            {
+                return NoteItems.Count == 0;
+            }
+        }
 
         public ICommand ClearCommand { get; private set; }
 

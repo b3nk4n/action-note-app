@@ -39,7 +39,7 @@ namespace ActionNote.Tasks
                 details.ChangeType == ToastHistoryChangedType.Removed) // Remark: ToastHistoryChangedType.Cleared seems not to be supported up to now?
             {
                 // load data
-                //await _dataService.Notes.Load();
+                await _dataService.LoadNotesAsync(); // load it manually here, because of _dataService.NotesCount
 
                 if (AppSettings.AllowRemoveNotes.Value)
                 {
@@ -68,7 +68,7 @@ namespace ActionNote.Tasks
                 else
                 {
                     // only refresh when there has been a change (because the bgtask is called multiple times when we do multiple remove operations)
-                    if (_actionCenterService.NotesCount == await _dataService.NotesCount())
+                    if (_actionCenterService.NotesCount == _dataService.NotesCount)
                     {
                         // when only the quick notes was removed, just re-add it
                         if (AppSettings.QuickNotesEnabled.Value && !_actionCenterService.ContainsQuickNotes())

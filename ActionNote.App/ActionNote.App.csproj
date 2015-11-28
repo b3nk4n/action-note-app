@@ -135,6 +135,7 @@
     <None Include="ActionNote.App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\arrow.png" />
     <Content Include="Assets\Cortana\voicecommands.xml" />
     <Content Include="Assets\IAP\WindowsStoreProxy.xml" />
     <Content Include="Assets\Images\blue.png" />

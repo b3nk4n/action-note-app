@@ -25,7 +25,7 @@ namespace ActionNote.Common.Services
 
         Task<IList<NoteItem>> GetAllNotes();
 
-        Task<int> NotesCount();
+        int NotesCount { get; }
 
         Task<NoteItem> GetNote(string id);
 
@@ -59,6 +59,8 @@ namespace ActionNote.Common.Services
         Task<bool> UploadAttachement(NoteItem noteItem);
 
         Task UploadMissingAttachements();
+
+        Task RemoveUnsyncedEntry(NoteItem item);
 
         Task<bool> DownloadAttachement(NoteItem noteItem);
 

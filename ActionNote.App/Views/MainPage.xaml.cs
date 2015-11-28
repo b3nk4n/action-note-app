@@ -2,6 +2,7 @@
 using ActionNote.Common.Models;
 using UWPCore.Framework.Controls;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace ActionNote.App.Views
 {
@@ -29,6 +30,20 @@ namespace ActionNote.App.Views
             {
                 ViewModel.EditCommand.Execute(clickedNoteItem);
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            IntroArrowBlick.Begin();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            IntroArrowBlick.Stop();
         }
     }
 }

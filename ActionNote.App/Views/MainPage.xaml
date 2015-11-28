@@ -12,6 +12,19 @@
     xmlns:commonConverters="using:ActionNote.Common.Converters"
     mc:Ignorable="d"
     d:DataContext="{d:DesignData Source=/SampleData/MainViewModelSampleData.xaml}">
+    <uwpcControls:UniversalPage.Resources>
+        <Storyboard x:Name="IntroArrowBlick">
+            <DoubleAnimationUsingKeyFrames AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </uwpcControls:UniversalPage.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -80,7 +93,11 @@
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{Binding ShowProgress, Converter={StaticResource boolToVisConv}}" />
-            
+
+            <!-- intro arrow -->
+            <Image x:Name="image" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="64,8" Source="/Assets/Images/arrow.png" Width="80"
+                   Visibility="{Binding HasNoNotes, Converter={StaticResource boolToVisConv}}"/>
+
             <ListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="8,16" IsItemClickEnabled="True" ItemClick="NoteItemClicked"
                       ItemTemplate="{StaticResource NoteListDataTemplate}">
                 <ListView.ItemContainerStyle>
