@@ -318,12 +318,12 @@ ment</value>
     <value>Enable “QuickNotes“</value>
     <comment>SettingsPage</comment>
   </data>
-  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
-    <value>Synchronize notes in background</value>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>Display notes</value>
     <comment>SettingsPage</comment>
   </data>
-  <data name="SettingsSyncNotes.Header" xml:space="preserve">
-    <value>Synchronize notes</value>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>Synchronize notes in background</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">

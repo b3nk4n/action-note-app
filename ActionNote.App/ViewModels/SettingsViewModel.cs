@@ -63,15 +63,15 @@ namespace ActionNote.App.ViewModels
             AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
         }
 
-        public bool SyncWithActionCenter
+        public bool ShowNotesInActionCenter
         {
             get
             {
-                return AppSettings.SyncWithActionCenter.Value;
+                return AppSettings.ShowNotesInActionCenter.Value;
             }
             set
             {
-                AppSettings.SyncWithActionCenter.Value = value;
+                AppSettings.ShowNotesInActionCenter.Value = value;
             }
         }
 

@@ -30,7 +30,7 @@ namespace ActionNote.Tasks
 
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
             if (details != null &&
-                AppSettings.SyncWithActionCenter.Value)
+                AppSettings.ShowNotesInActionCenter.Value)
             {
                 // load data
                 //await _dataService.Notes.Load();

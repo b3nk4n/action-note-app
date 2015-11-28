@@ -35,7 +35,7 @@ namespace ActionNote.Tasks
 
             if (details != null &&
                 !_actionCenterService.IsRemoveBlocked() &&
-                AppSettings.SyncWithActionCenter.Value &&
+                AppSettings.ShowNotesInActionCenter.Value &&
                 details.ChangeType == ToastHistoryChangedType.Removed) // Remark: ToastHistoryChangedType.Cleared seems not to be supported up to now?
             {
                 // load data

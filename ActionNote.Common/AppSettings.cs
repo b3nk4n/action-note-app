@@ -4,7 +4,7 @@ namespace ActionNote.Common
 {
     public class AppSettings
     {
-        public static StoredObjectBase<bool> SyncWithActionCenter = new LocalObject<bool>("syncActionCenter", true);
+        public static StoredObjectBase<bool> ShowNotesInActionCenter = new LocalObject<bool>("showInActionCenter", true);
 
         public static StoredObjectBase<bool> AllowRemoveNotes = new LocalObject<bool>("allowRemoveNotes", true);
 

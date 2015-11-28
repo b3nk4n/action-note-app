@@ -196,7 +196,7 @@ namespace ActionNote.App
         {
             await base.OnSuspendingAsync(e);
 
-            if (AppSettings.SyncWithActionCenter.Value)
+            if (AppSettings.ShowNotesInActionCenter.Value)
             {
                 var notes = await _dataService.GetAllNotes();
                 if (notes != null)
