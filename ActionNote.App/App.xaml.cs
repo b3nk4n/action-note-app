@@ -225,6 +225,12 @@ namespace ActionNote.App
                     Symbol = GlyphIcons.Archive,
                     Label = _localizer.Get("Nav.Archive"),
                     DestinationPage = typeof(ArchivPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = GlyphIcons.StarOutline,
+                    Label = _localizer.Get("Nav.Upgrade"),
+                    DestinationPage = typeof(UpgradePage)
                 }
             };
         }

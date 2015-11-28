@@ -241,6 +241,10 @@
     <value>Einstellungen</value>
     <comment>Navigation</comment>
   </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>Erweiterungen</value>
+    <comment>Navigation</comment>
+  </data>
   <data name="NewTitle.Text" xml:space="preserve">
     <value>NEUE NOTIZ</value>
     <comment>EditPage</comment>
@@ -338,8 +342,16 @@
 eingabe</value>
     <comment>EditPage</comment>
   </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>Synchronisieren</value>
+    <comment>MainPage</comment>
+  </data>
   <data name="Unpin.Label" xml:space="preserve">
     <value>Von „Start“ lösen</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>ERWEITERUNGEN</value>
+    <comment>UpgradePage</comment>
   </data>
 </root>

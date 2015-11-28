@@ -72,7 +72,7 @@
             <AppBarSeparator Style="{StaticResource ThinAppBarSeparatorStyle}" />
             <AppBarButton x:Uid="Add"  Width="62" Icon="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="SYNC" Command="{Binding SyncCommand}"/>
+                <AppBarButton x:Uid="Sync" Label="Synchronize" Command="{Binding SyncCommand}"/>
                 <AppBarButton x:Uid="DeleteAll" Command="{Binding ClearCommand}"/>
                 <AppBarButton x:Name="ShareSecondary" x:Uid="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
             </CommandBar.SecondaryCommands>

@@ -18,7 +18,7 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock Text="ABOUT" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <TextBlock x:Uid="AboutTitle" Text="ABOUT" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
 

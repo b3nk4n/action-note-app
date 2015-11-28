@@ -107,6 +107,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\UpgradeViewModel.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -123,6 +124,9 @@
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UpgradePage.xaml.cs">
+      <DependentUpon>UpgradePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -132,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Cortana\voicecommands.xml" />
+    <Content Include="Assets\IAP\WindowsStoreProxy.xml" />
     <Content Include="Assets\Images\blue.png" />
     <Content Include="Assets\Images\blue_att.png" />
     <Content Include="Assets\Images\blue_att_flag.png" />
@@ -200,6 +205,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpgradePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
