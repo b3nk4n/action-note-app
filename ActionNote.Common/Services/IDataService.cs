@@ -4,6 +4,14 @@ using System.Threading.Tasks;
 
 namespace ActionNote.Common.Services
 {
+    public enum SyncResult
+    {
+        Success,
+        Unchanged,
+        Nop,
+        Failed
+    }
+
     /// <summary>
     /// Note data service interface, to build a facade around notes repository and archive repository.
     /// </summary>
@@ -54,7 +62,7 @@ namespace ActionNote.Common.Services
 
         Task<bool> UpdateNoteAsync(NoteItem item);
 
-        Task<bool> SyncNotesAsync();
+        Task<SyncResult> SyncNotesAsync();
 
         Task<bool> UploadAttachement(NoteItem noteItem);
 
@@ -62,8 +70,17 @@ namespace ActionNote.Common.Services
 
         Task RemoveUnsyncedEntry(NoteItem item);
 
+        /// <summary>
+        /// Downloads an attachmenent in case it is missing.
+        /// </summary>
+        /// <param name="noteItem">The note item to download its attachement.</param>
+        /// <returns>Returns True when a file was downloaded, else False.</returns>
         Task<bool> DownloadAttachement(NoteItem noteItem);
 
-        Task DownloadMissingAttachements();
+        /// <summary>
+        /// Downloads missing attachements.
+        /// </summary>
+        /// <returns>Returns True when at least one file was downloaded, else False.</returns>
+        Task<bool> DownloadMissingAttachements();
     }
 }

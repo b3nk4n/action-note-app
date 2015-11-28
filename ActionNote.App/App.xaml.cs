@@ -28,6 +28,7 @@ namespace ActionNote.App
     {
         private static string BG_TASK_ACTIONCENTER = "ActionNote.ActionBarChangedBackgroundTask";
         private static string BG_TASK_TOAST_TRIGGERED = "ActionNote.ActionTriggeredBackgroundTask";
+        private static string BG_TASK_AUTO_SYNC = "ActionNote.AutoSyncBackgroundTask";
 
         private IBackgroundTaskService _backgroundTaskService;
         private IActionCenterService _actionCenterService;
@@ -94,6 +95,8 @@ namespace ActionNote.App
                 _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER);
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
+            if (_backgroundTaskService.RegistrationExists(BG_TASK_AUTO_SYNC))
+                _backgroundTaskService.Unregister(BG_TASK_AUTO_SYNC);
 
             _actionCenterService.StartTemporaryRemoveBlocking(10);
             _actionCenterService.Clear();
@@ -186,6 +189,7 @@ namespace ActionNote.App
             {
                 _backgroundTaskService.Register(BG_TASK_ACTIONCENTER, "ActionNote.Tasks.ActionBarChangedBackgroundTask", new ToastNotificationHistoryChangedTrigger());
                 _backgroundTaskService.Register(BG_TASK_TOAST_TRIGGERED, "ActionNote.Tasks.ActionTriggeredBackgroundTask", new ToastNotificationActionTrigger());
+                _backgroundTaskService.Register(BG_TASK_AUTO_SYNC, "ActionNote.Tasks.AutoSyncBackgroundTask", new TimeTrigger(AppConstants.SYNC_INTERVAL_MINUTES, false), new SystemCondition(SystemConditionType.InternetAvailable));
             }
 
             // start the user experience

@@ -194,15 +194,15 @@ namespace ActionNote.Common.Services
             return true;
         }
 
-        public async Task<bool> SyncNotesAsync()
+        public async Task<SyncResult> SyncNotesAsync()
         {
             if (!IsSynchronizationActive)
-                return true;
+                return SyncResult.Nop;
 
             if (!_networkInfoService.HasInternet)
             {
                 // no error handling needed here
-                return false;
+                return SyncResult.Failed;
             }
 
             // ensure loaded
@@ -223,6 +223,8 @@ namespace ActionNote.Common.Services
                 var jsonResponse = await res.Content.ReadAsStringAsync();
                 var syncDataResult = _serializationService.DeserializeJson<SyncDataResponse>(jsonResponse);
 
+                var unchanged = true;
+
                 if (syncDataResult != null)
                 {
                     foreach (var note in syncDataResult.Changed)
@@ -230,8 +232,9 @@ namespace ActionNote.Common.Services
                         if (Notes.Contains(note.Id))
                         {
                             Notes.Update(note);
+                            await Notes.Save(note);
+                            unchanged = false;
                         }
-                        await Notes.Save(note);
                     }
 
                     // ensure archiv data has loaded
@@ -247,13 +250,14 @@ namespace ActionNote.Common.Services
                             {
                                 // add when we are sure we did not delete it locally
                                 Notes.Add(note);
+                                await Notes.Save(note);
+                                unchanged = false;
                             }
                             else
                             {
                                 unsyncedDeleteIds.Add(note.Id);
                             }
                         }
-                        await Notes.Save(note);
                     }
 
                     foreach (var note in syncDataResult.Deleted)
@@ -261,6 +265,7 @@ namespace ActionNote.Common.Services
                         if (Notes.Contains(note.Id))
                         {
                             await MoveToArchivInternalAsync(note);
+                            unchanged = false;
                         }
                     }
 
@@ -304,11 +309,15 @@ namespace ActionNote.Common.Services
                         }
                     }
                 }
-                return true;
+
+                if (unchanged)
+                    return SyncResult.Unchanged;
+                else
+                    return SyncResult.Success;
             }
             else
             {
-                return false;
+                return SyncResult.Failed;
             }
         }
 
@@ -389,7 +398,7 @@ namespace ActionNote.Common.Services
         {
             if (!IsSynchronizationActive || // do not create a snyc log here, because it can even be downloaded later
                 !item.HasAttachement)
-                return true;
+                return false;
 
             if ( _networkInfoService.HasInternet)
             {
@@ -418,12 +427,13 @@ namespace ActionNote.Common.Services
             return false;
         }
 
-        public async Task DownloadMissingAttachements()
+        public async Task<bool> DownloadMissingAttachements()
         {
             if (!IsSynchronizationActive ||
                 !_networkInfoService.HasInternet)
-                return;
+                return false;
 
+            var downloadedAnything = false;
             foreach (var noteItem in Notes.GetAll())
             {
                 if (noteItem.HasAttachement)
@@ -432,17 +442,23 @@ namespace ActionNote.Common.Services
 
                     if (!await _localStorageService.ContainsFile(filePath))
                     {
-                        await DownloadAttachement(noteItem);
+                        if (await DownloadAttachement(noteItem))
+                        {
+                            downloadedAnything = true;
+                        }
                     }
                 }
             }
+
+            return downloadedAnything;
         }
 
         public async Task<bool> MoveToArchivAsync(NoteItem item)
         {
             if (await MoveToArchivInternalAsync(item))
             {
-                if (IsSynchronizationActive)
+                if (IsSynchronizationActive &&
+                    _networkInfoService.HasInternet)
                 {
                     // mark notes as deleted
                     var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
@@ -598,9 +614,9 @@ namespace ActionNote.Common.Services
             get
             {
 #if DEBUG
-                return true;
+                return true && AppSettings.SyncEnabled.Value;
 #else
-                return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
+                return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION) && AppSettings.SyncEnabled.Value;
 #endif
             }
         }

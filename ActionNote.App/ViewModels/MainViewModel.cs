@@ -163,14 +163,15 @@ namespace ActionNote.App.ViewModels
                 await StartProgressAsync(_localizer.Get("Progress.Syncing"));
 
                 // sync notes
-                if (await _dataService.SyncNotesAsync())
+                var syncResult = await _dataService.SyncNotesAsync();
+                if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
                 {
                     await _dataService.UploadMissingAttachements();
                     await _dataService.DownloadMissingAttachements();
 
                     await ReloadDataAsync();
                 }
-                else
+                else if (syncResult == SyncResult.Failed)
                 {
                     await _dialogService.ShowAsync(_localizer.Get("Message.SyncFailed"),
                         _localizer.Get("Message.Title.Warning"));

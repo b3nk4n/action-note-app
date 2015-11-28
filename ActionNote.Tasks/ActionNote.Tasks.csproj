@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionTriggeredBackgroundTask.cs" />
+    <Compile Include="AutoSyncBackgroundTask.cs" />
     <Compile Include="ActionBarChangedBackgroundTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
