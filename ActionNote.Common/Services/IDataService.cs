@@ -12,6 +12,14 @@ namespace ActionNote.Common.Services
         Failed
     }
 
+    public enum UpdateResult
+    {
+        Success,
+        Deleted,
+        Nop,
+        Failed
+    }
+
     /// <summary>
     /// Note data service interface, to build a facade around notes repository and archive repository.
     /// </summary>
@@ -60,7 +68,7 @@ namespace ActionNote.Common.Services
 
         Task<bool> AddNoteAsync(NoteItem item);
 
-        Task<bool> UpdateNoteAsync(NoteItem item);
+        Task<UpdateResult> UpdateNoteAsync(NoteItem item);
 
         Task<SyncResult> SyncNotesAsync();
 

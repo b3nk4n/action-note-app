@@ -72,8 +72,7 @@ namespace ActionNote.App.ViewModels
             },
             () =>
             {
-                //return (await _dataService.NotesCount()) > 0;
-                return true; // TODO: count without async?
+                return _dataService.NotesCount > 0;
             });
 
             AddCommand = new DelegateCommand(() =>
@@ -188,10 +187,6 @@ namespace ActionNote.App.ViewModels
                 {
                     await _dialogService.ShowAsync(_localizer.Get("Message.SyncFailed"),
                         _localizer.Get("Message.Title.Warning"));
-                }
-                else if (syncResult == SyncResult.Nop)
-                {
-                    // TODO: check AppSettings.UserId.Value and ask for login?
                 }
 
                 await StopProgressAsync();

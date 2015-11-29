@@ -52,7 +52,7 @@ namespace ActionNote.Tasks
                         foreach (var noteId in diff)
                         {
                             await _tilePinService.UnpinAsync(noteId);
-                            await _dataService.MoveToArchivAsync(await _dataService.GetNote(noteId));
+                            await _dataService.MoveToArchivAsync(await _dataService.GetNote(noteId)); // TODO: moveAllToArchive method? --> only 1 REST API call
                             _dataService.FlagNotesHaveChangedInBackground();
                             _dataService.FlagArchiveHasChangedInBackground();
                         }

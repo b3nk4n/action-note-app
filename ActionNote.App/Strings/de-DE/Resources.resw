@@ -205,6 +205,10 @@
     <value>Schaut etwas leer aus, nicht wahr? Eine Notiz ohne Inhalt kann leider nicht gespeichert werden.</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>Diese Notiz wurde bereits auf einem anderen Gerät gelöscht. Bitte führe eine manuelle Synchronisation der der Daten aus.</value>
+    <comment>MessageDialog</comment>
+  </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
     <value>Die Online-Synchronisation benötigt die Anmeldung und Berechtigung für die Identifikation. Wir haben diese Funktion nun vorläuftig deaktiviert.
 Diese kann in den Einstellungen jederzeit wieder aktiviert werden.</value>

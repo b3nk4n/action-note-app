@@ -206,6 +206,10 @@ ment</value>
     <value>Looks empty, right? A note without content cannot be saved.</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>This note has been already deleted on another device. Your device seems to be out of sync. Please perform a synchronization manually.</value>
+    <comment>MessageDialog</comment>
+  </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
     <value>The online synchronization requires the login for your identification. We have deactivated this feature for you.
 You can reactivate it in the settings.</value>

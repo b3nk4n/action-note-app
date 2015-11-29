@@ -231,16 +231,22 @@ namespace ActionNote.App.ViewModels
                 noteItem.Title = _commonLocalizer.Get("QuickNote");
             }
 
+            var updateDeleted = false;
             if (await _dataService.ContainsNote(noteItem.Id))
             {
-                await _dataService.UpdateNoteAsync(noteItem);
+                if (await _dataService.UpdateNoteAsync(noteItem) == UpdateResult.Deleted)
+                {
+                    updateDeleted = true;
+                    await _dialogService.ShowAsync(_localizer.Get("Message.DeletedOutside"), _localizer.Get("Message.Title.Warning"));
+                }
             }
             else
             {
                 await _dataService.AddNoteAsync(noteItem);
             }
 
-            if (noteItem.HasAttachement &&
+            if (!updateDeleted &&
+                noteItem.HasAttachement &&
                 noteItem.HasAttachementChanged &&
                 _dataService.IsSynchronizationActive)
             {

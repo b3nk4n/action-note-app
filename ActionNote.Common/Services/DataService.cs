@@ -127,21 +127,12 @@ namespace ActionNote.Common.Services
                         return true;
                     }
                 }
-
-                // sync error handling
-                //await Unsynced.Load(); // ensure loaded
-                //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Added);
-                //if (Unsynced.Contains(item.Id))
-                //    Unsynced.Update(unsyncedItem);
-                //else
-                //    Unsynced.Add(unsyncedItem);    
-                //await Unsynced.Save(unsyncedItem);
             }
             
             return false;
         }
 
-        public async Task<bool> UpdateNoteAsync(NoteItem item)
+        public async Task<UpdateResult> UpdateNoteAsync(NoteItem item)
         {
             // ensure loaded
             if (!Notes.HasLoaded)
@@ -154,48 +145,42 @@ namespace ActionNote.Common.Services
             {
                 Notes.Update(item);
 
-                if (IsSynchronizationActive &&
-                    _networkInfoService.HasInternet)
+                if (IsSynchronizationActive)
                 {
-                    var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/update/" + UserId), item, DEFAULT_TIMEOUT);
-
-                    if (res != null &&
-                        res.IsSuccessStatusCode)
+                    if (_networkInfoService.HasInternet)
                     {
-                        var jsonResponse = await res.Content.ReadAsStringAsync();
-                        var serverResponse = _serializationService.DeserializeJson<ServerResponse>(jsonResponse);
+                        var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/update/" + UserId), item, DEFAULT_TIMEOUT);
 
-                        if (serverResponse != null)
+                        if (res != null &&
+                            res.IsSuccessStatusCode)
                         {
-                            if (serverResponse.Message == ServerResponse.DELETED)
+                            var jsonResponse = await res.Content.ReadAsStringAsync();
+                            var serverResponse = _serializationService.DeserializeJson<ServerResponse>(jsonResponse);
+
+                            if (serverResponse != null)
                             {
-                                // TODO: show dialog: data has been deleted on other device. Device might be out of sync
-                                // --> show dialog outside of service ... return server response message?
-
-                                await MoveToArchivInternalAsync(item);
-                                return false;
+                                if (serverResponse.Message == ServerResponse.DELETED)
+                                {
+                                    await MoveToArchivInternalAsync(item);
+                                    return UpdateResult.Deleted;
+                                }
                             }
-                        }
 
-                        return true;
+                            return UpdateResult.Success;
+                        }
+                        else
+                        {
+                            return UpdateResult.Failed;
+                        }
                     }
                     else
                     {
-                        return false;
+                        return UpdateResult.Failed;
                     }
                 }
-
-                // sync error handling
-                //await Unsynced.Load(); // ensure loaded
-                //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Updated);
-                //if (Unsynced.Contains(item.Id))
-                //    Unsynced.Update(unsyncedItem);
-                //else
-                //    Unsynced.Add(unsyncedItem);
-                //await Unsynced.Save(unsyncedItem);
             }
             
-            return true;
+            return UpdateResult.Nop;
         }
 
         public async Task<SyncResult> SyncNotesAsync()
@@ -420,14 +405,6 @@ namespace ActionNote.Common.Services
                 }
             }
 
-            // sync error handling
-            //await Unsynced.Load(); // ensure loaded
-            //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileDownload);
-            //if (Unsynced.Contains(item.Id))
-            //    Unsynced.Update(unsyncedItem);
-            //else
-            //    Unsynced.Add(unsyncedItem);
-            //await Unsynced.Save(unsyncedItem);
             return false;
         }
 
@@ -471,17 +448,6 @@ namespace ActionNote.Common.Services
                         res.IsSuccessStatusCode)
                     {
                         return true;
-                    }
-                    else
-                    {
-                        // sync error handling
-                        //await Unsynced.Load(); // ensure loaded
-                        //var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.Deleted);
-                        //if (Unsynced.Contains(item.Id))
-                        //    Unsynced.Update(unsyncedItem);
-                        //else
-                        //    Unsynced.Add(unsyncedItem);
-                        //await Unsynced.Save(unsyncedItem);
                     }
                 }
 
