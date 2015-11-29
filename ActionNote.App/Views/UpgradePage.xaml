@@ -59,7 +59,7 @@
                                 </Border>
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" MaxWidth="142" HorizontalAlignment="Left" Margin="8,8,8,8" />
-                                    <TextBlock Text="{Binding Status}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" FontSize="20" Margin="8,0,8,8" />
+                                    <TextBlock Text="{Binding Status}" FontSize="20" FontWeight="Light" Margin="8,0,8,8" />
                                 </StackPanel>
                             </StackPanel>
 
@@ -67,8 +67,8 @@
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal" Margin="0,8">
-                            <Button x:Uid="Upgrade" Content="Upgrade" Command="{Binding UpgradeCommand}" Margin="8,8,4,8" MinWidth="100" Background="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-                            <Button x:Uid="ReadMore" Content="Read more..." Command="{Binding ReadMoreCommand}" Margin="4,8,8,8" MinWidth="100" />
+                            <Button x:Uid="Upgrade" Content="Upgrade" Command="{Binding UpgradeCommand}" Margin="8,8,4,8" MinWidth="104" Background="{ThemeResource SystemControlBackgroundAccentBrush}" Foreground="White"/>
+                            <Button x:Uid="ReadMore" Content="Read more..." Command="{Binding ReadMoreCommand}" Margin="4,8,8,8" MinWidth="104" />
                         </StackPanel>
                     </StackPanel>
 
@@ -83,7 +83,7 @@
                                 </FontIcon>
                             </StackPanel>
                             <TextBlock Text="YOU" FontSize="130" Margin="0,-56,0,16" TextAlignment="Center" />
-                            <TextBlock x:Uid="UpgradeLove" Text="FOR PURCHASING THE PRO VERSION" FontSize="16" Margin="0,-24,0,0" TextAlignment="Center" />
+                            <TextBlock x:Uid="UpgradeLove" Text="FOR PURCHASING THE PRO VERSION" FontSize="16" FontWeight="Bold" Margin="0,-24,0,0" TextAlignment="Center" />
                         </StackPanel>
                     </Grid>
                 </Grid>

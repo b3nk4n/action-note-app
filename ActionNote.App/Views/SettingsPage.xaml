@@ -37,7 +37,7 @@
                     <ToggleSwitch x:Uid="SettingsAutoSave" Header="Auto save notes" IsOn="{Binding SaveNoteOnBack, Mode=TwoWay}" Margin="4" />
                     
                     <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4,12,4,4" />
-                    <ToggleSwitch x:Name="ShowNotesInActionCenterToggle" x:Uid="SettingsSyncNotes" Header="Show notes" IsOn="{Binding ShowNotesInActionCenter, Mode=TwoWay}" Margin="4" />
+                    <ToggleSwitch x:Name="ShowNotesInActionCenterToggle" x:Uid="SettingsShowNotes" Header="Show notes" IsOn="{Binding ShowNotesInActionCenter, Mode=TwoWay}" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
                     <ComboBox x:Uid="OrderNotesBy" Header="Order notes by" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}"
                               ItemsSource="{Binding SortInActionCenterStringSource.ItemsSource}" SelectedItem="{Binding SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">

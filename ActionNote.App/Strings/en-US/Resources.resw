@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note is not just note taking app. It integrates with your Action Center and gives you the fastest access to all of your notes. Even across all your Windows 10 devices. </value>
+    <value>Action Note is not just another note taking app. It integrates with your Action Center and gives you the fastest access to all of your notes. Even across all your Windows 10 devices. </value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">

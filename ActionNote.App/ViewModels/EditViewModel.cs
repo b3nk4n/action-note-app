@@ -90,8 +90,7 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                //GoBackToMainPageWithoutBackEvent();
-                NavigationService.Refresh();
+                GoBackToMainPageWithoutBackEvent();
             });
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
