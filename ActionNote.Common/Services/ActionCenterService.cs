@@ -48,7 +48,7 @@ namespace ActionNote.Common.Services
 
             if (containsQuickNotes)
             {
-                await Task.Delay(10);
+                await Task.Delay(100);
                 AddQuickNotes();
             }  
         }
@@ -79,8 +79,7 @@ namespace ActionNote.Common.Services
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                await Task.Delay(10);
-
+                await Task.Delay(100);
                 AddQuickNotes();
             }
         }
@@ -91,7 +90,7 @@ namespace ActionNote.Common.Services
             var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
             toastNotification.SuppressPopup = true;
             toastNotification.Group = GROUP_NOTE;
-            toastNotification.Tag = note.ShortId; // just to find the notificication within this service,.shortid because it has a limited size
+            toastNotification.Tag = note.ShortId; // just to find the notificication within this service. Shortid because it has a limited size
             _toastService.Show(toastNotification);
         }
 

@@ -32,9 +32,6 @@ namespace ActionNote.Tasks
             if (details != null &&
                 AppSettings.ShowNotesInActionCenter.Value)
             {
-                // load data
-                //await _dataService.Notes.Load();
-
                 if (details.Argument == "quickNote")
                 {
                     if (details.UserInput.ContainsKey("content"))

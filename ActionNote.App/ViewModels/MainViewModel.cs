@@ -58,12 +58,12 @@ namespace ActionNote.App.ViewModels
                     return;
 
                 // unpin all tiles
-                foreach (var noteItem in await _dataService.GetAllNotes())
+                var allNotes = await _dataService.GetAllNotes();
+                foreach (var noteItem in allNotes)
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
-
-                    await _dataService.MoveToArchivAsync(noteItem); // TODO: moveAllToArchive method? --> only 1 REST API call
                 }
+                await _dataService.MoveRangeToArchivAsync(allNotes);
                 NoteItems.Clear();
 
                 SelectedNote = null;
