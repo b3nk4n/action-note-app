@@ -751,7 +751,8 @@ namespace ActionNote.Common.Services
             get
             {
                 return IsProVersion &&
-                    !IsUserIdValid;
+                    !IsUserIdValid &&
+                    AppSettings.SyncEnabled.Value;
             }
         }
 
@@ -777,5 +778,7 @@ namespace ActionNote.Common.Services
         }
 
         public bool HasSyncedInThisSession { get; private set; } = false;
+
+        public bool HasDeniedToLoginInThisSession { get; set; } = false;
     }
 }

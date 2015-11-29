@@ -124,5 +124,10 @@ namespace ActionNote.Common.Services
         /// to ensure not to auto-synced multiple times during one session.
         /// </summary>
         bool HasSyncedInThisSession { get; }
+
+        /// <summary>
+        /// Gets or sets whether the user already clicked NO to login in this session.
+        /// </summary>
+        bool HasDeniedToLoginInThisSession { get; set; } 
     }
 }

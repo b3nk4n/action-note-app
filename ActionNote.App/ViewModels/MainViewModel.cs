@@ -219,7 +219,8 @@ namespace ActionNote.App.ViewModels
 
         private async Task<bool> CheckUserLogin()
         {
-            if (_dataService.IsUserLoginPending)
+            if (_dataService.IsUserLoginPending &&
+               !_dataService.HasDeniedToLoginInThisSession)
             {
                 var dialogResult = await _dialogService.ShowAsync(
                     _localizer.Get("Message.LoginPending"),
@@ -229,13 +230,22 @@ namespace ActionNote.App.ViewModels
                     new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
 
                 if (dialogResult.Id.ToString().Equals("n"))
+                {
+                    _dataService.HasDeniedToLoginInThisSession = true;
                     return false;
+                } 
 
                 if (!await _dataService.CheckUserAndLogin())
                 {
                     await _dialogService.ShowAsync(
                         _localizer.Get("Message.LoginFailedInfo"),
                         _localizer.Get("Message.Title.Information"));
+                    return false;
+                }
+                else
+                {
+                    if (!_dataService.HasSyncedInThisSession)
+                        await ExecuteSync();
                 }
 
                 return true;

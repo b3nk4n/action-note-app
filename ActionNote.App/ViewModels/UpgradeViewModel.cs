@@ -50,7 +50,7 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            if (_dataService.IsProVersion)
+            if (!_dataService.IsProVersion)
             {
                 var items = await _licenseService.LoadProductsAsync(new[] { AppConstants.IAP_PRO_VERSION }, _localizer.Get("IAP.Purchased"));
                 // TODO: IAP simulation not working?!

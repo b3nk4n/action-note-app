@@ -51,7 +51,7 @@
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid Margin="16">
-                    <StackPanel>
+                    <StackPanel Visibility="{Binding ShowHeartBeat, Converter={StaticResource boolToVisConv}, ConverterParameter=!}">
                         <StackPanel DataContext="{Binding Product}">
                             <StackPanel Orientation="Horizontal">
                                 <Border Background="{ThemeResource SystemControlBackgroundAccentBrush}" Margin="8" Height="104" Width="104">

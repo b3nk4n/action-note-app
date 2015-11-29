@@ -59,7 +59,7 @@ namespace ActionNote.Tasks
 
                             _dataService.FlagNotesHaveChangedInBackground();
                             _dataService.FlagArchiveHasChangedInBackground();
-                            await _dataService.MoveRangeToArchiveAsync(notes);
+                            await _dataService.MoveRangeToArchiveAsync(diff);
                         }
 
                         if (AppSettings.QuickNotesEnabled.Value &&
