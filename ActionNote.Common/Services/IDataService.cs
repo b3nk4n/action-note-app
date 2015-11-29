@@ -111,5 +111,11 @@ namespace ActionNote.Common.Services
         /// Gets whether the data service runs as the pro version.
         /// </summary>
         bool IsProVersion { get; }
+
+        /// <summary>
+        /// Gets whether a synchronization has been performed in this session. Used by auto sync
+        /// to ensure not to auto-synced multiple times during one session.
+        /// </summary>
+        bool HasSyncedInThisSession { get; }
     }
 }

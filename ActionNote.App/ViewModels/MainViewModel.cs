@@ -200,6 +200,19 @@ namespace ActionNote.App.ViewModels
             await ReloadDataAsync();
 
             await CheckUserLogin();
+
+            await CheckAutoSync();
+        }
+
+        private async Task CheckAutoSync()
+        {
+            if (_dataService.IsSynchronizationActive &&
+                            AppSettings.SyncOnStart.Value &&
+                            !_dataService.HasSyncedInThisSession)
+            {
+                await new MessageDialog("auto sync", "xxx").ShowAsync();
+                await ExecuteSync();
+            }
         }
 
         private async Task<bool> CheckUserLogin()

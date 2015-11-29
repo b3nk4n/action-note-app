@@ -188,6 +188,9 @@ namespace ActionNote.Common.Services
             if (!IsSynchronizationActive)
                 return SyncResult.Nop;
 
+            HasSyncedInThisSession = true;
+            await Task.Delay(3000); // TODO remove
+
             if (!_networkInfoService.HasInternet)
             {
                 // no error handling needed here
@@ -648,5 +651,7 @@ namespace ActionNote.Common.Services
 #endif
             }
         }
+
+        public bool HasSyncedInThisSession { get; private set; } = false;
     }
 }

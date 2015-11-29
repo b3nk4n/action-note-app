@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ActionNote.Common;
-using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Mvvm;
@@ -9,7 +8,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using UWPCore.Framework.Controls;
 using UWPCore.Framework.Common;
-using UWPCore.Framework.Store;
 using ActionNote.App.Views;
 
 namespace ActionNote.App.ViewModels
