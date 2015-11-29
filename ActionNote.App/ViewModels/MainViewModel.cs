@@ -210,7 +210,6 @@ namespace ActionNote.App.ViewModels
                             AppSettings.SyncOnStart.Value &&
                             !_dataService.HasSyncedInThisSession)
             {
-                await new MessageDialog("auto sync", "xxx").ShowAsync();
                 await ExecuteSync();
             }
         }

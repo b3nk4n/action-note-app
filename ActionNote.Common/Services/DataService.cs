@@ -189,7 +189,6 @@ namespace ActionNote.Common.Services
                 return SyncResult.Nop;
 
             HasSyncedInThisSession = true;
-            await Task.Delay(3000); // TODO remove
 
             if (!_networkInfoService.HasInternet)
             {
