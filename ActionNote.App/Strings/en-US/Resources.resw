@@ -304,6 +304,10 @@ Would you like to login now?</value>
     <value>Read aloud</value>
     <comment>EditPage</comment>
   </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>Read more...</value>
+    <comment>UpgradePage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synchronize across all devices</value>
     <comment>SettingsPage</comment>
@@ -383,6 +387,14 @@ Would you like to login now?</value>
   <data name="Unpin.Label" xml:space="preserve">
     <value>Unpin</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>Upgrade</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>FOR PURCHASING THE PRO VERSION</value>
+    <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
     <value>UPGRADE</value>

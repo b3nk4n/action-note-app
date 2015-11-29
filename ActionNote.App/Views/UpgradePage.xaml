@@ -7,6 +7,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     mc:Ignorable="d">
+    <uwpcControls:UniversalPage.Resources>
+        <Storyboard x:Name="HeartBeat">
+            <DoubleAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="heart">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames RepeatBehavior="Forever" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="heart">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </uwpcControls:UniversalPage.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -21,6 +49,45 @@
         </uwpcControls:PageHeader>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Margin="16">
+                    <StackPanel>
+                        <StackPanel DataContext="{Binding Product}">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Background="{ThemeResource SystemControlBackgroundAccentBrush}" Margin="8" Height="104" Width="104">
+                                    <Image Source="{Binding ImageUri}" />
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" MaxWidth="142" HorizontalAlignment="Left" Margin="8,8,8,8" />
+                                    <TextBlock Text="{Binding Status}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" FontSize="20" Margin="8,0,8,8" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Text="{Binding Description}" Style="{StaticResource UWPCoreBodyTextBlockStyle}" TextWrapping="Wrap" MaxWidth="520" HorizontalAlignment="Left" Margin="8,16" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,8">
+                            <Button x:Uid="Upgrade" Content="Upgrade" Command="{Binding UpgradeCommand}" Margin="8,8,4,8" MinWidth="100" Background="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+                            <Button x:Uid="ReadMore" Content="Read more..." Command="{Binding ReadMoreCommand}" Margin="4,8,8,8" MinWidth="100" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="{Binding ShowHeartBeat, Converter={StaticResource boolToVisConv}}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-64,0,0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                                <TextBlock Text="I" FontSize="172" VerticalAlignment="Center"/>
+                                <FontIcon x:Name="heart" Glyph="{StaticResource Heart}" FontSize="140" VerticalAlignment="Center" Margin="32,24,0,0" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" RenderTransformOrigin="0.5,0.5">
+                                    <FontIcon.RenderTransform>
+                                        <CompositeTransform/>
+                                    </FontIcon.RenderTransform>
+                                </FontIcon>
+                            </StackPanel>
+                            <TextBlock Text="YOU" FontSize="130" Margin="0,-56,0,16" TextAlignment="Center" />
+                            <TextBlock x:Uid="UpgradeLove" Text="FOR PURCHASING THE PRO VERSION" FontSize="16" Margin="0,-24,0,0" TextAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </uwpcControls:UniversalPage>

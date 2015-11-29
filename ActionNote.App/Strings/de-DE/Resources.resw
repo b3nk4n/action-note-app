@@ -303,6 +303,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Vorlesen</value>
     <comment>EditPage</comment>
   </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>Mehr erfahren...</value>
+    <comment>UpgradePage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synchronisiere mit allen Geräten</value>
     <comment>SettingsPage</comment>
@@ -383,6 +387,14 @@ eingabe</value>
   <data name="Unpin.Label" xml:space="preserve">
     <value>Von „Start“ lösen</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>Freischalten</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>FÜR DEN KAUF DER PRO VERSION</value>
+    <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
     <value>ERWEITERUNGEN</value>
