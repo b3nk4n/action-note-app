@@ -29,7 +29,7 @@ namespace ActionNote.Tasks
 
             // wait to ensure ActionTriggeredBackgroundTask is running first, that restores items that have
             // been deleted by clicking on them.
-            await Task.Delay(1000);
+            await Task.Delay(1000); // TODO: check what happens if removed? Or is the time still ok due to slow online sync?
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
 

@@ -271,7 +271,7 @@ namespace ActionNote.Common.Services
                             if (note != null)
                                 unsyncedAddNotes.Add(note);
                         }
-                        // TODO: add range method ?
+
                         var addResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/addrange/" + UserId), unsyncedAddNotes, DEFAULT_TIMEOUT);
 
                         if (addResult != null &&

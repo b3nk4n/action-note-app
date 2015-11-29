@@ -134,6 +134,11 @@ namespace ActionNote.App
                     {
                         parameter = AppConstants.PARAM_ID + id;
                     }
+                    else
+                    {
+                        // note might have been deleted in the background
+                        pageType = DefaultPage;
+                    }
                 }
             }
             else if (args.Kind == ActivationKind.Launch)
@@ -146,8 +151,17 @@ namespace ActionNote.App
 
                     if (lauchArgs != null)
                     {
-                        pageType = typeof(EditPage);
-                        parameter = AppConstants.PARAM_ID + lauchArgs.Arguments;
+                        var noteId = lauchArgs.Arguments;
+                        if (await _dataService.GetNote(noteId) != null)
+                        {
+                            pageType = typeof(EditPage);
+                            parameter = AppConstants.PARAM_ID + noteId;
+                        }
+                        else
+                        {
+                            // note might have been deleted in the background
+                            pageType = DefaultPage;
+                        }
                     }
                 }
             }
