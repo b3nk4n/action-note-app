@@ -118,9 +118,8 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".png");
                 _blockBackEvent = true;
                 _actionCenterService.StartTemporaryRefreshBlocking(5);
-                StorageFile file = await picker.PickSingleFileAsync(); // TODO: not correctly working on mobile yet!
+                StorageFile file = await picker.PickSingleFileAsync();
                 _blockBackEvent = false;
-                // read: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/13002ba6-6e59-47b8-a746-c05525953c5a/uwpfileopenpicker-bugs-in-win-10-mobile-when-not-debugging?forum=wpdevelop
 
                 if (file != null)
                 {

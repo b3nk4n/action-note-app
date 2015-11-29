@@ -49,12 +49,17 @@ namespace ActionNote.Tasks
                     {
                         var diff = _actionCenterService.DiffWithNotesInActionCenter(notes);
 
-                        foreach (var noteId in diff)
+                        if (diff.Count > 0)
                         {
-                            await _tilePinService.UnpinAsync(noteId);
-                            await _dataService.MoveToArchivAsync(await _dataService.GetNote(noteId)); // TODO: moveAllToArchive method? --> only 1 REST API call
+                            // unpin deleted notes
+                            foreach (var note in diff)
+                            {
+                                await _tilePinService.UnpinAsync(note.Id);
+                            }
+
                             _dataService.FlagNotesHaveChangedInBackground();
                             _dataService.FlagArchiveHasChangedInBackground();
+                            await _dataService.MoveRangeToArchivAsync(notes);
                         }
 
                         if (AppSettings.QuickNotesEnabled.Value &&

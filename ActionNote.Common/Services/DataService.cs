@@ -45,7 +45,7 @@ namespace ActionNote.Common.Services
             Notes.BaseFolder = "data/";
             Archiv = archivRepository;
             Archiv.BaseFolder = "archiv/";
-            Unsynced = unsyncedRepository; // TODO: make sure to reload after app resume? (like notes and archive)
+            Unsynced = unsyncedRepository;
             Unsynced.BaseFolder = "unsynced/";
 
             _localStorageService = localStorageService;
@@ -232,7 +232,7 @@ namespace ActionNote.Common.Services
                     if (!Archiv.HasLoaded)
                         await Archiv.Load();
 
-                    var unsyncedDeleteIds = new List<string>();
+                    var unsyncedNotesToDelete = new List<NoteItem>();
                     foreach (var note in syncDataResult.Added)
                     {
                         if (!Notes.Contains(note.Id))
@@ -246,7 +246,7 @@ namespace ActionNote.Common.Services
                             }
                             else
                             {
-                                unsyncedDeleteIds.Add(note.Id);
+                                unsyncedNotesToDelete.Add(note);
                             }
                         }
                     }
@@ -271,7 +271,7 @@ namespace ActionNote.Common.Services
                             if (note != null)
                                 unsyncedAddNotes.Add(note);
                         }
-
+                        // TODO: add range method ?
                         var addResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/addrange/" + UserId), unsyncedAddNotes, DEFAULT_TIMEOUT);
 
                         if (addResult != null &&
@@ -285,19 +285,9 @@ namespace ActionNote.Common.Services
                         }
                     }
 
-                    if (unsyncedDeleteIds.Count > 0)
+                    if (unsyncedNotesToDelete.Count > 0)
                     {
-                        var deleteResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId), unsyncedDeleteIds, DEFAULT_TIMEOUT);
-
-                        if (deleteResult != null &&
-                            deleteResult.IsSuccessStatusCode)
-                        {
-                            // do noting
-                        }
-                        else
-                        {
-                            // ignore error and retry the next time
-                        }
+                        await MoveRangeToArchivAsync(unsyncedNotesToDelete);
                     }
                 }
 
@@ -458,6 +448,44 @@ namespace ActionNote.Common.Services
 
             // here we did not even moved the file locally
             return false;
+        }
+
+        public async Task<bool> MoveRangeToArchivAsync(IList<NoteItem> items)
+        {
+            var idsToDeleted = new List<string>();
+            foreach (var note in items)
+            {
+                if (!await MoveToArchivInternalAsync(note))
+                {
+                    // stop, as soon as one item could not be deleted
+                    return false;
+                }
+                idsToDeleted.Add(note.Id);
+            }
+
+            if (idsToDeleted.Count > 0)
+            {
+                if (IsSynchronizationActive &&
+                _networkInfoService.HasInternet)
+                {
+                    // mark notes as deleted
+                    var deleteResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId), idsToDeleted, DEFAULT_TIMEOUT);
+
+                    if (deleteResult != null &&
+                        deleteResult.IsSuccessStatusCode)
+                    {
+                        // do noting
+                        return true;
+                    }
+                    else
+                    {
+                        // ignore error and retry the next time
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private async Task<bool> MoveToArchivInternalAsync(NoteItem item)

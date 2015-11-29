@@ -116,18 +116,17 @@ namespace ActionNote.Common.Services
             _toastService.RemoveGroupeFromHistory(GROUP_QUICK_NOTE);
         }
 
-        public IList<string> DiffWithNotesInActionCenter(IList<NoteItem> noteItems)
+        public IList<NoteItem> DiffWithNotesInActionCenter(IList<NoteItem> noteItems)
         {
-            // find IDs to remove
-            var idsToRemove = new List<string>();
+            var notesToRemove = new List<NoteItem>();
             foreach (var item in noteItems)
             {
                 var toastItemsInHistory = _toastService.GetByTagFromHistory(item.ShortId);
                 if (toastItemsInHistory == null || toastItemsInHistory.Count() == 0)
-                    idsToRemove.Add(item.Id);
+                    notesToRemove.Add(item);
             }
 
-            return idsToRemove;
+            return notesToRemove;
         }
 
         public void StartTemporaryRemoveBlocking(int seconds)

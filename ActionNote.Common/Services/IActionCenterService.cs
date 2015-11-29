@@ -47,7 +47,7 @@ namespace ActionNote.Common.Services
         /// </summary>
         /// <param name="noteItems">The notes items that are in the repository.</param>
         /// <returns>Returns the list of IDs that have to be moved to trash.</returns>
-        IList<string> DiffWithNotesInActionCenter(IList<NoteItem> noteItems);
+        IList<NoteItem> DiffWithNotesInActionCenter(IList<NoteItem> noteItems);
 
         /// <summary>
         /// Starts the remove blicking timer via a global setting.

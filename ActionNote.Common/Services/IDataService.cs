@@ -53,6 +53,8 @@ namespace ActionNote.Common.Services
         /// <param name="noteItem">The note item to delete.</param>
         Task<bool> MoveToArchivAsync(NoteItem noteItem);
 
+        Task<bool> MoveRangeToArchivAsync(IList<NoteItem> items);
+
         /// <summary>
         /// Cleans up the unreferences attachement files.
         /// </summary>
