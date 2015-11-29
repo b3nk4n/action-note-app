@@ -8,6 +8,7 @@ using System;
 using Windows.UI.StartScreen;
 using ActionNote.Common.Helpers;
 using Windows.UI;
+using System.Collections.Generic;
 
 namespace ActionNote.Common.Services
 {
@@ -89,6 +90,19 @@ namespace ActionNote.Common.Services
         public async Task UnpinAsync(string noteId)
         {
             await _tileService.UnpinAsync(noteId);
+        }
+
+        public async Task UnpinUnreferencedTilesAsync(IList<string> noteIds)
+        {
+            var allTiles = await _tileService.GetAllSecondaryTilesAsync();
+
+            foreach (var tile in allTiles)
+            {
+                if (!noteIds.Contains(tile.Arguments))
+                {
+                    await _tileService.UnpinAsync(tile.TileId);
+                }
+            }
         }
 
         private AdaptiveTileModel GetTileSmallModel(NoteItem noteItem)

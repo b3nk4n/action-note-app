@@ -14,10 +14,10 @@ namespace ActionNote.Common
 
 #if DEBUG
         // local
-        public const string SERVER_BASE_PATH = "http://localhost:64302/";
+        //public const string SERVER_BASE_PATH = "http://localhost:64302/";
 
         // productive
-        //public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
+        public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
 #else
         // productive on RELEASE
         public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";

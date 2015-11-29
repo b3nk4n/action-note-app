@@ -14,6 +14,7 @@ namespace ActionNote.Tasks
     {
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
+        private ITilePinService _tilePinService;
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
@@ -23,6 +24,7 @@ namespace ActionNote.Tasks
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<IDataService>();
+            _tilePinService = injector.Get<ITilePinService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -43,6 +45,12 @@ namespace ActionNote.Tasks
                 var syncResult = await _dataService.SyncNotesAsync();
                 if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
                 {
+                    if (syncResult == SyncResult.Success)
+                    {
+                        _dataService.FlagNotesHaveChangedInBackground();
+                        _dataService.FlagArchiveHasChangedInBackground();
+                    }
+
                     await _dataService.UploadMissingAttachements();
                     var downloadedAFile = await _dataService.DownloadMissingAttachements();
 
@@ -50,6 +58,9 @@ namespace ActionNote.Tasks
                     {
                         var noteItems = await _dataService.GetAllNotes();
                         await _actionCenterService.RefreshAsync(noteItems);
+
+                        var noteIds = await _dataService.GetAllNoteIds();
+                        await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
                     }
                 }
             }

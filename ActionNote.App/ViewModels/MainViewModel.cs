@@ -182,6 +182,9 @@ namespace ActionNote.App.ViewModels
                     await _dataService.DownloadMissingAttachements();
 
                     await ReloadDataAsync();
+
+                    var allNoteIds = await _dataService.GetAllNoteIds();
+                    await _tilePinService.UnpinUnreferencedTilesAsync(allNoteIds);
                 }
                 else if (syncResult == SyncResult.Failed)
                 {
