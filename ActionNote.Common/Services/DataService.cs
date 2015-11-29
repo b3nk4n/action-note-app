@@ -23,8 +23,8 @@ namespace ActionNote.Common.Services
 
         private IStorageService _localStorageService;
 
-        public INotesRepository Notes { get; private set; }
-        public INotesRepository Archiv { get; private set; }
+        private INotesRepository Notes { get; set; }
+        private INotesRepository Archive { get; set; }
         private IUnsyncedRepository Unsynced { get; set; }
 
         private IHttpService _httpService;
@@ -43,8 +43,8 @@ namespace ActionNote.Common.Services
         {
             Notes = notesRepository;
             Notes.BaseFolder = "data/";
-            Archiv = archivRepository;
-            Archiv.BaseFolder = "archiv/";
+            Archive = archivRepository;
+            Archive.BaseFolder = "archiv/";
             Unsynced = unsyncedRepository;
             Unsynced.BaseFolder = "unsynced/";
 
@@ -65,6 +65,15 @@ namespace ActionNote.Common.Services
             return Notes.GetAll();
         }
 
+        public async Task<IList<NoteItem>> GetAllArchives()
+        {
+            // ensure loaded
+            if (!Archive.HasLoaded)
+                await Archive.Load();
+
+            return Archive.GetAll();
+        }
+
         public async Task<IList<string>> GetAllNoteIds()
         {
             // ensure loaded
@@ -82,6 +91,17 @@ namespace ActionNote.Common.Services
             get
             {
                 return Notes.Count;
+            }
+        }
+
+        /// <summary>
+        /// Attention: It is not ensured, that the data has loaded!!!
+        /// </summary>
+        public int ArchivesCount
+        {
+            get
+            {
+                return Archive.Count;
             }
         }
 
@@ -229,15 +249,15 @@ namespace ActionNote.Common.Services
                     }
 
                     // ensure archiv data has loaded
-                    if (!Archiv.HasLoaded)
-                        await Archiv.Load();
+                    if (!Archive.HasLoaded)
+                        await Archive.Load();
 
                     var unsyncedNotesToDelete = new List<NoteItem>();
                     foreach (var note in syncDataResult.Added)
                     {
                         if (!Notes.Contains(note.Id))
                         {
-                            if (!Archiv.Contains(note.Id))
+                            if (!Archive.Contains(note.Id))
                             {
                                 // add when we are sure we did not delete it locally
                                 Notes.Add(note);
@@ -287,7 +307,7 @@ namespace ActionNote.Common.Services
 
                     if (unsyncedNotesToDelete.Count > 0)
                     {
-                        await MoveRangeToArchivAsync(unsyncedNotesToDelete);
+                        await MoveRangeToArchiveAsync(unsyncedNotesToDelete);
                     }
                 }
 
@@ -426,14 +446,14 @@ namespace ActionNote.Common.Services
             return downloadedAnything;
         }
 
-        public async Task<bool> MoveToArchivAsync(NoteItem item)
+        public async Task<bool> MoveToArchiveAsync(NoteItem item)
         {
             if (await MoveToArchivInternalAsync(item))
             {
                 if (IsSynchronizationActive &&
                     _networkInfoService.HasInternet)
                 {
-                    // mark notes as deleted
+                    // mark note as deleted
                     var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId + "/" + item.Id), DEFAULT_TIMEOUT);
 
                     if (res != null &&
@@ -450,7 +470,7 @@ namespace ActionNote.Common.Services
             return false;
         }
 
-        public async Task<bool> MoveRangeToArchivAsync(IList<NoteItem> items)
+        public async Task<bool> MoveRangeToArchiveAsync(IList<NoteItem> items)
         {
             var idsToDeleted = new List<string>();
             foreach (var note in items)
@@ -495,24 +515,101 @@ namespace ActionNote.Common.Services
                 await Notes.Load();
 
             // ensure archiv data has loaded
-            if (!Archiv.HasLoaded)
-                await Archiv.Load();
+            if (!Archive.HasLoaded)
+                await Archive.Load();
 
             // update the timestamp
             item.ChangedDate = DateTimeOffset.Now;
 
-            if (await Archiv.Save(item))
+            if (await Archive.Save(item))
             {
                 Notes.Remove(item);
 
-                if (Archiv.Contains(item.Id))
-                    Archiv.Update(item);
+                if (Archive.Contains(item.Id))
+                    Archive.Update(item);
                 else
-                    Archiv.Add(item);
+                    Archive.Add(item);
                 return true;
             }
             
             return false;
+        }
+
+        public async Task<bool> RemoveFromArchiveAsync(NoteItem item)
+        {
+            // ensure archiv data has loaded
+            if (!Archive.HasLoaded)
+                await Archive.Load();
+
+            if (IsSynchronizationActive)
+            {
+                if (_networkInfoService.HasInternet)
+                {
+                    // mark note as deleted
+                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId + "/" + item.Id), DEFAULT_TIMEOUT);
+
+                    if (res != null &&
+                        res.IsSuccessStatusCode)
+                    {
+                        Archive.Remove(item);
+                        return true;
+                    }
+                }
+
+                // can not delete, because it can ensure the server is delete-synced
+                return false;
+            }
+            else
+            {
+                Archive.Remove(item);
+                return true;
+            }
+        }
+
+        public async Task<bool> RemoveAllFromArchiveAsync()
+        {
+            // ensure archiv data has loaded
+            if (!Archive.HasLoaded)
+                await Archive.Load();
+
+            var items = Archive.GetAll();
+
+            if (IsSynchronizationActive)
+            {
+                if (_networkInfoService.HasInternet)
+                {
+                    var idsToDelete = new List<string>();
+
+                    foreach (var item in items)
+                    {
+                        idsToDelete.Add(item.Id);
+                    }
+
+                    // mark note as deleted
+                    var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId), idsToDelete, DEFAULT_TIMEOUT);
+
+                    if (res != null &&
+                        res.IsSuccessStatusCode)
+                    {
+                        foreach (var item in items)
+                        {
+                            Archive.Remove(item);
+                        }
+                        return true;
+                    }
+                }
+
+                // can not delete, because it can ensure the server is delete-synced
+                return false;
+            }
+            else
+            {
+                foreach (var item in items)
+                {
+                    Archive.Remove(item);
+                }
+                return true;
+            }
         }
 
         public async Task CleanUpAttachementFilesAsync()
@@ -530,10 +627,10 @@ namespace ActionNote.Common.Services
             }
 
             // ensure archiv data has loaded
-            if (!Archiv.HasLoaded)
-                await Archiv.Load(); 
+            if (!Archive.HasLoaded)
+                await Archive.Load(); 
 
-            foreach (var note in Archiv.GetAll())
+            foreach (var note in Archive.GetAll())
             {
                 if (note.HasAttachement)
                     referencedAttachements.Add(note.AttachementFile);
@@ -541,7 +638,7 @@ namespace ActionNote.Common.Services
 
             // ensure archiv data has loaded
             if (!Unsynced.HasLoaded)
-                await Archiv.Load();
+                await Archive.Load();
 
             var attachementFiles = await _localStorageService.GetFilesAsync(AppConstants.ATTACHEMENT_BASE_PATH);
 
@@ -590,11 +687,11 @@ namespace ActionNote.Common.Services
             if (_archiveChangedInBackgroundFlag.Value)
             {
                 _archiveChangedInBackgroundFlag.Value = false;
-                result = await Archiv.Reload();
+                result = await Archive.Reload();
             }
             else
             {
-                result = await Archiv.Load();
+                result = await Archive.Load();
             }
             return result;
         }

@@ -35,33 +35,45 @@ namespace ActionNote.App.ViewModels
             {
                 var result = await _dialogService.ShowAsync(
                     _localizer.Get("Message.ReallyDeleteAll"),
-                    _localizer.Get("Message.Title.Warning"),
+                    _localizer.Get("Message.Title.Attention"),
                     0, 1,
                     new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
                     new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
                 if (result.Id.ToString().Equals("n"))
                     return;
 
-                // TODO: ensure server knows about deleted items (else: sync problem!)
+                if (await _dataService.RemoveAllFromArchiveAsync())
+                {
+                    NoteItems.Clear();
 
-                _dataService.Archiv.Clear();
-                NoteItems.Clear();
-
-                SelectedNote = null;
+                    SelectedNote = null;
+                }
+                else
+                {
+                    await _dialogService.ShowAsync(
+                        _localizer.Get("Message.CouldNotDeleteArchive"),
+                        _localizer.Get("Message.Title.Warning"));
+                }
             },
             () =>
             {
-                return _dataService.Archiv.Count > 0;
+                return _dataService.ArchivesCount > 0;
             });
 
-            RemoveCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                // TODO: ensure server knows about deleted items  (else: sync problem!)
+                if (await _dataService.RemoveFromArchiveAsync(noteItem))
+                {
+                    NoteItems.Remove(noteItem);
 
-                _dataService.Archiv.Remove(noteItem);
-                NoteItems.Remove(noteItem);
-
-                SelectedNote = null;
+                    SelectedNote = null;
+                }
+                else
+                {
+                    await _dialogService.ShowAsync(
+                        _localizer.Get("Message.CouldNotDeleteArchive"),
+                        _localizer.Get("Message.Title.Warning"));
+                }
             },
             (noteItem) =>
             {
@@ -95,7 +107,7 @@ namespace ActionNote.App.ViewModels
             await _dataService.LoadArchiveAsync();
 
             NoteItems.Clear();
-            var data = _dataService.Archiv.GetAll();
+            var data = await _dataService.GetAllArchives();
 
             if (data != null)
             {

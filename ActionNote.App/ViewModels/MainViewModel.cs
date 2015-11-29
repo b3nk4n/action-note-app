@@ -50,7 +50,7 @@ namespace ActionNote.App.ViewModels
             {
                 var result = await _dialogService.ShowAsync(
                     _localizer.Get("Message.ReallyDeleteAll"),
-                    _localizer.Get("Message.Title.Warning"),
+                    _localizer.Get("Message.Title.Attention"),
                     0, 1,
                     new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
                     new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
@@ -63,7 +63,7 @@ namespace ActionNote.App.ViewModels
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
                 }
-                await _dataService.MoveRangeToArchivAsync(allNotes);
+                await _dataService.MoveRangeToArchiveAsync(allNotes);
                 NoteItems.Clear();
 
                 SelectedNote = null;
@@ -91,7 +91,7 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                if (await _dataService.MoveToArchivAsync(noteItem))
+                if (await _dataService.MoveToArchiveAsync(noteItem))
                 {
                     SelectedNote = null;
                     NoteItems.Remove(noteItem);

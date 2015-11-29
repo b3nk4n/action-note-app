@@ -95,7 +95,7 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                if (await _dataService.MoveToArchivAsync(noteItem))
+                if (await _dataService.MoveToArchiveAsync(noteItem))
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
 

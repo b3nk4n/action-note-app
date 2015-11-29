@@ -206,6 +206,10 @@ ment</value>
     <value>Looks empty, right? A note without content cannot be saved.</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>The delete process could not be performed, because the information could not be sent to the server. Please check your internet connection and try again later.</value>
+    <comment>ArchivePage</comment>
+  </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
     <value>This note has been already deleted on another device. Your device seems to be out of sync. Please perform a synchronization manually.</value>
     <comment>MessageDialog</comment>
@@ -235,6 +239,10 @@ Would you like to login now?</value>
   <data name="Message.SyncFailed" xml:space="preserve">
     <value>The synchronization process was not successful. Please check your internet connection or try again later.</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>Attention</value>
+    <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
     <value>Information</value>

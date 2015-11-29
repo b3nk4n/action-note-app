@@ -25,18 +25,6 @@ namespace ActionNote.Common.Services
     /// </summary>
     public interface IDataService
     {
-        /// <summary>
-        /// Gets the notes.
-        /// Indirect access here, bacause the notes are synched.
-        /// </summary>
-        //INotesRepository Notes { get; }
-
-        /// <summary>
-        /// Gets the notes archiv.
-        /// Direct access here, because the archive is not synced.
-        /// </summary>
-        INotesRepository Archiv { get; }
-
         Task<IList<string>> GetAllNoteIds();
 
         Task<IList<NoteItem>> GetAllNotes();
@@ -47,13 +35,30 @@ namespace ActionNote.Common.Services
 
         Task<bool> ContainsNote(string id);
 
+        Task<IList<NoteItem>> GetAllArchives();
+
+        int ArchivesCount { get; }
+
         /// <summary>
         /// Moves the note to the archive.
         /// </summary>
         /// <param name="noteItem">The note item to delete.</param>
-        Task<bool> MoveToArchivAsync(NoteItem noteItem);
+        Task<bool> MoveToArchiveAsync(NoteItem noteItem);
 
-        Task<bool> MoveRangeToArchivAsync(IList<NoteItem> items);
+        Task<bool> MoveRangeToArchiveAsync(IList<NoteItem> items);
+
+        /// <summary>
+        /// Removes the note permanently from archive.
+        /// </summary>
+        /// <param name="noteItem">The note item to delete.</param>
+        /// <returns>Returns true when delete was successfule, else nothing was deleted.</returns>
+        Task<bool> RemoveFromArchiveAsync(NoteItem noteItem);
+
+        /// <summary>
+        /// Removes all permanently from archive.
+        /// </summary>
+        /// <returns>Returns true when clear was successfule, else nothing was deleted.</returns>
+        Task<bool> RemoveAllFromArchiveAsync();
 
         /// <summary>
         /// Cleans up the unreferences attachement files.

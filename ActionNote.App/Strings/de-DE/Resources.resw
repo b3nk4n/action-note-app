@@ -205,6 +205,10 @@
     <value>Schaut etwas leer aus, nicht wahr? Eine Notiz ohne Inhalt kann leider nicht gespeichert werden.</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>Der Löschvorgang konnte nicht abgeschlossen werden, da die Information nicht an den Server übermittelt werden konnte. Bitte prüfen Sie die Internetverbindung und versuchen es später noch einmal.</value>
+    <comment>ArchivePage</comment>
+  </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
     <value>Diese Notiz wurde bereits auf einem anderen Gerät gelöscht. Bitte führe eine manuelle Synchronisation der der Daten aus.</value>
     <comment>MessageDialog</comment>
@@ -234,6 +238,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
   <data name="Message.SyncFailed" xml:space="preserve">
     <value>Die Synchronisation der Daten konnte nicht erfolgreich durchgeführt werden. Bitte prüfen Sie ihre Internet-Verbindung oder versichen Sie es später noch einmal.</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>Achtung</value>
+    <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
     <value>Information</value>
