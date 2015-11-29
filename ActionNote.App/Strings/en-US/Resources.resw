@@ -194,12 +194,26 @@ ment</value>
     <value>EDIT</value>
     <comment>EditPage</comment>
   </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>purchased</value>
+    <comment>IAP</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTES</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Looks empty, right? A note without content cannot be saved.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>The online synchronization requires the login for your identification. We have deactivated this feature for you.
+You can reactivate it in the settings.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>You have activated the online sychronization, but your login is still pending.
+Would you like to login now?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">

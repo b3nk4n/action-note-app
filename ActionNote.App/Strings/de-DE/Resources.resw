@@ -193,12 +193,26 @@
     <value>BEARBEITEN</value>
     <comment>EditPage</comment>
   </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>gekauft</value>
+    <comment>IAP</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTIZEN</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Schaut etwas leer aus, nicht wahr? Eine Notiz ohne Inhalt kann leider nicht gespeichert werden.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>Die Online-Synchronisation benötigt die Anmeldung und Berechtigung für die Identifikation. Wir haben diese Funktion nun vorläuftig deaktiviert.
+Diese kann in den Einstellungen jederzeit wieder aktiviert werden.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>Die Online-Synchronisation ist aktiviert, jedoch ist die Anmeldung noch ausstehend.
+Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
@@ -306,7 +320,7 @@
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
-    <value>Online Synchronisation</value>
+    <value>Online-Synchronisation</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">

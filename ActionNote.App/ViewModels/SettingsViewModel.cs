@@ -16,7 +16,7 @@ namespace ActionNote.App.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private ILicenseService _licenseService;
+        private IDataService _dataService;
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
@@ -28,7 +28,7 @@ namespace ActionNote.App.ViewModels
 
         public SettingsViewModel()
         {
-            _licenseService = Injector.Get<ILicenseService>();
+            _dataService = Injector.Get<IDataService>();
 
             // localize string source
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
@@ -41,15 +41,13 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
             ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
             SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
             QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
-
-            IsProVersion = await _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -119,10 +117,11 @@ namespace ActionNote.App.ViewModels
             }
             set
             {
-                if (!IsProVersion && value)
+                if (!_dataService.IsProVersion && value)
                 {
                     // if we want to activate it and we are not running the pro version
                     AppSettings.SyncEnabled.Value = false;
+                    // deactivate sync, but we re-activate the setting when the purchase was successful.
                     NavigationService.Navigate(typeof(UpgradePage));
                 }
                 else
@@ -155,12 +154,5 @@ namespace ActionNote.App.ViewModels
                 AppSettings.SyncInBackground.Value = value;
             }
         }
-
-        public bool IsProVersion
-        {
-            get { return _isProVersion; }
-            set { Set(ref _isProVersion, value); }
-        }
-        private bool _isProVersion;
     }
 }

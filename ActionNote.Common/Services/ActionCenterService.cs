@@ -19,6 +19,9 @@ namespace ActionNote.Common.Services
     {
         public static StoredObjectBase<DateTimeOffset> BackgroundTaskToastRemoveBlockingUntil = new LocalObject<DateTimeOffset>("toastBlocking", DateTimeOffset.MinValue);
 
+        // refesh block for FileOpenPicker
+        public static StoredObjectBase<DateTimeOffset> RefreshBlockingUntil = new LocalObject<DateTimeOffset>("refreshBlocking", DateTimeOffset.MinValue);
+
         public const string GROUP_NOTE = "note";
         public const string GROUP_QUICK_NOTE = "quickNote";
 
@@ -57,6 +60,9 @@ namespace ActionNote.Common.Services
 
         public async Task RefreshAsync(IList<NoteItem> noteItems)
         {
+            if (IsRefreshBlocked())
+                return;
+
             _toastService.ClearHistory();
 
             var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
@@ -132,6 +138,16 @@ namespace ActionNote.Common.Services
         public bool IsRemoveBlocked()
         {
             return BackgroundTaskToastRemoveBlockingUntil.Value > DateTimeOffset.Now;
+        }
+
+        public void StartTemporaryRefreshBlocking(int seconds)
+        {
+            RefreshBlockingUntil.Value = DateTimeOffset.Now.AddSeconds(seconds);
+        }
+
+        public bool IsRefreshBlocked()
+        {
+            return RefreshBlockingUntil.Value > DateTimeOffset.Now;
         }
 
         public int NotesCount

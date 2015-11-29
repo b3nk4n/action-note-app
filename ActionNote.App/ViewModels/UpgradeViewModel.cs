@@ -1,6 +1,7 @@
 ﻿using ActionNote.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.Mvvm;
 using UWPCore.Framework.Store;
 using Windows.UI.Xaml.Navigation;
@@ -10,6 +11,8 @@ namespace ActionNote.App.ViewModels
     public class UpgradeViewModel : ViewModelBase
     {
         private ILicenseService _licenseService;
+
+        private Localizer _localizer = new Localizer();
 
         public ProductItem Product {
             get { return _product; }
@@ -25,7 +28,7 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            var items = await _licenseService.LoadProductsAsync(new[] { AppConstants.IAP_PRO_VERSION }, "XXX"); // TODO translate
+            var items = await _licenseService.LoadProductsAsync(new[] { AppConstants.IAP_PRO_VERSION }, _localizer.Get("IAP.Purchased"));
             // TODO: IAP simulation not working
             
             if (items.Count > 0)

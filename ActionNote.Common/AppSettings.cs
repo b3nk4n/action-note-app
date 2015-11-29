@@ -20,6 +20,8 @@ namespace ActionNote.Common
 
         // *** Pro Version only: ***
 
+        public static StoredObjectBase<string> UserId = new LocalObject<string>("userId", null);
+
         public static StoredObjectBase<bool> SyncEnabled = new LocalObject<bool>("proSyncNotes", false);
 
         public static StoredObjectBase<bool> SyncOnStart = new LocalObject<bool>("proSyncOnStart", true);

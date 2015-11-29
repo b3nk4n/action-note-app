@@ -1,4 +1,5 @@
-﻿using ActionNote.Common.Models;
+﻿using System;
+using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -160,6 +161,18 @@ namespace ActionNote.App.ViewModels
 
             SyncCommand = new DelegateCommand(async () =>
             {
+                await ExecuteSync();
+            },
+            () =>
+            {
+                return _dataService.IsSynchronizationActive;
+            });
+        }
+
+        private async Task ExecuteSync()
+        {
+            if (await CheckUserLogin())
+            {
                 await StartProgressAsync(_localizer.Get("Progress.Syncing"));
 
                 // sync notes
@@ -176,13 +189,13 @@ namespace ActionNote.App.ViewModels
                     await _dialogService.ShowAsync(_localizer.Get("Message.SyncFailed"),
                         _localizer.Get("Message.Title.Warning"));
                 }
+                else if (syncResult == SyncResult.Nop)
+                {
+                    // TODO: check AppSettings.UserId.Value and ask for login?
+                }
 
                 await StopProgressAsync();
-            },
-            () =>
-            {
-                return true;
-            });
+            }
         }
 
         public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -190,6 +203,34 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             await ReloadDataAsync();
+
+            await CheckUserLogin();
+        }
+
+        private async Task<bool> CheckUserLogin()
+        {
+            if (_dataService.IsUserLoginPending)
+            {
+                var dialogResult = await _dialogService.ShowAsync(
+                    _localizer.Get("Message.LoginPending"),
+                    _localizer.Get("Message.Title.Information"),
+                    0, 1, 
+                    new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
+                    new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
+
+                if (dialogResult.Id.ToString().Equals("n"))
+                    return false;
+
+                if (!await _dataService.CheckUserAndLogin())
+                {
+                    await _dialogService.ShowAsync(
+                        _localizer.Get("Message.LoginFailedInfo"),
+                        _localizer.Get("Message.Title.Information"));
+                }
+
+                return true;
+            }
+            return true;
         }
 
         private async Task ReloadDataAsync()

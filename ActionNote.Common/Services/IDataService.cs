@@ -82,5 +82,26 @@ namespace ActionNote.Common.Services
         /// </summary>
         /// <returns>Returns True when at least one file was downloaded, else False.</returns>
         Task<bool> DownloadMissingAttachements();
+
+        /// <summary>
+        /// Checks whether the user is logged in, and in case he is not, the Live-Login pops up.
+        /// </summary>
+        /// <returns>Returns True when the user is logged in successfully (or already was), else False.</returns>
+        Task<bool> CheckUserAndLogin();
+
+        /// <summary>
+        /// Indicates whether the service will perform sync operations.
+        /// </summary>
+        bool IsSynchronizationActive { get; }
+
+        /// <summary>
+        /// Gets whether the user login is still pending.
+        /// </summary>
+        bool IsUserLoginPending { get; }
+
+        /// <summary>
+        /// Gets whether the data service runs as the pro version.
+        /// </summary>
+        bool IsProVersion { get; }
     }
 }

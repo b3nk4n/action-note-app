@@ -18,6 +18,8 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
+using UWPCore.Framework.Store;
+using Windows.UI.Popups;
 
 namespace ActionNote.App
 {
@@ -35,6 +37,7 @@ namespace ActionNote.App
         private IDataService _dataService;
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
+        private ILicenseService _licenseService;
 
         private Localizer _localizer;
 
@@ -52,6 +55,7 @@ namespace ActionNote.App
             _speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
             _dataService = Injector.Get<IDataService>();
+            _licenseService = Injector.Get<ILicenseService>();
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
@@ -72,6 +76,10 @@ namespace ActionNote.App
 
             _speechService = Injector.Get<ISpeechService>();
             //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // TODO: caused app not starting on phone (after Cortana setup !?!)
+
+#if DEBUG
+            await _licenseService.RefeshSimulator();
+#endif
         }
 
         public override void OnResuming(object args)
@@ -81,8 +89,11 @@ namespace ActionNote.App
             _actionCenterService.StartTemporaryRemoveBlocking(5);
             _actionCenterService.Clear();
 
-            // refresh the page, so that the OnNavigatedTo event is fired on the current page.
-            NavigationService.Refresh();
+            // refresh the page, so that the OnNavigatedTo event is fired on the current page,
+            // bot NOT on EditPage (due to loss of selected photo) 
+            if (NavigationService != null &&
+                NavigationService.CurrentPageType == typeof(MainPage))
+                NavigationService.Refresh();
         }
 
         public async override Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)

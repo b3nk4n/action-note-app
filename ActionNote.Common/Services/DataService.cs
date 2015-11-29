@@ -4,6 +4,7 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UWPCore.Framework.Accounts;
 using UWPCore.Framework.Data;
 using UWPCore.Framework.Logging;
 using UWPCore.Framework.Networking;
@@ -30,13 +31,15 @@ namespace ActionNote.Common.Services
         private ISerializationService _serializationService;
         private INetworkInfoService _networkInfoService;
         private ILicenseService _licenseService;
+        private IOnlineIdService _onlineIdService;
 
         private StoredObjectBase<bool> _notesChangedInBackgroundFlag = new LocalObject<bool>("_notesChangedInBackground_", false);
         private StoredObjectBase<bool> _archiveChangedInBackgroundFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
 
         [Inject]
         public DataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
-            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ILicenseService licenseService)
+            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ILicenseService licenseService,
+            IOnlineIdService onlineIdService)
         {
             Notes = notesRepository;
             Notes.BaseFolder = "data/";
@@ -50,6 +53,7 @@ namespace ActionNote.Common.Services
             _serializationService = serializationService;
             _networkInfoService = networkInfoService;
             _licenseService = licenseService;
+            _onlineIdService = onlineIdService;
         }
 
         public async Task<IList<NoteItem>> GetAllNotes()
@@ -115,7 +119,7 @@ namespace ActionNote.Common.Services
                 if (IsSynchronizationActive &&
                     _networkInfoService.HasInternet)
                 {
-                    var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/add/XXXXXXXXXX"), item, DEFAULT_TIMEOUT);
+                    var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/add/" + UserId), item, DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
@@ -153,7 +157,7 @@ namespace ActionNote.Common.Services
                 if (IsSynchronizationActive &&
                     _networkInfoService.HasInternet)
                 {
-                    var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/update/XXXXXXXXXX"), item, DEFAULT_TIMEOUT);
+                    var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/update/" + UserId), item, DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
@@ -215,7 +219,7 @@ namespace ActionNote.Common.Services
                 syncDataRequest.Data.Add(new SyncDataRequestItem(noteItem.Id, noteItem.ChangedDate));
             }
 
-            var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/sync/XXXXXXXXXX"), syncDataRequest, DEFAULT_TIMEOUT);
+            var res = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/sync/" + UserId), syncDataRequest, DEFAULT_TIMEOUT);
 
             if (res != null &&
                 res.IsSuccessStatusCode)
@@ -281,7 +285,7 @@ namespace ActionNote.Common.Services
                                 unsyncedAddNotes.Add(note);
                         }
 
-                        var addResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/addrange/XXXXXXXXXX"), unsyncedAddNotes, DEFAULT_TIMEOUT);
+                        var addResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/addrange/" + UserId), unsyncedAddNotes, DEFAULT_TIMEOUT);
 
                         if (addResult != null &&
                             addResult.IsSuccessStatusCode)
@@ -296,7 +300,7 @@ namespace ActionNote.Common.Services
 
                     if (unsyncedDeleteIds.Count > 0)
                     {
-                        var deleteResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/XXXXXXXXXX"), unsyncedDeleteIds, DEFAULT_TIMEOUT);
+                        var deleteResult = await _httpService.PostJsonAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId), unsyncedDeleteIds, DEFAULT_TIMEOUT);
 
                         if (deleteResult != null &&
                             deleteResult.IsSuccessStatusCode)
@@ -336,7 +340,7 @@ namespace ActionNote.Common.Services
                     var content = new HttpMultipartFormDataContent();
                     content.Add(new HttpStreamContent(stream), "file", item.AttachementFile);
 
-                    var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/XXXXXXXXXX/" + item.AttachementFile), content, DEFAULT_TIMEOUT);
+                    var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), content, DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
@@ -402,7 +406,7 @@ namespace ActionNote.Common.Services
 
             if ( _networkInfoService.HasInternet)
             {
-                var res = await _httpService.GetAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/XXXXXXXXXX/" + item.AttachementFile), 5000);
+                var res = await _httpService.GetAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), 5000);
 
                 if (res != null &&
                     res.IsSuccessStatusCode)
@@ -461,7 +465,7 @@ namespace ActionNote.Common.Services
                     _networkInfoService.HasInternet)
                 {
                     // mark notes as deleted
-                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/XXXXXXXXXX/" + item.Id), DEFAULT_TIMEOUT);
+                    var res = await _httpService.DeleteAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/delete/" + UserId + "/" + item.Id), DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
@@ -609,14 +613,72 @@ namespace ActionNote.Common.Services
             _archiveChangedInBackgroundFlag.Value = true;
         }
 
+        public async Task<bool> CheckUserAndLogin()
+        {
+            if (IsUserLoginPending &&
+                AppSettings.SyncEnabled.Value == true)
+            {
+                if (await _onlineIdService.AuthenticateAsync(OnlineIdService.SERVICE_SIGNIN))
+                {
+                    AppSettings.UserId.Value = _onlineIdService.UserIdentity.SafeCustomerId;
+                }
+                else
+                {
+                    // auto disable online sync
+                    AppSettings.SyncEnabled.Value = true;
+
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private string UserId
+        {
+            get
+            {
+#if FAKE_USER && DEBUG
+                return "XXXXXXXXXX";
+#else
+                return AppSettings.UserId.Value;
+#endif
+            }
+        }
+
+        private bool IsUserIdValid
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(UserId);
+            }
+        }
+
+        public bool IsUserLoginPending
+        {
+            get
+            {
+                return IsProVersion &&
+                    !IsUserIdValid;
+            }
+        }
+
         public bool IsSynchronizationActive
         {
             get
             {
-#if DEBUG
-                return true && AppSettings.SyncEnabled.Value;
+                return AppSettings.SyncEnabled.Value &&
+                    !IsUserLoginPending;
+            }
+        }
+
+        public bool IsProVersion
+        {
+            get
+            {
+#if FAKE_PRO && DEBUG
+                return true;
 #else
-                return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION) && AppSettings.SyncEnabled.Value;
+                return _licenseService.IsProductActive(AppConstants.IAP_PRO_VERSION);
 #endif
             }
         }

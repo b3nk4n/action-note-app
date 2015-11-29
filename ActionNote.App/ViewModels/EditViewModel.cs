@@ -40,6 +40,7 @@ namespace ActionNote.App.ViewModels
         private IDialogService _dialogService;
         private IStatusBarService _statusBarService;
         private IDeviceInfoService _deviceInfoService;
+        private IActionCenterService _actionCenterService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -70,6 +71,7 @@ namespace ActionNote.App.ViewModels
             _dialogService = Injector.Get<IDialogService>();
             _statusBarService = Injector.Get<IStatusBarService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
+            _actionCenterService = Injector.Get<IActionCenterService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -88,7 +90,8 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
-                GoBackToMainPageWithoutBackEvent();
+                //GoBackToMainPageWithoutBackEvent();
+                NavigationService.Refresh();
             });
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
@@ -113,11 +116,15 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".jpg");
                 picker.FileTypeFilter.Add(".jpeg");
                 picker.FileTypeFilter.Add(".png");
+                _blockBackEvent = true;
+                _actionCenterService.StartTemporaryRefreshBlocking(5);
                 StorageFile file = await picker.PickSingleFileAsync(); // TODO: not correctly working on mobile yet!
+                _blockBackEvent = false;
                 // read: https://social.msdn.microsoft.com/Forums/sqlserver/en-US/13002ba6-6e59-47b8-a746-c05525953c5a/uwpfileopenpicker-bugs-in-win-10-mobile-when-not-debugging?forum=wpdevelop
 
                 if (file != null)
                 {
+                    //var noteItem = await _dataService.GetNote(note.Id);
                     var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
                     var fileName = canonicalPrefix + file.Name;
 
@@ -130,6 +137,8 @@ namespace ActionNote.App.ViewModels
                         }
 
                         noteItem.AttachementFile = fileName;
+
+                        RaisePropertyChanged("SelectedAttachementImageOrReload");
                     }
                 }
 
@@ -212,35 +221,36 @@ namespace ActionNote.App.ViewModels
 
         private async Task SaveNoteAsync(NoteItem noteItem)
         {
-            if (noteItem.HasContentChanged)
-            {
-                if (string.IsNullOrWhiteSpace(noteItem.Title))
-                {
-                    noteItem.Title = _commonLocalizer.Get("QuickNote");
-                }
+            // do nothing, when note is unchanged
+            if (!noteItem.HasContentChanged &&
+                !noteItem.HasAttachementChanged)
+                return;
 
-                if (await _dataService.ContainsNote(noteItem.Id))
-                {
-                    await _dataService.UpdateNoteAsync(noteItem);
-                }
-                else
-                {
-                    await _dataService.AddNoteAsync(noteItem);
-                }
+            if (string.IsNullOrWhiteSpace(noteItem.Title))
+            {
+                noteItem.Title = _commonLocalizer.Get("QuickNote");
+            }
+
+            if (await _dataService.ContainsNote(noteItem.Id))
+            {
+                await _dataService.UpdateNoteAsync(noteItem);
+            }
+            else
+            {
+                await _dataService.AddNoteAsync(noteItem);
             }
 
             if (noteItem.HasAttachement &&
-                noteItem.HasAttachementChanged)
+                noteItem.HasAttachementChanged &&
+                _dataService.IsSynchronizationActive)
             {
                 await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
                 await _dataService.UploadAttachement(noteItem);
                 await StopProgressAsync();
             }
             
-
-            // update tile in case it was pinned and has changed
-            if (noteItem.HasContentChanged || noteItem.HasAttachementChanged)
-                await _tilePinService.UpdateAsync(noteItem);
+            // update tile
+            await _tilePinService.UpdateAsync(noteItem);
         }
 
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -282,9 +292,10 @@ namespace ActionNote.App.ViewModels
                 noteToEdit.Id = state["id"] as string;
                 noteToEdit.Title = state["title"] as string;
                 noteToEdit.Content = state["content"] as string;
-                noteToEdit.AttachementFile = state["attachementFile"] as string;
+                //noteToEdit.AttachementFile = state["attachementFile"] as string;
                 noteToEdit.IsImportant = (bool)state["isImportant"];
                 noteToEdit.Color = (ColorCategory)Enum.Parse(typeof(ColorCategory), state["color"] as string);
+                noteToEdit.ChangedDate = (DateTimeOffset)state["changedDate"];
             }
             else
             {
@@ -327,16 +338,18 @@ namespace ActionNote.App.ViewModels
                     if (SelectedNote != null && !SelectedNote.IsEmtpy)
                         await SaveNoteAsync(SelectedNote);
                 }
-                else if (suspending)
-                {
-                    state["id"] = SelectedNote.Id;
-                    state["title"] = SelectedNote.Title;
-                    state["content"] = SelectedNote.Content;
-                    state["attachementFile"] = SelectedNote.AttachementFile;
-                    state["isImportant"] = SelectedNote.IsImportant;
-                    state["color"] = SelectedNote.Color.ToString();
-                }
-            }  
+            }
+
+            if (suspending)
+            {
+                state["id"] = SelectedNote.Id;
+                state["title"] = SelectedNote.Title;
+                state["content"] = SelectedNote.Content;
+                //state["attachementFile"] = SelectedNote.AttachementFile;
+                state["isImportant"] = SelectedNote.IsImportant;
+                state["color"] = SelectedNote.Color.ToString();
+                state["changedDate"] = SelectedNote.ChangedDate;
+            }
         }
 
         private async Task StartProgressAsync(string message)

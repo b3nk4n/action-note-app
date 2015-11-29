@@ -61,6 +61,10 @@ namespace ActionNote.Common.Services
         /// <returns>Returns True when it is remove blocked, else False.</returns>
         bool IsRemoveBlocked();
 
+        void StartTemporaryRefreshBlocking(int seconds);
+
+        bool IsRefreshBlocked();
+
         /// <summary>
         /// Gets the number of notes (without the quicknotes notification).
         /// </summary>
