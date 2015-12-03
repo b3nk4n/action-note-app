@@ -296,7 +296,7 @@ namespace ActionNote.App.ViewModels
                 noteToEdit.Id = state["id"] as string;
                 noteToEdit.Title = state["title"] as string;
                 noteToEdit.Content = state["content"] as string;
-                //noteToEdit.AttachementFile = state["attachementFile"] as string;
+                noteToEdit.AttachementFile = state["attachementFile"] as string;
                 noteToEdit.IsImportant = (bool)state["isImportant"];
                 noteToEdit.Color = (ColorCategory)Enum.Parse(typeof(ColorCategory), state["color"] as string);
                 noteToEdit.ChangedDate = (DateTimeOffset)state["changedDate"];
@@ -349,7 +349,7 @@ namespace ActionNote.App.ViewModels
                 state["id"] = SelectedNote.Id;
                 state["title"] = SelectedNote.Title;
                 state["content"] = SelectedNote.Content;
-                //state["attachementFile"] = SelectedNote.AttachementFile;
+                state["attachementFile"] = SelectedNote.AttachementFile;
                 state["isImportant"] = SelectedNote.IsImportant;
                 state["color"] = SelectedNote.Color.ToString();
                 state["changedDate"] = SelectedNote.ChangedDate;

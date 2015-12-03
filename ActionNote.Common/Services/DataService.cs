@@ -135,6 +135,7 @@ namespace ActionNote.Common.Services
             if (await Notes.Save(item))
             {
                 Notes.Add(item);
+                Logger.WriteLine("NOTE ADDED");
 
                 if (IsSynchronizationActive &&
                     _networkInfoService.HasInternet)
@@ -164,6 +165,7 @@ namespace ActionNote.Common.Services
             if (await Notes.Save(item))
             {
                 Notes.Update(item);
+                Logger.WriteLine("NOTE UPDATED");
 
                 if (IsSynchronizationActive)
                 {

@@ -258,12 +258,12 @@ namespace ActionNote.App.ViewModels
             // ensure the repository has been loaded (which is required after suspend-shutdown)
             await _dataService.LoadNotesAsync();
 
-            NoteItems.Clear();
             var data = await _dataService.GetAllNotes();
 
             if (data != null)
             {
                 var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
+                NoteItems.Clear();
                 NoteItems = new ObservableCollection<NoteItem>(sorted);
                 RaisePropertyChanged("NoteItems");
                 RaisePropertyChanged("HasNoNotes");
