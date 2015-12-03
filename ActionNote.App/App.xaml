@@ -249,7 +249,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Grid x:Name="RootGrid">
+                            <Grid x:Name="RootGrid" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal">
