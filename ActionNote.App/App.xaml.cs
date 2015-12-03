@@ -89,10 +89,15 @@ namespace ActionNote.App
             _actionCenterService.StartTemporaryRemoveBlocking(5);
             _actionCenterService.Clear();
 
+            // indicate that the data has to be reloaded from disk, because it might have changed outside
+            // be pessimistic here and reload all after each resume, because changing the setting is a background task is not (immediately) detected by the app.
+            _dataService.FlagNotesNeedReload();
+            _dataService.FlagArchiveNeedsReload();
+
             // refresh the page, so that the OnNavigatedTo event is fired on the current page,
             // bot NOT on EditPage (due to loss of selected photo) 
             if (NavigationService != null &&
-                NavigationService.CurrentPageType == typeof(MainPage))
+                NavigationService.CurrentPageType != typeof(EditPage))
                 NavigationService.Refresh();
         }
 

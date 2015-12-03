@@ -33,8 +33,8 @@ namespace ActionNote.Common.Services
         private ILicenseService _licenseService;
         private IOnlineIdService _onlineIdService;
 
-        private StoredObjectBase<bool> _notesChangedInBackgroundFlag = new LocalObject<bool>("_notesChangedInBackground_", false);
-        private StoredObjectBase<bool> _archiveChangedInBackgroundFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
+        private StoredObjectBase<bool> _notesNeedReloadFlag = new LocalObject<bool>("_notesChangedInBackground_", false);
+        private StoredObjectBase<bool> _archiveNeedReloadFlag = new LocalObject<bool>("_archiveChangedInBackground_", false);
 
         [Inject]
         public DataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
@@ -665,11 +665,11 @@ namespace ActionNote.Common.Services
         public async Task<bool> LoadNotesAsync()
         {
             bool result;
-            _notesChangedInBackgroundFlag.Invalidate();
-            if (_notesChangedInBackgroundFlag.Value)
+            _notesNeedReloadFlag.Invalidate();
+            if (_notesNeedReloadFlag.Value)
             {
                 Logger.WriteLine("NOTES RELOAD");
-                _notesChangedInBackgroundFlag.Value = false;
+                _notesNeedReloadFlag.Value = false;
                 result = await Notes.Reload();
             }
             else
@@ -683,10 +683,10 @@ namespace ActionNote.Common.Services
         public async Task<bool> LoadArchiveAsync()
         {
             bool result;
-            _notesChangedInBackgroundFlag.Invalidate();
-            if (_archiveChangedInBackgroundFlag.Value)
+            _notesNeedReloadFlag.Invalidate();
+            if (_archiveNeedReloadFlag.Value)
             {
-                _archiveChangedInBackgroundFlag.Value = false;
+                _archiveNeedReloadFlag.Value = false;
                 result = await Archive.Reload();
             }
             else
@@ -696,14 +696,14 @@ namespace ActionNote.Common.Services
             return result;
         }
 
-        public void FlagNotesHaveChangedInBackground()
+        public void FlagNotesNeedReload()
         {
-            _notesChangedInBackgroundFlag.Value = true;
+            _notesNeedReloadFlag.Value = true;
         }
 
-        public void FlagArchiveHasChangedInBackground()
+        public void FlagArchiveNeedsReload()
         {
-            _archiveChangedInBackgroundFlag.Value = true;
+            _archiveNeedReloadFlag.Value = true;
         }
 
         public async Task<bool> CheckUserAndLogin()

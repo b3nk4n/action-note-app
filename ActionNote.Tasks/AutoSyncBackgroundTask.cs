@@ -47,8 +47,8 @@ namespace ActionNote.Tasks
                 {
                     if (syncResult == SyncResult.Success)
                     {
-                        _dataService.FlagNotesHaveChangedInBackground();
-                        _dataService.FlagArchiveHasChangedInBackground();
+                        _dataService.FlagNotesNeedReload();
+                        _dataService.FlagArchiveNeedsReload();
                     }
 
                     await _dataService.UploadMissingAttachements();

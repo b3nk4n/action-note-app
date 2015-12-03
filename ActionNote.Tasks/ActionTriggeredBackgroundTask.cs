@@ -74,7 +74,7 @@ namespace ActionNote.Tasks
                                 !string.IsNullOrWhiteSpace(content))
                             {
                                 var noteItem = new NoteItem(title, content);
-                                _dataService.FlagNotesHaveChangedInBackground();
+                                _dataService.FlagNotesNeedReload();
                                 await _dataService.AddNoteAsync(noteItem);
 
                                 if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)

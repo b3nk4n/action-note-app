@@ -69,9 +69,9 @@ namespace ActionNote.Common.Services
 
         Task<bool> LoadArchiveAsync();
 
-        void FlagNotesHaveChangedInBackground();
+        void FlagNotesNeedReload();
 
-        void FlagArchiveHasChangedInBackground();
+        void FlagArchiveNeedsReload();
 
         Task<bool> AddNoteAsync(NoteItem item);
 

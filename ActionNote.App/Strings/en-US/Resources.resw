@@ -142,7 +142,7 @@
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
-    <value>Privicy info</value>
+    <value>Privacy info</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">

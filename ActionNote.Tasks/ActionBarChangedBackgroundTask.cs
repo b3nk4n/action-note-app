@@ -57,8 +57,8 @@ namespace ActionNote.Tasks
                                 await _tilePinService.UnpinAsync(note.Id);
                             }
 
-                            _dataService.FlagNotesHaveChangedInBackground();
-                            _dataService.FlagArchiveHasChangedInBackground();
+                            _dataService.FlagNotesNeedReload();
+                            _dataService.FlagArchiveNeedsReload();
                             await _dataService.MoveRangeToArchiveAsync(diff);
                         }
 
