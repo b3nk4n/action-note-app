@@ -94,6 +94,9 @@ namespace ActionNote.App
             _dataService.FlagNotesNeedReload();
             _dataService.FlagArchiveNeedsReload();
 
+            // unregister background tasks
+            UnregisterBackgroundTasks();
+
             // refresh the page, so that the OnNavigatedTo event is fired on the current page,
             // bot NOT on EditPage (due to loss of selected photo) 
             if (NavigationService != null &&
@@ -107,19 +110,14 @@ namespace ActionNote.App
             await _dataService.LoadNotesAsync();
 
             // unregister previous one, to ensure the latest version is running
-            if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))
-                _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER);
-            if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
-                _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
-            if (_backgroundTaskService.RegistrationExists(BG_TASK_AUTO_SYNC))
-                _backgroundTaskService.Unregister(BG_TASK_AUTO_SYNC);
+            UnregisterBackgroundTasks();
 
             _actionCenterService.StartTemporaryRemoveBlocking(10);
             _actionCenterService.Clear();
 
             var pageType = DefaultPage;
             string parameter = null;
-            if (args.Kind == ActivationKind.ToastNotification) 
+            if (args.Kind == ActivationKind.ToastNotification)
             {
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
 
@@ -214,14 +212,6 @@ namespace ActionNote.App
                 }
             }
 
-            // (re)register background tasks
-            if (await _backgroundTaskService.RequestAccessAsync())
-            {
-                _backgroundTaskService.Register(BG_TASK_ACTIONCENTER, "ActionNote.Tasks.ActionBarChangedBackgroundTask", new ToastNotificationHistoryChangedTrigger());
-                _backgroundTaskService.Register(BG_TASK_TOAST_TRIGGERED, "ActionNote.Tasks.ActionTriggeredBackgroundTask", new ToastNotificationActionTrigger());
-                _backgroundTaskService.Register(BG_TASK_AUTO_SYNC, "ActionNote.Tasks.AutoSyncBackgroundTask", new TimeTrigger(AppConstants.SYNC_INTERVAL_MINUTES, false), new SystemCondition(SystemConditionType.InternetAvailable));
-            }
-
             // start the user experience
             NavigationService.Navigate(pageType, parameter);
         }
@@ -229,6 +219,9 @@ namespace ActionNote.App
         public async override Task OnSuspendingAsync(SuspendingEventArgs e)
         {
             await base.OnSuspendingAsync(e);
+
+            // (re)register background tasks
+            await RegisterBackgroundTasks();
 
             if (AppSettings.ShowNotesInActionCenter.Value)
             {
@@ -290,6 +283,39 @@ namespace ActionNote.App
                     DestinationPage = typeof(SettingsPage)
                 }
             };
+        }
+
+        /// <summary>
+        /// Registers all background Tasks.
+        /// </summary>
+        private async Task RegisterBackgroundTasks()
+        {
+            if (await _backgroundTaskService.RequestAccessAsync())
+            {
+                if (AppSettings.ShowNotesInActionCenter.Value)
+                {
+                    _backgroundTaskService.Register(BG_TASK_ACTIONCENTER, "ActionNote.Tasks.ActionBarChangedBackgroundTask", new ToastNotificationHistoryChangedTrigger());
+                    _backgroundTaskService.Register(BG_TASK_TOAST_TRIGGERED, "ActionNote.Tasks.ActionTriggeredBackgroundTask", new ToastNotificationActionTrigger());
+                }
+
+                if (_dataService.IsSynchronizationActive && AppSettings.SyncInBackground.Value)
+                {
+                    _backgroundTaskService.Register(BG_TASK_AUTO_SYNC, "ActionNote.Tasks.AutoSyncBackgroundTask", new TimeTrigger(AppConstants.SYNC_INTERVAL_MINUTES, false), new SystemCondition(SystemConditionType.InternetAvailable));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unregisters all background Tasks.
+        /// </summary>
+        private void UnregisterBackgroundTasks()
+        {
+            if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))
+                _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER);
+            if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
+                _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
+            if (_backgroundTaskService.RegistrationExists(BG_TASK_AUTO_SYNC))
+                _backgroundTaskService.Unregister(BG_TASK_AUTO_SYNC);
         }
     }
 }
