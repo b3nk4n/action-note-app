@@ -47,12 +47,6 @@ namespace ActionNote.App.ViewModels
 
         private Random _random = new Random();
 
-        /// <summary>
-        /// Flag that indicates that no save operation is needed on BACK event.
-        /// This is to prevent double saving.
-        /// </summary>
-        private bool _blockBackEvent;
-
         // For sample data only
         public EditViewModel()
             : this(null)
@@ -115,10 +109,8 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".jpg");
                 picker.FileTypeFilter.Add(".jpeg");
                 picker.FileTypeFilter.Add(".png");
-                _blockBackEvent = true;
                 _actionCenterService.StartTemporaryRefreshBlocking(5);
                 StorageFile file = await picker.PickSingleFileAsync();
-                _blockBackEvent = false;
 
                 if (file != null)
                 {
@@ -208,9 +200,6 @@ namespace ActionNote.App.ViewModels
         /// </summary>
         private void GoBackToMainPageWithoutBackEvent()
         {
-            // prevent duplicated save
-            _blockBackEvent = true;
-
             if (NavigationService.CanGoBack)
                 NavigationService.GoBack();
             else
@@ -260,6 +249,8 @@ namespace ActionNote.App.ViewModels
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
+
+            NavigationService.FrameFacade.BackRequested += BackRequested;
 
             NoteItem noteToEdit = null;
             if (parameter != null)
@@ -313,6 +304,20 @@ namespace ActionNote.App.ViewModels
             await CheckAndDownloadAttachement();
         }
 
+        private async void BackRequested(object sender, HandledEventArgs e)
+        {
+            if (AppSettings.SaveNoteOnBack.Value)
+            {
+                e.Handled = true;
+
+                if (SelectedNote != null && !SelectedNote.IsEmtpy)
+                {
+                    await SaveNoteAsync(SelectedNote);
+                    GoBackToMainPageWithoutBackEvent();
+                }
+            }
+        }
+
         private async Task CheckAndDownloadAttachement()
         {
             if (SelectedNote == null ||
@@ -335,14 +340,8 @@ namespace ActionNote.App.ViewModels
         {
             await base.OnNavigatedFromAsync(state, suspending);
 
-            if (!_blockBackEvent)
-            {
-                if (AppSettings.SaveNoteOnBack.Value)
-                {
-                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
-                        await SaveNoteAsync(SelectedNote);
-                }
-            }
+            if (!suspending)
+                NavigationService.FrameFacade.BackRequested -= BackRequested;
 
             if (suspending)
             {
