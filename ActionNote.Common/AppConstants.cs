@@ -25,7 +25,7 @@ namespace ActionNote.Common
         /// <summary>
         /// The auto sync interval in background.
         /// </summary>
-        public const uint SYNC_INTERVAL_MINUTES = 120;
+        public const uint SYNC_INTERVAL_MINUTES = 60;
 
         /// <summary>
         /// The pro version key.
