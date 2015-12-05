@@ -1,4 +1,6 @@
 ﻿using ActionNote.App.ViewModels;
+using ActionNote.Common.Models;
+using Universal.UI.Xaml.Controls;
 using UWPCore.Framework.Controls;
 
 namespace ActionNote.App.Views
@@ -8,10 +10,25 @@ namespace ActionNote.App.Views
     /// </summary>
     public sealed partial class ArchivPage : UniversalPage
     {
+        private ArchivViewModel ViewModel { get; set; }
+
         public ArchivPage()
         {
             InitializeComponent();
-            DataContext = new ArchivViewModel();
+            ViewModel = new ArchivViewModel();
+            DataContext = ViewModel;
+        }
+
+        private void SwipeListView_ItemSwipe(object sender, ItemSwipeEventArgs e)
+        {
+            var item = e.SwipedItem as NoteItem;
+            if (item != null)
+            {
+                if (e.Direction == SwipeListDirection.Right)
+                {
+                    ViewModel.RemoveCommand.Execute(item);
+                }
+            }
         }
     }
 }

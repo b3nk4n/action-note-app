@@ -79,7 +79,7 @@ namespace ActionNote.Common.Services
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                await Task.Delay(100);
+                await Task.Delay(1000);
                 AddQuickNotes();
             }
         }

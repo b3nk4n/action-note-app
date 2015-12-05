@@ -1,5 +1,6 @@
 ﻿using ActionNote.App.ViewModels;
 using ActionNote.Common.Models;
+using Universal.UI.Xaml.Controls;
 using UWPCore.Framework.Controls;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -29,6 +30,22 @@ namespace ActionNote.App.Views
                 clickedNoteItem == ViewModel.SelectedNote)
             {
                 ViewModel.EditCommand.Execute(clickedNoteItem);
+            }
+        }
+
+        private void SwipeListView_ItemSwipe(object sender, ItemSwipeEventArgs e)
+        {
+            var item = e.SwipedItem as NoteItem;
+            if (item != null)
+            {
+                if (e.Direction == SwipeListDirection.Left)
+                {
+                    item.IsImportant = !item.IsImportant;
+                }
+                else
+                {
+                    ViewModel.RemoveCommand.Execute(item);
+                }
             }
         }
 
