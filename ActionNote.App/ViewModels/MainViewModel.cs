@@ -13,6 +13,7 @@ using UWPCore.Framework.UI;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 using UWPCore.Framework.Devices;
+using UWPCore.Framework.Support;
 
 namespace ActionNote.App.ViewModels
 {
@@ -23,6 +24,7 @@ namespace ActionNote.App.ViewModels
         private IDialogService _dialogService;
         private IStatusBarService _statusBarService;
         private IDeviceInfoService _deviceInfoService;
+        private IStartupActionService _startupActionsService;
 
         private Localizer _localizer = new Localizer();
 
@@ -39,6 +41,14 @@ namespace ActionNote.App.ViewModels
             _dialogService = Injector.Get<IDialogService>();
             _statusBarService = Injector.Get<IStatusBarService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
+            _startupActionsService = Injector.Get<IStartupActionService>();
+
+            _startupActionsService.Register(1, ActionExecutionRule.Equals, () =>
+            {
+                // if the app started the first time, and we detect the user has the pro-version: auto enable online-sync
+                if (_dataService.IsProVersion)
+                    AppSettings.SyncEnabled.Value = true;
+            });
 
             ClearCommand = new DelegateCommand(async () =>
             {
@@ -154,6 +164,7 @@ namespace ActionNote.App.ViewModels
         public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
+            _startupActionsService.OnNavigatedTo(mode);
 
             await ReloadDataAsync();
 
