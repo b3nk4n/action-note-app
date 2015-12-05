@@ -112,7 +112,6 @@
     <Compile Include="AppConstants.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="Converters\ColorCategoryToBrushConverter.cs" />
-    <Compile Include="Converters\FlagUnflagConverter.cs" />
     <Compile Include="Helpers\ColorCategoryConverter.cs" />
     <Compile Include="Helpers\NoteUtils.cs" />
     <Compile Include="Models\INotesRepository.cs" />

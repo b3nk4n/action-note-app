@@ -144,12 +144,4 @@
   <data name="Swipe.Delete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="Swipe.MarkImportant" xml:space="preserve">
-    <value>Mark as important</value>
-    <comment>SwipeView</comment>
-  </data>
-  <data name="Swipe.MarkUnimportant" xml:space="preserve">
-    <value>Mark as unimportant</value>
-    <comment>SwipeView</comment>
-  </data>
 </root>

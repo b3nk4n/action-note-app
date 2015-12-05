@@ -210,6 +210,8 @@ namespace ActionNote.App.ViewModels
                 }
                 else
                 {
+                    SyncCommand.RaiseCanExecuteChanged();
+
                     if (!_dataService.HasSyncedInThisSession)
                         await ExecuteSync();
                 }

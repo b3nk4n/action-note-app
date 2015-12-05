@@ -46,14 +46,6 @@
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <swipe:SwipeListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="0,16"
                       ItemTemplate="{StaticResource NoteListDataTemplate}" ItemSwipe="SwipeListView_ItemSwipe" ItemLeftBehavior="Disabled">
-                <swipe:SwipeListView.ItemLeftContentTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding IsImportant, Converter={StaticResource flagUnflagConv}}" Foreground="White" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center" VerticalAlignment="Center"/>
-                            <Path Opacity="{Binding IsImportant, Converter={StaticResource boolToDoubleConv}, ConverterParameter=0;1}" Data="F1M0,0L0,36 2.25,36 2.25,18 13.5,18 13.5,22.5 29.25,22.5 29.25,4.5 15.75,4.5 15.75,0z M2.25,2.25L13.5,2.25 13.5,15.75 2.25,15.75z M15.75,6.75L27,6.75 27,20.25 15.75,20.25z" Fill="White" Height="24" Stretch="Uniform" Width="24" Margin="19,0,19,0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </swipe:SwipeListView.ItemLeftContentTemplate>
                 <swipe:SwipeListView.ItemRightContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
