@@ -19,6 +19,7 @@ using UWPCore.Framework.Common;
 using UWPCore.Framework.UI;
 using Windows.UI.Xaml.Media;
 using UWPCore.Framework.Devices;
+using UWPCore.Framework.Share;
 
 namespace ActionNote.App.ViewModels
 {
@@ -41,6 +42,7 @@ namespace ActionNote.App.ViewModels
         private IStatusBarService _statusBarService;
         private IDeviceInfoService _deviceInfoService;
         private IActionCenterService _actionCenterService;
+        private IShareContentService _shareContentService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -66,6 +68,7 @@ namespace ActionNote.App.ViewModels
             _statusBarService = Injector.Get<IStatusBarService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _actionCenterService = Injector.Get<IActionCenterService>();
+            _shareContentService = Injector.Get<IShareContentService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -186,6 +189,45 @@ namespace ActionNote.App.ViewModels
             (colorString) =>
             {
                 return SelectedNote != null;
+            });
+
+            ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                var description = _localizer.Get("ShareContentDescription");
+                if (noteItem.HasAttachement)
+                {
+                    var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
+                    if (file != null)
+                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, description);
+                }
+                else
+                {
+                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, description);
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            PinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.PinOrUpdateAsync(noteItem);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            UnpinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.UnpinAsync(noteItem.Id);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
             });
         }
 
@@ -382,9 +424,21 @@ namespace ActionNote.App.ViewModels
             set {
                 Set(ref _selectedNote, value);
                 RaisePropertyChanged("SelectedAttachementImageOrReload");
+                RaisePropertyChanged("IsSelectedNotePinned");
             }
         }
         private NoteItem _selectedNote;
+
+        public bool IsSelectedNotePinned
+        {
+            get
+            {
+                if (SelectedNote == null)
+                    return false;
+
+                return _tilePinService.Contains(SelectedNote.Id);
+            }
+        }
 
         /// <summary>
         /// Gets or sets whether the edit page is in EDIT mode or ADD mode. 
@@ -447,5 +501,11 @@ namespace ActionNote.App.ViewModels
         public ICommand ReadNoteCommand { get; private set; }
 
         public ICommand ColorSelectedCommand { get; private set; }
+
+        public ICommand PinCommand { get; private set; }
+
+        public ICommand UnpinCommand { get; private set; }
+
+        public ICommand ShareCommand { get; private set; }
     }
 }

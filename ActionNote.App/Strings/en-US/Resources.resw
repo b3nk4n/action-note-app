@@ -389,7 +389,7 @@ Would you like to login now?</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Synchronize</value>
+    <value>Sync</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">

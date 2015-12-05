@@ -389,7 +389,7 @@ eingabe</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Synchronisieren</value>
+    <value>Sync</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">

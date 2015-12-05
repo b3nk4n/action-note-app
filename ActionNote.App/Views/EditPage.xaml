@@ -147,6 +147,26 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="433" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SharePrimary.Visibility" Value="Visible" />
+                        <Setter Target="ShareSecondary.Visibility" Value="Collapsed" />
+                        <Setter Target="SpeechInput.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
                 <Grid>
@@ -201,7 +221,14 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton x:Uid="SpeechInput" Width="62" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" />
+            <AppBarButton x:Name="SharePrimary" x:Uid="Share" Width="62" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="SpeechInput" x:Name="SpeechInput" Width="62" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed" /> <!-- hidden on mobile -->
+            <AppBarButton x:Uid="Pin" Width="62" Icon="Pin" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
+            <AppBarButton x:Uid="Unpin"  Width="62" Icon="UnPin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
             <AppBarButton x:Uid="Attachement" Width="62" Icon="Attach">
                 <AppBarButton.Flyout>
                     <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterBottomStyle}">
@@ -215,6 +242,7 @@
             <AppBarButton x:Uid="DiscardChanges" Width="62" Icon="Clear" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" />
             <AppBarButton x:Uid="/ActionNote.Common/Resources/Save" Width="62" Icon="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="ShareSecondary" x:Uid="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
                 <AppBarButton x:Uid="ReadAloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
                 <AppBarButton x:Uid="Delete" Command="{Binding RemoveCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" CommandParameter="{Binding SelectedNote}"/>
             </CommandBar.SecondaryCommands>

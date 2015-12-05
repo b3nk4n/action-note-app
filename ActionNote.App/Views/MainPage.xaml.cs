@@ -25,9 +25,7 @@ namespace ActionNote.App.Views
         {
             var clickedNoteItem = e.ClickedItem as NoteItem;
 
-            // go to edit page when selected item is clicked again
-            if (clickedNoteItem != null &&
-                clickedNoteItem == ViewModel.SelectedNote)
+            if (clickedNoteItem != null)
             {
                 ViewModel.EditCommand.Execute(clickedNoteItem);
             }

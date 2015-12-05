@@ -6,8 +6,6 @@ using System.Collections.ObjectModel;
 using UWPCore.Framework.Mvvm;
 using Windows.UI.Xaml.Navigation;
 using ActionNote.App.Views;
-using UWPCore.Framework.Share;
-using UWPCore.Framework.Storage;
 using ActionNote.Common;
 using UWPCore.Framework.Common;
 using ActionNote.Common.Helpers;
@@ -21,8 +19,6 @@ namespace ActionNote.App.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private IDataService _dataService;
-        private IShareContentService _shareContentService;
-        private IStorageService _localStorageSerivce;
         private ITilePinService _tilePinService;
         private IDialogService _dialogService;
         private IStatusBarService _statusBarService;
@@ -39,8 +35,6 @@ namespace ActionNote.App.ViewModels
         public MainViewModel()
         {
             _dataService = Injector.Get<IDataService>();
-            _shareContentService = Injector.Get<IShareContentService>();
-            _localStorageSerivce = Injector.Get<ILocalStorageService>();
             _tilePinService = Injector.Get<ITilePinService>();
             _dialogService = Injector.Get<IDialogService>();
             _statusBarService = Injector.Get<IStatusBarService>();
@@ -104,45 +98,6 @@ namespace ActionNote.App.ViewModels
             (noteItem) =>
             {
                 return noteItem != null;
-            });
-
-            PinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
-            {
-                await _tilePinService.PinOrUpdateAsync(noteItem);
-                RaisePropertyChanged("IsSelectedNotePinned");
-            },
-            (noteItem) =>
-            {
-                return noteItem != null && !noteItem.IsEmtpy;
-            });
-
-            UnpinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
-            {
-                await _tilePinService.UnpinAsync(noteItem.Id);
-                RaisePropertyChanged("IsSelectedNotePinned");
-            },
-            (noteItem) =>
-            {
-                return noteItem != null;
-            });
-
-            ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
-            {
-                var description = _localizer.Get("ShareContentDescription");
-                if (noteItem.HasAttachement)
-                {
-                    var file = await _localStorageSerivce.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
-                    if (file != null)
-                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, description);
-                }
-                else
-                {
-                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, description);
-                }
-            },
-            (noteItem) =>
-            {
-                return noteItem != null && !noteItem.IsEmtpy;
             });
 
             SortCommand = new DelegateCommand<string>((sortType) =>
@@ -302,17 +257,6 @@ namespace ActionNote.App.ViewModels
         }
         private NoteItem _selectedNote;
 
-        public bool IsSelectedNotePinned
-        {
-            get
-            {
-                if (SelectedNote == null)
-                    return false;
-
-                return _tilePinService.Contains(SelectedNote.Id);
-            }
-        }
-
         /// <summary>
         /// Gets or sets whether to show the progress bar (used on non-mobile only)
         /// </summary>
@@ -341,13 +285,7 @@ namespace ActionNote.App.ViewModels
         public ICommand EditCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
-
-        public ICommand PinCommand { get; private set; }
-
-        public ICommand UnpinCommand { get; private set; }
-
-        public ICommand ShareCommand { get; private set; }
-
+        
         public ICommand SortCommand { get; private set; }
 
         public ICommand SyncCommand { get; private set; }
