@@ -79,7 +79,7 @@ namespace ActionNote.Common.Services
 
         Task<SyncResult> SyncNotesAsync();
 
-        Task<bool> UploadAttachement(NoteItem noteItem);
+        Task<bool> UploadAttachement(NoteItem noteItem, bool createUnsyncItem = true);
 
         Task UploadMissingAttachements();
 

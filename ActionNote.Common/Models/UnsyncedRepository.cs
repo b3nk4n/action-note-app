@@ -87,5 +87,19 @@ namespace ActionNote.Common.Models
                 entity.Type = prototype.Type;
             }
         }
+
+        public override async void Remove(string id)
+        {
+            base.Remove(id);
+
+            await _localStorageService.DeleteFileAsync(BaseFolder + id);
+        }
+
+        public override async void Clear()
+        {
+            base.Clear();
+
+            await _localStorageService.DeleteFolderAsync(BaseFolder);
+        }
     }
 }

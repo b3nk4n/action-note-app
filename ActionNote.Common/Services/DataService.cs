@@ -324,7 +324,7 @@ namespace ActionNote.Common.Services
             }
         }
 
-        public async Task<bool> UploadAttachement(NoteItem item)
+        public async Task<bool> UploadAttachement(NoteItem item, bool createUnsyncItem = true)
         {
             if (!item.HasAttachement)
                 return true;
@@ -332,6 +332,19 @@ namespace ActionNote.Common.Services
             if (IsSynchronizationActive &&
                 _networkInfoService.HasInternet)
             {
+                // save the unsynced change before upload, to make sure we realy do uploat it, even when the app is e.g. crashing / terminating inbetween
+                await Unsynced.Load(); // ensure loaded
+                var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
+
+                if (createUnsyncItem)
+                {
+                    if (Unsynced.Contains(item.Id))
+                        Unsynced.Update(unsyncedItem);
+                    else
+                        Unsynced.Add(unsyncedItem);
+                    await Unsynced.Save(unsyncedItem);
+                }
+
                 string filePath = AppConstants.ATTACHEMENT_BASE_PATH + item.AttachementFile;
                 var file = await _localStorageService.GetFileAsync(filePath);
                 using (var stream = await file.OpenReadAsync())
@@ -339,24 +352,17 @@ namespace ActionNote.Common.Services
                     var content = new HttpMultipartFormDataContent();
                     content.Add(new HttpStreamContent(stream), "file", item.AttachementFile);
 
-                    var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), content, DEFAULT_TIMEOUT);
+                    var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), content, 2 * DEFAULT_TIMEOUT);
 
                     if (res != null &&
                         res.IsSuccessStatusCode)
                     {
+                        Unsynced.Remove(unsyncedItem);
                         return true;
                     }
                 }
             }
-
-            // sync error handling
-            await Unsynced.Load(); // ensure loaded
-            var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
-            if (Unsynced.Contains(item.Id))
-                Unsynced.Update(unsyncedItem);
-            else
-                Unsynced.Add(unsyncedItem);
-            await Unsynced.Save(unsyncedItem);
+            
             return false;
         }
 
@@ -380,7 +386,7 @@ namespace ActionNote.Common.Services
                     if (note != null &&
                         note.HasAttachement)
                     {
-                        if (await UploadAttachement(note))
+                        if (await UploadAttachement(note, false))
                         {
                             // we can remove, because we are iterating a copy
                             Unsynced.Remove(unsyncedFile);
