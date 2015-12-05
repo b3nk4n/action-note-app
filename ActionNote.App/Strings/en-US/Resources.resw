@@ -284,8 +284,16 @@ Would you like to login now?</value>
     <value>Pin to start</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>Deleting...</value>
+    <comment>MainPage</comment>
+  </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
     <value>Downloading file...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>Saving...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">

@@ -283,8 +283,16 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>An „Start“ anheften</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>Lösche...</value>
+    <comment>MainPage</comment>
+  </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
     <value>Empfange Datei...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>Speichere...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">

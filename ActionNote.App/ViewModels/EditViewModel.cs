@@ -92,12 +92,16 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
+                await StartProgressAsync(_localizer.Get("Progress.Deleting"));
+
                 if (await _dataService.MoveToArchiveAsync(noteItem))
                 {
                     await _tilePinService.UnpinAsync(noteItem.Id);
 
                     GoBackToMainPageWithoutBackEvent();
                 }
+
+                await StopProgressAsync();
             },
             (noteItem) =>
             {
@@ -255,6 +259,8 @@ namespace ActionNote.App.ViewModels
                 !noteItem.HasAttachementChanged)
                 return;
 
+            await StartProgressAsync(_localizer.Get("Progress.Saving"));
+
             if (string.IsNullOrWhiteSpace(noteItem.Title))
             {
                 noteItem.Title = _commonLocalizer.Get("QuickNote");
@@ -281,9 +287,10 @@ namespace ActionNote.App.ViewModels
             {
                 await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
                 await _dataService.UploadAttachement(noteItem);
-                await StopProgressAsync();
             }
-            
+
+            await StopProgressAsync();
+
             // update tile
             await _tilePinService.UpdateAsync(noteItem);
         }
@@ -399,6 +406,9 @@ namespace ActionNote.App.ViewModels
 
         private async Task StartProgressAsync(string message)
         {
+            if (!_dataService.IsSynchronizationActive)
+                return;
+
             if (_deviceInfoService.IsWindows)
             {
                 ShowProgress = true;

@@ -61,6 +61,8 @@ namespace ActionNote.App.ViewModels
                 if (result.Id.ToString().Equals("n"))
                     return;
 
+                await StartProgressAsync(_localizer.Get("Progress.Deleting"));
+
                 // unpin all tiles
                 var allNotes = await _dataService.GetAllNotes();
                 foreach (var noteItem in allNotes)
@@ -73,6 +75,8 @@ namespace ActionNote.App.ViewModels
                 SelectedNote = null;
 
                 RaisePropertyChanged("HasNoNotes");
+
+                await StopProgressAsync();
             },
             () =>
             {
@@ -95,6 +99,8 @@ namespace ActionNote.App.ViewModels
 
             RemoveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
+                await StartProgressAsync(_localizer.Get("Progress.Deleting"));
+
                 if (await _dataService.MoveToArchiveAsync(noteItem))
                 {
                     SelectedNote = null;
@@ -104,6 +110,8 @@ namespace ActionNote.App.ViewModels
                 }
 
                 RaisePropertyChanged("HasNoNotes");
+
+                await StopProgressAsync();
             },
             (noteItem) =>
             {
@@ -240,6 +248,9 @@ namespace ActionNote.App.ViewModels
 
         private async Task StartProgressAsync(string message)
         {
+            if (!_dataService.IsSynchronizationActive)
+                return;
+
             if (_deviceInfoService.IsWindows)
             {
                 ShowProgress = true;
