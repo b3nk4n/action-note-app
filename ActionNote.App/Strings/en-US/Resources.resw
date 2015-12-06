@@ -221,7 +221,7 @@ You can reactivate it in the settings.</value>
   </data>
   <data name="Message.LoginPending" xml:space="preserve">
     <value>You have activated the online sychronization, but your login is still pending.
-Would you like to login now?</value>
+Would you like to login with your Microsoft acount right now?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
@@ -250,6 +250,14 @@ Would you like to login now?</value>
   </data>
   <data name="Message.Title.Warning" xml:space="preserve">
     <value>Warning</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>Welcome back!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>We have reactivated the online synchronization for you. To use this feature, you have to login with your Microsoft account. Would you like to login right now?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Nav.About" xml:space="preserve">

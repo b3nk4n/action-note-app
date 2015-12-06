@@ -28,6 +28,11 @@ namespace ActionNote.App.ViewModels
 
         private Localizer _localizer = new Localizer();
 
+        /// <summary>
+        /// Indicates to show a welcome back message for the login, because this user has used the app before.
+        /// </summary>
+        private bool _welcomeBack = false;
+
         public ObservableCollection<NoteItem> NoteItems
         {
             get;
@@ -47,7 +52,10 @@ namespace ActionNote.App.ViewModels
             {
                 // if the app started the first time, and we detect the user has the pro-version: auto enable online-sync
                 if (_dataService.IsProVersion)
+                {
+                    _welcomeBack = true;
                     AppSettings.SyncEnabled.Value = true;
+                }
             });
 
             ClearCommand = new DelegateCommand(async () =>
@@ -196,8 +204,22 @@ namespace ActionNote.App.ViewModels
             if (_dataService.IsUserLoginPending &&
                !_dataService.HasDeniedToLoginInThisSession)
             {
+                string dialogText;
+                string dialogTitle;
+
+                if (_welcomeBack)
+                {
+                    dialogText = _localizer.Get("Message.WelcomeLoginPending");
+                    dialogTitle = _localizer.Get("Message.Title.WelcomeBack");
+                }
+                else
+                {
+                    dialogText = _localizer.Get("Message.LoginPending");
+                    dialogTitle = _localizer.Get("Message.Title.Information");
+                }
+
                 var dialogResult = await _dialogService.ShowAsync(
-                    _localizer.Get("Message.LoginPending"),
+                    dialogText,
                     _localizer.Get("Message.Title.Information"),
                     0, 1, 
                     new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },

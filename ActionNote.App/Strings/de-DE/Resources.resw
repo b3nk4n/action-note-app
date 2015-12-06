@@ -251,6 +251,14 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Warnung</value>
     <comment>MessageDialog</comment>
   </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>Willkommen zurück!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>Wir haben die Online-Synchronisation für dich aktiviert. Damit das funktioniert, musst du dich noch kurz mit deinem Microsoft-Konto anmelden. Willst du die Anmeldung jetzt durchführen?</value>
+    <comment>MessageDialog</comment>
+  </data>
   <data name="Nav.About" xml:space="preserve">
     <value>Info</value>
     <comment>Navigation</comment>

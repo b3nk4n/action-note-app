@@ -726,7 +726,7 @@ namespace ActionNote.Common.Services
                 else
                 {
                     // auto disable online sync
-                    AppSettings.SyncEnabled.Value = true;
+                    AppSettings.SyncEnabled.Value = false;
 
                     return false;
                 }
