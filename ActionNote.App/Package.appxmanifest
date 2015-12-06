@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="20506BenjaminSautermeiste.ActionNote" Publisher="CN=E658962E-3EEA-4A7B-9BDA-D69C021B84FB" Version="1.2.2.0" />
+  <Identity Name="20506BenjaminSautermeiste.ActionNote" Publisher="CN=E658962E-3EEA-4A7B-9BDA-D69C021B84FB" Version="1.2.3.0" />
   <mp:PhoneIdentity PhoneProductId="7bbe84a2-2dbf-434c-9503-f428a0ecd937" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Action Note</DisplayName>
@@ -26,10 +26,9 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#0063B1" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
           <BackgroundTasks>
-            <Task Type="general" />
-            <Task Type="systemEvent" />
+            <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
@@ -37,9 +36,10 @@
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
           <BackgroundTasks>
-            <Task Type="timer" />
+            <Task Type="general" />
+            <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
       </Extensions>
