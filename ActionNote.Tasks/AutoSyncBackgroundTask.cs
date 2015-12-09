@@ -1,12 +1,9 @@
-﻿using ActionNote.Common;
-using ActionNote.Common.Models;
-using ActionNote.Common.Modules;
+﻿using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Notifications;
 
 namespace ActionNote.Tasks
 {
@@ -38,30 +35,30 @@ namespace ActionNote.Tasks
                 return;
             }
 
-            var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
-            if (details != null)
+            // sync notes
+            var syncResult = await _dataService.SyncNotesAsync();
+            if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
             {
-                // sync notes
-                var syncResult = await _dataService.SyncNotesAsync();
-                if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
+                if (syncResult == SyncResult.Success)
                 {
-                    if (syncResult == SyncResult.Success)
-                    {
-                        _dataService.FlagNotesNeedReload();
-                        _dataService.FlagArchiveNeedsReload();
-                    }
+                    _dataService.FlagNotesNeedReload();
+                    _dataService.FlagArchiveNeedsReload();
+                }
 
-                    await _dataService.UploadMissingAttachements();
-                    var downloadedAFile = await _dataService.DownloadMissingAttachements();
+                var downloadedAFile = false;
+                if (await _dataService.UploadMissingAttachements(1) == FileUploadResult.Nop)
+                {
+                    // only download anything, when nothing was uploaded (to ensure we do not produce to much traffic / timeout)
+                    downloadedAFile = await _dataService.DownloadMissingAttachements();
+                }
 
-                    if (syncResult != SyncResult.Unchanged || downloadedAFile)
-                    {
-                        var noteItems = await _dataService.GetAllNotes();
-                        await _actionCenterService.RefreshAsync(noteItems);
+                if (syncResult != SyncResult.Unchanged || downloadedAFile)
+                {
+                    var noteItems = await _dataService.GetAllNotes();
+                    await _actionCenterService.RefreshAsync(noteItems);
 
-                        var noteIds = await _dataService.GetAllNoteIds();
-                        await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
-                    }
+                    var noteIds = await _dataService.GetAllNoteIds();
+                    await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
                 }
             }
 

@@ -366,19 +366,33 @@ namespace ActionNote.Common.Services
             return false;
         }
 
-        public async Task UploadMissingAttachements()
+        public async Task<FileUploadResult> UploadMissingAttachements(int max = -1)
         {
             if (!IsSynchronizationActive ||
                 !_networkInfoService.HasInternet)
-                return;
+                return FileUploadResult.Nop;
 
             await Notes.Load(); // ensure loaded
             await Unsynced.Load(); // ensure loaded
 
             var unsyncedFiles = Unsynced.GetAll();
 
-            foreach (var unsyncedFile in unsyncedFiles)
+            var limit = unsyncedFiles.Count;
+
+            if (limit == 0)
+                return FileUploadResult.Nop;
+
+            if (max >= 0)
             {
+                limit = Math.Min(max, limit);
+            }
+
+            int errorCounter = 0;
+
+            for (int i = 0; i < limit; i++)
+            {
+                var unsyncedFile = unsyncedFiles[i];
+
                 if (unsyncedFile.Type == UnsyncedType.FileUpload)
                 {
                     var note = Notes.Get(unsyncedFile.Id);
@@ -391,9 +405,19 @@ namespace ActionNote.Common.Services
                             // we can remove, because we are iterating a copy
                             Unsynced.Remove(unsyncedFile);
                         }
+                        else
+                        {
+                            errorCounter++;
+                        }
                     }
                 }
             }
+
+            if (errorCounter == limit)
+                return FileUploadResult.Failed;
+
+            // success, if every upload was successful.
+            return FileUploadResult.Success;
         }
 
         public async Task RemoveUnsyncedEntry(NoteItem item)

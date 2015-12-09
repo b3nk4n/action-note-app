@@ -20,6 +20,13 @@ namespace ActionNote.Common.Services
         Failed
     }
 
+    public enum FileUploadResult
+    {
+        Success,
+        Nop,
+        Failed
+    }
+
     /// <summary>
     /// Note data service interface, to build a facade around notes repository and archive repository.
     /// </summary>
@@ -81,7 +88,12 @@ namespace ActionNote.Common.Services
 
         Task<bool> UploadAttachement(NoteItem noteItem, bool createUnsyncItem = true);
 
-        Task UploadMissingAttachements();
+        /// <summary>
+        /// Uploads the given number of attachements.
+        /// </summary>
+        /// <param name="max">The max number of attachements to upload, where -1 is unlimited.</param>
+        /// <returns></returns>
+        Task<FileUploadResult> UploadMissingAttachements(int max = -1);
 
         Task RemoveUnsyncedEntry(NoteItem item);
 
