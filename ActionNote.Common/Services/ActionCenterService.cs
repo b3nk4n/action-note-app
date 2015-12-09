@@ -9,6 +9,7 @@ using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
 using System;
 using System.Collections.Generic;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.Common.Services
 {
@@ -28,11 +29,13 @@ namespace ActionNote.Common.Services
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
         private IToastService _toastService;
+        private IDeviceInfoService _deviceInfoService;
 
         [Inject]
-        public ActionCenterService(IToastService toastService)
+        public ActionCenterService(IToastService toastService, IDeviceInfoService deviceInfoService)
         {
             _toastService = toastService;
+            _deviceInfoService = deviceInfoService;
         }
 
         public async Task AddToTop(NoteItem noteItem)
@@ -233,7 +236,7 @@ namespace ActionNote.Common.Services
                                 new AdaptiveImage()
                                 {
                                     Placement = ImagePlacement.AppLogoOverride,
-                                    Source = "Assets/StoreLogo.png"
+                                    Source = "Assets/StoreLogo_trans.png"
                                 },
                                 new AdaptiveText()
                                 {
@@ -276,13 +279,22 @@ namespace ActionNote.Common.Services
                 }
             };
 
-            string contentText;
             if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
-                contentText = string.Format("{0}\r\n{1}", _localizer.Get("NoteTitle.PlaceholderText"), _localizer.Get("NoteContent.PlaceholderText"));
-            else
-                contentText = _localizer.Get("NoteContent.PlaceholderText");
+            {
+                string placeholderFormat;
 
-            (toastModel.Actions.Children[0] as AdaptiveInput).PlaceHolderContent = contentText;
+                if (_deviceInfoService.IsPhone)
+                {
+                    placeholderFormat = "{0} / {1}";
+                }
+                else
+                {
+                    placeholderFormat = "{0}\r{1}";
+                }
+
+                string placeholderText = string.Format(placeholderFormat, _localizer.Get("NoteTitle.PlaceholderText"), _localizer.Get("NoteContent.PlaceholderText"));
+                (toastModel.Actions.Children[0] as AdaptiveInput).PlaceHolderContent = placeholderText;
+            }
 
             return toastModel;
         }

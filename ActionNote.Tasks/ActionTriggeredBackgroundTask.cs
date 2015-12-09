@@ -45,23 +45,22 @@ namespace ActionNote.Tasks
                         {
                             if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
                             {
-                                var splitIndex = input.IndexOf("\r\n");
+                                var splitIndex = input.IndexOf("\r");
 
                                 if (splitIndex != -1)
                                 {
-                                    title = input.Substring(0, splitIndex);
-                                    content = input.Substring(splitIndex + 2, input.Length - splitIndex - 2);
+                                    title = input.Substring(0, splitIndex).Trim();
+                                    content = input.Substring(splitIndex + 1, input.Length - splitIndex - 1).Trim();
                                 }
 
                                 if (string.IsNullOrWhiteSpace(content))
                                 {
-                                    title = _localizer.Get("QuickNote");
                                     content = title;
+                                    title = _localizer.Get("QuickNote");
                                 }
                                 else if (string.IsNullOrWhiteSpace(title))
                                 {
                                     title = _localizer.Get("QuickNote");
-                                    content = title;
                                 }
                             }
                             else
