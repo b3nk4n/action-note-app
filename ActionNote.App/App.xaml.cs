@@ -19,7 +19,6 @@ using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
 using UWPCore.Framework.Store;
-using Windows.UI.Popups;
 
 namespace ActionNote.App
 {

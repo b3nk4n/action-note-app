@@ -1,7 +1,12 @@
-﻿using ActionNote.App.ViewModels;
+﻿using System;
+using ActionNote.App.ViewModels;
 using ActionNote.Common.Models;
 using Universal.UI.Xaml.Controls;
+using UWPCore.Framework.Common;
 using UWPCore.Framework.Controls;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Shapes;
 
 namespace ActionNote.App.Views
 {
@@ -11,6 +16,8 @@ namespace ActionNote.App.Views
     public sealed partial class ArchivPage : UniversalPage
     {
         private ArchivViewModel ViewModel { get; set; }
+
+        private Localizer _localizer = new Localizer();
 
         public ArchivPage()
         {
@@ -29,6 +36,24 @@ namespace ActionNote.App.Views
                     ViewModel.RemoveCommand.Execute(item);
                 }
             }
+        }
+
+        private async void NoteListItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Mouse)
+                return;
+
+            var item = (sender as Rectangle).Tag as NoteItem;
+
+            var menu = new PopupMenu();
+            menu.Commands.Add(new UICommand(_localizer.Get("Delete.Label"), (command) =>
+            {
+                ViewModel.RemoveCommand.Execute(item);
+            }));
+
+            var point = e.GetPosition(null);
+            point.X += 40;
+            await menu.ShowAsync(point);
         }
     }
 }

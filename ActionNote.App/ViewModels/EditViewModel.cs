@@ -196,6 +196,7 @@ namespace ActionNote.App.ViewModels
                 return SelectedNote != null;
             });
 
+            // TODO: redundand with MainPageViewModel
             ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 var description = _localizer.Get("ShareContentDescription");

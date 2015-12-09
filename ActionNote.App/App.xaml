@@ -32,29 +32,6 @@
             <uwpcConverters:DateTimeConverter x:Key="dateTimeConverter" />
             <uwpcConverters:EmptyStringToVisibilityConverter x:Key="emptyStringToVisConv" />
 
-            <DataTemplate x:Key="NoteListDataTemplate">
-                <Grid Margin="20,4,12,4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="8" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,8,4" />
-                    <StackPanel Grid.Column="1">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Margin="4" />
-                            <FontIcon Grid.Column="1" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
-                            <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
-                        </Grid>
-                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}" />
-                    </StackPanel>
-                </Grid>
-            </DataTemplate>
-
             <Style x:Key="CommandBarFlyoutPresenterBaseStyle" TargetType="FlyoutPresenter">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>

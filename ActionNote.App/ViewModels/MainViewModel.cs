@@ -14,6 +14,8 @@ using Windows.UI.Popups;
 using System.Threading.Tasks;
 using UWPCore.Framework.Devices;
 using UWPCore.Framework.Support;
+using UWPCore.Framework.Storage;
+using UWPCore.Framework.Share;
 
 namespace ActionNote.App.ViewModels
 {
@@ -25,6 +27,8 @@ namespace ActionNote.App.ViewModels
         private IStatusBarService _statusBarService;
         private IDeviceInfoService _deviceInfoService;
         private IStartupActionService _startupActionsService;
+        private IStorageService _localStorageService;
+        private IShareContentService _shareContentService;
 
         private Localizer _localizer = new Localizer();
 
@@ -47,6 +51,8 @@ namespace ActionNote.App.ViewModels
             _statusBarService = Injector.Get<IStatusBarService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _startupActionsService = Injector.Get<IStartupActionService>();
+            _localStorageService = Injector.Get<ILocalStorageService>();
+            _shareContentService = Injector.Get<IShareContentService>();
 
             _startupActionsService.Register(1, ActionExecutionRule.Equals, () =>
             {
@@ -146,6 +152,46 @@ namespace ActionNote.App.ViewModels
             () =>
             {
                 return _dataService.IsSynchronizationActive;
+            });
+
+            // TODO: redundand with MainPageViewModel
+            ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                var description = _localizer.Get("ShareContentDescription");
+                if (noteItem.HasAttachement)
+                {
+                    var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
+                    if (file != null)
+                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, description);
+                }
+                else
+                {
+                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, description);
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            PinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.PinOrUpdateAsync(noteItem);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            },
+            (noteItem) =>
+            {
+                return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            UnpinCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                await _tilePinService.UnpinAsync(noteItem.Id);
+                RaisePropertyChanged("IsSelectedNotePinned");
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
             });
         }
 
@@ -335,5 +381,11 @@ namespace ActionNote.App.ViewModels
         public ICommand SortCommand { get; private set; }
 
         public ICommand SyncCommand { get; private set; }
+
+        public ICommand ShareCommand { get; private set; }
+
+        public ICommand PinCommand { get; private set; }
+
+        public ICommand UnpinCommand { get; private set; }
     }
 }
