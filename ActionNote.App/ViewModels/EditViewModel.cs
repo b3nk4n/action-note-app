@@ -26,6 +26,7 @@ namespace ActionNote.App.ViewModels
     public interface EditViewModelCallbacks
     {
         void SelectTitle();
+        void UnfocusTextBoxes();
     }
 
     public class EditViewModel : ViewModelBase
@@ -360,6 +361,10 @@ namespace ActionNote.App.ViewModels
                 if (SelectedNote != null && !SelectedNote.IsEmtpy)
                 {
                     e.Handled = true;
+
+                    // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
 
                     await SaveNoteAsync(SelectedNote);
                     GoBackToMainPageWithoutBackEvent();

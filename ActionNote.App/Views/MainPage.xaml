@@ -64,6 +64,7 @@
         </CommandBar>
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <Button x:Name="FocusElement" Width="1" Height="1" Opacity="0" TabIndex="0" />
             <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{Binding ShowProgress, Converter={StaticResource boolToVisConv}}" />
 
             <!-- intro arrow -->
