@@ -215,12 +215,12 @@ namespace ActionNote.App.ViewModels
                 else
                 {
                     dialogText = _localizer.Get("Message.LoginPending");
-                    dialogTitle = _localizer.Get("Message.Title.Information");
+                    dialogTitle = _localizer.Get("Message.Title.Info");
                 }
 
                 var dialogResult = await _dialogService.ShowAsync(
                     dialogText,
-                    _localizer.Get("Message.Title.Information"),
+                    dialogTitle,
                     0, 1, 
                     new UICommand(_localizer.Get("Message.Option.Yes")) { Id = "y" },
                     new UICommand(_localizer.Get("Message.Option.No")) { Id = "n" });
@@ -235,7 +235,7 @@ namespace ActionNote.App.ViewModels
                 {
                     await _dialogService.ShowAsync(
                         _localizer.Get("Message.LoginFailedInfo"),
-                        _localizer.Get("Message.Title.Information"));
+                        _localizer.Get("Message.Title.Info"));
                     return false;
                 }
                 else
