@@ -19,8 +19,15 @@ using UWPCore.Framework.Share;
 
 namespace ActionNote.App.ViewModels
 {
+    public interface IMainViewModelCallbacks
+    {
+        void SyncStarted();
+    }
+
     public class MainViewModel : ViewModelBase
     {
+        private IMainViewModelCallbacks _callbacks;
+
         private IDataService _dataService;
         private ITilePinService _tilePinService;
         private IDialogService _dialogService;
@@ -43,8 +50,15 @@ namespace ActionNote.App.ViewModels
             private set;
         } = new ObservableCollection<NoteItem>();
 
+        // For sample data only
         public MainViewModel()
+            : this(null)
+        { }
+
+        public MainViewModel(IMainViewModelCallbacks callbacks)
         {
+            _callbacks = callbacks;
+
             _dataService = Injector.Get<IDataService>();
             _tilePinService = Injector.Get<ITilePinService>();
             _dialogService = Injector.Get<IDialogService>();
@@ -200,6 +214,8 @@ namespace ActionNote.App.ViewModels
             if (await CheckUserLogin())
             {
                 await StartProgressAsync(_localizer.Get("Progress.Syncing"));
+
+                _callbacks.SyncStarted();
 
                 // sync notes
                 var syncResult = await _dataService.SyncNotesAsync();

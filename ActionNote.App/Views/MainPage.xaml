@@ -52,6 +52,16 @@
                            Tag="{Binding }"/>
             </Grid>
         </DataTemplate>
+        <Storyboard x:Name="SyncAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="SyncIcon">
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="360">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:2.01" Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
     </uwpcControls:UniversalPage.Resources>
 
@@ -83,7 +93,15 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton x:Uid="Sync" Width="62" Icon="Sync" Label="Synchronize" Command="{Binding SyncCommand}"/>
+            <AppBarButton x:Uid="Sync" Width="62" Label="Synchronize" Command="{Binding SyncCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon x:Name="SyncIcon" Glyph="{StaticResource Refresh}" RenderTransformOrigin="0.5,0.5" >
+                        <FontIcon.RenderTransform>
+                            <CompositeTransform/>
+                        </FontIcon.RenderTransform>
+                    </FontIcon>
+                </AppBarButton.Icon>
+            </AppBarButton>
             <AppBarSeparator Style="{StaticResource ThinAppBarSeparatorStyle}" />
             <AppBarButton x:Uid="Add" Width="62" Icon="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>

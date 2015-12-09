@@ -17,7 +17,7 @@ namespace ActionNote.App.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : UniversalPage
+    public sealed partial class MainPage : UniversalPage, IMainViewModelCallbacks
     {
         private ITilePinService _tilePinService;
 
@@ -31,7 +31,7 @@ namespace ActionNote.App.Views
 
             _tilePinService = Injector.Get<ITilePinService>();
 
-            ViewModel = new MainViewModel();
+            ViewModel = new MainViewModel(this);
             DataContext = ViewModel;
         }
 
@@ -110,6 +110,11 @@ namespace ActionNote.App.Views
             var point = e.GetPosition(null);
             point.X += 66;
             await menu.ShowAsync(point);
+        }
+
+        public void SyncStarted()
+        {
+            SyncAnimation.Begin();
         }
     }
 }
