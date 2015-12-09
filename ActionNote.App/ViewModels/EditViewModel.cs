@@ -357,10 +357,10 @@ namespace ActionNote.App.ViewModels
         {
             if (AppSettings.SaveNoteOnBack.Value)
             {
-                e.Handled = true;
-
                 if (SelectedNote != null && !SelectedNote.IsEmtpy)
                 {
+                    e.Handled = true;
+
                     await SaveNoteAsync(SelectedNote);
                     GoBackToMainPageWithoutBackEvent();
                 }
