@@ -1,9 +1,11 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UWPCore.Framework.IoC;
+using UWPCore.Framework.Logging;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -32,6 +34,8 @@ namespace ActionNote.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
+            Logger.WriteLine("ActionBarChangedTask: started");
+
             taskInstance.Canceled += (s, e) =>
             {
                 if (hasMutex)
@@ -41,8 +45,20 @@ namespace ActionNote.Tasks
             // wait to ensure ActionTriggeredBackgroundTask is running first
             await Task.Delay(1000);
 
+            var start = DateTimeOffset.Now.Ticks;
+
             hasMutex = backgroundMutex.WaitOne();
-            
+
+            var end = DateTimeOffset.Now.Ticks;
+
+            Logger.WriteLine("ActionBarChangedTask: entered (waited: {0})", end - start);
+
+            // exit when we didn't get the mutex
+            if (!hasMutex)
+            {
+                deferral.Complete();
+                return;
+            }
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
 
@@ -52,27 +68,31 @@ namespace ActionNote.Tasks
                 details.ChangeType == ToastHistoryChangedType.Removed) // Remark: ToastHistoryChangedType.Cleared seems not to be supported up to now?
             {
                 // load data
-                await _dataService.LoadNotesAsync(); // load it manually here, because of _dataService.NotesCount
+                _dataService.LoadNotesAsync().Wait(); // load it manually here, because of _dataService.NotesCount
 
                 if (AppSettings.AllowRemoveNotes.Value)
                 {
-                    var notes = await _dataService.GetAllNotes();
+                    var getAllTask = _dataService.GetAllNotes();
+                    getAllTask.Wait();
+                    var notes = getAllTask.Result;
 
                     if (notes != null)
                     {
                         var diff = _actionCenterService.DiffWithNotesInActionCenter(notes);
+
+                        Logger.WriteLine("ActionBarChangedTask: delete {0} notes", diff.Count);
 
                         if (diff.Count > 0)
                         {
                             // unpin deleted notes
                             foreach (var note in diff)
                             {
-                                await _tilePinService.UnpinAsync(note.Id);
+                                _tilePinService.UnpinAsync(note.Id).Wait();
                             }
 
                             _dataService.FlagNotesNeedReload();
                             _dataService.FlagArchiveNeedsReload();
-                            await _dataService.MoveRangeToArchiveAsync(diff);
+                            _dataService.MoveRangeToArchiveAsync(diff).Wait();
                         }
 
                         if (AppSettings.QuickNotesEnabled.Value &&
@@ -96,16 +116,20 @@ namespace ActionNote.Tasks
                     }
                     else
                     {
-                        var notes = await _dataService.GetAllNotes();
-                        
+                        var getAllTask = _dataService.GetAllNotes();
+                        getAllTask.Wait();
+                        var notes = getAllTask.Result;
+
                         if (notes != null)
-                            await _actionCenterService.RefreshAsync(notes);
+                            _actionCenterService.RefreshAsync(notes).Wait();
                     }
                 }
             }
 
             if (hasMutex)
                 backgroundMutex.ReleaseMutex();
+
+            Logger.WriteLine("ActionBarChangedTask: DONE");
 
             deferral.Complete();
         }

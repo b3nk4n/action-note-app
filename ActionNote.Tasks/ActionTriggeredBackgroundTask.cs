@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
+using UWPCore.Framework.Logging;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -35,13 +36,21 @@ namespace ActionNote.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
+            Logger.WriteLine("ActionTriggeredTask: started");
+
             taskInstance.Canceled += (s, e) =>
             {
                 if (hasMutex)
                     backgroundMutex.ReleaseMutex();
             };
 
+            var start = DateTimeOffset.Now.Ticks;
+
             hasMutex = backgroundMutex.WaitOne(3000); // wait time is generally not needed, but just to make sure we are not blocking the save process ... (close your eyes and have a dirty try!)   
+
+            var end = DateTimeOffset.Now.Ticks;
+
+            Logger.WriteLine("ActionTriggeredTask: entered (waited: {0})", end - start);
 
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
             if (details != null &&
@@ -112,6 +121,8 @@ namespace ActionNote.Tasks
 
             if (hasMutex)
                 backgroundMutex.ReleaseMutex();
+
+            Logger.WriteLine("ActionTriggeredTask: DONE");
 
             deferral.Complete();
         }
