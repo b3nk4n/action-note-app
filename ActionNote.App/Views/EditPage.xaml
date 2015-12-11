@@ -203,7 +203,7 @@
                                         <Ellipse Fill="#49BFFF" Width="16" Height="16" Margin="4" />
                                     </Button>
                                     <Button Grid.Column="0" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Green">
-                                        <Ellipse Fill="#61FF49" Width="16" Height="16" Margin="4" />
+                                        <Ellipse Fill="#25FF88" Width="16" Height="16" Margin="4" />
                                     </Button>
                                     <Button Grid.Column="1" Grid.Row="1" Width="48" Height="48" HorizontalAlignment="Stretch" Style="{StaticResource CommandBarFlyoutButtonStyle}" Click="ColorFlyoutClicked" Command="{Binding ColorSelectedCommand}" CommandParameter="Violett">
                                         <Ellipse Fill="#C849FF" Width="16" Height="16" Margin="4" />

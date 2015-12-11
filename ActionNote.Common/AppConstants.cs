@@ -35,7 +35,7 @@ namespace ActionNote.Common
         public readonly static Color COLOR_ACCENT = Color.FromArgb(255, 0, 99, 177);
         public readonly static Color COLOR_WHITE = Colors.White;
         public readonly static Color COLOR_RED = Color.FromArgb(255, 255, 73, 73);
-        public readonly static Color COLOR_GREEN = Color.FromArgb(255, 97, 255, 73);
+        public readonly static Color COLOR_GREEN = Color.FromArgb(255, 37, 255, 136);
         public readonly static Color COLOR_BLUE = Color.FromArgb(255, 73, 191, 255);
         public readonly static Color COLOR_ORANGE = Color.FromArgb(255, 255, 164, 73);
         public readonly static Color COLOR_VIOLETT = Color.FromArgb(255, 200, 73, 255);
