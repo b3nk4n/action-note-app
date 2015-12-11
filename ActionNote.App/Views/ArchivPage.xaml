@@ -26,7 +26,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Margin="4" />
+                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontSize="24" FontWeight="SemiBold" Margin="4" />
                         <FontIcon Grid.Column="1" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                         <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                     </Grid>
