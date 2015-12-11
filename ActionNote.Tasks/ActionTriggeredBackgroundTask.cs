@@ -2,6 +2,9 @@
 using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using Windows.ApplicationModel.Background;
@@ -16,6 +19,10 @@ namespace ActionNote.Tasks
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
+        private static Mutex backgroundMutex = new Mutex(false, "createNoteBeforeDiff");
+
+        private static volatile bool hasMutex;
+
         public ActionTriggeredBackgroundTask()
         {
             IInjector injector = Injector.Instance;
@@ -24,9 +31,17 @@ namespace ActionNote.Tasks
             _dataService = injector.Get<IDataService>();
         }
 
-        public async void Run(IBackgroundTaskInstance taskInstance)
+        public void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
+
+            taskInstance.Canceled += (s, e) =>
+            {
+                if (hasMutex)
+                    backgroundMutex.ReleaseMutex();
+            };
+
+            hasMutex = backgroundMutex.WaitOne(3000); // wait time is generally not needed, but just to make sure we are not blocking the save process ... (close your eyes and have a dirty try!)   
 
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
             if (details != null &&
@@ -39,7 +54,6 @@ namespace ActionNote.Tasks
                         string content = null;
                         string title = null;
                         var input = details.UserInput["content"] as string;
-
 
                         if (!string.IsNullOrWhiteSpace(input))
                         {
@@ -74,25 +88,30 @@ namespace ActionNote.Tasks
                             {
                                 var noteItem = new NoteItem(title, content);
                                 _dataService.FlagNotesNeedReload();
-                                await _dataService.AddNoteAsync(noteItem);
+                                _dataService.AddNoteAsync(noteItem).Wait();
 
                                 if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
                                 {
                                     // add it into the action center at the beginning when we order for date.
-                                    await _actionCenterService.AddToTop(noteItem);
+                                    _actionCenterService.AddToTop(noteItem).Wait();
                                 }
                                 else
                                 {
                                     // refresh all, because new note could be not at the top of the list
-                                    var notes = await _dataService.GetAllNotes();
+                                    var getAllTask = _dataService.GetAllNotes();
+                                    getAllTask.Wait();
+                                    var notes = getAllTask.Result;
                                     if (notes != null)
-                                        await _actionCenterService.RefreshAsync(notes);
+                                        _actionCenterService.RefreshAsync(notes).Wait();
                                 }
                             }
                         }
                     }
                 }
             }
+
+            if (hasMutex)
+                backgroundMutex.ReleaseMutex();
 
             deferral.Complete();
         }

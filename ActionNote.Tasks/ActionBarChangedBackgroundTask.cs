@@ -1,6 +1,7 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
+using System.Threading;
 using System.Threading.Tasks;
 using UWPCore.Framework.IoC;
 using Windows.ApplicationModel.Background;
@@ -13,6 +14,10 @@ namespace ActionNote.Tasks
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
         private ITilePinService _tilePinService;
+
+        private static Mutex backgroundMutex = new Mutex(false, "createNoteBeforeDiff");
+
+        private static volatile bool hasMutex;
 
         public ActionBarChangedBackgroundTask()
         {
@@ -27,9 +32,17 @@ namespace ActionNote.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
-            // wait to ensure ActionTriggeredBackgroundTask is running first, that restores items that have
-            // been deleted by clicking on them.
+            taskInstance.Canceled += (s, e) =>
+            {
+                if (hasMutex)
+                    backgroundMutex.ReleaseMutex();
+            };
+
+            // wait to ensure ActionTriggeredBackgroundTask is running first
             await Task.Delay(1000);
+
+            hasMutex = backgroundMutex.WaitOne();
+            
 
             var details = taskInstance.TriggerDetails as ToastNotificationHistoryChangedTriggerDetail;
 
@@ -90,6 +103,9 @@ namespace ActionNote.Tasks
                     }
                 }
             }
+
+            if (hasMutex)
+                backgroundMutex.ReleaseMutex();
 
             deferral.Complete();
         }
