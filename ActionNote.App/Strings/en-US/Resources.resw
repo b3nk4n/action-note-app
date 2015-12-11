@@ -170,6 +170,22 @@ ment</value>
     <value>Select</value>
     <comment>EditPage</comment>
   </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>2 hours</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>30 minutes</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>45 minutes</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>1 hour</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
     <comment>MainPage/EditPage</comment>
@@ -346,6 +362,10 @@ Would you like to login with your Microsoft acount right now?</value>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
     <value>Auto save notes</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>Synchronization interval</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">

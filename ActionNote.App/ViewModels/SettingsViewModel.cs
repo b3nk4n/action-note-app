@@ -22,6 +22,8 @@ namespace ActionNote.App.ViewModels
 
         public StringComboBoxSource QuickNoteContentTypeStringSource { get; private set; }
 
+        public StringComboBoxSource BackgroundTaskSyncIntervalStringSource { get; private set; }
+
         private Localizer _localizer = new Localizer();
 
         public SettingsViewModel()
@@ -33,9 +35,17 @@ namespace ActionNote.App.ViewModels
                 new SourceComboBoxItem(AppConstants.SORT_DATE, _localizer.Get("SortByDate.Text")),
                 new SourceComboBoxItem(AppConstants.SORT_CATEGORY, _localizer.Get("SortByCategory.Text"))
             });
+
             QuickNoteContentTypeStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
                 new SourceComboBoxItem(AppConstants.QUICK_NOTES_CONTENT, _localizer.Get("QuickNotesTypeContent.Text")),
                 new SourceComboBoxItem(AppConstants.QUICK_NOTES_TITLE_AND_CONTENT, _localizer.Get("QuickNotesTypeTitleAndContent.Text"))
+            });
+
+            BackgroundTaskSyncIntervalStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_30, _localizer.Get("BackSyncInterval.30")),
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_45, _localizer.Get("BackSyncInterval.45")),
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_60, _localizer.Get("BackSyncInterval.60")),
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_120, _localizer.Get("BackSyncInterval.120"))
             });
         }
 
@@ -46,6 +56,7 @@ namespace ActionNote.App.ViewModels
             ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
             SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
             QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+            BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -57,6 +68,7 @@ namespace ActionNote.App.ViewModels
 
             AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
             AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
+            AppSettings.BackgroundTaskSyncInterval.Value = BackgroundTaskSyncIntervalStringSource.SelectedValue;
         }
 
         public bool ShowNotesInActionCenter

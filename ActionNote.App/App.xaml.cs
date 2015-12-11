@@ -299,7 +299,10 @@ namespace ActionNote.App
 
                 if (_dataService.IsSynchronizationActive && AppSettings.SyncInBackground.Value)
                 {
-                    _backgroundTaskService.Register(BG_TASK_AUTO_SYNC, "ActionNote.Tasks.AutoSyncBackgroundTask", new TimeTrigger(AppConstants.SYNC_INTERVAL_MINUTES, false), new SystemCondition(SystemConditionType.InternetAvailable));
+                    uint syncInterval = 60;
+                    uint.TryParse(AppSettings.BackgroundTaskSyncInterval.Value, out syncInterval);
+
+                    _backgroundTaskService.Register(BG_TASK_AUTO_SYNC, "ActionNote.Tasks.AutoSyncBackgroundTask", new TimeTrigger(syncInterval, false), new SystemCondition(SystemConditionType.InternetAvailable));
                 }
             }
         }

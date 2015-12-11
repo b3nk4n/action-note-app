@@ -23,11 +23,6 @@ namespace ActionNote.Common
         public const string SERVER_BASE_PATH = "http://bsautermeister.de/actionnote-service/";
 #endif
         /// <summary>
-        /// The auto sync interval in background.
-        /// </summary>
-        public const uint SYNC_INTERVAL_MINUTES = 60;
-
-        /// <summary>
         /// The pro version key.
         /// </summary>
         public const string IAP_PRO_VERSION = "actionnote_pro";
@@ -50,5 +45,10 @@ namespace ActionNote.Common
 
         public const string QUICK_NOTES_CONTENT = "content";
         public const string QUICK_NOTES_TITLE_AND_CONTENT = "titlecontent";
+
+        public const string SYNC_INTERVAL_30 = "30";
+        public const string SYNC_INTERVAL_45 = "45";
+        public const string SYNC_INTERVAL_60 = "60";
+        public const string SYNC_INTERVAL_120 = "120";
     }
 }

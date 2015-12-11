@@ -27,5 +27,7 @@ namespace ActionNote.Common
         public static StoredObjectBase<bool> SyncOnStart = new LocalObject<bool>("proSyncOnStart", true);
 
         public static StoredObjectBase<bool> SyncInBackground = new LocalObject<bool>("proSyncInBackground", true);
+
+        public static StoredObjectBase<string> BackgroundTaskSyncInterval = new LocalObject<string>("proSyncBackInverval", AppConstants.SYNC_INTERVAL_60);
     }
 }
