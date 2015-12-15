@@ -75,6 +75,10 @@ namespace ActionNote.Tasks
                                     title = input.Substring(0, splitIndex).Trim();
                                     content = input.Substring(splitIndex + 1, input.Length - splitIndex - 1).Trim();
                                 }
+                                else
+                                {
+                                    content = input.Trim();
+                                }
 
                                 if (string.IsNullOrWhiteSpace(content))
                                 {
