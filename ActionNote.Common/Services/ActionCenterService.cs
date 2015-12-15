@@ -285,7 +285,7 @@ namespace ActionNote.Common.Services
 
                 if (_deviceInfoService.IsPhone)
                 {
-                    placeholderFormat = "{0} / {1}";
+                    placeholderFormat = "{0} ↩ {1}";
                 }
                 else
                 {
