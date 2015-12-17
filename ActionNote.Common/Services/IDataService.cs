@@ -46,6 +46,8 @@ namespace ActionNote.Common.Services
 
         int ArchivesCount { get; }
 
+        Task<NoteItem> GetArchivedNote(string id);
+
         /// <summary>
         /// Moves the note to the archive.
         /// </summary>

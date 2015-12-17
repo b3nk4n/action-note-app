@@ -20,10 +20,21 @@ namespace ActionNote.App.Views
         private Localizer _localizer = new Localizer();
 
         public ArchivPage()
+            : base(typeof(ArchivPage))
         {
             InitializeComponent();
             ViewModel = new ArchivViewModel();
             DataContext = ViewModel;
+        }
+
+        private void NoteItemClicked(object sender, Windows.UI.Xaml.Controls.ItemClickEventArgs e)
+        {
+            var clickedNoteItem = e.ClickedItem as NoteItem;
+
+            if (clickedNoteItem != null)
+            {
+                ViewModel.ReadOnlyCommand.Execute(clickedNoteItem);
+            }
         }
 
         private void SwipeListView_ItemSwipe(object sender, ItemSwipeEventArgs e)

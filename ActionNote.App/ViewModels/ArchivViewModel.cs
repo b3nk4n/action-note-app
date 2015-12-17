@@ -1,4 +1,5 @@
-﻿using ActionNote.Common;
+﻿using ActionNote.App.Views;
+using ActionNote.Common;
 using ActionNote.Common.Helpers;
 using ActionNote.Common.Models;
 using ActionNote.Common.Services;
@@ -30,6 +31,15 @@ namespace ActionNote.App.ViewModels
         {
             _dataService = Injector.Get<IDataService>();
             _dialogService = Injector.Get<IDialogService>();
+
+            ReadOnlyCommand = new DelegateCommand<NoteItem>((noteItem) =>
+            {
+                NavigationService.Navigate(typeof(ReadOnlyPage), AppConstants.PARAM_ID + noteItem.Id);
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
 
             ClearCommand = new DelegateCommand(async () =>
             {
@@ -130,6 +140,8 @@ namespace ActionNote.App.ViewModels
             }
         }
         private NoteItem _selectedNote;
+
+        public ICommand ReadOnlyCommand { get; private set; }
 
         public ICommand ClearCommand { get; private set; }
 

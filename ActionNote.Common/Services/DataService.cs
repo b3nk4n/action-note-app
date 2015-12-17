@@ -114,6 +114,15 @@ namespace ActionNote.Common.Services
             return Notes.Get(id);
         }
 
+        public async Task<NoteItem> GetArchivedNote(string id)
+        {
+            // ensure loaded
+            if (!Archive.HasLoaded)
+                await Archive.Load();
+
+            return Archive.Get(id);
+        }
+
         public async Task<bool> ContainsNote(string id)
         {
             // ensure loaded
