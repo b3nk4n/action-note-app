@@ -383,6 +383,14 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>„Kurznotizen“ für schnelle Notizen</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Standard-Titel für Kurznotizen</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Kurznotiz</value>
+    <comment>BackgroundTask</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Notizen anzeigen</value>
     <comment>SettingsPage</comment>

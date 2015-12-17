@@ -18,6 +18,8 @@ namespace ActionNote.Common
 
         public static StoredObjectBase<string> SortNoteInActionCenterBy = new LocalObject<string>("sortNotesInActionCenter", AppConstants.SORT_DATE);
 
+        public static StoredObjectBase<string> QuickNotesDefaultTitle = new LocalObject<string>("qickNotesDefaultTitle", string.Empty); // Emtpy means to use "QuickNotes"
+
         // *** Pro Version only: ***
 
         public static StoredObjectBase<string> UserId = new LocalObject<string>("userId", null);

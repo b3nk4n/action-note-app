@@ -57,6 +57,10 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                    <TextBox x:Uid="SettingsQuickNotesDefaultTitle" Header="Default title for QuickNotes" PlaceholderText="Quick Notes" Width="264" Margin="4" HorizontalAlignment="Left"
+                             Text="{Binding QuickNotesDefaultTitle, Mode=TwoWay}" TextWrapping="NoWrap" AcceptsReturn="False"
+                             IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsEnabled}"
+                             Visibility="{Binding ElementName=QuickNotesEnabled, Path=IsOn, Converter={StaticResource boolToVisConv}}"/>
 
                     <TextBlock x:Uid="SettingsOnlineSync" Style="{StaticResource TitleTextBlockStyle}" Text="Online Synchronization" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="SettingsSyncEnabledToggle" x:Uid="SettingsAcrossDevices" Header="Synchronize across all devices" IsOn="{Binding SyncEnabled, Mode=TwoWay}" Margin="4" />

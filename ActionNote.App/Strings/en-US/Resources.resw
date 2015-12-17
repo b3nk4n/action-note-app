@@ -329,7 +329,7 @@ Would you like to login with your Microsoft acount right now?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Input method of „QuickNotes“</value>
+    <value>Input method of „Quick Notes“</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
@@ -381,8 +381,16 @@ Would you like to login with your Microsoft acount right now?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>Enable “QuickNotes“</value>
+    <value>Enable “Quick Notes“</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Default title for “Quick Notes“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Quick Notes</value>
+    <comment>BackgroundTask</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Display notes</value>

@@ -66,6 +66,12 @@ namespace ActionNote.Tasks
 
                         if (!string.IsNullOrWhiteSpace(input))
                         {
+                            var quickNotesDefaultTitle = AppSettings.QuickNotesDefaultTitle.Value;
+                            if (string.IsNullOrEmpty(quickNotesDefaultTitle))
+                            {
+                                quickNotesDefaultTitle = _localizer.Get("QuickNotes");
+                            }
+
                             if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
                             {
                                 var splitIndex = input.IndexOf("\r");
@@ -83,16 +89,16 @@ namespace ActionNote.Tasks
                                 if (string.IsNullOrWhiteSpace(content))
                                 {
                                     content = title;
-                                    title = _localizer.Get("QuickNote");
+                                    title = quickNotesDefaultTitle;
                                 }
                                 else if (string.IsNullOrWhiteSpace(title))
                                 {
-                                    title = _localizer.Get("QuickNote");
+                                    title = quickNotesDefaultTitle;
                                 }
                             }
                             else
                             {
-                                title = _localizer.Get("QuickNote");
+                                title = quickNotesDefaultTitle;
                                 content = input;
                             }
 

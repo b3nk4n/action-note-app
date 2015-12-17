@@ -164,5 +164,17 @@ namespace ActionNote.App.ViewModels
                 AppSettings.SyncInBackground.Value = value;
             }
         }
+
+        public string QuickNotesDefaultTitle
+        {
+            get
+            {
+                return AppSettings.QuickNotesDefaultTitle.Value;
+            }
+            set
+            {
+                AppSettings.QuickNotesDefaultTitle.Value = value;
+            }
+        }
     }
 }
