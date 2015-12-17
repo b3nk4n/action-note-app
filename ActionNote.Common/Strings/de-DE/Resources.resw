@@ -143,5 +143,6 @@
   </data>
   <data name="Swipe.Delete.Text" xml:space="preserve">
     <value>Löschen</value>
+    <comment>MainPage</comment>
   </data>
 </root>

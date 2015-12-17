@@ -20,6 +20,8 @@ using UWPCore.Framework.UI;
 using Windows.UI.Xaml.Media;
 using UWPCore.Framework.Devices;
 using UWPCore.Framework.Share;
+using UWPCore.Framework.Input;
+using Windows.System;
 
 namespace ActionNote.App.ViewModels
 {
@@ -44,6 +46,7 @@ namespace ActionNote.App.ViewModels
         private IDeviceInfoService _deviceInfoService;
         private IActionCenterService _actionCenterService;
         private IShareContentService _shareContentService;
+        private IKeyboardService _keyboardService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -70,6 +73,8 @@ namespace ActionNote.App.ViewModels
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _actionCenterService = Injector.Get<IActionCenterService>();
             _shareContentService = Injector.Get<IShareContentService>();
+            _keyboardService = Injector.Get<IKeyboardService>();
+            RegisterForKeyboard();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -297,6 +302,13 @@ namespace ActionNote.App.ViewModels
             await _tilePinService.UpdateAsync(noteItem);
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            RegisterForKeyboard();
+        }
+
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
@@ -355,6 +367,105 @@ namespace ActionNote.App.ViewModels
             await CheckAndDownloadAttachement();
         }
 
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            _keyboardService.UnregisterForKeyDown();
+
+            await base.OnNavigatedFromAsync(state, suspending);
+
+            if (!suspending)
+                NavigationService.FrameFacade.BackRequested -= BackRequested;
+
+            if (suspending)
+            {
+                state["id"] = SelectedNote.Id;
+                state["title"] = SelectedNote.Title;
+                state["content"] = SelectedNote.Content;
+                state["attachementFile"] = SelectedNote.AttachementFile;
+                state["isImportant"] = SelectedNote.IsImportant;
+                state["color"] = SelectedNote.Color.ToString();
+                state["changedDate"] = SelectedNote.ChangedDate;
+            }
+        }
+
+        private void RegisterForKeyboard()
+        {
+            _keyboardService.RegisterForKeyDown(async (e) =>
+            {
+                if (e.ControlKey && e.VirtualKey == VirtualKey.S)
+                {
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
+                    SaveCommand.Execute(SelectedNote);
+                }
+                else if (e.ControlKey && e.VirtualKey == VirtualKey.X)
+                {
+                    DiscardCommand.Execute(null);
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.S)
+                {
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
+                    ShareCommand.Execute(SelectedNote);
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.R)
+                {
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
+                    ReadNoteCommand.Execute(SelectedNote);
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.P)
+                {
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
+                    if (IsSelectedNotePinned)
+                    {
+                        UnpinCommand.Execute(SelectedNote);
+                    }
+                    else
+                    {
+                        PinCommand.Execute(SelectedNote);
+                    }
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.I ||
+                         e.AltKey && e.VirtualKey == VirtualKey.F ||
+                         e.AltKey && e.VirtualKey == VirtualKey.M)
+                {
+                    SelectedNote.IsImportant = !SelectedNote.IsImportant;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number1 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad1)
+                {
+                    SelectedNote.Color = ColorCategory.Neutral;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number2 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad2)
+                {
+                    SelectedNote.Color = ColorCategory.Red;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number3 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad3)
+                {
+                    SelectedNote.Color = ColorCategory.Blue;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number4 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad4)
+                {
+                    SelectedNote.Color = ColorCategory.Green;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number5 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad5)
+                {
+                    SelectedNote.Color = ColorCategory.Violett;
+                }
+                else if (e.AltKey && e.VirtualKey == VirtualKey.Number6 ||
+                         e.AltKey && e.VirtualKey == VirtualKey.NumberPad6)
+                {
+                    SelectedNote.Color = ColorCategory.Orange;
+                }
+            });
+        }
+
         private async void BackRequested(object sender, HandledEventArgs e)
         {
             if (AppSettings.SaveNoteOnBack.Value)
@@ -388,25 +499,6 @@ namespace ActionNote.App.ViewModels
                     RaisePropertyChanged("SelectedAttachementImageOrReload");
                 }
                 await StopProgressAsync();
-            }
-        }
-
-        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
-        {
-            await base.OnNavigatedFromAsync(state, suspending);
-
-            if (!suspending)
-                NavigationService.FrameFacade.BackRequested -= BackRequested;
-
-            if (suspending)
-            {
-                state["id"] = SelectedNote.Id;
-                state["title"] = SelectedNote.Title;
-                state["content"] = SelectedNote.Content;
-                state["attachementFile"] = SelectedNote.AttachementFile;
-                state["isImportant"] = SelectedNote.IsImportant;
-                state["color"] = SelectedNote.Color.ToString();
-                state["changedDate"] = SelectedNote.ChangedDate;
             }
         }
 

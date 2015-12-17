@@ -212,7 +212,7 @@ ment</value>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>purchased</value>
-    <comment>IAP</comment>
+    <comment>UpgradePage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTES</value>
@@ -224,7 +224,7 @@ ment</value>
   </data>
   <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
     <value>The delete process could not be performed, because the information could not be sent to the server. Please check your internet connection and try again later.</value>
-    <comment>ArchivePage</comment>
+    <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
     <value>This note has been already deleted on another device. Your device seems to be out of sync. Please perform a synchronization manually.</value>

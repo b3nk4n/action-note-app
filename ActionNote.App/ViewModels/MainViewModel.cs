@@ -16,6 +16,8 @@ using UWPCore.Framework.Devices;
 using UWPCore.Framework.Support;
 using UWPCore.Framework.Storage;
 using UWPCore.Framework.Share;
+using UWPCore.Framework.Input;
+using Windows.System;
 
 namespace ActionNote.App.ViewModels
 {
@@ -36,6 +38,7 @@ namespace ActionNote.App.ViewModels
         private IStartupActionService _startupActionsService;
         private IStorageService _localStorageService;
         private IShareContentService _shareContentService;
+        private IKeyboardService _keyboardService;
 
         private Localizer _localizer = new Localizer();
 
@@ -67,6 +70,8 @@ namespace ActionNote.App.ViewModels
             _startupActionsService = Injector.Get<IStartupActionService>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _shareContentService = Injector.Get<IShareContentService>();
+            _keyboardService = Injector.Get<IKeyboardService>();
+            RegisterForKeyboard();
 
             _startupActionsService.Register(1, ActionExecutionRule.Equals, () =>
             {
@@ -239,6 +244,13 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            RegisterForKeyboard();
+        }
+
         public override async void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
@@ -249,6 +261,28 @@ namespace ActionNote.App.ViewModels
             await CheckUserLogin();
 
             await CheckAutoSync();
+        }
+
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
+        {
+            _keyboardService.UnregisterForKeyDown();
+
+            await base.OnNavigatedFromAsync(state, suspending);
+        }
+
+        private void RegisterForKeyboard()
+        {
+            _keyboardService.RegisterForKeyDown((e) =>
+            {
+                if (e.ControlKey && e.VirtualKey == VirtualKey.N)
+                {
+                    AddCommand.Execute(null);
+                }
+                if (e.VirtualKey == VirtualKey.F5)
+                {
+                    SyncCommand.Execute(null);
+                }
+            });
         }
 
         private async Task CheckAutoSync()
