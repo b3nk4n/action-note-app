@@ -87,26 +87,35 @@ namespace ActionNote.Tasks
 
                         if (diff.Count > 0)
                         {
-                            // unpin deleted notes
-                            foreach (var note in diff)
+                            if (AppSettings.AllowClearNotes.Value ||
+                                diff.Count <= 1 || // either only one is deleted
+                                diff.Count >= 1 && diff.Count != notes.Count) // or not all
                             {
-                                _tilePinService.UnpinAsync(note.Id).Wait();
-                            }
+                                // unpin deleted notes
+                                foreach (var note in diff)
+                                {
+                                    _tilePinService.UnpinAsync(note.Id).Wait();
+                                }
 
-                            _dataService.FlagNotesNeedReload();
-                            _dataService.FlagArchiveNeedsReload();
-                            _dataService.MoveRangeToArchiveAsync(diff).Wait();
+                                _dataService.FlagNotesNeedReload();
+                                _dataService.FlagArchiveNeedsReload();
+                                _dataService.MoveRangeToArchiveAsync(diff).Wait();
+
+                                var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
+                                _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                            }
+                            else
+                            {
+                                await _actionCenterService.RefreshAsync(notes);
+                            }
                         }
 
                         if (AppSettings.QuickNotesEnabled.Value &&
                             !_actionCenterService.ContainsQuickNotes())
                         {
-                            // add quick notes when it was removed by klicking on it or using it.
+                            // add quick notes when it was removed by clicking on it or using it.
                             _actionCenterService.AddQuickNotes();
                         }
-
-                        var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-                        _badgeService.GetBadgeUpdaterForApplication().Update(badge);
                     }
                 }
                 else

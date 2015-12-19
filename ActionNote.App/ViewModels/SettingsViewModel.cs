@@ -95,6 +95,18 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        public bool AllowClearNotes
+        {
+            get
+            {
+                return AppSettings.AllowClearNotes.Value;
+            }
+            set
+            {
+                AppSettings.AllowClearNotes.Value = value;
+            }
+        }
+
         public bool SaveNoteOnBack
         {
             get
