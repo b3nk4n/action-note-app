@@ -176,16 +176,17 @@ namespace ActionNote.App.ViewModels
             // TODO: redundand with MainPageViewModel
             ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
+                var content = string.Format("{0}\r{1}", noteItem.Title, noteItem.Content);
                 var description = _localizer.Get("ShareContentDescription");
                 if (noteItem.HasAttachement)
                 {
                     var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
                     if (file != null)
-                        _shareContentService.ShareImage(noteItem.Title, file, null, noteItem.Content, description);
+                        _shareContentService.ShareImage(noteItem.Title, file, null, content, description);
                 }
                 else
                 {
-                    _shareContentService.ShareText(noteItem.Title, noteItem.Content, description);
+                    _shareContentService.ShareText(noteItem.Title, content, description);
                 }
             },
             (noteItem) =>
