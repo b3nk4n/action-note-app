@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Logging;
+using UWPCore.Framework.Notifications;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -17,6 +18,7 @@ namespace ActionNote.Tasks
     {
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
+        private IBadgeService _badgeService;
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
@@ -30,6 +32,7 @@ namespace ActionNote.Tasks
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<IDataService>();
+            _badgeService = injector.Get<IBadgeService>();
         }
 
         public void Run(IBackgroundTaskInstance taskInstance)
@@ -123,6 +126,9 @@ namespace ActionNote.Tasks
                                     if (notes != null)
                                         _actionCenterService.RefreshAsync(notes).Wait();
                                 }
+
+                                var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
+                                _badgeService.GetBadgeUpdaterForApplication().Update(badge);
                             }
                         }
                     }

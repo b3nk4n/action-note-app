@@ -19,6 +19,7 @@ using Windows.UI;
 using UWPCore.Framework.UI;
 using System.Collections.Generic;
 using UWPCore.Framework.Store;
+using UWPCore.Framework.Notifications;
 
 namespace ActionNote.App
 {
@@ -37,6 +38,7 @@ namespace ActionNote.App
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
         private ILicenseService _licenseService;
+        private IBadgeService _badgeService;
 
         private Localizer _localizer;
 
@@ -55,6 +57,7 @@ namespace ActionNote.App
             _serializationService = Injector.Get<ISerializationService>();
             _dataService = Injector.Get<IDataService>();
             _licenseService = Injector.Get<ILicenseService>();
+            _badgeService = Injector.Get<IBadgeService>();
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
@@ -228,6 +231,9 @@ namespace ActionNote.App
                 if (notes != null)
                     await _actionCenterService.RefreshAsync(notes);
             }
+
+            var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
+            _badgeService.GetBadgeUpdaterForApplication().Update(badge);
 
             await _dataService.CleanUpAttachementFilesAsync();
         }
