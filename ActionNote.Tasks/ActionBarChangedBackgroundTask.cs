@@ -85,11 +85,15 @@ namespace ActionNote.Tasks
 
                         Logger.WriteLine("ActionBarChangedTask: delete {0} notes", diff.Count);
 
+                        var containsQuickNotesInActionCenter = _actionCenterService.ContainsQuickNotes();
+
                         if (diff.Count > 0)
                         {
                             if (AppSettings.AllowClearNotes.Value ||
                                 diff.Count <= 1 || // either only one is deleted
-                                diff.Count >= 1 && diff.Count != notes.Count) // or not all
+                                diff.Count >= 1 && diff.Count != notes.Count) // || // many but not all not all
+                                //AppSettings.QuickNotesEnabled.Value && diff.Count == notes.Count && containsQuickNotesInActionCenter) // but allow when all are removed, but the quick notes is still there, which means there was no clear all
+                                // not working due to bug of SuppressPopup
                             {
                                 // unpin deleted notes
                                 foreach (var note in diff)
@@ -106,12 +110,12 @@ namespace ActionNote.Tasks
                             }
                             else
                             {
-                                await _actionCenterService.RefreshAsync(notes);
+                                _actionCenterService.RefreshAsync(notes).Wait();
                             }
                         }
 
                         if (AppSettings.QuickNotesEnabled.Value &&
-                            !_actionCenterService.ContainsQuickNotes())
+                            !containsQuickNotesInActionCenter)
                         {
                             // add quick notes when it was removed by clicking on it or using it.
                             _actionCenterService.AddQuickNotes();

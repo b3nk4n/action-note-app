@@ -107,7 +107,7 @@ namespace ActionNote.Common.Services
             // add the quick note toast
             var quickNoteToastModel = GetQuickNoteToastModel();
             var quickNoteToastNotification = _toastService.AdaptiveFactory.Create(quickNoteToastModel);
-            quickNoteToastNotification.SuppressPopup = true;
+            quickNoteToastNotification.SuppressPopup = true; // REMEMBER: suprress-popup currently can causes a bug that the "reference" to the notification can get lost after remove/replace => sometimes ContainsQuickNotes() even when it was deleted
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote";
             _toastService.Show(quickNoteToastNotification);
