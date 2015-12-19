@@ -8,7 +8,7 @@ namespace ActionNote.Common
 
         public static StoredObjectBase<bool> AllowRemoveNotes = new LocalObject<bool>("allowRemoveNotes", true);
 
-        public static StoredObjectBase<bool> AllowClearNotes = new LocalObject<bool>("allowClearNotes", true); // currently using a workaround
+        public static StoredObjectBase<bool> AllowClearNotes = new LocalObject<bool>("allowClearNotes", true); // currently using a workaround, as well as inactive in the PC version.
 
         public static StoredObjectBase<bool> SaveNoteOnBack = new LocalObject<bool>("saveNoteOnBack", true);
 

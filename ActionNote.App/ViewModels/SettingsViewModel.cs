@@ -9,12 +9,14 @@ using Windows.UI.Xaml.Navigation;
 using UWPCore.Framework.Controls;
 using UWPCore.Framework.Common;
 using ActionNote.App.Views;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.App.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
         private IDataService _dataService;
+        private IDeviceInfoService _deviceInfoService;
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
@@ -29,6 +31,7 @@ namespace ActionNote.App.ViewModels
         public SettingsViewModel()
         {
             _dataService = Injector.Get<IDataService>();
+            _deviceInfoService = Injector.Get<IDeviceInfoService>();
 
             // localize string source
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
@@ -186,6 +189,14 @@ namespace ActionNote.App.ViewModels
             set
             {
                 AppSettings.QuickNotesDefaultTitle.Value = value;
+            }
+        }
+
+        public bool IsPhone
+        {
+            get
+            {
+                return _deviceInfoService.IsPhone;
             }
         }
     }

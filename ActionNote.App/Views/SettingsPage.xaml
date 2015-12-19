@@ -39,8 +39,12 @@
                     <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="ShowNotesInActionCenterToggle" x:Uid="SettingsShowNotes" Header="Show notes" IsOn="{Binding ShowNotesInActionCenter, Mode=TwoWay}" Margin="4" />
                     <ToggleSwitch x:Name="SettingsAllowRemove" x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
-                    <ToggleSwitch x:Uid="SettingsAllowClear" Header="Allow to clear notes" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=SettingsAllowRemove, Path=IsOn}"
-                                  Visibility="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn, Converter={StaticResource boolToVisConv}}" Margin="4" />
+                    <StackPanel Visibility="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn, Converter={StaticResource boolToVisConv}}">
+                        <ToggleSwitch x:Uid="SettingsAllowClear" Header="Allow to clear notes" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=SettingsAllowRemove, Path=IsOn}"
+                                      IsHitTestVisible="{Binding IsPhone}" IsTabStop="False" Margin="4" />
+                        <TextBlock Text="* This option cannot be disabled in the PC version, due to a bug in Windows 10. This option will be activated after the 'Red Stone 1' update in summer 2016. Thank you for your patience!" TextWrapping="Wrap" FontSize="12" FontStyle="Italic"
+                                   Margin="4,-8,4,8" Visibility="{Binding IsPhone, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" />
+                    </StackPanel>
                     <ComboBox x:Uid="OrderNotesBy" Header="Order notes by" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}"
                               ItemsSource="{Binding SortInActionCenterStringSource.ItemsSource}" SelectedItem="{Binding SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
