@@ -9,6 +9,7 @@ using Windows.UI.StartScreen;
 using ActionNote.Common.Helpers;
 using Windows.UI;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ActionNote.Common.Services
 {
@@ -105,36 +106,36 @@ namespace ActionNote.Common.Services
             }
         }
 
-        private AdaptiveTileModel GetTileSmallModel(NoteItem noteItem)
-        {
-            var tileModel = new AdaptiveTileModel()
-            {
-                Visual = new AdaptiveVisual()
-                {
-                    Bindings =
-                    {
-                       new AdaptiveBinding()
-                       {
-                           Template = VisualTemplate.TileSmall,
-                           Children =
-                           {
-                               new AdaptiveText()
-                               {
-                                   Content = noteItem.Title
-                               }
-                           }
-                       }
-                    }
-                }
-            };
-
-            TrySetAttachementAsBackground(noteItem, tileModel);
-
-            return tileModel;
-        }
-
         private AdaptiveTileModel GetTileModel(NoteItem noteItem)
         {
+            // trim the content to 3 or 4 lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
+            var contentWith4LinesForMedium = new StringBuilder();
+            var contentWith3LinesForWide = new StringBuilder();
+            if (!string.IsNullOrEmpty(noteItem.Content))
+            {
+                var splitted = noteItem.Content.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < splitted.Length; ++i)
+                {
+                    if (i >= 4)
+                        break;
+
+
+                    if (i < 3)
+                    {
+                        contentWith3LinesForWide.Append(splitted[i].Trim());
+                        contentWith3LinesForWide.Append(Environment.NewLine);
+                    }
+
+
+                    if (i < 4)
+                    {
+                        contentWith4LinesForMedium.Append(splitted[i].Trim());
+                        contentWith4LinesForMedium.Append(Environment.NewLine);
+                    }
+                }
+            }
+
             var tileModel = new AdaptiveTileModel()
             {
                 Visual = new AdaptiveVisual()
@@ -155,6 +156,7 @@ namespace ActionNote.Common.Services
                        new AdaptiveBinding()
                        {
                            Template = VisualTemplate.TileMedium,
+                           Branding = VisualBranding.None,
                            Children =
                            {
                                new AdaptiveText()
@@ -164,7 +166,7 @@ namespace ActionNote.Common.Services
                                },
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Content,
+                                   Content = contentWith4LinesForMedium.ToString(),
                                    HintWrap = true
                                }
                            }
@@ -172,6 +174,7 @@ namespace ActionNote.Common.Services
                        new AdaptiveBinding()
                        {
                            Template = VisualTemplate.TileWide,
+                           Branding = VisualBranding.None,
                            Children =
                            {
                                new AdaptiveText()
@@ -181,8 +184,8 @@ namespace ActionNote.Common.Services
                                },
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Content,
-                                   HintStyle = TextStyle.Body,
+                                   Content = contentWith3LinesForWide.ToString(),
+                                   HintStyle = TextStyle.Caption,
                                    HintWrap = true
                                }
                            }
