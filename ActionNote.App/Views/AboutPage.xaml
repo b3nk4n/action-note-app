@@ -39,6 +39,7 @@
                         PrivacyInfoUri="http://bsautermeister.de/privacy.php" >
                             <uwpcViewModels:AboutViewModel.Contributors>
                                 <uwpcModels:ContributorModel Title="Arthur Shlain (Noun Project)" Icon="/Assets/Images/noun_project.png" />
+                                <uwpcModels:ContributorModel Title="Rui Silva" Icon="/Assets/Images/portuguese.png" />
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
                     </uwpcControls:AboutControl.DataContext>

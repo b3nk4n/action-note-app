@@ -275,7 +275,7 @@ namespace ActionNote.App.ViewModels
                 var quickNotesDefaultTitle = AppSettings.QuickNotesDefaultTitle.Value;
                 if (string.IsNullOrEmpty(quickNotesDefaultTitle))
                 {
-                    quickNotesDefaultTitle = _localizer.Get("QuickNotes");
+                    quickNotesDefaultTitle = _commonLocalizer.Get("QuickNotes");
                 }
 
                 noteItem.Title = quickNotesDefaultTitle;
