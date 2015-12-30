@@ -356,19 +356,28 @@ namespace ActionNote.Common.Services
 
                 string filePath = AppConstants.ATTACHEMENT_BASE_PATH + item.AttachementFile;
                 var file = await _localStorageService.GetFileAsync(filePath);
-                using (var stream = await file.OpenReadAsync())
+
+                if (file != null)
                 {
-                    var content = new HttpMultipartFormDataContent();
-                    content.Add(new HttpStreamContent(stream), "file", item.AttachementFile);
-
-                    var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), content, 2 * DEFAULT_TIMEOUT);
-
-                    if (res != null &&
-                        res.IsSuccessStatusCode)
+                    using (var stream = await file.OpenReadAsync())
                     {
-                        Unsynced.Remove(unsyncedItem);
-                        return true;
+                        var content = new HttpMultipartFormDataContent();
+                        content.Add(new HttpStreamContent(stream), "file", item.AttachementFile);
+
+                        var res = await _httpService.PostAsync(new Uri(AppConstants.SERVER_BASE_PATH + "attachements/file/" + UserId + "/" + item.AttachementFile), content, 2 * DEFAULT_TIMEOUT);
+
+                        if (res != null &&
+                            res.IsSuccessStatusCode)
+                        {
+                            Unsynced.Remove(unsyncedItem);
+                            return true;
+                        }
                     }
+                }
+                else
+                {
+                    // delete, because the file might not exisit. Possible reason is that the file was not saved successully.
+                    Unsynced.Remove(unsyncedItem);
                 }
             }
             

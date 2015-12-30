@@ -132,7 +132,8 @@ namespace ActionNote.App.ViewModels
                     var fileName = canonicalPrefix + file.Name;
 
                     var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
-                    if (await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
+                    if (destinationFile != null &&
+                        await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
                     {
                         if (noteItem.AttachementFile != null)
                         {
