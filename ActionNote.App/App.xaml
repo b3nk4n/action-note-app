@@ -31,6 +31,8 @@
             <uwpcConverters:BooleanToStringConverter x:Key="boolToStringConv" />
             <uwpcConverters:DateTimeConverter x:Key="dateTimeConverter" />
             <uwpcConverters:EmptyStringToVisibilityConverter x:Key="emptyStringToVisConv" />
+            <commonConverters:ImportantWidthConverter x:Key="importantToWidthConv" />
+            <commonConverters:ImportantCornerRadiusConverter x:Key="importantToCornerRadiusConv" />
 
             <Style x:Key="CommandBarFlyoutPresenterBaseStyle" TargetType="FlyoutPresenter">
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
