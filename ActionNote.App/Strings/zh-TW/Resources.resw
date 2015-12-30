@@ -118,341 +118,341 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action note non è solo un blocco note per appunti. Si integra nel centro operativo e da così la possibilità di accedere velocemente ai tuoi appunti. E questo attraverso tutti i tuoi dispositivi Windows 10.</value>
+    <value>Action Note不僅僅是一個筆記的應用程式。它整合到您的通知中心，能更快的獲取您所有的筆記。甚至是有照片的筆記並自動同步在您所有的Windows10設備上。</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
-    <value>Contributori:</value>
+    <value>共同作者:</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.MoreAppsText" xml:space="preserve">
-    <value>Altre App</value>
+    <value>更多程式</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.RateAndReviewText" xml:space="preserve">
-    <value>Vota e commenta</value>
+    <value>評分及評論</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.SendFeedbackEmailText" xml:space="preserve">
-    <value>Invia feedback</value>
+    <value>建議</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShareAppText" xml:space="preserve">
-    <value>Condividi App</value>
+    <value>分享程式</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
-    <value>Info sulla privacy</value>
+    <value>隱私權資訊</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">
-    <value>INFO</value>
+    <value>關於</value>
     <comment>AboutPage</comment>
   </data>
   <data name="Add.Label" xml:space="preserve">
-    <value>Aggiungi</value>
+    <value>新增</value>
     <comment>MainPage</comment>
   </data>
   <data name="ArchiveTitle.Text" xml:space="preserve">
-    <value>ARCHIVIO</value>
+    <value>存檔</value>
     <comment>ArchivPage</comment>
   </data>
   <data name="Attachement.Label" xml:space="preserve">
-    <value>Allegato</value>
+    <value>附件</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementRemove.Text" xml:space="preserve">
-    <value>Cancella</value>
+    <value>移除</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementSelect.Text" xml:space="preserve">
-    <value>Seleziona</value>
+    <value>選擇</value>
     <comment>EditPage</comment>
   </data>
   <data name="BackSyncInterval.120" xml:space="preserve">
-    <value>2 ore</value>
+    <value>2 小時</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.30" xml:space="preserve">
-    <value>30 minuti</value>
+    <value>30 分鐘</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.45" xml:space="preserve">
-    <value>45 minuti</value>
+    <value>45 分鐘</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.60" xml:space="preserve">
-    <value>1 ora</value>
+    <value>1 小時</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Delete.Label" xml:space="preserve">
-    <value>Cancella</value>
+    <value>刪除</value>
     <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
-    <value>Cancella tutto</value>
+    <value>刪除全部</value>
     <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
-    <value>Elimina</value>
+    <value>放棄</value>
     <comment>EditPage</comment>
   </data>
   <data name="DiscardChanges.Label" xml:space="preserve">
-    <value>Elimina modifiche</value>
+    <value>放棄變更</value>
     <comment>EditPage</comment>
   </data>
   <data name="Edit.Label" xml:space="preserve">
-    <value>Modifica</value>
+    <value>編輯</value>
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
-    <value>MODIFICA</value>
+    <value>編輯</value>
     <comment>EditPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
-    <value>comprata</value>
+    <value>購買</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
-    <value>APPUNTI</value>
+    <value>筆記</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
-    <value>Un appunto senza contenuto non può essere salvato.</value>
+    <value>看起來很空,是吧?沒有內容的筆記是不能保存的。</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
-    <value>Non è stato possibile cancellare, perché non è stato possibile inviare le informazioni al server. Si prega di controllare la connessione a internet e riprovare più tardi.</value>
+    <value>由於訊息不能發送到伺服器，無法執行刪除。請檢查您的網路，並稍後重試。</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
-    <value>Questo appunto è già stato cancellato su un altro dispositivo. Si prega di avviare manualmente la sincronizzazione dei dati.</value>
+    <value>此筆記在其它設備上已被刪除。您的設備似乎尚未同步，請手動執行同步。</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
-    <value>La sincronizzazione online funziona solo dopo l'accesso e con il diritto di identificazione. Abbiamo attivato temporaneamente questa funzione.
-Questo può essere cambiato in qualsiasi momento nelle impostazioni.</value>
+    <value>線上同步需要登入您的帳戶。我們已為您解除啟用此功能。
+您可以在設定中重新啟動它。</value>
     <comment>Message Dialog</comment>
   </data>
   <data name="Message.LoginPending" xml:space="preserve">
-    <value>La sincronizzazione online è attiva, manca l'accesso.  
-Vuoi collegarti adesso con il tuo account Microsoft?</value>
+    <value>您已開啟線上同步功能，但是您尚未登入。
+您是否現在登入您的微軟帳戶?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
-    <value>No</value>
+    <value>否</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.Yes" xml:space="preserve">
-    <value>Si</value>
+    <value>是</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.ReallyDeleteAll" xml:space="preserve">
-    <value>Cancellare tutti gli appunti?</value>
+    <value>您確定要刪除所有筆記嗎?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.SyncFailed" xml:space="preserve">
-    <value>Non è stato possibile eseguire la sincronizzazione dei dati. Controlla la connessione internet o riprova più tardi.</value>
+    <value>同步失敗，請檢查您的網路或稍後再試一次。</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.Title.Attention" xml:space="preserve">
-    <value>Attenzioni</value>
+    <value>注意</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
-    <value>Informazioni</value>
+    <value>訊息</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Warning" xml:space="preserve">
-    <value>Avviso</value>
+    <value>警告</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.WelcomeBack" xml:space="preserve">
-    <value>Bentornato!</value>
+    <value>歡迎回來!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.WelcomeLoginPending" xml:space="preserve">
-    <value>Abbiamo attivato la sincronizzazione online. Per farla funzionare devi collegarti con il tuo account Microsoft. Voi accedere adesso?</value>
+    <value>我們已開啟您的在線同步功能。要使用此功能，需要登入您的微軟帳戶。您想要現在登入嗎?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Nav.About" xml:space="preserve">
-    <value>Info</value>
+    <value>關於</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Archive" xml:space="preserve">
-    <value>Archivio</value>
+    <value>存檔</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Notes" xml:space="preserve">
-    <value>Appunti</value>
+    <value>筆記</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Settings" xml:space="preserve">
-    <value>Impostazioni</value>
+    <value>設定</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Upgrade" xml:space="preserve">
-    <value>Upgrade</value>
+    <value>更新</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
-    <value>NUOVO APPUNTO</value>
+    <value>新的筆記</value>
     <comment>EditPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
-    <value>Ordina per appunti</value>
+    <value>排序依據</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Pin.Label" xml:space="preserve">
-    <value>Aggiungi a Start</value>
+    <value>釘選到開始畫面</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.Deleting" xml:space="preserve">
-    <value>Cancellazione…</value>
+    <value>刪除中...</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
-    <value>File in download…</value>
+    <value>下載檔案中...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Saving" xml:space="preserve">
-    <value>Salva…</value>
+    <value>儲存中...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">
-    <value>Sincronizzazione…</value>
+    <value>同步中...</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.UploadingFile" xml:space="preserve">
-    <value>Invia file…</value>
+    <value>上傳檔案中...</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>"Appunti r." metodo di inserimenti</value>
+    <value>快速筆記的輸入方式</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
-    <value>Solo dettaglio</value>
+    <value>詳細資料</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
-    <value>Titolo e dettaglio</value>
+    <value>標題及詳細資料</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="ReadAloud.Label" xml:space="preserve">
-    <value>Leggere ad alta voce</value>
+    <value>朗誦筆記</value>
     <comment>EditPage</comment>
   </data>
   <data name="ReadMore.Content" xml:space="preserve">
-    <value>Informazioni…</value>
+    <value>了解更多...</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
-    <value>Sincronizza con tutti i dispositivi</value>
+    <value>在所有設備上同步</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Action Center</value>
+    <value>通知中心</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Consenti cancella tutto appunti</value>
+    <value>允許清除筆記</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Consenti cancellazione appunti</value>
+    <value>允許刪除筆記</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
-    <value>Salvataggio automatico appunti</value>
+    <value>自動儲存筆記</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
-    <value>intervallo di sincronizzazione</value>
+    <value>同步間隔</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
-    <value>Generale</value>
+    <value>一般設定</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
-    <value>Online-sincronizzazione</value>
+    <value>線上同步設定</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">
-    <value>Personalizzazione</value>
+    <value>個性化設定</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>Attiva "Appunti rapidi"</value>
+    <value>啟用「快速筆記」</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Titolo standard "Appunti rapidi"</value>
+    <value>預設標題</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Appunti rapidi</value>
+    <value>快速筆記</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
-    <value>Visualizza appunti</value>
+    <value>顯示筆記</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncInBackground.Header" xml:space="preserve">
-    <value>Sinc. degli appunti in secondo piano</value>
+    <value>背景同步</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">
-    <value>Sinc. allo start dell'applicazione</value>
+    <value>當程式開啟時同步</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
-    <value>Scegli colore</value>
+    <value>主題顏色</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>IMPOSTAZIONI</value>
+    <value>設定</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Share.Label" xml:space="preserve">
-    <value>Condividi</value>
+    <value>分享</value>
     <comment>MainPage</comment>
   </data>
   <data name="ShareContentDescription" xml:space="preserve">
-    <value>Condividi con i tuoi amici</value>
+    <value>與您的朋友分享它</value>
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
-    <value>Categoria</value>
+    <value>類別</value>
     <comment>MainPage</comment>
   </data>
   <data name="SortByDate.Text" xml:space="preserve">
-    <value>Cambio data</value>
+    <value>更改日期</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
-    <value>Input vocale</value>
+    <value>語音輸入</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Sync</value>
+    <value>同步</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">
-    <value>Rimuovi</value>
+    <value>取消釘選</value>
     <comment>MainPage</comment>
   </data>
   <data name="Upgrade.Content" xml:space="preserve">
-    <value>Upgrade</value>
+    <value>升級</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>PER L'ACQUISTO DELLA VERSIONE PRO</value>
+    <value>購買專業版本</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
-    <value>UPGRADE</value>
+    <value>升級</value>
     <comment>UpgradePage</comment>
   </data>
 </root>

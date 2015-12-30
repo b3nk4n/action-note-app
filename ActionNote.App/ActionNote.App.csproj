@@ -99,6 +99,7 @@
     <None Include="ActionNote.App_StoreKey.pfx" />
     <None Include="Assets\Codes\Action Note Testing Promo Code.tsv" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-TW\Resources.resw" />
     <PRIResource Include="Strings\it-IT\Resources.resw" />
     <PRIResource Include="Strings\pt-PT\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
