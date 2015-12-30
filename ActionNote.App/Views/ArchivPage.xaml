@@ -14,12 +14,13 @@
         <DataTemplate x:Key="NoteListDataTemplate">
             <Grid Margin="4" Padding="16,0,8,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="16" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="8" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,4,8,4" />
-                <StackPanel Grid.Column="1">
+                <Border Grid.Column="0" Background="{Binding Color, Converter={StaticResource colorToBrushConv}}" Width="{Binding IsImportant, Converter={StaticResource importantToWidthConv}}"
+                        CornerRadius="{Binding IsImportant, Converter={StaticResource importantToCornerRadiusConv}}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="0,4,0,4" />
+                <StackPanel Grid.Column="1" Margin="8,0,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
