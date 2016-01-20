@@ -94,6 +94,7 @@ namespace ActionNote.Common.Services
             toastNotification.SuppressPopup = true;
             toastNotification.Group = GROUP_NOTE;
             toastNotification.Tag = note.ShortId; // just to find the notificication within this service. Shortid because it has a limited size
+            toastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // TODO: check if this really helps !?
             _toastService.Show(toastNotification);
         }
 
@@ -110,6 +111,7 @@ namespace ActionNote.Common.Services
             quickNoteToastNotification.SuppressPopup = true; // REMEMBER: suprress-popup currently can causes a bug that the "reference" to the notification can get lost after remove/replace => sometimes ContainsQuickNotes() even when it was deleted
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote";
+            quickNoteToastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // TODO: check if this really helps !?
             _toastService.Show(quickNoteToastNotification);
         }
 
