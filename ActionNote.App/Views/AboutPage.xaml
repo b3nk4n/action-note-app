@@ -42,6 +42,7 @@
                                 <uwpcModels:ContributorModel Title="Rui Silva" Icon="/Assets/Images/portuguese.png" />
                                 <uwpcModels:ContributorModel Title="Daniel Sto" Icon="/Assets/Images/italia.png" />
                                 <uwpcModels:ContributorModel Title="好野" Icon="/Assets/Images/taiwan.png" />
+                                <uwpcModels:ContributorModel Title="Diego F." Icon="/Assets/Images/spain.png" />
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
                     </uwpcControls:AboutControl.DataContext>
