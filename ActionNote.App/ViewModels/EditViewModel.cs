@@ -76,6 +76,11 @@ namespace ActionNote.App.ViewModels
             _keyboardService = Injector.Get<IKeyboardService>();
             RegisterForKeyboard();
 
+            Windows.UI.Xaml.Window.Current.Closed += (s, e) =>
+            {
+                e.Handled = true;
+            };
+
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 if (!noteItem.IsEmtpy)

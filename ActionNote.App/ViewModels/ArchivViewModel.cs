@@ -79,10 +79,29 @@ namespace ActionNote.App.ViewModels
                     SelectedNote = null;
                 }
                 else
-                {
+                { // TODO: Currently we never get here, because the method returns TRUE even when we have no internet connection.
                     await _dialogService.ShowAsync(
                         _localizer.Get("Message.CouldNotDeleteArchive"),
                         _localizer.Get("Message.Title.Warning"));
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
+
+            RestoreCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                if (await _dataService.RestoreFromArchiveAsync(noteItem))
+                {
+                    NoteItems.Remove(noteItem);
+                    SelectedNote = null;
+                }
+                else
+                { // TODO: restore waring message?! Currently we never get here, because the method returns TRUE even when we have no internet connection.
+                    //await _dialogService.ShowAsync(
+                    //    _localizer.Get("Message.CouldNotDeleteArchive"),
+                    //    _localizer.Get("Message.Title.Warning"));
                 }
             },
             (noteItem) =>
@@ -146,6 +165,8 @@ namespace ActionNote.App.ViewModels
         public ICommand ClearCommand { get; private set; }
 
         public ICommand RemoveCommand { get; private set; }
+
+        public ICommand RestoreCommand { get; private set; }
 
         public ICommand SortCommand { get; private set; }
     }

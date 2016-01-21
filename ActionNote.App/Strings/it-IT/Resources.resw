@@ -347,6 +347,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>Informazioni…</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>Ripristinare</value>
+    <comment>ArchivePage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Sincronizza con tutti i dispositivi</value>
     <comment>SettingsPage</comment>

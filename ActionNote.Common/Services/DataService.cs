@@ -192,7 +192,7 @@ namespace ActionNote.Common.Services
                             {
                                 if (serverResponse.Message == ServerResponse.DELETED)
                                 {
-                                    await MoveToArchivInternalAsync(item);
+                                    await MoveToArchiveInternalAsync(item);
                                     return UpdateResult.Deleted;
                                 }
                             }
@@ -277,7 +277,19 @@ namespace ActionNote.Common.Services
                             }
                             else
                             {
-                                unsyncedNotesToDelete.Add(note);
+                                var archivedInstance = Archive.Get(note.Id);
+                                if (archivedInstance.ChangedDate < note.ChangedDate)
+                                {
+                                    // server copy is newer => remove local instance from archive and add the new one.
+                                    Archive.Remove(archivedInstance);
+                                    Notes.Add(note);
+                                    await Notes.Save(note);
+                                }
+                                else
+                                {
+                                    // local copy in archive is newer => commit missing delete
+                                    unsyncedNotesToDelete.Add(note);
+                                }
                             }
                         }
                     }
@@ -286,7 +298,7 @@ namespace ActionNote.Common.Services
                     {
                         if (Notes.Contains(note.Id))
                         {
-                            await MoveToArchivInternalAsync(note);
+                            await MoveToArchiveInternalAsync(note);
                             unchanged = false;
                         }
                     }
@@ -498,7 +510,7 @@ namespace ActionNote.Common.Services
 
         public async Task<bool> MoveToArchiveAsync(NoteItem item)
         {
-            if (await MoveToArchivInternalAsync(item))
+            if (await MoveToArchiveInternalAsync(item))
             {
                 if (IsSynchronizationActive &&
                     _networkInfoService.HasInternet)
@@ -525,7 +537,7 @@ namespace ActionNote.Common.Services
             var idsToDeleted = new List<string>();
             foreach (var note in items)
             {
-                if (!await MoveToArchivInternalAsync(note))
+                if (!await MoveToArchiveInternalAsync(note))
                 {
                     // stop, as soon as one item could not be deleted
                     return false;
@@ -558,7 +570,7 @@ namespace ActionNote.Common.Services
             return true;
         }
 
-        private async Task<bool> MoveToArchivInternalAsync(NoteItem item)
+        private async Task<bool> MoveToArchiveInternalAsync(NoteItem item)
         {
             // ensure notes data has loaded
             if (!Notes.HasLoaded)
@@ -582,6 +594,57 @@ namespace ActionNote.Common.Services
                 return true;
             }
             
+            return false;
+        }
+
+        public async Task<bool> RestoreFromArchiveAsync(NoteItem item)
+        {
+            if (await RestoreFromArchiveInternalAsync(item))
+            {
+                if (IsSynchronizationActive &&
+                    _networkInfoService.HasInternet)
+                {
+                    // restore note
+                    var res = await _httpService.PutAsync(new Uri(AppConstants.SERVER_BASE_PATH + "notes/restore/" + UserId + "/" + item.Id), item, DEFAULT_TIMEOUT);
+
+                    if (res != null &&
+                        res.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                }
+
+                return true; // TODO: react when no internet connection and restore was not successful? Check also for move-to-archive
+            }
+
+            // here we did not even moved the file locally
+            return false;
+        }
+
+        private async Task<bool> RestoreFromArchiveInternalAsync(NoteItem item)
+        {
+            // ensure notes data has loaded
+            if (!Notes.HasLoaded)
+                await Notes.Load();
+
+            // ensure archiv data has loaded
+            if (!Archive.HasLoaded)
+                await Archive.Load();
+
+            // update the timestamp
+            item.ChangedDate = DateTimeOffset.Now;
+
+            if (await Notes.Save(item))
+            {
+                Archive.Remove(item);
+
+                if (Notes.Contains(item.Id))
+                    Notes.Update(item);
+                else
+                    Notes.Add(item);
+                return true;
+            }
+
             return false;
         }
 

@@ -347,6 +347,10 @@ Le gustaría iniciar sesión con tu cuenta de Microsoft en este momento?</value>
     <value>Leer más...</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>Restaurar</value>
+    <comment>ArchivePage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Sincronizar en todos los dispositivos</value>
     <comment>SettingsPage</comment>

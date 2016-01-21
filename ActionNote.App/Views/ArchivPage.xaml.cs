@@ -61,6 +61,10 @@ namespace ActionNote.App.Views
             {
                 ViewModel.RemoveCommand.Execute(item);
             }));
+            menu.Commands.Add(new UICommand(_localizer.Get("Restore.Label"), (command) =>
+            {
+                ViewModel.RestoreCommand.Execute(item);
+            }));
 
             var point = e.GetPosition(null);
             point.X += 40;

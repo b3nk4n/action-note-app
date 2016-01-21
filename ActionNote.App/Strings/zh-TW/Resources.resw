@@ -347,6 +347,10 @@
     <value>了解更多...</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>還原</value>
+    <comment>ArchivePage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>在所有設備上同步</value>
     <comment>SettingsPage</comment>

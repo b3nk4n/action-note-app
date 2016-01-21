@@ -56,6 +56,8 @@ namespace ActionNote.Common.Services
 
         Task<bool> MoveRangeToArchiveAsync(IList<NoteItem> items);
 
+        Task<bool> RestoreFromArchiveAsync(NoteItem noteItem);
+
         /// <summary>
         /// Removes the note permanently from archive.
         /// </summary>
