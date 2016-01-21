@@ -44,7 +44,8 @@
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="Delete" Icon="Delete" Command="{Binding RemoveCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="Restore" Icon="Undo" Width="62" Command="{Binding RestoreCommand}" CommandParameter="{Binding SelectedNote}"/>
+            <AppBarButton x:Uid="Delete" Icon="Delete" Width="62" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="ReadAloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
             </CommandBar.SecondaryCommands>
@@ -57,7 +58,7 @@
             <ScrollViewer Padding="16,0">
                 <StackPanel Padding="0,16">
                     <StackPanel DataContext="{Binding SelectedNote}">
-                        <TextBlock Text="{Binding ChangedDate, Converter={StaticResource dateTimeConverter}}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" Opacity="{Binding ElementName=self, Path=DataContext.IsEditMode, Converter={StaticResource boolToDoubleConv}, ConverterParameter=1;0}" FontSize="11" HorizontalAlignment="Right" Margin="4,-8,4,4" />
+                        <TextBlock Text="{Binding ChangedDate, Converter={StaticResource dateTimeConverter}}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" FontSize="11" HorizontalAlignment="Right" Margin="4,-8,4,4" />
 
                         <TextBox x:Name="TitleTextBox" x:Uid="/ActionNote.Common/Resources/NoteTitle" IsReadOnly="True" TabIndex="0" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" />
 

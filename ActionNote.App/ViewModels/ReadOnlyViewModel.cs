@@ -65,6 +65,27 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
+            RestoreCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
+            {
+                if (await _dataService.RestoreFromArchiveAsync(noteItem))
+                {
+                    SelectedNote = null;
+
+                    GoBackToArchivePage();
+                }
+                else
+                {
+                    // TODO: also a message here?
+                    //await _dialogService.ShowAsync(
+                    //    _localizer.Get("Message.CouldNotDeleteArchive"),
+                    //    _localizer.Get("Message.Title.Warning"));
+                }
+            },
+            (noteItem) =>
+            {
+                return noteItem != null;
+            });
+
             VoiceToTextCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 var result = await _speechService.RecoginizeUI();
@@ -259,6 +280,8 @@ namespace ActionNote.App.ViewModels
         private bool _showProgress;
 
         public ICommand RemoveCommand { get; private set; }
+
+        public ICommand RestoreCommand { get; private set; }
 
         public ICommand VoiceToTextCommand { get; private set; }
 
