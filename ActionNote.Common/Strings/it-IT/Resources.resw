@@ -145,4 +145,8 @@
     <value>Cancella</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Swipe.Restore.Text" xml:space="preserve">
+    <value>Ripristinare</value>
+    <comment>MainPage</comment>
+  </data>
 </root>

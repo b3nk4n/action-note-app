@@ -46,6 +46,10 @@ namespace ActionNote.App.Views
                 {
                     ViewModel.RemoveCommand.Execute(item);
                 }
+                else if (e.Direction == SwipeListDirection.Left)
+                {
+                    ViewModel.RestoreCommand.Execute(item);
+                }
             }
         }
 

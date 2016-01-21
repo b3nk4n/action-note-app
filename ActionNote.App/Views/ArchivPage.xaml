@@ -77,7 +77,8 @@
 
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <swipe:SwipeListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="0,16" IsItemClickEnabled="True" ItemClick="NoteItemClicked"
-                      ItemTemplate="{StaticResource NoteListDataTemplate}" ItemSwipe="SwipeListView_ItemSwipe" SelectionMode="None" ItemLeftBehavior="Disabled">
+                      ItemTemplate="{StaticResource NoteListDataTemplate}" ItemSwipe="SwipeListView_ItemSwipe" SelectionMode="None" ItemLeftBackground="Green"
+                      ItemRightBehavior="Expand" ItemLeftBehavior="Expand">
                 <swipe:SwipeListView.ItemRightContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -86,6 +87,14 @@
                         </StackPanel>
                     </DataTemplate>
                 </swipe:SwipeListView.ItemRightContentTemplate>
+                <swipe:SwipeListView.ItemLeftContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock x:Uid="/ActionNote.Common/Resources/Swipe/Restore" Text="Restore" Foreground="White" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center" VerticalAlignment="Center"/>
+                            <FontIcon Glyph="{StaticResource Undo}" FontWeight="Bold" Margin="19,0,19,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </swipe:SwipeListView.ItemLeftContentTemplate>
                 <swipe:SwipeListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

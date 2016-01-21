@@ -145,4 +145,8 @@
     <value>Löschen</value>
     <comment>MainPage</comment>
   </data>
+  <data name="Swipe.Restore.Text" xml:space="preserve">
+    <value>Wiederherstellen</value>
+    <comment>MainPage</comment>
+  </data>
 </root>
