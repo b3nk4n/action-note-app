@@ -375,6 +375,32 @@ namespace ActionNote.App.ViewModels
             await CheckAndDownloadAttachement();
         }
 
+        private bool _savedInForwardNavigation = false;
+        public async override void OnNavigatingFrom(NavigatingEventArgs args)
+        {
+            base.OnNavigatingFrom(args);
+
+            if (!_savedInForwardNavigation &&
+                args.NavigationMode == NavigationMode.New)
+            {
+                if (AppSettings.SaveNoteOnBack.Value)
+                {
+                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
+                    {
+                        args.Cancel = true;
+
+                        // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
+                        _callbacks.UnfocusTextBoxes();
+                        await Task.Delay(50);
+
+                        _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
+                        await SaveNoteAsync(SelectedNote);
+                        NavigationService.Navigate(args.PageType, args.Parameter);
+                    }
+                }
+            }
+        }
+
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
             _keyboardService.UnregisterForKeyDown();
