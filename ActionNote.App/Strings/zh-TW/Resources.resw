@@ -292,7 +292,7 @@
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Upgrade" xml:space="preserve">
-    <value>更新</value>
+    <value>升級</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
