@@ -44,6 +44,7 @@
                                 <uwpcModels:ContributorModel Title="好野" Icon="/Assets/Images/taiwan.png" />
                                 <uwpcModels:ContributorModel Title="Diego F." Icon="/Assets/Images/spain.png" />
                                 <uwpcModels:ContributorModel Title="Patrick Dubé" Icon="/Assets/Images/quebec_french.png" />
+                                <uwpcModels:ContributorModel Title="Piotr Świtalski" Icon="/Assets/Images/polen.png" />
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
                     </uwpcControls:AboutControl.DataContext>

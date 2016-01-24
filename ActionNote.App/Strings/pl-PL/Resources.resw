@@ -118,345 +118,345 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note no es sólo otra aplicación de toma de notas. Se integra con tu Centro de Acción y le ofrece el acceso más rápido a todas tus notas. Incluso en todos tus dispositivos con Windows 10.</value>
+    <value>Action Note nie jest tylko kolejną aplikacją do notatek. Aplikacja integruje się z Centrum Akcji i pozwala na najszybszy dostęp do wszystkich notatek, na wszystkich urządzeniach z systemem Windows 10!</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
-    <value>Colaboradores:</value>
+    <value>Współautor:</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.MoreAppsText" xml:space="preserve">
-    <value>Mas aplicaciones</value>
+    <value>Więcej aplikacji</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.RateAndReviewText" xml:space="preserve">
-    <value>Calificar y evaluar</value>
+    <value>Oceń i skomentuj</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.SendFeedbackEmailText" xml:space="preserve">
-    <value>Enviar comentarios</value>
+    <value>Wyślij opinię</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShareAppText" xml:space="preserve">
-    <value>Compartir app</value>
+    <value>Podziel się aplikacją</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
-    <value>Información de Privacidad</value>
+    <value>Informacje o prywatności</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">
-    <value>ACERCA DE</value>
+    <value>O APLIKACJI</value>
     <comment>AboutPage</comment>
   </data>
   <data name="Add.Label" xml:space="preserve">
-    <value>Agregar</value>
+    <value>Dodaj</value>
     <comment>MainPage</comment>
   </data>
   <data name="ArchiveTitle.Text" xml:space="preserve">
-    <value>ARCHIVO</value>
+    <value>ARCHIWUM</value>
     <comment>ArchivPage</comment>
   </data>
   <data name="Attachement.Label" xml:space="preserve">
-    <value>Adjunto</value>
+    <value>Załącznik</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementRemove.Text" xml:space="preserve">
-    <value>Eliminar</value>
+    <value>Usuń</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementSelect.Text" xml:space="preserve">
-    <value>Seleccionar</value>
+    <value>Wybierz</value>
     <comment>EditPage</comment>
   </data>
   <data name="BackSyncInterval.120" xml:space="preserve">
-    <value>2 horas</value>
+    <value>2 godziny</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.30" xml:space="preserve">
-    <value>30 minutos</value>
+    <value>30 minut</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.45" xml:space="preserve">
-    <value>45 minutos</value>
+    <value>45 minut</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.60" xml:space="preserve">
-    <value>1 hora</value>
+    <value>1 godzinę</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Delete.Label" xml:space="preserve">
-    <value>Eliminar</value>
+    <value>Usuń</value>
     <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
-    <value>Eliminar todo</value>
+    <value>Usuń wszystkie</value>
     <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
-    <value>Descartar</value>
+    <value>Odrzuć</value>
     <comment>EditPage</comment>
   </data>
   <data name="DiscardChanges.Label" xml:space="preserve">
-    <value>Descartar cambios</value>
+    <value>Odrzuć zmiany</value>
     <comment>EditPage</comment>
   </data>
   <data name="Edit.Label" xml:space="preserve">
-    <value>Editar</value>
+    <value>Edytuj</value>
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
-    <value>EDITAR</value>
+    <value>EDYTUJ</value>
     <comment>EditPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
-    <value>comprado</value>
+    <value>zakupiono</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
-    <value>NOTAS</value>
+    <value>NOTATKI</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
-    <value>Se ve vacío, verdad? Una nota sin contenido no puede ser guardada.</value>
+    <value>Wygląda na puste? Notatka bez zawartości</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
-    <value>El proceso de eliminación no pudo realizarse, debido a que la información no se ha podido enviar al servidor. Por favor, compruebe su conexión a Internet y vuelva a intentarlo más tarde.</value>
+    <value>Proces usuwania nie może zostać wykonany, ponieważ dane nie mogą być wysyłane do serwera. Sprawdź swoje połączenie internetowe i spróbuj ponownie później.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
-    <value>Esta nota ya ha sido eliminada en otro dispositivo. Su dispositivo parece estar fuera de sincronización. Por favor, realice una sincronización manual.</value>
+    <value>Ta notatka została już usunięta na innym urządzeniu. Urządzenie wydaje się być zsynchronizowane, ale spróbuj wykonać synchronizację ręcznie.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
-    <value>La sincronización en línea requiere el inicio de sesión para su identificación. Hemos desactivado esta función para usted.
-Puede reactivarlo en la configuración.</value>
+    <value>Synchronizacja online wymaga loginu w celu identyfikacji. Wyłączyliśmy tę usługę dla Ciebie.
+Możesz włączyć tę usługę w ustawieniach.</value>
     <comment>Message Dialog</comment>
   </data>
   <data name="Message.LoginPending" xml:space="preserve">
-    <value>Has activado la sincronización en línea, pero su información de acceso aún está pendiente.
-Le gustaría iniciar sesión con tu cuenta de Microsoft en este momento?</value>
+    <value>Włączyłeś synchronizację online, ale nadal trwa logowanie.
+Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
-    <value>No</value>
+    <value>Nie</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.Yes" xml:space="preserve">
-    <value>Sí</value>
+    <value>Tak</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.ReallyDeleteAll" xml:space="preserve">
-    <value>Realmente quiere eliminar todas las notas?</value>
+    <value>Na pewno chcesz usunąć wszystkie notatki?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.SyncFailed" xml:space="preserve">
-    <value>El proceso de sincronización no tuvo éxito. Comprueba tu conexión a Internet o inténtelo de nuevo más tarde.</value>
+    <value>Synchronizacja nie została ukończona. Sprawdź swoje połączenie internetowe i spróbuj ponownie.</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.Title.Attention" xml:space="preserve">
-    <value>Atención</value>
+    <value>Uwaga</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
-    <value>Información</value>
+    <value>Informacja</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Warning" xml:space="preserve">
-    <value>Aviso</value>
+    <value>Ostrzeżenie</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.WelcomeBack" xml:space="preserve">
-    <value>Bienvenido de nuevo!</value>
+    <value>Witaj ponownie!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.WelcomeLoginPending" xml:space="preserve">
-    <value>Hemos reactivado la sincronización en línea para usted. Para usar esta función, tiene que iniciar sesión con tu cuenta de Microsoft. Quieres iniciar sesión ahora mismo?</value>
+    <value>Mamy ponownie synchronizację online dla Ciebie. Aby skorzystać z tej funkcji musisz się zalogować za pomocą swojego konta Microsoft. Czy chciałbyś zalogować się teraz?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Nav.About" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>O aplikacji</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Archive" xml:space="preserve">
-    <value>Archivo</value>
+    <value>Archiwum</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Notes" xml:space="preserve">
-    <value>Notas</value>
+    <value>Notatki</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Settings" xml:space="preserve">
-    <value>Ajustes</value>
+    <value>Ustawienia</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Upgrade" xml:space="preserve">
-    <value>Mejorar</value>
+    <value>Ulepsz</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
-    <value>NUEVA NOTA</value>
+    <value>NOWA NOTATKA</value>
     <comment>EditPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
-    <value>Ordenar notas por</value>
+    <value>Sortuj według</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Pin.Label" xml:space="preserve">
-    <value>Anclar al inicio</value>
+    <value>Przypnij do ekranu startowego</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.Deleting" xml:space="preserve">
-    <value>Borrando...</value>
+    <value>Usuwanie…</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
-    <value>Descargando archivos...</value>
+    <value>Pobieranie pliku…</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Saving" xml:space="preserve">
-    <value>Guardando...</value>
+    <value>Zapisywanie…</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">
-    <value>Sincronizando...</value>
+    <value>Synchronizowanie…</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.UploadingFile" xml:space="preserve">
-    <value>Cargando archivo ...</value>
+    <value>Wysyłanie pliku…</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Método de entrada de las "notas rápidas"</value>
+    <value>Metoda wprowadzania "Szybkich notatek"</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
-    <value>Detalles solamente</value>
+    <value>Tylko szczegóły</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
-    <value>Titulo y detalles</value>
+    <value>Tytuł i szczegóły</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="ReadAloud.Label" xml:space="preserve">
-    <value>Leer en voz alta</value>
+    <value>Odczytaj nagranie</value>
     <comment>EditPage</comment>
   </data>
   <data name="ReadMore.Content" xml:space="preserve">
-    <value>Leer más...</value>
+    <value>Czytaj więcej…</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="Restore.Label" xml:space="preserve">
-    <value>Restaurar</value>
+    <value>Przywróć</value>
     <comment>ArchivePage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
-    <value>Sincronizar en todos los dispositivos</value>
+    <value>Synchronizuj między urządzeniami</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Centro de actividades (Action Center)</value>
+    <value>Centrum akcji (Action Center)</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Permitir borrar notas</value>
+    <value>Pozwalaj czyścić notatki</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Permitir eliminar notas</value>
+    <value>Pozwalaj usuwać notatki</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
-    <value>Auto guardar notas</value>
+    <value>Zapisuj notatki automatycznie</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
-    <value>Intervalo de sincronización</value>
+    <value>Synchronizuj co:</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
-    <value>General</value>
+    <value>Ogólne</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
-    <value>Sincronización en línea</value>
+    <value>Synchronizacja online</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">
-    <value>Personalización</value>
+    <value>Personalizacja</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>Activar "Notas rápidas"</value>
+    <value>Włącz "Szybkie notatki"</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Título predeterminado</value>
+    <value>Domyślny tytuł</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Notas rápidas</value>
+    <value>Szybkie notatki</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
-    <value>Mostrar notas</value>
+    <value>Pokaż notatki</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncInBackground.Header" xml:space="preserve">
-    <value>Sincronizar notas en segundo plano</value>
+    <value>Synchronizuj notatki w tle</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">
-    <value>Sincronizar al iniciar la aplicación</value>
+    <value>Synchronizuj podczas uruchamiania aplikacji</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
-    <value>Color del tema</value>
+    <value>Kolor motywu</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>AJUSTES</value>
+    <value>USTAWIENIA</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Share.Label" xml:space="preserve">
-    <value>Compartir</value>
+    <value>Udostępnij</value>
     <comment>MainPage</comment>
   </data>
   <data name="ShareContentDescription" xml:space="preserve">
-    <value>Compártelo con tus amigos</value>
+    <value>Podziel się ze znajomymi</value>
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
-    <value>Categoría</value>
+    <value>Kategorii</value>
     <comment>MainPage</comment>
   </data>
   <data name="SortByDate.Text" xml:space="preserve">
-    <value>Cambiar fecha</value>
+    <value>Daty modyfikacji</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
-    <value>Entrada de voz</value>
+    <value>Dodaj nagranie</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Sincronizar</value>
+    <value>Synchronizuj</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">
-    <value>Desanclar</value>
+    <value>Odepnij od ekranu startowego</value>
     <comment>MainPage</comment>
   </data>
   <data name="Upgrade.Content" xml:space="preserve">
-    <value>Mejorar</value>
+    <value>Ulepsz</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>POR ADQUIRIR LA VERSION PRO</value>
+    <value>ZA ZAKUP WERSJI PRO</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
-    <value>MEJORAR</value>
+    <value>ULEPSZ</value>
     <comment>UpgradePage</comment>
   </data>
 </root>

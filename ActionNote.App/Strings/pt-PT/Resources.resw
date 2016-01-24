@@ -328,7 +328,7 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>"Notas Ráp." método de entrada</value>
+    <value>Método de entrada das "Notas Rápidas"</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
