@@ -356,7 +356,7 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Action Center</value>
+    <value>Info-Center (Action Center)</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">

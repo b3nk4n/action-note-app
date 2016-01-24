@@ -356,7 +356,7 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Action Center</value>
+    <value>Centro notifiche (Action Center)</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
