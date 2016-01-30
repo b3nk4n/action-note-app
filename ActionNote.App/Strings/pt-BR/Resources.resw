@@ -408,7 +408,7 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">
-    <value>Sincronizar quando a aplicação esta inicializando</value>
+    <value>Sinc. quando a aplicação esta inicializando</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
