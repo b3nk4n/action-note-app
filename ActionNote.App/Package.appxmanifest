@@ -26,9 +26,15 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#0063B1" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.TimedRefreshBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="general" />
+            <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
@@ -36,10 +42,9 @@
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
           <BackgroundTasks>
-            <Task Type="general" />
-            <Task Type="systemEvent" />
+            <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
       </Extensions>

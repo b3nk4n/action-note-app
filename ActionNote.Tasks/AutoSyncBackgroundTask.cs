@@ -1,4 +1,5 @@
-﻿using ActionNote.Common.Modules;
+﻿using ActionNote.Common;
+using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
 using UWPCore.Framework.Common;
@@ -15,8 +16,6 @@ namespace ActionNote.Tasks
         private ITilePinService _tilePinService;
         private IBadgeService _badgeService;
 
-        private Localizer _localizer = new Localizer("ActionNote.Common");
-
         public AutoSyncBackgroundTask()
         {
             IInjector injector = Injector.Instance;
@@ -32,39 +31,36 @@ namespace ActionNote.Tasks
             var deferral = taskInstance.GetDeferral();
 
             // no not auto sync at night to reduce data
-            if (DateTimeOffset.Now.Hour > 0 && DateTimeOffset.Now.Hour < 6)
+            if (!(DateTimeOffset.Now.Hour > 0 && DateTimeOffset.Now.Hour < 6))
             {
-                deferral.Complete();
-                return;
-            }
-
-            // sync notes
-            var syncResult = await _dataService.SyncNotesAsync();
-            if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
-            {
-                if (syncResult == SyncResult.Success)
+                // sync notes
+                var syncResult = await _dataService.SyncNotesAsync();
+                if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
                 {
-                    _dataService.FlagNotesNeedReload();
-                    _dataService.FlagArchiveNeedsReload();
-                }
+                    if (syncResult == SyncResult.Success)
+                    {
+                        _dataService.FlagNotesNeedReload();
+                        _dataService.FlagArchiveNeedsReload();
+                    }
 
-                var downloadedAFile = false;
-                if (await _dataService.UploadMissingAttachements(1) == FileUploadResult.Nop)
-                {
-                    // only download anything, when nothing was uploaded (to ensure we do not produce to much traffic / timeout)
-                    downloadedAFile = await _dataService.DownloadMissingAttachements();
-                }
+                    var downloadedAFile = false;
+                    if (await _dataService.UploadMissingAttachements(1) == FileUploadResult.Nop)
+                    {
+                        // only download anything, when nothing was uploaded (to ensure we do not produce to much traffic / timeout)
+                        downloadedAFile = await _dataService.DownloadMissingAttachements();
+                    }
 
-                if (syncResult != SyncResult.Unchanged || downloadedAFile)
-                {
-                    var noteItems = await _dataService.GetAllNotes();
-                    await _actionCenterService.RefreshAsync(noteItems);
+                    if (syncResult != SyncResult.Unchanged || downloadedAFile)
+                    {
+                        var noteItems = await _dataService.GetAllNotes();
+                        await _actionCenterService.RefreshAsync(noteItems);
 
-                    var noteIds = await _dataService.GetAllNoteIds();
-                    await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
+                        var noteIds = await _dataService.GetAllNoteIds();
+                        await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
 
-                    var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-                    _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                        var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
+                        _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                    }
                 }
             }
 

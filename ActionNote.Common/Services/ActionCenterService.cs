@@ -23,6 +23,15 @@ namespace ActionNote.Common.Services
         // refesh block for FileOpenPicker
         public static StoredObjectBase<DateTimeOffset> RefreshBlockingUntil = new LocalObject<DateTimeOffset>("refreshBlocking", DateTimeOffset.MinValue);
 
+        /// <summary>
+        /// Timed refresh Action Center workaround (Expiration after 72h bug)
+        /// <see cref="https://social.msdn.microsoft.com/Forums/Windowsapps/en-US/e3d9962d-c11a-403a-8d25-eec30fcdd7b6/defaultmaximum-expirationtime-for-toastnotification?forum=wpdevelop"/>
+        /// </summary>
+        /// <remarks>
+        /// The default value is MAX date time, bacause everything should not start before the app itself did at least one refresh of the action center.
+        /// </remarks>
+        public static StoredObjectBase<DateTimeOffset> LastActionCenterRefresh = new LocalObject<DateTimeOffset>("lastExpireRefresh", DateTimeOffset.MaxValue);
+
         public const string GROUP_NOTE = "note";
         public const string GROUP_QUICK_NOTE = "quickNote";
 
@@ -66,6 +75,8 @@ namespace ActionNote.Common.Services
             if (IsRefreshBlocked())
                 return;
 
+            LastActionCenterRefresh.Value = DateTimeOffset.Now;
+
             _toastService.ClearHistory();
 
             var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
@@ -75,14 +86,14 @@ namespace ActionNote.Common.Services
                 var note = sorted[i];
 
                 if (i != 0)
-                    await Task.Delay(10);
+                    await Task.Delay(1); // TODO 10
 
                 AddNotification(note);
             }
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                await Task.Delay(1000);
+                await Task.Delay(1); // TODO 1000
                 AddQuickNotes();
             }
         }
@@ -94,7 +105,7 @@ namespace ActionNote.Common.Services
             toastNotification.SuppressPopup = true;
             toastNotification.Group = GROUP_NOTE;
             toastNotification.Tag = note.ShortId; // just to find the notificication within this service. Shortid because it has a limited size
-            toastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // TODO: check if this really helps !?
+            toastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // Does not solve anything, it is still 72h !!!
             _toastService.Show(toastNotification);
         }
 
@@ -111,7 +122,7 @@ namespace ActionNote.Common.Services
             quickNoteToastNotification.SuppressPopup = true; // REMEMBER: suprress-popup currently can causes a bug that the "reference" to the notification can get lost after remove/replace => sometimes ContainsQuickNotes() even when it was deleted
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote";
-            quickNoteToastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // TODO: check if this really helps !?
+            quickNoteToastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // Does not solve anything, it is still 72h !!!
             _toastService.Show(quickNoteToastNotification);
         }
 
