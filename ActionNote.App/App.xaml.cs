@@ -321,7 +321,7 @@ namespace ActionNote.App
         private void UnregisterBackgroundTasks()
         {
             if (_backgroundTaskService.RegistrationExists(BG_TASK_ACTIONCENTER))
-                _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER);
+                _backgroundTaskService.Unregister(BG_TASK_ACTIONCENTER, true); // <-- Cancel this task! Because there is a race condition, that all notes could be deleted by this task!!!
             if (_backgroundTaskService.RegistrationExists(BG_TASK_TOAST_TRIGGERED))
                 _backgroundTaskService.Unregister(BG_TASK_TOAST_TRIGGERED);
             if (_backgroundTaskService.RegistrationExists(BG_TASK_AUTO_SYNC))

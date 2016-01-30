@@ -54,13 +54,13 @@ namespace ActionNote.Common.Services
             if (containsQuickNotes)
                 RemoveQuickNotes();
 
-            await Task.Delay(10);
+            await Task.Delay(1);
 
             AddNotification(noteItem);
 
             if (containsQuickNotes)
             {
-                await Task.Delay(100);
+                await Task.Delay(10);
                 AddQuickNotes();
             }  
         }
@@ -86,14 +86,14 @@ namespace ActionNote.Common.Services
                 var note = sorted[i];
 
                 if (i != 0)
-                    await Task.Delay(1); // TODO 10
+                    await Task.Delay(1);
 
                 AddNotification(note);
             }
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                await Task.Delay(1); // TODO 1000
+                await Task.Delay(10);
                 AddQuickNotes();
             }
         }

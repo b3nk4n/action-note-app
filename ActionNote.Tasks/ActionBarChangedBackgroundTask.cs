@@ -36,6 +36,7 @@ namespace ActionNote.Tasks
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
+            taskInstance.Progress = 1;
 
             Logger.WriteLine("ActionBarChangedTask: started");
 
@@ -59,6 +60,7 @@ namespace ActionNote.Tasks
             // exit when we didn't get the mutex
             if (!hasMutex)
             {
+                taskInstance.Progress = 100;
                 deferral.Complete();
                 return;
             }
@@ -144,12 +146,12 @@ namespace ActionNote.Tasks
                     }
                 }
             }
-
             if (hasMutex)
                 backgroundMutex.ReleaseMutex();
 
             Logger.WriteLine("ActionBarChangedTask: DONE");
 
+            taskInstance.Progress = 100;
             deferral.Complete();
         }
     }

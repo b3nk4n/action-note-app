@@ -18,6 +18,7 @@ using UWPCore.Framework.Storage;
 using UWPCore.Framework.Share;
 using UWPCore.Framework.Input;
 using Windows.System;
+using UWPCore.Framework.Logging;
 
 namespace ActionNote.App.ViewModels
 {
@@ -350,18 +351,29 @@ namespace ActionNote.App.ViewModels
 
         private async Task ReloadDataAsync()
         {
-            // ensure the repository has been loaded (which is required after suspend-shutdown)
-            await _dataService.LoadNotesAsync();
-
-            var data = await _dataService.GetAllNotes();
-
-            if (data != null)
+            
+            try
             {
-                var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
-                NoteItems.Clear();
-                NoteItems = new ObservableCollection<NoteItem>(sorted);
-                RaisePropertyChanged("NoteItems");
-                RaisePropertyChanged("HasNoNotes");
+                // ensure the repository has been loaded (which is required after suspend-shutdown)
+                await _dataService.LoadNotesAsync();
+
+                var data = await _dataService.GetAllNotes();
+
+                if (data != null)
+                {
+                    var sorted = NoteUtils.Sort(data, AppSettings.SortNoteBy.Value);
+                    NoteItems.Clear();
+                    NoteItems = new ObservableCollection<NoteItem>(sorted);
+                    RaisePropertyChanged("NoteItems");
+                    RaisePropertyChanged("HasNoNotes");
+                }
+            }
+            catch (Exception e)
+            {
+                // Just try not to crash the app:
+                // TODO: FIXME, why was here an ArgumentNull exception? (Afterwards was not able to reproduce)
+                // Performed actions: Suspend app, add new note, before note was added, start the app.
+                Logger.WriteLine("Unknown String Argument null error?", e);
             }
         }
 
