@@ -432,7 +432,7 @@ namespace ActionNote.App.ViewModels
                     await Task.Delay(50);
                     SaveCommand.Execute(SelectedNote);
                 }
-                else if (e.ControlKey && e.VirtualKey == VirtualKey.X)
+                else if (e.ControlKey && e.VirtualKey == VirtualKey.D) // NOT X! Because Ctrl-X is used cut CUT the content!
                 {
                     DiscardCommand.Execute(null);
                 }
