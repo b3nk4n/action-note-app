@@ -46,6 +46,7 @@
                                 <uwpcModels:ContributorModel Title="Patrick Dubé" Icon="/Assets/Images/quebec_french.png" />
                                 <uwpcModels:ContributorModel Title="Piotr Świtalski" Icon="/Assets/Images/polen.png" />
                                 <uwpcModels:ContributorModel Title="Andre Bom Alves Nunes" Icon="/Assets/Images/brasil.png" />
+                                <uwpcModels:ContributorModel Title="Lukáš Bittner" Icon="/Assets/Images/czech.png" />
 
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
