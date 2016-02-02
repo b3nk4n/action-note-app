@@ -99,6 +99,7 @@
     <None Include="ActionNote.App_StoreKey.pfx" />
     <None Include="Assets\Codes\Action Note Testing Promo Code.tsv" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-CN\Resources.resw" />
     <PRIResource Include="Strings\cs-CZ\Resources.resw" />
     <PRIResource Include="Strings\pt-BR\Resources.resw" />
     <PRIResource Include="Strings\pl-PL\Resources.resw" />
@@ -161,6 +162,7 @@
     <Content Include="Assets\Images\blue_att_flag.png" />
     <Content Include="Assets\Images\blue_flag.png" />
     <Content Include="Assets\Images\brasil.png" />
+    <Content Include="Assets\Images\chinese.png" />
     <Content Include="Assets\Images\colombia.png" />
     <Content Include="Assets\Images\czech.png" />
     <Content Include="Assets\Images\green.png" />

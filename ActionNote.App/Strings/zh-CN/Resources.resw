@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>Action Note 不只是一个笔记应用，它和通知中心结合在一起，能够让你可以通过最快的方式记录或访问你的笔记。甚至能在你的所有 Windows 10 设备上同步照片。</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>贡献者：</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>更多优秀App</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>评分</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>发送反馈</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>共享App</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>隐私信息</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>关于</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>新增</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>存档</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>附件</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>移除</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>选择</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>2小时</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>30分钟</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>45分钟</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>1小时</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>删除</value>
+    <comment>MainPage/EditPage</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>全部删除</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>放弃</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>放弃变更</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>编辑</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>编辑</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>购买</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>笔记</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>看起来是空的，是吧？没有内容的笔记是不能保存的。</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>因为网络原因不能执行删除。请检查您的网络并稍后再试。</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>这个笔记在其他设备上已经被删除。您的设备好像没有进行同步。请手动进行同步。</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>网络同步功能需要登录您的账户进行确定，您现在不能使用此功能。
+您可以在设置中重新设置它。</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>您的网络同步功能已经激活，但您没有登录。
+您愿意现在登录您的微软账户吗</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>不</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>是的</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>你确定要删除所有笔记吗？</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>同步失败，请检查网络或稍后再试。</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>注意</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>信息</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>警告</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>欢迎回来！</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>我们已经开启您的在线同步功能。要使用此功能需要登录您的微软账户。您要现在登录吗？</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>关于</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>存档</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>笔记</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>设置</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>更多</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>新的笔记</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>排序依据</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>固定到桌面</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>删除中…</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>下载中…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>保存中…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>同步中…</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>上传中…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>快速笔记的输入方式</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>正文</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>标题和正文</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>朗读笔记</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>了解更多</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>恢复</value>
+    <comment>ArchivePage</comment>
+  </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>在所有设备上同步</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>通知中心 (Action Center)</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowClear.Header" xml:space="preserve">
+    <value>允许清除笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>允许删除笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>自动保存笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>同步间隔</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>常规</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>同步设定</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>个性化设置</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>快速笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>预设标题</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>快速笔记</value>
+    <comment>BackgroundTask</comment>
+  </data>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>显示笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>在后台同步笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>启动时同步笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>主题</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>设置</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>分享</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>与你的朋友分享它</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>类别</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>更改日期</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>语音输入</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>同步</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>取消固定</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>升级</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>感谢您购买了专业版本</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>升级</value>
+    <comment>UpgradePage</comment>
+  </data>
+</root>
