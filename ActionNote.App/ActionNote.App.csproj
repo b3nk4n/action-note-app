@@ -157,6 +157,7 @@
     <Content Include="Assets\Images\blue_att_flag.png" />
     <Content Include="Assets\Images\blue_flag.png" />
     <Content Include="Assets\Images\brasil.png" />
+    <Content Include="Assets\Images\colombia.png" />
     <Content Include="Assets\Images\green.png" />
     <Content Include="Assets\Images\green_att.png" />
     <Content Include="Assets\Images\green_att_flag.png" />
@@ -179,7 +180,6 @@
     <Content Include="Assets\Images\red_att_flag.png" />
     <Content Include="Assets\Images\red_flag.png" />
     <Content Include="Assets\Images\save.png" />
-    <Content Include="Assets\Images\spain.png" />
     <Content Include="Assets\Images\StoreLogo300.png" />
     <Content Include="Assets\Images\taiwan.png" />
     <Content Include="Assets\Images\violett.png" />
