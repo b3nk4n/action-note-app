@@ -129,11 +129,13 @@
                     <StackPanel DataContext="{Binding SelectedNote}">
                         <TextBlock Text="{Binding ChangedDate, Converter={StaticResource dateTimeConverter}}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" Opacity="{Binding ElementName=self, Path=DataContext.IsEditMode, Converter={StaticResource boolToDoubleConv}, ConverterParameter=1;0}" FontSize="11" HorizontalAlignment="Right" Margin="4,-8,4,4" />
 
-                        <TextBox x:Name="TitleTextBox" x:Uid="/ActionNote.Common/Resources/NoteTitle" TabIndex="0" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24" IsSpellCheckEnabled="False" KeyUp="TitleTextBoxKeyUp" />
+                        <TextBox x:Name="TitleTextBox" x:Uid="/ActionNote.Common/Resources/NoteTitle" TabIndex="0" Text="{Binding Title, Mode=TwoWay}" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24"
+                                 IsSpellCheckEnabled="True" KeyUp="TitleTextBoxKeyUp" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
 
-                        <TextBox x:Name="ContentTextBox" x:Uid="/ActionNote.Common/Resources/NoteContent" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}" IsSpellCheckEnabled="False" />
+                        <TextBox x:Name="ContentTextBox" x:Uid="/ActionNote.Common/Resources/NoteContent" Text="{Binding Content, Mode=TwoWay}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}"
+                                 IsSpellCheckEnabled="True" />
 
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
                     </StackPanel>
