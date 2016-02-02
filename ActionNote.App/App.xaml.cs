@@ -20,6 +20,10 @@ using UWPCore.Framework.UI;
 using System.Collections.Generic;
 using UWPCore.Framework.Store;
 using UWPCore.Framework.Notifications;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace ActionNote.App
 {
@@ -119,7 +123,7 @@ namespace ActionNote.App
             _actionCenterService.Clear();
 
             var pageType = DefaultPage;
-            string parameter = null;
+            object parameter = null;
             if (args.Kind == ActivationKind.ToastNotification)
             {
                 var toastArgs = args as ToastNotificationActivatedEventArgs;
@@ -214,6 +218,25 @@ namespace ActionNote.App
                     }
                 }
             }
+            // TODO implement https://channel9.msdn.com/Series/A-Developers-Guide-to-Windows-10/22#time=28m26s
+            /*else if (args.Kind == ActivationKind.ShareTarget)
+            {
+                Frame rootFrame = Window.Current.Content as Frame;
+
+                if (rootFrame == null)
+                {
+                    rootFrame = new Frame();
+                    Window.Current.Content = rootFrame;
+                }
+
+                if (rootFrame.Content == null)
+                {
+                    var shareArgs = args as ShareTargetActivatedEventArgs;
+
+                    rootFrame.Navigate(typeof(SharePage), shareArgs.ShareOperation);
+                    return; // do NOT use NavigationService for Share Target!
+                }
+            }*/
 
             // start the user experience
             NavigationService.Navigate(pageType, parameter);
