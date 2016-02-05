@@ -186,11 +186,11 @@
     <comment>SettingsPage</comment>
   </data>
   <data name="Delete.Label" xml:space="preserve">
-    <value>Smazat</value>
+    <value>Odstranit</value>
     <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
-    <value>Smazat vše</value>
+    <value>Odstranit vše</value>
     <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
@@ -206,7 +206,7 @@
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
-    <value>UPRAVIT</value>
+    <value>EDITACE</value>
     <comment>EditPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
@@ -226,7 +226,7 @@
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
-    <value>Tato poznámka byla již smazána z jiného zařízení. Vaše zařízení není patrně synchronizováno. Prosím, proveďte aktualizaci manuálně.</value>
+    <value>Tato poznámka již byla odstraněna z jiného zařízení. Vaše zařízení není patrně synchronizováno. Prosím, proveďte aktualizaci manuálně.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
@@ -248,7 +248,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.ReallyDeleteAll" xml:space="preserve">
-    <value>Skutečně smazat všechny poznámky?</value>
+    <value>Skutečně odstranit všechny poznámky?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.SyncFailed" xml:space="preserve">
@@ -296,7 +296,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
-    <value>NOVÝ</value>
+    <value>NOVÁ</value>
     <comment>EditPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
@@ -304,11 +304,11 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Pin.Label" xml:space="preserve">
-    <value>Připnout na start</value>
+    <value>Připnout na Start</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.Deleting" xml:space="preserve">
-    <value>Mazání…</value>
+    <value>Odstraňování…</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
@@ -360,11 +360,11 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Povolit vymázání poznámek</value>
+    <value>Povolit odstranění všech poznámek</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Povolit mazání poznámek</value>
+    <value>Povolit odstranění jednotlivých poznámek</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
@@ -396,7 +396,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Rychlé poznámky</value>
+    <value>Rychlá poznámka</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
@@ -436,7 +436,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
-    <value>Vstup řeči</value>
+    <value>Nahrát zvuk</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
@@ -452,7 +452,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>NÁKUP PRO VERZE</value>
+    <value>ZA VÁŠ NÁKUP PRO VERZE</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">

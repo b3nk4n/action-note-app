@@ -130,7 +130,7 @@
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotes" xml:space="preserve">
-    <value>Rychlé poznámky</value>
+    <value>Rychlá poznámka</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotesDescription" xml:space="preserve">
@@ -142,7 +142,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="Swipe.Delete.Text" xml:space="preserve">
-    <value>Smazat</value>
+    <value>Odstranit</value>
     <comment>MainPage</comment>
   </data>
   <data name="Swipe.Restore.Text" xml:space="preserve">
