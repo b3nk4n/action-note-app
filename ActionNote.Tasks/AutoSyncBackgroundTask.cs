@@ -53,7 +53,7 @@ namespace ActionNote.Tasks
                     if (syncResult != SyncResult.Unchanged || downloadedAFile)
                     {
                         var noteItems = await _dataService.GetAllNotes();
-                        await _actionCenterService.RefreshAsync(noteItems);
+                        _actionCenterService.RefreshAsync(noteItems);
 
                         var noteIds = await _dataService.GetAllNoteIds();
                         await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);

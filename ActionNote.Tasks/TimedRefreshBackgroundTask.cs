@@ -30,7 +30,7 @@ namespace ActionNote.Tasks
                 if (AppSettings.ShowNotesInActionCenter.Value)
                 {
                     var noteItems = await _dataService.GetAllNotes();
-                    await _actionCenterService.RefreshAsync(noteItems);
+                    _actionCenterService.RefreshAsync(noteItems);
                 }
             }
 

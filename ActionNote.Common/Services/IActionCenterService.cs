@@ -13,7 +13,7 @@ namespace ActionNote.Common.Services
         /// Adds a new notification at the top, even when there is the quick notes already.
         /// </summary>
         /// <param name="noteItem">The note item to add.</param>
-        Task AddToTop(NoteItem noteItem);
+        void AddToTop(NoteItem noteItem);
 
         /// <summary>
         /// Clears the action center history.
@@ -24,7 +24,7 @@ namespace ActionNote.Common.Services
         /// Refreshes the whole action center.
         /// </summary>
         /// <param name="noteItems">The notes items that are in the repo and have to be in the action center.</param>
-        Task RefreshAsync(IList<NoteItem> noteItems);
+        void RefreshAsync(IList<NoteItem> noteItems);
 
         /// <summary>
         /// Gets whether the quick notes are in the action center or not.

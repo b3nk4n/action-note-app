@@ -253,7 +253,7 @@ namespace ActionNote.App
             {
                 var notes = await _dataService.GetAllNotes();
                 if (notes != null)
-                    await _actionCenterService.RefreshAsync(notes);
+                    _actionCenterService.RefreshAsync(notes);
             }
 
             var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);

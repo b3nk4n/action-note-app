@@ -112,7 +112,7 @@ namespace ActionNote.Tasks
                             }
                             else
                             {
-                                _actionCenterService.RefreshAsync(notes).Wait();
+                                _actionCenterService.RefreshAsync(notes);//.Wait();
                             }
                         }
 
@@ -142,7 +142,7 @@ namespace ActionNote.Tasks
                         var notes = getAllTask.Result;
 
                         if (notes != null)
-                            _actionCenterService.RefreshAsync(notes).Wait();
+                            _actionCenterService.RefreshAsync(notes);//.Wait();
                     }
                 }
             }

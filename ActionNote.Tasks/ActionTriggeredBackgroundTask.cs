@@ -109,13 +109,11 @@ namespace ActionNote.Tasks
                                 !string.IsNullOrWhiteSpace(content))
                             {
                                 var noteItem = new NoteItem(title, content);
-                                _dataService.FlagNotesNeedReload();
-                                _dataService.AddNoteAsync(noteItem).Wait();
 
                                 if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
                                 {
                                     // add it into the action center at the beginning when we order for date.
-                                    _actionCenterService.AddToTop(noteItem).Wait();
+                                    _actionCenterService.AddToTop(noteItem);//.Wait();
                                 }
                                 else
                                 {
@@ -123,9 +121,16 @@ namespace ActionNote.Tasks
                                     var getAllTask = _dataService.GetAllNotes();
                                     getAllTask.Wait();
                                     var notes = getAllTask.Result;
+                                    notes.Add(noteItem);
                                     if (notes != null)
-                                        _actionCenterService.RefreshAsync(notes).Wait();
+                                        _actionCenterService.RefreshAsync(notes);//.Wait();
                                 }
+
+                                // add note physically after adding the notification
+                                // 1) for faster response time
+                                // 2) because an added note might be deleted, when the app is launched and not pushed as a notification
+                                _dataService.FlagNotesNeedReload();
+                                _dataService.AddNoteAsync(noteItem).Wait();
 
                                 var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
                                 _badgeService.GetBadgeUpdaterForApplication().Update(badge);

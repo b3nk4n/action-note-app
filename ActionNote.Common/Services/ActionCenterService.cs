@@ -47,20 +47,20 @@ namespace ActionNote.Common.Services
             _deviceInfoService = deviceInfoService;
         }
 
-        public async Task AddToTop(NoteItem noteItem)
+        public void AddToTop(NoteItem noteItem)
         {
             var containsQuickNotes = ContainsQuickNotes();
 
             if (containsQuickNotes)
                 RemoveQuickNotes();
 
-            await Task.Delay(1);
+            //await Task.Delay(1);
 
             AddNotification(noteItem);
 
             if (containsQuickNotes)
             {
-                await Task.Delay(10);
+                //await Task.Delay(10);
                 AddQuickNotes();
             }  
         }
@@ -70,7 +70,7 @@ namespace ActionNote.Common.Services
             _toastService.ClearHistory();
         }
 
-        public async Task RefreshAsync(IList<NoteItem> noteItems)
+        public void RefreshAsync(IList<NoteItem> noteItems)
         {
             if (IsRefreshBlocked())
                 return;
@@ -85,15 +85,15 @@ namespace ActionNote.Common.Services
             {
                 var note = sorted[i];
 
-                if (i != 0)
-                    await Task.Delay(1);
+                //if (i != 0)
+                    //await Task.Delay(1);
 
                 AddNotification(note);
             }
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                await Task.Delay(10);
+                //await Task.Delay(10);
                 AddQuickNotes();
             }
         }
