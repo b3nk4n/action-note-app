@@ -1,7 +1,6 @@
 ﻿using ActionNote.Common.Helpers;
 using ActionNote.Common.Models;
 using Ninject;
-using System.Threading.Tasks;
 using System.Linq;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Notifications;
@@ -54,13 +53,10 @@ namespace ActionNote.Common.Services
             if (containsQuickNotes)
                 RemoveQuickNotes();
 
-            //await Task.Delay(1);
-
             AddNotification(noteItem);
 
             if (containsQuickNotes)
             {
-                //await Task.Delay(10);
                 AddQuickNotes();
             }  
         }
@@ -85,15 +81,11 @@ namespace ActionNote.Common.Services
             {
                 var note = sorted[i];
 
-                //if (i != 0)
-                    //await Task.Delay(1);
-
                 AddNotification(note);
             }
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
-                //await Task.Delay(10);
                 AddQuickNotes();
             }
         }
@@ -276,11 +268,17 @@ namespace ActionNote.Common.Services
                             PlaceHolderContent = _localizer.Get("NoteContent.PlaceholderText"),
                             Id = "content",
                         },
+                        new AdaptiveInput()
+                        {
+                            Type = InputType.Text,
+                            PlaceHolderContent = "one more?",
+                            Id = "content2",
+                        },
                         new AdaptiveAction()
                         {
                             ActivationType = ToastActivationType.Background,
                             Content = _localizer.Get("Save.Label"),
-                            HintInputId = "content",
+                            //HintInputId = "content2",
                             Arguments = "quickNote",
                             ImageUri = "Assets/Images/save.png"
                         }
@@ -294,19 +292,54 @@ namespace ActionNote.Common.Services
 
             if (AppSettings.QuickNotesContentType.Value == AppConstants.QUICK_NOTES_TITLE_AND_CONTENT)
             {
-                string placeholderFormat;
-
-                if (_deviceInfoService.IsPhone)
+                toastModel.Actions = new AdaptiveActions()
                 {
-                    placeholderFormat = "{0} ↩ {1}";
-                }
-                else
+                    Children =
+                    {
+                        new AdaptiveInput()
+                        {
+                            Type = InputType.Text,
+                            PlaceHolderContent = _localizer.Get("NoteTitle.PlaceholderText"),
+                            Id = "title",
+                        },
+                        new AdaptiveInput()
+                        {
+                            Type = InputType.Text,
+                            PlaceHolderContent = _localizer.Get("NoteContent.PlaceholderText"),
+                            Id = "content",
+                        },
+                        new AdaptiveAction()
+                        {
+                            ActivationType = ToastActivationType.Background,
+                            Content = _localizer.Get("Save.Label"),
+                            Arguments = "quickNote",
+                            ImageUri = "Assets/Images/save.png"
+                        }
+                    }
+                };
+            }
+            else
+            {
+                toastModel.Actions = new AdaptiveActions()
                 {
-                    placeholderFormat = "{0}\r{1}";
-                }
-
-                string placeholderText = string.Format(placeholderFormat, _localizer.Get("NoteTitle.PlaceholderText"), _localizer.Get("NoteContent.PlaceholderText"));
-                (toastModel.Actions.Children[0] as AdaptiveInput).PlaceHolderContent = placeholderText;
+                    Children =
+                    {
+                        new AdaptiveInput()
+                        {
+                            Type = InputType.Text,
+                            PlaceHolderContent = _localizer.Get("NoteContent.PlaceholderText"),
+                            Id = "content",
+                        },
+                        new AdaptiveAction()
+                        {
+                            ActivationType = ToastActivationType.Background,
+                            Content = _localizer.Get("Save.Label"),
+                            HintInputId = "content",
+                            Arguments = "quickNote",
+                            ImageUri = "Assets/Images/save.png"
+                        }
+                    }
+                };
             }
 
             return toastModel;
