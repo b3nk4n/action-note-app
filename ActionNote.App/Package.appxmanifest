@@ -26,14 +26,15 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#0063B1" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
+        <uap:Extension Category="windows.shareTarget">
+          <uap:ShareTarget Description="Take a note...">
+            <uap:DataFormat>Text</uap:DataFormat>
+            <uap:DataFormat>weblink</uap:DataFormat>
+          </uap:ShareTarget>
+        </uap:Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.TimedRefreshBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionBarChangedBackgroundTask">
@@ -42,7 +43,12 @@
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.TimedRefreshBackgroundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.ActionTriggeredBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
+        <Extension Category="windows.backgroundTasks" EntryPoint="ActionNote.Tasks.AutoSyncBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
           </BackgroundTasks>

@@ -24,6 +24,7 @@ using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.UI.Core;
 
 namespace ActionNote.App
 {
@@ -63,6 +64,8 @@ namespace ActionNote.App
             _dataService = Injector.Get<IDataService>();
             _licenseService = Injector.Get<ILicenseService>();
             _badgeService = Injector.Get<IBadgeService>();
+
+            ShareTargetPage = typeof(SharePage);
 
             // initialize Microsoft Application Insights
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
@@ -218,25 +221,6 @@ namespace ActionNote.App
                     }
                 }
             }
-            // TODO implement https://channel9.msdn.com/Series/A-Developers-Guide-to-Windows-10/22#time=28m26s
-            /*else if (args.Kind == ActivationKind.ShareTarget)
-            {
-                Frame rootFrame = Window.Current.Content as Frame;
-
-                if (rootFrame == null)
-                {
-                    rootFrame = new Frame();
-                    Window.Current.Content = rootFrame;
-                }
-
-                if (rootFrame.Content == null)
-                {
-                    var shareArgs = args as ShareTargetActivatedEventArgs;
-
-                    rootFrame.Navigate(typeof(SharePage), shareArgs.ShareOperation);
-                    return; // do NOT use NavigationService for Share Target!
-                }
-            }*/
 
             // start the user experience
             NavigationService.Navigate(pageType, parameter);

@@ -5,11 +5,38 @@
     xmlns:local="using:ActionNote.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <TextBox Header="Test" PlaceholderText="Hello" Margin="4" />
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <uwpcControls:PageHeader>
+            <!--<uwpcControls:PageHeader.HeaderContent>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" x:Uid="NewTitle" Text="NEW NOTE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                </Grid>
+            </uwpcControls:PageHeader.HeaderContent>-->
+        </uwpcControls:PageHeader>
+
+        <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
+            <StackPanel Padding="16">
+                <TextBox x:Name="TitleTextBox" x:Uid="/ActionNote.Common/Resources/NoteTitle" TabIndex="0" Text="" Margin="4" Style="{StaticResource CustomTextBoxStyle}" FontSize="24"
+                                 IsSpellCheckEnabled="True" />
+
+                <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Margin="4,0" />
+
+                <TextBox x:Name="ContentTextBox" x:Uid="/ActionNote.Common/Resources/NoteContent" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="128" Margin="4" Style="{StaticResource CustomTextBoxStyle}"
+                                 IsSpellCheckEnabled="True" />
+            </StackPanel>
+        </Grid>
     </Grid>
+
 </Page>
