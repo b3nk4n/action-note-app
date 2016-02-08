@@ -54,6 +54,8 @@ namespace ActionNote.App.ViewModels
             private set;
         } = new ObservableCollection<NoteItem>();
 
+        public static MainViewModel StaticInstance { get; private set; }
+
         // For sample data only
         public MainViewModel()
             : this(null)
@@ -61,6 +63,8 @@ namespace ActionNote.App.ViewModels
 
         public MainViewModel(IMainViewModelCallbacks callbacks)
         {
+            StaticInstance = this;
+
             _callbacks = callbacks;
 
             _dataService = Injector.Get<IDataService>();
@@ -349,9 +353,8 @@ namespace ActionNote.App.ViewModels
             return true;
         }
 
-        private async Task ReloadDataAsync()
+        public async Task ReloadDataAsync()
         {
-            
             try
             {
                 // ensure the repository has been loaded (which is required after suspend-shutdown)

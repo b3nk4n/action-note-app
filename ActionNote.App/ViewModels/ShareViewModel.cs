@@ -25,9 +25,8 @@ namespace ActionNote.App.ViewModels
         private IDataService _dataService;
         private IStorageService _localStorageService;
         private IGraphicsService _graphicsService;
-        private IDeviceInfoService _deviceInfoService;
-        private IStatusBarService _statusBarService;
         private IActionCenterService _actionCenterService;
+        private IDeviceInfoService _deviceInfoService;
         private IKeyboardService _keyboardService;
 
         private Localizer _localizer = new Localizer();
@@ -42,9 +41,8 @@ namespace ActionNote.App.ViewModels
             _dataService = Injector.Get<IDataService>();
             _localStorageService = Injector.Get<ILocalStorageService>();
             _graphicsService = Injector.Get<IGraphicsService>();
-            _deviceInfoService = Injector.Get<IDeviceInfoService>();
-            _statusBarService = Injector.Get<IStatusBarService>();
             _actionCenterService = Injector.Get<IActionCenterService>();
+            _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _keyboardService = Injector.Get<IKeyboardService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
@@ -52,6 +50,30 @@ namespace ActionNote.App.ViewModels
                 if (!noteItem.IsEmtpy)
                 {
                     await SaveNoteAsync(noteItem);
+
+                    if (WindowWrapper.ActiveWrappers.Count > 1) // more than 1 wrapper means the app is active as well
+                    {
+                        // notify the app to refresh (depatch on the first wrapper, because this is our app instance)
+                        await WindowWrapper.ActiveWrappers.FirstOrDefault()?.Dispatcher.DispatchAsync(async () =>
+                        {
+                            var main = MainViewModel.StaticInstance;
+                            if (main != null)
+                            {
+                                await main.ReloadDataAsync();
+                            }
+                        });
+                    }
+
+                    await WindowWrapper.ActiveWrappers.FirstOrDefault()?.Dispatcher.DispatchAsync(async () =>
+                    {
+                        if (WindowWrapper.ActiveWrappers.Count == 1 || // having exactly 1 wrapper means the app is not active
+                            WindowWrapper.ActiveWrappers.Count > 1 && _deviceInfoService.IsPhone) 
+                        {
+                            var notes = await _dataService.GetAllNotes();
+                            _actionCenterService.RefreshAsync(notes);
+                        }
+                    });
+
                     ShareOperation.ReportCompleted();
                 }
                 else
@@ -142,7 +164,7 @@ namespace ActionNote.App.ViewModels
                 !noteItem.HasAttachementChanged)
                 return;
 
-            await StartProgressAsync(_localizer.Get("Progress.Saving"));
+            StartProgress();
 
             if (string.IsNullOrWhiteSpace(noteItem.Title))
             {
@@ -173,31 +195,22 @@ namespace ActionNote.App.ViewModels
                 noteItem.HasAttachementChanged &&
                 _dataService.IsSynchronizationActive)
             {
-                await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
                 await _dataService.UploadAttachement(noteItem);
             }
 
-            await StopProgressAsync();
+            StopProgress();
         }
 
-        private async Task StartProgressAsync(string message)
+        private void StartProgress()
         {
             if (!_dataService.IsSynchronizationActive)
                 return;
 
-            if (_deviceInfoService.IsWindows)
-            {
-                ShowProgress = true;
-            }
-            else
-            {
-                await _statusBarService.StartProgressAsync(message, true);
-            }
+            ShowProgress = true;
         }
 
-        private async Task StopProgressAsync()
+        private void StopProgress()
         {
-            await _statusBarService.StopProgressAsync();
             ShowProgress = false;
         }
 

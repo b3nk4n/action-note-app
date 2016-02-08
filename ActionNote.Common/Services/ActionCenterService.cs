@@ -22,6 +22,8 @@ namespace ActionNote.Common.Services
         // refesh block for FileOpenPicker
         public static StoredObjectBase<DateTimeOffset> RefreshBlockingUntil = new LocalObject<DateTimeOffset>("refreshBlocking", DateTimeOffset.MinValue);
 
+        private const int MAX_NOTIFICATOINS = 19;
+
         /// <summary>
         /// Timed refresh Action Center workaround (Expiration after 72h bug)
         /// <see cref="https://social.msdn.microsoft.com/Forums/Windowsapps/en-US/e3d9962d-c11a-403a-8d25-eec30fcdd7b6/defaultmaximum-expirationtime-for-toastnotification?forum=wpdevelop"/>
@@ -77,7 +79,7 @@ namespace ActionNote.Common.Services
 
             var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
 
-            for (int i = 0; i < sorted.Count; ++i)
+            for (int i = 0; i < Math.Min(sorted.Count, MAX_NOTIFICATOINS); ++i)
             {
                 var note = sorted[i];
 
