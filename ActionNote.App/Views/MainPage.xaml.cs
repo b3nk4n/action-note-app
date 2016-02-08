@@ -5,7 +5,6 @@ using Universal.UI.Xaml.Controls;
 using UWPCore.Framework.Controls;
 using UWPCore.Framework.Common;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;

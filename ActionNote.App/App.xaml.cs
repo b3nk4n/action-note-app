@@ -20,11 +20,6 @@ using UWPCore.Framework.UI;
 using System.Collections.Generic;
 using UWPCore.Framework.Store;
 using UWPCore.Framework.Notifications;
-using Windows.ApplicationModel.DataTransfer.ShareTarget;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Windows.UI.Core;
 
 namespace ActionNote.App
 {

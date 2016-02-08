@@ -1,18 +1,16 @@
 ﻿using ActionNote.App.ViewModels;
-using System;
+using ActionNote.Common.Helpers;
 using UWPCore.Framework.Controls;
-using UWPCore.Framework.Mvvm;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.ApplicationModel.DataTransfer.ShareTarget;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+using Windows.System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 
 namespace ActionNote.App.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SharePage : Page
+    public sealed partial class SharePage : UniversalPage
     {
         public SharePage()
         {
@@ -20,38 +18,22 @@ namespace ActionNote.App.Views
             DataContext = new ShareViewModel();
         }
 
-        
+        private void ColorFlyoutClicked(object sender, RoutedEventArgs e)
+        {
+            ColorFlyout.Hide();
+        }
 
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    base.OnNavigatedTo(e);
+        private void TitleTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            TextBoxUtils.JumpFucusOnEnterTo(ContentTextBox, e.Key);
+        }
 
-        //    var shareOperation = e.Parameter as ShareOperation;
-        //    if (shareOperation != null)
-        //    {
-        //        if (shareOperation.Data.Contains(StandardDataFormats.Text))
-        //        {
-        //            TitleTextBox.Text += StandardDataFormats.Text;
-        //            ContentTextBox.Text += await shareOperation.Data.GetTextAsync();
-        //        }
-        //        else if (shareOperation.Data.Contains(StandardDataFormats.WebLink))
-        //        {
-        //            TitleTextBox.Text += StandardDataFormats.WebLink;
-        //            var uri = await shareOperation.Data.GetWebLinkAsync();
-        //            ContentTextBox.Text += uri.AbsoluteUri;
-        //        }
-        //    }
-        //}
-
-        // TODO: ...
-        // save note
-        // dismiss
-        // flag as important
-        // color category
-        // attachement image?
-
-        // UniversalSharePage?
-        // INavigationService => Basic/NullNavigationService which simply uses the Frame to navigate?
-        
+        /// <summary>
+        /// Perform INTELLIGENT KEYBOARD.
+        /// </summary>
+        private void ContentTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            TextBoxUtils.IntelligentOnEnter(ContentTextBox, e.Key);
+        }
     }
 }

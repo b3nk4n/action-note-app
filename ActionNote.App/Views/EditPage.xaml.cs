@@ -5,6 +5,8 @@ using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.Views
 {
@@ -43,11 +45,7 @@ namespace ActionNote.App.Views
 
         private void TitleTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == VirtualKey.Enter)
-            {
-                ContentTextBox.Focus(FocusState.Programmatic);
-                ContentTextBox.Select(ContentTextBox.Text.Length, 0);
-            }
+            TextBoxUtils.JumpFucusOnEnterTo(ContentTextBox, e.Key);
         }
 
         /// <summary>
@@ -55,69 +53,7 @@ namespace ActionNote.App.Views
         /// </summary>
         private void ContentTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == VirtualKey.Enter)
-            {
-                if (ContentTextBox.SelectionLength > 1) // TODO do nothing if text is selected?
-                    return;
-
-                var selectedIndex = ContentTextBox.SelectionStart;
-                var text = ContentTextBox.Text.Replace("\r\n", "\r"); // work on a copy, because CB.electionStart does count '\r\n' only as 1, note to chars!
-
-                var textBeforeEnter = text.Substring(0, selectedIndex);
-                var textAfterEnter = text.Substring(selectedIndex);
-                var lineBeforeEnter = textBeforeEnter;
-                if (textBeforeEnter.EndsWith("\r"))
-                    lineBeforeEnter = lineBeforeEnter.Remove(lineBeforeEnter.Length - 1);
-                var lastIndex = lineBeforeEnter.LastIndexOfAny(new[] { '\r', '\n' });
-                if (lastIndex != -1)
-                    lineBeforeEnter = lineBeforeEnter.Substring(lastIndex).TrimStart('\r');
-
-                if (lineBeforeEnter.Length > 0)
-                {
-                    string tagToInsert = null;
-                    if (lineBeforeEnter.StartsWith("- "))
-                        tagToInsert = "- ";
-                    if (lineBeforeEnter.StartsWith("+ "))
-                        tagToInsert = "+ ";
-                    if (lineBeforeEnter.StartsWith("* "))
-                        tagToInsert = "* ";
-                    if (lineBeforeEnter.StartsWith("> "))
-                        tagToInsert = "> ";
-                    if (lineBeforeEnter.StartsWith("-> "))
-                        tagToInsert = "-> ";
-
-                    if (tagToInsert != null &&
-                        lineBeforeEnter.Length > tagToInsert.Length)
-                    {
-                        ContentTextBox.Text = textBeforeEnter + tagToInsert + textAfterEnter;
-
-                        ContentTextBox.Focus(FocusState.Programmatic);
-                        ContentTextBox.Select(selectedIndex + tagToInsert.Length, 0);
-                    }
-                    else // remove start tag
-                    {
-                        string tagToRemove = null;
-                        if (lineBeforeEnter == "- ")
-                            tagToRemove = "- ";
-                        if (lineBeforeEnter == "+ ")
-                            tagToRemove = "+ ";
-                        if (lineBeforeEnter == "* ")
-                            tagToRemove = "* ";
-                        if (lineBeforeEnter == "> ")
-                            tagToRemove = "> ";
-                        if (lineBeforeEnter == "-> ")
-                            tagToRemove = "-> ";
-
-                        if (tagToRemove != null)
-                        {
-                            ContentTextBox.Text = textBeforeEnter.Remove(textBeforeEnter.Length - (tagToRemove.Length + 1)) + textAfterEnter;
-
-                            ContentTextBox.Focus(FocusState.Programmatic);
-                            ContentTextBox.Select(selectedIndex - (tagToInsert.Length + 1), 0);
-                        }
-                    }
-                }
-            }
+            TextBoxUtils.IntelligentOnEnter(ContentTextBox, e.Key);
         }
     }
 }

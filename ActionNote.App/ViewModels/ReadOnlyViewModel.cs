@@ -1,10 +1,7 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Models;
 using ActionNote.Common.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Devices;
