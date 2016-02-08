@@ -17,6 +17,7 @@ using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
+using UWPCore.Framework.Notifications;
 
 namespace ActionNote.App.ViewModels
 {
@@ -28,6 +29,7 @@ namespace ActionNote.App.ViewModels
         private IActionCenterService _actionCenterService;
         private IDeviceInfoService _deviceInfoService;
         private IKeyboardService _keyboardService;
+        private IBadgeService _badgeService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -44,6 +46,7 @@ namespace ActionNote.App.ViewModels
             _actionCenterService = Injector.Get<IActionCenterService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _keyboardService = Injector.Get<IKeyboardService>();
+            _badgeService = Injector.Get<IBadgeService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -71,6 +74,8 @@ namespace ActionNote.App.ViewModels
                         {
                             var notes = await _dataService.GetAllNotes();
                             _actionCenterService.RefreshAsync(notes);
+                            var badge = _badgeService.Factory.CreateBadgeNumber(notes.Count);
+                            _badgeService.GetBadgeUpdaterForApplication().Update(badge);
                         }
                     });
 
