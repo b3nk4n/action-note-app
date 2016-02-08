@@ -3,6 +3,7 @@ using ActionNote.Common.Helpers;
 using ActionNote.Common.Models;
 using ActionNote.Common.Services;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UWPCore.Framework.Common;
@@ -15,6 +16,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 namespace ActionNote.App.ViewModels
 {
@@ -79,25 +81,52 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            var note = new NoteItem();
+            var noteItem = new NoteItem();
 
             ShareOperation = parameter as ShareOperation;
             if (ShareOperation != null)
             {
+                noteItem.Title = ShareOperation.Data.Properties.Title;
+
                 if (ShareOperation.Data.Contains(StandardDataFormats.Text))
                 {
-                    note.Title = ShareOperation.Data.Properties.Title;
-                    note.Content = await ShareOperation.Data.GetTextAsync();
+                    noteItem.Content = await ShareOperation.Data.GetTextAsync();
                 }
                 else if (ShareOperation.Data.Contains(StandardDataFormats.WebLink))
                 {
                     var uri = await ShareOperation.Data.GetWebLinkAsync();
-                    note.Title = ShareOperation.Data.Properties.Title;
-                    note.Content = uri.AbsolutePath;
+                    noteItem.Content = uri.AbsolutePath;
+                }
+
+                if (ShareOperation.Data.Contains(StandardDataFormats.StorageItems))
+                {
+                    var files = await ShareOperation.Data.GetStorageItemsAsync();
+                    var file = files.FirstOrDefault() as StorageFile;
+
+                    if (file != null)
+                    {
+                        //var noteItem = await _dataService.GetNote(note.Id);
+                        var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
+                        var fileName = canonicalPrefix + file.Name;
+
+                        var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
+                        if (destinationFile != null &&
+                            await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
+                        {
+                            if (noteItem.AttachementFile != null)
+                            {
+                                await RemoveAttachement(noteItem);
+                            }
+
+                            noteItem.AttachementFile = fileName;
+
+                            RaisePropertyChanged("SelectedAttachementImageOrReload");
+                        }
+                    }
                 }
             }
 
-            SelectedNote = note;
+            SelectedNote = noteItem;
         }
 
         private async Task RemoveAttachement(NoteItem noteItem)
