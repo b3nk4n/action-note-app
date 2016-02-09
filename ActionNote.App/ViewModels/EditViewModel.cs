@@ -392,7 +392,6 @@ namespace ActionNote.App.ViewModels
         public async override void OnNavigatingFrom(NavigatingEventArgs args)
         {
             base.OnNavigatingFrom(args);
-
             if (!_savedInForwardNavigation &&
                 args.NavigationMode == NavigationMode.New)
             {
@@ -408,7 +407,7 @@ namespace ActionNote.App.ViewModels
 
                         _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
                         await SaveNoteAsync(SelectedNote);
-                        NavigationService.Navigate(args.PageType, args.Parameter);
+                        NavigationService.Navigate(args.PageType, args.Parameter); // UGLY workaround
                     }
                 }
             }

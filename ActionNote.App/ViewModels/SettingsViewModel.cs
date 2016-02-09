@@ -10,6 +10,9 @@ using UWPCore.Framework.Controls;
 using UWPCore.Framework.Common;
 using ActionNote.App.Views;
 using UWPCore.Framework.Devices;
+using UWPCore.Framework.UI;
+using System.Text;
+using System;
 
 namespace ActionNote.App.ViewModels
 {
@@ -17,6 +20,7 @@ namespace ActionNote.App.ViewModels
     {
         private IDataService _dataService;
         private IDeviceInfoService _deviceInfoService;
+        private IDialogService _dialogService;
 
         public EnumSource<ElementTheme> ThemeEnumSource { get; private set; } = new EnumSource<ElementTheme>();
 
@@ -32,6 +36,7 @@ namespace ActionNote.App.ViewModels
         {
             _dataService = Injector.Get<IDataService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
+            _dialogService = Injector.Get<IDialogService>();
 
             // localize string source
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
@@ -52,14 +57,61 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
-            SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
-            QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
-            BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
+            // we temporarily use pessimistic try-catch here, to find the SETTINGS BUG
+            var sb = new StringBuilder();
+            try
+            {
+                SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine("Error in SortNoteInActionCenterBy:");
+                sb.AppendLine(ex.Message);
+            }
+
+            try
+            {
+                QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine("Error in QuickNotesContentType:");
+                sb.AppendLine(ex.Message);
+            }
+
+            try
+            {
+                BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine("Error in BackgroundTaskSyncInterval:");
+                sb.AppendLine(ex.Message);
+            }
+
+            try
+            {
+                ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine("Error in PageTheme");
+                sb.AppendLine(ex.Message);
+            }
+
+            if (sb.Length > 0)
+            {
+                await _dialogService.ShowAsync(sb.ToString(), "Take a screenshot and send to developer");
+            }
+
+            //SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
+            //QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+            //BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
+            //ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
