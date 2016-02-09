@@ -36,7 +36,6 @@ namespace ActionNote.Tasks
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
-            taskInstance.Progress = 1;
 
             Logger.WriteLine("ActionBarChangedTask: started");
 
@@ -47,7 +46,7 @@ namespace ActionNote.Tasks
             };
 
             // wait to ensure ActionTriggeredBackgroundTask is running first
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
             var start = DateTimeOffset.Now.Ticks;
 
@@ -60,7 +59,6 @@ namespace ActionNote.Tasks
             // exit when we didn't get the mutex
             if (!hasMutex)
             {
-                taskInstance.Progress = 100;
                 deferral.Complete();
                 return;
             }
@@ -112,7 +110,7 @@ namespace ActionNote.Tasks
                             }
                             else
                             {
-                                _actionCenterService.RefreshAsync(notes);//.Wait();
+                                _actionCenterService.RefreshAsync(notes);
                             }
                         }
 
@@ -142,7 +140,7 @@ namespace ActionNote.Tasks
                         var notes = getAllTask.Result;
 
                         if (notes != null)
-                            _actionCenterService.RefreshAsync(notes);//.Wait();
+                            _actionCenterService.RefreshAsync(notes);
                     }
                 }
             }
@@ -151,7 +149,6 @@ namespace ActionNote.Tasks
 
             Logger.WriteLine("ActionBarChangedTask: DONE");
 
-            taskInstance.Progress = 100;
             deferral.Complete();
         }
     }
