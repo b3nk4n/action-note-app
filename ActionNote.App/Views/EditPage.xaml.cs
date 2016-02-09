@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ActionNote.App.ViewModels;
 using UWPCore.Framework.Controls;
 using Windows.System;
@@ -7,6 +8,8 @@ using Windows.UI.Xaml.Input;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using ActionNote.Common.Helpers;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
 
 namespace ActionNote.App.Views
 {
@@ -15,11 +18,14 @@ namespace ActionNote.App.Views
     /// </summary>
     public sealed partial class EditPage : UniversalPage, EditViewModelCallbacks
     {
+        private EditViewModel ViewModel { get; set; }
+
         public EditPage()
             : base(typeof(MainPage))
         {
             InitializeComponent();
-            DataContext = new EditViewModel(this);
+            ViewModel = new EditViewModel(this);
+            DataContext = ViewModel;
         }
 
         public async void SelectTitle()
@@ -54,6 +60,37 @@ namespace ActionNote.App.Views
         private void ContentTextBoxKeyUp(object sender, KeyRoutedEventArgs e)
         {
             TextBoxUtils.IntelligentOnEnter(ContentTextBox, e.Key);
+        }
+
+        private async void FileDragOver(object sender, DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var deferral = e.GetDeferral();
+                var files = await e.DataView.GetStorageItemsAsync();
+                if (files.Count > 0)
+                {
+                    var file = files.First() as IStorageFile;
+                    var fileTypeLowerCase = file.FileType.ToLower();
+                    var isKnownFileType = fileTypeLowerCase == ".png" || fileTypeLowerCase == ".jpg";
+                    e.AcceptedOperation = isKnownFileType ? DataPackageOperation.Copy : DataPackageOperation.None;
+                }
+                deferral.Complete();
+                return;
+            }
+        }
+
+        private async void FileDrop(object sender, DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var items = await e.DataView.GetStorageItemsAsync();
+                if (items.Count > 0)
+                {
+                    var storageFile = items[0] as StorageFile;
+                    ViewModel.SaveAttachementCommand.Execute(storageFile);
+                }
+            }
         }
     }
 }

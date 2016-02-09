@@ -114,6 +114,15 @@ namespace ActionNote.App.ViewModels
                 return noteItem != null;
             });
 
+            SaveAttachementCommand = new DelegateCommand<StorageFile>(async (file) =>
+            {
+                await SaveAttachementFile(SelectedNote, file);
+            },
+            (file) =>
+            {
+                return file != null && SelectedNote != null;
+            });
+
             SelectAttachementCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
                 var picker = new FileOpenPicker();
@@ -124,29 +133,7 @@ namespace ActionNote.App.ViewModels
                 picker.FileTypeFilter.Add(".png");
                 _actionCenterService.StartTemporaryRefreshBlocking(5);
                 StorageFile file = await picker.PickSingleFileAsync();
-
-                if (file != null)
-                {
-                    //var noteItem = await _dataService.GetNote(note.Id);
-                    var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
-                    var fileName = canonicalPrefix + file.Name;
-
-                    var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
-                    if (destinationFile != null &&
-                        await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
-                    {
-                        if (noteItem.AttachementFile != null)
-                        {
-                            await RemoveAttachement(noteItem);
-                        }
-
-                        noteItem.AttachementFile = fileName;
-
-                        RaisePropertyChanged("SelectedAttachementImageOrReload");
-                    }
-                }
-
-                RemoveAttachementCommand.RaiseCanExecuteChanged();
+                await SaveAttachementFile(noteItem, file);
             },
             (noteItem) =>
             {
@@ -242,6 +229,32 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null;
             });
+        }
+
+        private async Task SaveAttachementFile(NoteItem noteItem, StorageFile file)
+        {
+            if (file != null)
+            {
+                //var noteItem = await _dataService.GetNote(note.Id);
+                var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
+                var fileName = canonicalPrefix + file.Name;
+
+                var destinationFile = await _localStorageService.CreateOrReplaceFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + fileName);
+                if (destinationFile != null &&
+                    await _graphicsService.ResizeImageAsync(file, destinationFile, 1024, 1024))
+                {
+                    if (noteItem.AttachementFile != null)
+                    {
+                        await RemoveAttachement(noteItem);
+                    }
+
+                    noteItem.AttachementFile = fileName;
+
+                    RaisePropertyChanged("SelectedAttachementImageOrReload");
+                }
+            }
+
+            RemoveAttachementCommand.RaiseCanExecuteChanged();
         }
 
         private async Task RemoveAttachement(NoteItem noteItem)
@@ -633,6 +646,8 @@ namespace ActionNote.App.ViewModels
         public ICommand RemoveCommand { get; private set; }
 
         public ICommand DiscardCommand { get; private set; }
+
+        public ICommand SaveAttachementCommand { get; private set; }
 
         public ICommand SelectAttachementCommand { get; private set; }
 

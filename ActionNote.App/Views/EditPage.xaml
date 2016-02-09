@@ -123,8 +123,8 @@
         <Grid Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True">
             <Button x:Name="FocusElement" Width="1" Height="1" Opacity="0" TabIndex="0" />
             <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" Visibility="{Binding ShowProgress, Converter={StaticResource boolToVisConv}}" />
-            
-            <ScrollViewer Padding="16,0">
+
+            <ScrollViewer Padding="16,0" AllowDrop="True" DragOver="FileDragOver" Drop="FileDrop">
                 <StackPanel Padding="0,16">
                     <StackPanel DataContext="{Binding SelectedNote}">
                         <TextBlock Text="{Binding ChangedDate, Converter={StaticResource dateTimeConverter}}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" Opacity="{Binding ElementName=self, Path=DataContext.IsEditMode, Converter={StaticResource boolToDoubleConv}, ConverterParameter=1;0}" FontSize="11" HorizontalAlignment="Right" Margin="4,-8,4,4" />
