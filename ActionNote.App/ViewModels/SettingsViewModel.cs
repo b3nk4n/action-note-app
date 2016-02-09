@@ -99,13 +99,13 @@ namespace ActionNote.App.ViewModels
             }
             catch (Exception ex)
             {
-                sb.AppendLine("Error in PageTheme");
+                sb.AppendLine("Error in PageTheme:");
                 sb.AppendLine(ex.Message);
             }
 
             if (sb.Length > 0)
             {
-                await _dialogService.ShowAsync(sb.ToString(), "Take a screenshot and send to developer");
+                await _dialogService.ShowAsync(sb.ToString(), "Please send a screenshot to the developer");
             }
 
             //SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
