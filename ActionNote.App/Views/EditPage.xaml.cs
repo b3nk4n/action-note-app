@@ -72,7 +72,7 @@ namespace ActionNote.App.Views
                 {
                     var file = files.First() as IStorageFile;
                     var fileTypeLowerCase = file.FileType.ToLower();
-                    var isKnownFileType = fileTypeLowerCase == ".png" || fileTypeLowerCase == ".jpg";
+                    var isKnownFileType = fileTypeLowerCase == ".png" || fileTypeLowerCase == ".jpg" || fileTypeLowerCase == ".jpeg";
                     e.AcceptedOperation = isKnownFileType ? DataPackageOperation.Copy : DataPackageOperation.None;
                 }
                 deferral.Complete();
