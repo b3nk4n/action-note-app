@@ -1,8 +1,6 @@
-﻿using ActionNote.Common;
-using ActionNote.Common.Modules;
+﻿using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
 using System;
-using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Notifications;
 using Windows.ApplicationModel.Background;

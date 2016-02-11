@@ -22,6 +22,7 @@ using UWPCore.Framework.Devices;
 using UWPCore.Framework.Share;
 using UWPCore.Framework.Input;
 using Windows.System;
+using UWPCore.Framework.Launcher;
 
 namespace ActionNote.App.ViewModels
 {
@@ -228,6 +229,17 @@ namespace ActionNote.App.ViewModels
             (noteItem) =>
             {
                 return noteItem != null;
+            });
+
+            OpenPicture = new DelegateCommand(async () =>
+            {
+                var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile);
+                if (file != null)
+                    await SystemLauncher.LaunchFileAsync(file);
+            },
+            () =>
+            {
+                return SelectedNote != null && SelectedNote.HasAttachement;
             });
         }
 
@@ -663,5 +675,7 @@ namespace ActionNote.App.ViewModels
         public ICommand UnpinCommand { get; private set; }
 
         public ICommand ShareCommand { get; private set; }
+
+        public ICommand OpenPicture { get; set; }
     }
 }

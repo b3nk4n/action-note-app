@@ -92,5 +92,10 @@ namespace ActionNote.App.Views
                 }
             }
         }
+
+        private void AttachementImageTapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.OpenPicture.Execute(null);
+        }
     }
 }

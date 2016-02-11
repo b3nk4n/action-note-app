@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.Devices;
 using UWPCore.Framework.Input;
+using UWPCore.Framework.Launcher;
 using UWPCore.Framework.Mvvm;
 using UWPCore.Framework.Share;
 using UWPCore.Framework.Speech;
@@ -129,6 +130,17 @@ namespace ActionNote.App.ViewModels
             (noteItem) =>
             {
                 return noteItem != null && !noteItem.IsEmtpy;
+            });
+
+            OpenPicture = new DelegateCommand(async () =>
+            {
+                var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile);
+                if (file != null)
+                    await SystemLauncher.LaunchFileAsync(file);
+            },
+            () =>
+            {
+                return SelectedNote != null && SelectedNote.HasAttachement;
             });
         }
 
@@ -285,5 +297,7 @@ namespace ActionNote.App.ViewModels
         public ICommand ReadNoteCommand { get; private set; }
 
         public ICommand ShareCommand { get; private set; }
+
+        public ICommand OpenPicture { get; set; }
     }
 }

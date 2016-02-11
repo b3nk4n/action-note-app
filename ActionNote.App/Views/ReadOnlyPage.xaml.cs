@@ -1,5 +1,6 @@
 ﻿using ActionNote.App.ViewModels;
 using UWPCore.Framework.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace ActionNote.App.Views
 {
@@ -8,10 +9,18 @@ namespace ActionNote.App.Views
     /// </summary>
     public sealed partial class ReadOnlyPage : UniversalPage
     {
+        private ReadOnlyViewModel ViewModel { get; set; }
+
         public ReadOnlyPage()
         {
             InitializeComponent();
-            DataContext = new ReadOnlyViewModel();
+            ViewModel = new ReadOnlyViewModel();
+            DataContext = ViewModel;
+        }
+
+        private void AttachementImageTapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.OpenPicture.Execute(null);
         }
     }
 }

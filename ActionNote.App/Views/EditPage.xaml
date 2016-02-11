@@ -140,7 +140,8 @@
                         <Rectangle Height="1" HorizontalAlignment="Stretch" Fill="{StaticResource SystemControlForegroundChromeDisabledLowBrush}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Margin="4,0" />
                     </StackPanel>
 
-                    <Image Source="{Binding SelectedAttachementImageOrReload}" Visibility="{Binding SelectedNote.HasAttachement, Converter={StaticResource boolToVisConv}}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" />
+                    <Image Source="{Binding SelectedAttachementImageOrReload}" Visibility="{Binding SelectedNote.HasAttachement, Converter={StaticResource boolToVisConv}}" HorizontalAlignment="Left" Stretch="Uniform" MaxWidth="1024" MaxHeight="1024" Margin="4" 
+                           Tapped="AttachementImageTapped"/>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
