@@ -214,17 +214,17 @@ namespace ActionNote.Common.Services
             return UpdateResult.Nop;
         }
 
-        public async Task<SyncResult> SyncNotesAsync()
+        public async Task<SyncData> SyncNotesAsync()
         {
             if (!IsSynchronizationActive)
-                return SyncResult.Nop;
+                return new SyncData(SyncResult.Nop);
 
             HasSyncedInThisSession = true;
 
             if (!_networkInfoService.HasInternet)
             {
                 // no error handling needed here
-                return SyncResult.Failed;
+                return new SyncData(SyncResult.Failed);
             }
 
             // ensure loaded
@@ -335,13 +335,13 @@ namespace ActionNote.Common.Services
                 }
 
                 if (unchanged)
-                    return SyncResult.Unchanged;
+                    return new SyncData(SyncResult.Unchanged);
                 else
-                    return SyncResult.Success;
+                    return new SyncData(SyncResult.Success, syncDataResult);
             }
             else
             {
-                return SyncResult.Failed;
+                return new SyncData(SyncResult.Failed);
             }
         }
 

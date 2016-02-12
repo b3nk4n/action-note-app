@@ -1,9 +1,26 @@
 ﻿using ActionNote.Common.Models;
+using ActionNote.Common.Services.Communication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ActionNote.Common.Services
 {
+    public class SyncData
+    {
+        public SyncDataResponse Data { get; set; }
+        public SyncResult Result { get; set; }
+
+        public SyncData(SyncResult result)
+            : this(result, new SyncDataResponse())
+        { }
+        
+        public SyncData(SyncResult result, SyncDataResponse data)
+        {
+            Data = data;
+            Result = result;
+        }
+    }
+
     public enum SyncResult
     {
         Success,
@@ -88,7 +105,7 @@ namespace ActionNote.Common.Services
 
         Task<UpdateResult> UpdateNoteAsync(NoteItem item);
 
-        Task<SyncResult> SyncNotesAsync();
+        Task<SyncData> SyncNotesAsync();
 
         Task<bool> UploadAttachement(NoteItem noteItem, bool createUnsyncItem = true);
 

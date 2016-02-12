@@ -230,17 +230,25 @@ namespace ActionNote.App.ViewModels
 
                 // sync notes
                 var syncResult = await _dataService.SyncNotesAsync();
-                if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
+                if (syncResult.Result == SyncResult.Success || syncResult.Result == SyncResult.Unchanged)
                 {
                     await _dataService.UploadMissingAttachements();
                     await _dataService.DownloadMissingAttachements();
 
                     await ReloadDataAsync();
 
+                    // unpin deleted tiles
                     var allNoteIds = await _dataService.GetAllNoteIds();
                     await _tilePinService.UnpinUnreferencedTilesAsync(allNoteIds);
+
+                    // update changed tiles
+                    foreach (var changedNote in syncResult.Data.Changed)
+                    {
+                        if (_tilePinService.Contains(changedNote.Id))
+                            await _tilePinService.UpdateAsync(changedNote);
+                    }
                 }
-                else if (syncResult == SyncResult.Failed)
+                else if (syncResult.Result == SyncResult.Failed)
                 {
                     await _dialogService.ShowAsync(_localizer.Get("Message.SyncFailed"),
                         _localizer.Get("Message.Title.Warning"));

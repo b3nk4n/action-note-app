@@ -33,9 +33,9 @@ namespace ActionNote.Tasks
             {
                 // sync notes
                 var syncResult = await _dataService.SyncNotesAsync();
-                if (syncResult == SyncResult.Success || syncResult == SyncResult.Unchanged)
+                if (syncResult.Result == SyncResult.Success || syncResult.Result == SyncResult.Unchanged)
                 {
-                    if (syncResult == SyncResult.Success)
+                    if (syncResult.Result == SyncResult.Success)
                     {
                         _dataService.FlagNotesNeedReload();
                         _dataService.FlagArchiveNeedsReload();
@@ -48,13 +48,21 @@ namespace ActionNote.Tasks
                         downloadedAFile = await _dataService.DownloadMissingAttachements();
                     }
 
-                    if (syncResult != SyncResult.Unchanged || downloadedAFile)
+                    if (syncResult.Result != SyncResult.Unchanged || downloadedAFile)
                     {
                         var noteItems = await _dataService.GetAllNotes();
                         _actionCenterService.RefreshAsync(noteItems);
 
+                        // delete unreferenced tiles
                         var noteIds = await _dataService.GetAllNoteIds();
                         await _tilePinService.UnpinUnreferencedTilesAsync(noteIds);
+
+                        // update changed tiles
+                        foreach (var changedNote in syncResult.Data.Changed)
+                        {
+                            if (_tilePinService.Contains(changedNote.Id))
+                                await _tilePinService.UpdateAsync(changedNote);
+                        }
 
                         var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
                         _badgeService.GetBadgeUpdaterForApplication().Update(badge);
