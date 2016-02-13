@@ -235,7 +235,10 @@ namespace ActionNote.App.ViewModels
             {
                 var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + SelectedNote.AttachementFile);
                 if (file != null)
-                    await SystemLauncher.LaunchFileAsync(file);
+                {
+                    var res = await SystemLauncher.QueryFileSupportAsync(file);
+                    var res1 = await SystemLauncher.LaunchFileAsync(file);
+                }
             },
             () =>
             {
@@ -300,7 +303,7 @@ namespace ActionNote.App.ViewModels
                 var quickNotesDefaultTitle = AppSettings.QuickNotesDefaultTitle.Value;
                 if (string.IsNullOrEmpty(quickNotesDefaultTitle))
                 {
-                    quickNotesDefaultTitle = _commonLocalizer.Get("QuickNotes");
+                    quickNotesDefaultTitle = _commonLocalizer.Get("QuickNote");
                 }
 
                 noteItem.Title = quickNotesDefaultTitle;

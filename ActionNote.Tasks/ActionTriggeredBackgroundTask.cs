@@ -132,7 +132,7 @@ namespace ActionNote.Tasks
             var quickNotesDefaultTitle = AppSettings.QuickNotesDefaultTitle.Value;
             if (string.IsNullOrEmpty(quickNotesDefaultTitle))
             {
-                quickNotesDefaultTitle = _localizer.Get("QuickNotes");
+                quickNotesDefaultTitle = _localizer.Get("QuickNote");
             }
             return quickNotesDefaultTitle;
         }

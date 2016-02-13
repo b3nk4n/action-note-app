@@ -397,7 +397,7 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
     <value>Rychlá poznámka</value>
-    <comment>BackgroundTask</comment>
+    <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Zobrazit poznámky</value>

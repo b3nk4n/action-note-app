@@ -396,8 +396,8 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Notes Rapides</value>
-    <comment>BackgroundTask</comment>
+    <value>Note Rapide</value>
+    <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Afficher les notes</value>

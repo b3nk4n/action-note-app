@@ -396,8 +396,8 @@ Le gustaría iniciar sesión con tu cuenta de Microsoft en este momento?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Notas rápidas</value>
-    <comment>BackgroundTask</comment>
+    <value>Nota rápida</value>
+    <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Mostrar notas</value>

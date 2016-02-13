@@ -397,7 +397,7 @@
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
     <value>快速笔记</value>
-    <comment>BackgroundTask</comment>
+    <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>显示笔记</value>

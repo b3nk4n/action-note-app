@@ -126,15 +126,15 @@
     <comment>EditPage</comment>
   </data>
   <data name="QuickNote" xml:space="preserve">
-    <value>Quick Note</value>
+    <value>Szybka notatka</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotes" xml:space="preserve">
-    <value>Quick Notes</value>
+    <value>Szybkie notatki</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotesDescription" xml:space="preserve">
-    <value>Create new note...</value>
+    <value>Stwórz nową notatkę…</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="Save.Label" xml:space="preserve">

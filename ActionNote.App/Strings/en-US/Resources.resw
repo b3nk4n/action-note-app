@@ -397,8 +397,8 @@ Would you like to login with your Microsoft acount right now?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Quick Notes</value>
-    <comment>BackgroundTask</comment>
+    <value>Quick Note</value>
+    <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Display notes</value>
