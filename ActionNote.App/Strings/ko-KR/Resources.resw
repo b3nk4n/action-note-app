@@ -299,6 +299,10 @@ Microsoft 계정으로 로그인을 시도하시겠습니까?</value>
     <value>새 노트</value>
     <comment>EditPage</comment>
   </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>* 이 옵션은 윈도우10 PC버전의 버그로 인해 비활성화할 수 없습니다. 이 옵션은 2016년 여름 '레드스톤1' 업데이트가 된 후 활성화될 것입니다. 감사합니다!</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
     <value>다음 순으로 정렬</value>
     <comment>SettingsPage</comment>

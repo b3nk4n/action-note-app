@@ -300,6 +300,10 @@ Would you like to login with your Microsoft acount right now?</value>
     <value>NEW NOTE</value>
     <comment>EditPage</comment>
   </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>* This option cannot be disabled in the PC version, due to a bug in Windows 10. This option will be activated after the 'Red Stone 1' update in summer 2016. Thank you for your patience!</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
     <value>Order notes by</value>
     <comment>SettingsPage</comment>
