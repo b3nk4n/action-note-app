@@ -48,6 +48,7 @@
                                 <uwpcModels:ContributorModel Title="Andre Bom Alves Nunes" Icon="/Assets/Images/brasil.png" />
                                 <uwpcModels:ContributorModel Title="Lukáš Bittner" Icon="/Assets/Images/czech.png" />
                                 <uwpcModels:ContributorModel Title="谭源" Icon="/Assets/Images/chinese.png" />
+                                <uwpcModels:ContributorModel Title="Jae-young Song" Icon="/Assets/Images/korea.png" />
 
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
