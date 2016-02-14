@@ -126,11 +126,11 @@
     <comment>EditPage</comment>
   </data>
   <data name="QuickNote" xml:space="preserve">
-    <value>Note Rapide</value>
+    <value>Note rapide</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotes" xml:space="preserve">
-    <value>Notes Rapides</value>
+    <value>Notes rapides</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotesDescription" xml:space="preserve">

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note n'est pas seulement une autre app de prise de note. Elle s'intègre à votre centre de contrôle et vous donne un accès rapide à l'ensemble de vos notes. Même à travers tous vos périphériques Windows 10.</value>
+    <value>Action Note n'est pas qu'une simple application de prise de notes. Elle s'intègre dans le centre de contrôle, vous permettant d'accéder à vos notes de la manière la plus rapide qui soit. Même entre plusieurs appareils Windows 10.</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
@@ -126,11 +126,11 @@
     <comment>AboutPage</comment>
   </data>
   <data name="About.MoreAppsText" xml:space="preserve">
-    <value>Plus d'apps</value>
+    <value>Plus d'applications</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.RateAndReviewText" xml:space="preserve">
-    <value>Évaluations et avis</value>
+    <value>Noter l'application</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.SendFeedbackEmailText" xml:space="preserve">
@@ -138,11 +138,11 @@
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShareAppText" xml:space="preserve">
-    <value>Partager l'app</value>
+    <value>En parler à un ami</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
-    <value>Infos sur la vie privée</value>
+    <value>Politique de vie privée</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">
@@ -150,7 +150,7 @@
     <comment>AboutPage</comment>
   </data>
   <data name="Add.Label" xml:space="preserve">
-    <value>Ajouter</value>
+    <value>Nouvelle note</value>
     <comment>MainPage</comment>
   </data>
   <data name="ArchiveTitle.Text" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment>ArchivPage</comment>
   </data>
   <data name="Attachement.Label" xml:space="preserve">
-    <value>Joindre</value>
+    <value>Fichier joint</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementRemove.Text" xml:space="preserve">
@@ -190,7 +190,7 @@
     <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
-    <value>Supprimer tout</value>
+    <value>Tout supprimer</value>
     <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
@@ -202,7 +202,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="Edit.Label" xml:space="preserve">
-    <value>Édition</value>
+    <value>Modifier</value>
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
@@ -210,7 +210,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
-    <value>acheté</value>
+    <value>Acheté</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
@@ -218,25 +218,25 @@
     <comment>MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
-    <value>C'est vide, non? Impossible d'enregistrer une note sans contenu.</value>
+    <value>Pourquoi faire une note si elle est vide?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
-    <value>Le processus de suppression ne peut pas être effectuée car l'information n'a pas pu être envoyée au serveur. Veuillez vérifier votre connexion internet et réessayez plus tard.</value>
+    <value>La suppression a échoué, car le serveur distant n'a pu être atteint. Veuillez vérifier votre connexion à Internet et réessayer plus tard.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
-    <value>Cette note a déjà été supprimée sur un autre appareil. Votre appareil semble être désynchronisé. Veuillez effectuer une synchronisation manuelle.</value>
+    <value>Cette note a déjà été supprimée sur un autre appareil. Cet appareil semble être désynchronisé. Veuillez synchroniser manuellement vos notes.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
-    <value>La synchronisation en ligne nécessite le login pour votre identification. Nous avons désactivé cette fonction pour vous.
+    <value>La connexion à votre compte a échoué. La synchronisation a été désactivée.
 Vous pouvez la réactiver dans les paramètres.</value>
     <comment>Message Dialog</comment>
   </data>
   <data name="Message.LoginPending" xml:space="preserve">
-    <value>Vous avez activé la synchronisation en ligne, mais votre nom d'utilisateur est toujours en attente.
-Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
+    <value>Vous avez activé la synchronisation, mais vous n'êtes pas connecté.
+Voulez-vous connecter à votre compte Microsoft?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
@@ -248,31 +248,31 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.ReallyDeleteAll" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimmer toutes les notes?</value>
+    <value>Voulez-vous vraiment supprimer toutes vos notes?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.SyncFailed" xml:space="preserve">
-    <value>La synchronisation a échoué. Veuillez vérifier votre connexion internet et réessayez plus tard.</value>
+    <value>La synchronisation a échoué. Veuillez vérifier votre connexion Internet et réessayer plus tard.</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.Title.Attention" xml:space="preserve">
-    <value>Attention</value>
+    <value>Attention!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
-    <value>Information</value>
+    <value>Information!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Warning" xml:space="preserve">
-    <value>Avertissement</value>
+    <value>Avertissement!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.WelcomeBack" xml:space="preserve">
-    <value>Bienvenue!</value>
+    <value>Bienvenue à nouveau!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.WelcomeLoginPending" xml:space="preserve">
-    <value>Nous avons réactivé la synchronisation en ligne pour vous. Pour utiliser cette fonctionnalité, vous devez vous connecter avec votre compte Microsoft. Souhaitez-vous vous connecter maintenant?</value>
+    <value>Nous avons réactivé la synchronisation pour vous. Pour utiliser cette fonctionnalité, vous devez être connecté à votre compte Microsoft. Voulez-vous vous connecter?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Nav.About" xml:space="preserve">
@@ -292,7 +292,7 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Upgrade" xml:space="preserve">
-    <value>Mise à niveau</value>
+    <value>Version Pro</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
@@ -304,35 +304,35 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
-    <value>Trier notes par</value>
+    <value>Trier les notes par</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Pin.Label" xml:space="preserve">
-    <value>Épingler à l'accueil</value>
+    <value>Épingler sur l'écran d'accueil</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.Deleting" xml:space="preserve">
-    <value>Suppression…</value>
+    <value>Suppression en cours…</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
-    <value>Téléchargement…</value>
+    <value>Téléchargement du fichier…</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Saving" xml:space="preserve">
-    <value>Enregistre…</value>
+    <value>Enregistrement…</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">
-    <value>Synchronisation…</value>
+    <value>Synchronisation en cours…</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.UploadingFile" xml:space="preserve">
-    <value>Téléversement…</value>
+    <value>Téléversement du fichier…</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Méthode d'entrée de „Notes Rapides“</value>
+    <value>Méthode de saisie des notes rapides</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
@@ -348,15 +348,19 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>EditPage</comment>
   </data>
   <data name="ReadMore.Content" xml:space="preserve">
-    <value>Lire plus…</value>
+    <value>En savoir plus...</value>
     <comment>UpgradePage</comment>
+  </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>Code QR</value>
+    <comment>EditPage</comment>
   </data>
   <data name="Restore.Label" xml:space="preserve">
     <value>Restaurer</value>
     <comment>ArchivePage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
-    <value>Synchroniser sur tous les appareils</value>
+    <value>Synchroniser sur tout vos appareils</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
@@ -364,15 +368,15 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Permettre d'effacer les notes</value>
+    <value>Autoriser la suppression de notes</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Permettre de supprimer des notes</value>
+    <value>Permettre la suppression de notes</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
-    <value>Enregistrer automatiquement les notes</value>
+    <value>Sauvegarder les notes automatiquement</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
@@ -384,7 +388,7 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
-    <value>Synchronisation en ligne</value>
+    <value>Synchronisation</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">
@@ -392,7 +396,7 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>Activer “Notes Rapides“</value>
+    <value>Activer les notes rapides</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
@@ -400,7 +404,7 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Note Rapide</value>
+    <value>Note rapide</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
@@ -412,11 +416,11 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">
-    <value>Synchroniser au démarrage</value>
+    <value>Synchroniser les notes quand l'application est démarrée</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
-    <value>Thème de couleur</value>
+    <value>Thème</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
@@ -428,7 +432,7 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>MainPage</comment>
   </data>
   <data name="ShareContentDescription" xml:space="preserve">
-    <value>Partager avec vos amis</value>
+    <value>Partagez votre note</value>
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
@@ -436,31 +440,31 @@ Souhaitez-vous vous connecter avec votre compte Microsoft maintenant?</value>
     <comment>MainPage</comment>
   </data>
   <data name="SortByDate.Text" xml:space="preserve">
-    <value>Changer la date</value>
+    <value>Date de dernière modification</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
-    <value>Ajouter voix</value>
+    <value>Reconnaisance vocale</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Sync</value>
+    <value>Synchroniser</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">
-    <value>Désinpingler</value>
+    <value>Détacher de l'écran d'accueil</value>
     <comment>MainPage</comment>
   </data>
   <data name="Upgrade.Content" xml:space="preserve">
-    <value>Mise à niveau</value>
+    <value>Mettre à niveau</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>POUR AVOIR ACHETÉ LA VERSION PRO</value>
+    <value>MERCI D'AVOIR ACHETÉ LA VERSION PRO</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
-    <value>MISE À NIVEAU</value>
+    <value>VERSION PRO</value>
     <comment>UpgradePage</comment>
   </data>
 </root>
