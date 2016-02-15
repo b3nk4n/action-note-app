@@ -56,7 +56,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Uid="ArchiveTitle" Text="ARCHIVE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    <AppBarButton Grid.Column="1" Width="62" Icon="Sort">
+                    <AppBarButton Grid.Column="1" Icon="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />
@@ -69,7 +69,6 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <!--<AppBarButton x:Uid="Delete" Width="62" Icon="Delete" Label="Delete" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedNote}"/>-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="DeleteAll" Label="Delete all" Command="{Binding ClearCommand}"/>
             </CommandBar.SecondaryCommands>

@@ -94,7 +94,7 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton x:Uid="Sync" Width="62" Label="Synchronize" Command="{Binding SyncCommand}">
+            <AppBarButton x:Uid="Sync" Label="Synchronize" Command="{Binding SyncCommand}">
                 <AppBarButton.Icon>
                     <FontIcon x:Name="SyncIcon" Glyph="{StaticResource Refresh}" RenderTransformOrigin="0.5,0.5" >
                         <FontIcon.RenderTransform>
@@ -104,7 +104,7 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarSeparator Style="{StaticResource ThinAppBarSeparatorStyle}" />
-            <AppBarButton x:Uid="Add" Width="62" Icon="Add" Command="{Binding AddCommand}"/>
+            <AppBarButton x:Uid="Add" Icon="Add" Command="{Binding AddCommand}"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="DeleteAll" Command="{Binding ClearCommand}"/>
             </CommandBar.SecondaryCommands>

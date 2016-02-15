@@ -198,7 +198,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="DiscardChanges.Label" xml:space="preserve">
-    <value>Annuler changem.</value>
+    <value>Annuler les changem.</value>
     <comment>EditPage</comment>
   </data>
   <data name="Edit.Label" xml:space="preserve">
@@ -206,7 +206,7 @@
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
-    <value>ÉDITION</value>
+    <value>MODIFICATION</value>
     <comment>EditPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">

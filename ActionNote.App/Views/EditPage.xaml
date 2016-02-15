@@ -48,8 +48,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="{Binding PageTitle}" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    <AppBarToggleButton Grid.Column="1" Width="62" IsChecked="{Binding SelectedNote.IsImportant, Mode=TwoWay}" Icon="Flag" />
-                    <AppBarButton Grid.Column="2" Width="62" Foreground="{Binding SelectedNote.Color, Converter={StaticResource colorToBrushConv}}"  Style="{StaticResource ColorfulAppBarButtonStyle}">
+                    <AppBarToggleButton Grid.Column="1" IsChecked="{Binding SelectedNote.IsImportant, Mode=TwoWay}" Icon="Flag" />
+                    <AppBarButton Grid.Column="2" Foreground="{Binding SelectedNote.Color, Converter={StaticResource colorToBrushConv}}"  Style="{StaticResource ColorfulAppBarButtonStyle}">
                         <AppBarButton.Icon>
                             <PathIcon Width="20" Data="M10,0.5L11.9145803451538,0.693006455898285 13.697826385498,1.24655771255493 16.7175121307373,3.28248739242554 18.7534427642822,6.30217313766479 19.3069934844971,8.08541965484619 19.5,10 19.3069934844971,11.9145803451538 18.7534427642822,13.697826385498 16.7175121307373,16.7175121307373 13.697826385498,18.7534427642822 11.9145803451538,19.3069934844971 10,19.5 8.08541965484619,19.3069934844971 6.30217313766479,18.7534427642822 3.28248739242554,16.7175121307373 1.24655771255493,13.697826385498 0.693006455898285,11.9145803451538 0.5,10 0.693006455898285,8.08541965484619 1.24655771255493,6.30217313766479 3.28248739242554,3.28248739242554 6.30217313766479,1.24655771255493 8.08541965484619,0.693006455898285 10,0.5z" />
                         </AppBarButton.Icon>
@@ -93,14 +93,14 @@
         </uwpcControls:PageHeader>
 
         <CommandBar x:Name="bottomBar" Grid.Row="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch">
-            <AppBarButton x:Name="SharePrimary" x:Uid="Share" Width="62" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
+            <AppBarButton x:Name="SharePrimary" Width="62" x:Uid="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed">
                 <AppBarButton.Icon>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{StaticResource Share}" />
                 </AppBarButton.Icon>
             </AppBarButton>
-            <AppBarButton x:Uid="SpeechInput" x:Name="SpeechInput" Width="62" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed" /> <!-- hidden on mobile -->
+            <AppBarButton x:Uid="SpeechInput" Width="62" x:Name="SpeechInput" Icon="Microphone" Command="{Binding VoiceToTextCommand}" CommandParameter="{Binding SelectedNote}" Visibility="Collapsed" /> <!-- hidden on mobile -->
             <AppBarButton x:Uid="Pin" Width="62" Icon="Pin" Command="{Binding PinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}, ConverterParameter=!}"/>
-            <AppBarButton x:Uid="Unpin"  Width="62" Icon="UnPin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
+            <AppBarButton x:Uid="Unpin" Width="62" Icon="UnPin" Command="{Binding UnpinCommand}" CommandParameter="{Binding SelectedNote}" Visibility="{Binding IsSelectedNotePinned, Converter={StaticResource boolToVisConv}}"/>
             <AppBarButton x:Uid="Attachement" Width="62" Icon="Attach">
                 <AppBarButton.Flyout>
                     <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterBottomStyle}">
