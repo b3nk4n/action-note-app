@@ -351,6 +351,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Číst více…</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>QR kód</value>
+    <comment>EditPage</comment>
+  </data>
   <data name="Restore.Label" xml:space="preserve">
     <value>Obnovit</value>
     <comment>ArchivePage</comment>

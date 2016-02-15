@@ -351,6 +351,10 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <value>Czytaj więcej…</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>Kod QR</value>
+    <comment>EditPage</comment>
+  </data>
   <data name="Restore.Label" xml:space="preserve">
     <value>Przywróć</value>
     <comment>ArchivePage</comment>

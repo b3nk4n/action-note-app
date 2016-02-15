@@ -351,6 +351,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Mehr erfahren...</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>QR-Code lesen</value>
+    <comment>EditPage</comment>
+  </data>
   <data name="Restore.Label" xml:space="preserve">
     <value>Wiederherstellen</value>
     <comment>ArchivePage</comment>

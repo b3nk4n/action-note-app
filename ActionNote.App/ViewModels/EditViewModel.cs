@@ -23,6 +23,13 @@ using UWPCore.Framework.Share;
 using UWPCore.Framework.Input;
 using Windows.System;
 using UWPCore.Framework.Launcher;
+using ZXing.Mobile;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI;
+using Windows.UI.Text;
+using Windows.UI.Xaml.Shapes;
+using Windows.Foundation;
 
 namespace ActionNote.App.ViewModels
 {
@@ -53,6 +60,10 @@ namespace ActionNote.App.ViewModels
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
 
         private Random _random = new Random();
+
+        private static bool? hasCamera;
+        private static MobileBarcodeScanner scanner;
+        public static NoteItem StaticSelectedNote { get; set; }
 
         // For sample data only
         public EditViewModel()
@@ -244,6 +255,136 @@ namespace ActionNote.App.ViewModels
             {
                 return SelectedNote != null && SelectedNote.HasAttachement;
             });
+
+            ScanQrCommand = new DelegateCommand(async () =>
+            {
+                scanner = new MobileBarcodeScanner(Dispatcher.CoreDispatcher);
+                scanner.UseCustomOverlay = true;
+                scanner.CustomOverlay = CreateCustomOverlay(_deviceInfoService.IsWindows);
+                var options = new MobileBarcodeScanningOptions()
+                {
+                    // set auto rotate to false, becuase it was causing some crashed + (green) camera-deadlock
+                    AutoRotate = false,
+                };
+
+                // LOCK screen rotation
+                var currentOrientation = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().CurrentOrientation;
+                Windows.Graphics.Display.DisplayInformation.AutoRotationPreferences = currentOrientation;
+
+                var result = await scanner.Scan(options);
+
+                await Dispatcher.DispatchAsync(() =>
+                {
+                    if (string.IsNullOrEmpty(StaticSelectedNote.Content))
+                        StaticSelectedNote.Content += result.Text;
+                    else
+                        StaticSelectedNote.Content += Environment.NewLine + result.Text;
+                });
+            },
+            () =>
+            {
+                return SelectedNote != null;
+            });
+        }
+
+        private UIElement CreateCustomOverlay(bool showCancelButton)
+        {
+            var root = new Grid();
+            var rectBottom = new Rectangle()
+            {
+                Fill = new SolidColorBrush(Colors.Black),
+                Height = 48,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Opacity = 0.2,
+            };
+            root.Children.Add(rectBottom);
+
+            var rectTop = new Rectangle()
+            {
+                Fill = new SolidColorBrush(Colors.Black),
+                Height = 48,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Top,
+                Opacity = 0.2,
+            };
+            root.Children.Add(rectTop);
+
+            var viewBox = new Viewbox()
+            {
+                Margin = new Thickness(64)
+            };
+            var crosshairGrid = new Grid()
+            {
+                Width = 240,
+                Height = 240,
+                Opacity = 0.2,
+            };
+            crosshairGrid.Children.Add(new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(2, 2, 0, 0),
+                Width = 64,
+                Height = 64,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left
+            });
+            crosshairGrid.Children.Add(new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(0, 2, 2, 0),
+                Width = 64,
+                Height = 64,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right
+            });
+            crosshairGrid.Children.Add(new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(0, 0, 2, 2),
+                Width = 64,
+                Height = 64,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Right
+            });
+            crosshairGrid.Children.Add(new Border()
+            {
+                BorderBrush = new SolidColorBrush(Colors.Black),
+                BorderThickness = new Thickness(2, 0, 0, 2),
+                Width = 64,
+                Height = 64,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Left
+            });
+            crosshairGrid.Children.Add(new Rectangle()
+            {
+                Fill = new SolidColorBrush(Colors.Black),
+                Width = 128,
+                Height = 2,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
+            });
+
+            viewBox.Child = crosshairGrid;
+            root.Children.Add(viewBox);
+
+            if (showCancelButton)
+            {
+                var button = new Button()
+                {
+                    Style = (Style)Application.Current.Resources["IconButtonStyle"],
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    Content = ((char)GlyphIcons.Close).ToString()
+                };
+                button.Click += (s, e) => {
+                    //_scanner.Cancel(); causes a crash, use navigation service instead
+                    NavigationService.GoBack();
+                };
+                root.Children.Add(button);
+            }
+
+            return root;
         }
 
         private async Task SaveAttachementFile(NoteItem noteItem, StorageFile file)
@@ -398,9 +539,30 @@ namespace ActionNote.App.ViewModels
                     _callbacks.SelectTitle();
             }
 
-            SelectedNote = noteToEdit;
+            if (SelectedNote == null ||
+                _saveStateForQrScanner)
+            {
+                _saveStateForQrScanner = false;
+                SelectedNote = noteToEdit;
+                StaticSelectedNote = SelectedNote; // set static reference for QR-Scan return
+            }
+
+            // UNLOCK screen rotation
+            Windows.Graphics.Display.DisplayInformation.AutoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.None;
+
+            // check if camera is available
+            await CheckCamera();
 
             await CheckAndDownloadAttachement();
+        }
+
+        private async Task CheckCamera()
+        {
+            if (!hasCamera.HasValue)
+            {
+                var devices = await Windows.Devices.Enumeration.DeviceInformation.FindAllAsync(Windows.Devices.Enumeration.DeviceClass.VideoCapture);
+                hasCamera = devices.Count > 0;
+            }
         }
 
         private bool _savedInForwardNavigation = false;
@@ -408,7 +570,8 @@ namespace ActionNote.App.ViewModels
         {
             base.OnNavigatingFrom(args);
             if (!_savedInForwardNavigation &&
-                args.NavigationMode == NavigationMode.New)
+                args.NavigationMode == NavigationMode.New &&
+                args.PageType != typeof(ZXing.Mobile.ScanPage))
             {
                 if (AppSettings.SaveNoteOnBack.Value)
                 {
@@ -426,7 +589,12 @@ namespace ActionNote.App.ViewModels
                     }
                 }
             }
+
+            if (args.PageType == typeof(ZXing.Mobile.ScanPage))
+                _saveStateForQrScanner = true;
         }
+
+        private bool _saveStateForQrScanner;
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
@@ -437,7 +605,7 @@ namespace ActionNote.App.ViewModels
             if (!suspending)
                 NavigationService.FrameFacade.BackRequested -= BackRequested;
 
-            if (suspending)
+            if (suspending || _saveStateForQrScanner)
             {
                 state["id"] = SelectedNote.Id;
                 state["title"] = SelectedNote.Title;
@@ -642,6 +810,14 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        public bool ActivateQRScan
+        {
+            get
+            {
+                return _dataService.IsProVersion && (hasCamera.HasValue && hasCamera.Value == true);
+            }
+        }
+
         /// <summary>
         /// Gets or sets whether to show the progress bar (used on non-mobile only)
         /// </summary>
@@ -680,5 +856,7 @@ namespace ActionNote.App.ViewModels
         public ICommand ShareCommand { get; private set; }
 
         public ICommand OpenPicture { get; set; }
+
+        public ICommand ScanQrCommand { get; set; }
     }
 }

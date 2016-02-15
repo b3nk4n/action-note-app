@@ -225,6 +225,12 @@ namespace ActionNote.App
         {
             await base.OnSuspendingAsync(e);
 
+            // make sure to quit the scan-page
+            if (NavigationService.CurrentPageType == typeof(ZXing.Mobile.ScanPage))
+            {
+                NavigationService.GoBack();
+            }
+
             // (re)register background tasks
             await RegisterBackgroundTasks();
 

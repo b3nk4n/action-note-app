@@ -114,6 +114,7 @@
             <AppBarButton x:Uid="DiscardChanges" Width="62" Icon="Clear" Command="{Binding DiscardCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" />
             <AppBarButton x:Uid="/ActionNote.Common/Resources/Save" Width="62" Icon="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedNote}"/>
             <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="ReadQR" Command="{Binding ScanQrCommand}" IsEnabled="{Binding ActivateQRScan}" />
                 <AppBarButton x:Name="ShareSecondary" x:Uid="Share" Command="{Binding ShareCommand}" CommandParameter="{Binding SelectedNote}" />
                 <AppBarButton x:Uid="ReadAloud" Command="{Binding ReadNoteCommand}" CommandParameter="{Binding SelectedNote}"/>
                 <AppBarButton x:Uid="Delete" Command="{Binding RemoveCommand}" Visibility="{Binding IsEditMode, Converter={StaticResource boolToVisConv}}" CommandParameter="{Binding SelectedNote}"/>
