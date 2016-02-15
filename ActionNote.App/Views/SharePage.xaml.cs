@@ -1,7 +1,6 @@
 ﻿using ActionNote.App.ViewModels;
 using ActionNote.Common.Helpers;
 using UWPCore.Framework.Controls;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 
