@@ -271,13 +271,18 @@ namespace ActionNote.App.ViewModels
 
                 var result = await scanner.Scan(options);
 
-                await Dispatcher.DispatchAsync(() =>
+                if (result != null)
                 {
-                    if (string.IsNullOrEmpty(StaticSelectedNote.Content))
-                        StaticSelectedNote.Content += result.Text;
-                    else
-                        StaticSelectedNote.Content += Environment.NewLine + result.Text;
-                });
+                    await Dispatcher.DispatchAsync(() =>
+                    {
+                        var parsed = ZXing.Client.Result.ResultParser.parseResult(result);
+
+                        if (string.IsNullOrEmpty(StaticSelectedNote.Content))
+                            StaticSelectedNote.Content += parsed.DisplayResult;
+                        else
+                            StaticSelectedNote.Content += Environment.NewLine + parsed.DisplayResult;
+                    });
+                }
             },
             () =>
             {
