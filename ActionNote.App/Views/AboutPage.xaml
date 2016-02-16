@@ -49,6 +49,7 @@
                                 <uwpcModels:ContributorModel Title="Lukáš Bittner" Icon="/Assets/Images/czech.png" />
                                 <uwpcModels:ContributorModel Title="谭源" Icon="/Assets/Images/chinese.png" />
                                 <uwpcModels:ContributorModel Title="Jae-young Song" Icon="/Assets/Images/korea.png" />
+                                <uwpcModels:ContributorModel Title="Jan R Gustafsson" Icon="/Assets/Images/sweden.png" />
 
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
