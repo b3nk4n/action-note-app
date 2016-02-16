@@ -90,7 +90,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock x:Uid="/ActionNote.Common/Resources/Swipe/Restore" Text="Restore" Foreground="White" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center" VerticalAlignment="Center"/>
-                            <FontIcon Glyph="{StaticResource Undo}" FontWeight="Bold" Margin="19,0,19,0" />
+                            <FontIcon Glyph="{StaticResource Undo}" Foreground="White" FontWeight="Bold" Margin="19,0,19,0" />
                         </StackPanel>
                     </DataTemplate>
                 </swipe:SwipeListView.ItemLeftContentTemplate>
