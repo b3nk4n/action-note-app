@@ -1,4 +1,5 @@
-﻿using UWPCore.Framework.Controls;
+﻿using ActionNote.App.ViewModels;
+using UWPCore.Framework.Controls;
 
 namespace ActionNote.App.Views
 {
@@ -7,9 +8,13 @@ namespace ActionNote.App.Views
     /// </summary>
     public sealed partial class SettingsPage : UniversalPage
     {
+        private SettingsViewModel ViewModel;
+
         public SettingsPage()
         {
             InitializeComponent();
+            ViewModel = new SettingsViewModel();
+            DataContext = ViewModel;
         }
     }
 }

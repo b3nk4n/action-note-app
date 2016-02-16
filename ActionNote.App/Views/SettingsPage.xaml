@@ -8,11 +8,12 @@
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     xmlns:uwpcViewModels="using:ActionNote.App.ViewModels"
     xmlns:uwpcConverters="using:UWPCore.Framework.Converters"
+    xmlns:uwpcData="using:UWPCore.Framework.Data"
     mc:Ignorable="d">
 
     <Page.Resources>
         <uwpcConverters:EnumDisplayValueConverter x:Key="EnumDisplayValueConv" />
-        
+
         <Style TargetType="ComboBox">
             <Setter Property="Padding" Value="12,5,0,7"/>
             <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}"/>
@@ -176,7 +177,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style TargetType="ToggleSwitch">
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -390,10 +391,6 @@
             </Setter>
         </Style>
     </Page.Resources>
-    
-    <Page.DataContext>
-        <uwpcViewModels:SettingsViewModel />
-    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -423,20 +420,20 @@
                                    Margin="4,-8,4,8" Visibility="{Binding IsPhone, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" />
                     </StackPanel>
                     <ComboBox x:Uid="OrderNotesBy" Header="Order notes by" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}"
-                              ItemsSource="{Binding SortInActionCenterStringSource.ItemsSource}" SelectedItem="{Binding SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">
+                              ItemsSource="{x:Bind ViewModel.SortInActionCenterStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Translation}" />
+                            <DataTemplate x:DataType="uwpcData:SourceComboBoxItem">
+                                <TextBlock Text="{x:Bind Translation}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <ToggleSwitch x:Name="QuickNotesEnabled" x:Uid="SettingsQuickNotes" Header="Enable QuickNotes in action center" IsOn="{Binding QuickNotesEnabled, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
                     <ComboBox x:Uid="QuickNotesInputType" Header="QuickNotes input type" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsEnabled}"
                               Visibility="{Binding ElementName=QuickNotesEnabled, Path=IsOn, Converter={StaticResource boolToVisConv}}"
-                              ItemsSource="{Binding QuickNoteContentTypeStringSource.ItemsSource}" SelectedItem="{Binding QuickNoteContentTypeStringSource.SelectedItem, Mode=TwoWay}">
+                              ItemsSource="{x:Bind ViewModel.QuickNoteContentTypeStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.QuickNoteContentTypeStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Translation}" />
+                            <DataTemplate x:DataType="uwpcData:SourceComboBoxItem">
+                                <TextBlock Text="{x:Bind Translation}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -453,17 +450,17 @@
                                   IsEnabled="{Binding ElementName=SettingsSyncEnabledToggle, Path=IsOn}" Margin="4" />
                     <ComboBox x:Uid="SettingsBackSyncInterval" Header="Sync interval" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=SettingsSyncInBackground, Path=IsOn}"
                               Visibility="{Binding ElementName=SettingsSyncEnabledToggle, Path=IsOn, Converter={StaticResource boolToVisConv}}"
-                              ItemsSource="{Binding BackgroundTaskSyncIntervalStringSource.ItemsSource}" SelectedItem="{Binding BackgroundTaskSyncIntervalStringSource.SelectedItem, Mode=TwoWay}">
+                              ItemsSource="{x:Bind ViewModel.BackgroundTaskSyncIntervalStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.BackgroundTaskSyncIntervalStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Translation}" />
+                            <DataTemplate x:DataType="uwpcData:SourceComboBoxItem">
+                                <TextBlock Text="{x:Bind Translation}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
                     <TextBlock x:Uid="SettingsPersonalization" Style="{StaticResource TitleTextBlockStyle}" Text="Personalization" Margin="4,12,4,4" />
                     <ComboBox x:Uid="SettingsThemeColor" Header="Theme color" Margin="4,4,4,12" Width="264"
-                              ItemsSource="{Binding ThemeEnumSource.ItemsSource}" SelectedItem="{Binding ThemeEnumSource.SelectedItem, Mode=TwoWay}">
+                              ItemsSource="{x:Bind ViewModel.ThemeEnumSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.ThemeEnumSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource EnumDisplayValueConv}}" />
