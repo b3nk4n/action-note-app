@@ -460,7 +460,7 @@ Voulez-vous connecter à votre compte Microsoft?</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>MERCI D'AVOIR ACHETÉ LA VERSION PRO</value>
+    <value>D'AVOIR ACHETÉ LA VERSION PRO</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">

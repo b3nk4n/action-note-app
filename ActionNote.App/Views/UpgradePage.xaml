@@ -83,7 +83,8 @@
                                 </FontIcon>
                             </StackPanel>
                             <TextBlock Text="YOU" FontSize="130" Margin="0,-56,0,16" TextAlignment="Center" />
-                            <TextBlock x:Uid="UpgradeLove" Text="FOR PURCHASING THE PRO VERSION" FontSize="16" FontWeight="Bold" Margin="0,-24,0,0" TextAlignment="Center" />
+                            <TextBlock x:Uid="UpgradeLove" Text="FOR PURCHASING THE PRO VERSION" FontSize="16" FontWeight="Bold" Margin="0,-24,0,0" TextAlignment="Center"
+                                       TextWrapping="Wrap" MaxWidth="320"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
