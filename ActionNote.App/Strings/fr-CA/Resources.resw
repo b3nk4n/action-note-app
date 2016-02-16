@@ -368,7 +368,7 @@ Voulez-vous connecter à votre compte Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Autoriser la suppression de notes</value>
+    <value>Permettre de supprimer toutes les notes</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
