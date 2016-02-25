@@ -332,7 +332,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Metoda wprowadzania "Szybkich notatek"</value>
+    <value>Metoda wprowadzania</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">

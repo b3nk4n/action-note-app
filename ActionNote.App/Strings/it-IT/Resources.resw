@@ -332,7 +332,7 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Metodo di inserimenti per "Appunti rapidi"</value>
+    <value>Metodo di inserimenti</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">

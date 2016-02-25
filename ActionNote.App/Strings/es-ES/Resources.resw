@@ -332,7 +332,7 @@ Le gustaría iniciar sesión con tu cuenta de Microsoft en este momento?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Método de entrada de las "notas rápidas"</value>
+    <value>Método de entrada</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">

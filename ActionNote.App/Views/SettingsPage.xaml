@@ -14,7 +14,8 @@
     <Page.Resources>
         <uwpcConverters:EnumDisplayValueConverter x:Key="EnumDisplayValueConv" />
 
-        <Style TargetType="ComboBox">
+        <!-- CAUSES CRASHES ON SOME WINDOWS 10 DEVICES!!! -->
+        <!--<Style TargetType="ComboBox">
             <Setter Property="Padding" Value="12,5,0,7"/>
             <Setter Property="MinWidth" Value="{ThemeResource ComboBoxThemeMinWidth}"/>
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -176,7 +177,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
         <Style TargetType="ToggleSwitch">
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -428,7 +429,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <ToggleSwitch x:Name="QuickNotesEnabled" x:Uid="SettingsQuickNotes" Header="Enable QuickNotes in action center" IsOn="{Binding QuickNotesEnabled, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
-                    <ComboBox x:Uid="QuickNotesInputType" Header="QuickNotes input type" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsEnabled}"
+                    <ComboBox x:Uid="QuickNotesInputType" Header="Input method for 'Quick Notes'" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsEnabled}"
                               Visibility="{Binding ElementName=QuickNotesEnabled, Path=IsOn, Converter={StaticResource boolToVisConv}}"
                               ItemsSource="{x:Bind ViewModel.QuickNoteContentTypeStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.QuickNoteContentTypeStringSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>

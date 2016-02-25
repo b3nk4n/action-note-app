@@ -332,7 +332,7 @@ Voulez-vous connecter à votre compte Microsoft?</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Méthode de saisie des notes rapides</value>
+    <value>Méthode de saisie</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
@@ -372,7 +372,7 @@ Voulez-vous connecter à votre compte Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Permettre la suppression de notes</value>
+    <value>Permettre de supprimer une note</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
