@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Logging;
-using UWPCore.Framework.Notifications;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -17,7 +16,6 @@ namespace ActionNote.Tasks
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
         private ITilePinService _tilePinService;
-        private IBadgeService _badgeService;
 
         private static Mutex backgroundMutex = new Mutex(false, "createNoteBeforeDiff");
 
@@ -30,7 +28,6 @@ namespace ActionNote.Tasks
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<IDataService>();
             _tilePinService = injector.Get<ITilePinService>();
-            _badgeService = injector.Get<IBadgeService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -105,8 +102,7 @@ namespace ActionNote.Tasks
                                 _dataService.FlagArchiveNeedsReload();
                                 _dataService.MoveRangeToArchiveAsync(diff).Wait();
 
-                                var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-                                _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                                _tilePinService.UpdateMainTile(notes);
                             }
                             else
                             {

@@ -7,7 +7,6 @@ using System.Threading;
 using UWPCore.Framework.Common;
 using UWPCore.Framework.IoC;
 using UWPCore.Framework.Logging;
-using UWPCore.Framework.Notifications;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 
@@ -17,7 +16,7 @@ namespace ActionNote.Tasks
     {
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
-        private IBadgeService _badgeService;
+        private ITilePinService _tilePinService;
 
         private Localizer _localizer = new Localizer("ActionNote.Common");
 
@@ -31,7 +30,7 @@ namespace ActionNote.Tasks
             injector.Init(new DefaultModule(), new AppModule());
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<IDataService>();
-            _badgeService = injector.Get<IBadgeService>();
+            _tilePinService = injector.Get<ITilePinService>();
         }
 
         public void Run(IBackgroundTaskInstance taskInstance)
@@ -87,6 +86,12 @@ namespace ActionNote.Tasks
                         // store note according to sorting
                         var noteItem = new NoteItem(title, content);
 
+                        // load notes
+                        var getAllTask = _dataService.GetAllNotes();
+                        getAllTask.Wait();
+                        var notes = getAllTask.Result;
+                        notes.Add(noteItem);
+
                         if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
                         {
                             // add it into the action center at the beginning when we order for date.
@@ -95,10 +100,6 @@ namespace ActionNote.Tasks
                         else
                         {
                             // refresh all, because new note could be not at the top of the list
-                            var getAllTask = _dataService.GetAllNotes();
-                            getAllTask.Wait();
-                            var notes = getAllTask.Result;
-                            notes.Add(noteItem);
                             if (notes != null)
                                 _actionCenterService.RefreshAsync(notes);//.Wait();
                         }
@@ -109,8 +110,7 @@ namespace ActionNote.Tasks
                         _dataService.FlagNotesNeedReload();
                         _dataService.AddNoteAsync(noteItem).Wait();
 
-                        var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-                        _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                        _tilePinService.UpdateMainTile(notes);
                     }
                 }
             }

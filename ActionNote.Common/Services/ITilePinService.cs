@@ -6,6 +6,8 @@ namespace ActionNote.Common.Services
 {
     public interface ITilePinService
     {
+        void UpdateMainTile(IList<NoteItem> noteItems);
+
         Task PinOrUpdateAsync(NoteItem noteItem);
 
         Task UpdateAsync(NoteItem noteItem);

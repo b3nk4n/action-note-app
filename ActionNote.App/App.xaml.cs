@@ -39,7 +39,7 @@ namespace ActionNote.App
         private ISpeechService _speechService;
         private ISerializationService _serializationService;
         private ILicenseService _licenseService;
-        private IBadgeService _badgeService;
+        private ITilePinService _tilePinService;
 
         private Localizer _localizer;
 
@@ -58,7 +58,7 @@ namespace ActionNote.App
             _serializationService = Injector.Get<ISerializationService>();
             _dataService = Injector.Get<IDataService>();
             _licenseService = Injector.Get<ILicenseService>();
-            _badgeService = Injector.Get<IBadgeService>();
+            _tilePinService = Injector.Get<ITilePinService>();
 
             ShareTargetPage = typeof(SharePage);
 
@@ -234,15 +234,14 @@ namespace ActionNote.App
             // (re)register background tasks
             await RegisterBackgroundTasks();
 
+            var notes = await _dataService.GetAllNotes();
             if (AppSettings.ShowNotesInActionCenter.Value)
             {
-                var notes = await _dataService.GetAllNotes();
                 if (notes != null)
                     _actionCenterService.RefreshAsync(notes);
             }
 
-            var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-            _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+            _tilePinService.UpdateMainTile(notes);
 
             await _dataService.CleanUpAttachementFilesAsync();
         }

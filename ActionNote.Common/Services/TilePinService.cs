@@ -10,6 +10,7 @@ using ActionNote.Common.Helpers;
 using Windows.UI;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ActionNote.Common.Services
 {
@@ -23,9 +24,51 @@ namespace ActionNote.Common.Services
             _tileService = tileService;
         }
 
+        public void UpdateMainTile(IList<NoteItem> noteItems)
+        {
+            var updater = _tileService.GetUpdaterForApplication();
+
+            // clear all
+            updater.Clear();
+
+            if (noteItems.Count > 0)
+            {
+                // add new notes to flip through
+                updater.EnableNotificationQueue(true);
+
+                // filter out 5 most important notes
+                var fiveMostImportantNotes = new List<NoteItem>();
+                var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
+                var importantNotes = sortedNotes.Where(n => n.IsImportant).Take(5);
+                fiveMostImportantNotes.AddRange(importantNotes);
+                if (fiveMostImportantNotes.Count < 5)
+                {
+                    foreach (var item in sortedNotes)
+                    {
+                        if (!fiveMostImportantNotes.Contains(item))
+                        {
+                            fiveMostImportantNotes.Add(item);
+
+                            if (fiveMostImportantNotes.Count == 5)
+                                break;
+                        }
+                    }
+                }
+
+                // update the tile sequence
+                foreach (var noteItem in fiveMostImportantNotes)
+                {
+                    var tileModel = GetMainTileModel(noteItem);
+                    var tile = _tileService.AdaptiveFactory.Create(tileModel);
+                    tile.Tag = noteItem.ShortId;
+                    updater.Update(tile);
+                }
+            }
+        }
+
         public async Task PinOrUpdateAsync(NoteItem noteItem)
         {
-            var tileModel = GetTileModel(noteItem);
+            var tileModel = GetSecondaryTileModel(noteItem);
             var tile = _tileService.AdaptiveFactory.Create(tileModel);
 
             if (_tileService.Exists(noteItem.Id))
@@ -58,7 +101,7 @@ namespace ActionNote.Common.Services
             if (!_tileService.Exists(noteItem.Id))
                 return;
 
-            var tileModel = GetTileModel(noteItem);
+            var tileModel = GetSecondaryTileModel(noteItem);
             var tile = _tileService.AdaptiveFactory.Create(tileModel);
 
             var secondaryTile = new SecondaryTileModel();
@@ -106,32 +149,31 @@ namespace ActionNote.Common.Services
             }
         }
 
-        private AdaptiveTileModel GetTileModel(NoteItem noteItem)
+        private AdaptiveTileModel GetMainTileModel(NoteItem noteItem)
         {
-            // trim the content to 3 or 4 lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
-            var contentWith4LinesForMedium = new StringBuilder();
-            var contentWith3LinesForWide = new StringBuilder();
+            // trim the content to 3/9 lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
+            var contentWith3Lines = new StringBuilder();
+            var contentWith9Lines = new StringBuilder();
             if (!string.IsNullOrEmpty(noteItem.Content))
             {
                 var splitted = noteItem.Content.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int i = 0; i < splitted.Length; ++i)
                 {
-                    if (i >= 4)
+                    if (i >= 9)
                         break;
 
 
                     if (i < 3)
                     {
-                        contentWith3LinesForWide.Append(splitted[i].Trim());
-                        contentWith3LinesForWide.Append(Environment.NewLine);
+                        contentWith3Lines.Append(splitted[i].Trim());
+                        contentWith3Lines.Append(Environment.NewLine);
                     }
 
-
-                    if (i < 4)
+                    if (i < 9)
                     {
-                        contentWith4LinesForMedium.Append(splitted[i].Trim());
-                        contentWith4LinesForMedium.Append(Environment.NewLine);
+                        contentWith9Lines.Append(splitted[i].Trim());
+                        contentWith9Lines.Append(Environment.NewLine);
                     }
                 }
             }
@@ -142,7 +184,99 @@ namespace ActionNote.Common.Services
                 {
                     Bindings =
                     {
-                        new AdaptiveBinding()
+                       new AdaptiveBinding()
+                       {
+                           Template = VisualTemplate.TileMedium,
+                           Branding = VisualBranding.Name,
+                           Children =
+                           {
+                               new AdaptiveText()
+                               {
+                                   Content = noteItem.Title,
+                                   HintStyle = TextStyle.Base,
+                               },
+                               new AdaptiveText()
+                               {
+                                   Content = contentWith3Lines.ToString(),
+                                   HintWrap = true
+                               },
+                           }
+                       },
+                       new AdaptiveBinding()
+                       {
+                           Template = VisualTemplate.TileWide,
+                           Branding = VisualBranding.Name,
+                           Children =
+                           {
+                               new AdaptiveText()
+                               {
+                                   Content = noteItem.Title,
+                                   HintStyle = TextStyle.Base
+                               },
+                               new AdaptiveText()
+                               {
+                                   Content = contentWith3Lines.ToString(),
+                                   HintStyle = TextStyle.Caption,
+                                   HintWrap = true
+                               }
+                           }
+                       },
+                       new AdaptiveBinding()
+                       {
+                           Template = VisualTemplate.TileLarge,
+                           Branding = VisualBranding.Name,
+                           Children =
+                           {
+                               new AdaptiveText()
+                               {
+                                   Content = noteItem.Title,
+                                   HintStyle = TextStyle.Base
+                               },
+                               new AdaptiveText()
+                               {
+                                   Content = contentWith9Lines.ToString(),
+                                   HintStyle = TextStyle.Caption,
+                                   HintWrap = true
+                               }
+                           }
+                       }
+                    }
+                }
+            };
+
+            TrySetAttachementAsBackground(noteItem, tileModel, true);
+
+            return tileModel;
+        }
+
+        private AdaptiveTileModel GetSecondaryTileModel(NoteItem noteItem)
+        {
+            // trim the content lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
+            var contentWith4Lines = new StringBuilder();
+            if (!string.IsNullOrEmpty(noteItem.Content))
+            {
+                var splitted = noteItem.Content.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (int i = 0; i < splitted.Length; ++i)
+                {
+                    if (i >= 8)
+                        break;
+
+                    if (i < 4)
+                    {
+                        contentWith4Lines.Append(splitted[i].Trim());
+                        contentWith4Lines.Append(Environment.NewLine);
+                    }
+                }
+            }
+
+            var tileModel = new AdaptiveTileModel()
+            {
+                Visual = new AdaptiveVisual()
+                {
+                    Bindings =
+                    {
+                       new AdaptiveBinding()
                        {
                            Template = VisualTemplate.TileSmall,
                            Children =
@@ -166,7 +300,7 @@ namespace ActionNote.Common.Services
                                },
                                new AdaptiveText()
                                {
-                                   Content = contentWith4LinesForMedium.ToString(),
+                                   Content = contentWith4Lines.ToString(),
                                    HintWrap = true
                                }
                            }
@@ -180,11 +314,11 @@ namespace ActionNote.Common.Services
                                new AdaptiveText()
                                {
                                    Content = noteItem.Title,
-                                   HintStyle = TextStyle.Subtitle
+                                   HintStyle = TextStyle.Base
                                },
                                new AdaptiveText()
                                {
-                                   Content = contentWith3LinesForWide.ToString(),
+                                   Content = contentWith4Lines.ToString(),
                                    HintStyle = TextStyle.Caption,
                                    HintWrap = true
                                }
@@ -194,31 +328,46 @@ namespace ActionNote.Common.Services
                 }
             };
 
-            TrySetAttachementAsBackground(noteItem, tileModel);
+            TrySetAttachementAsBackground(noteItem, tileModel, false);
 
             return tileModel;
         }
 
-        private static void TrySetAttachementAsBackground(NoteItem noteItem, AdaptiveTileModel tileModel)
+        private static void TrySetAttachementAsBackground(NoteItem noteItem, AdaptiveTileModel tileModel, bool useBackgroundColorImage)
         {
+            string picturePath = null;
+            int overlay = 0;
+
             if (noteItem.HasAttachement)
             {
-                var picturePath = IOConstants.APPDATA_LOCAL_SCHEME + "/" + AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile;
+                picturePath = IOConstants.APPDATA_LOCAL_SCHEME + "/" + AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile;
+                overlay = 33;
+            }
+            else if (useBackgroundColorImage && noteItem.Color != ColorCategory.Neutral)
+            {
+                picturePath = IOConstants.APPX_SCHEME + "/Assets/Images/" + noteItem.Color.ToString().ToLower() + ".png";
+            }
+
+            if (picturePath != null)
+            {
                 tileModel.Visual.Bindings[0].Children.Add(new AdaptiveImage()
                 {
                     Placement = ImagePlacement.Background,
+                    HintOverlay = overlay,
                     Source = picturePath
                 });
 
                 tileModel.Visual.Bindings[1].Children.Add(new AdaptiveImage()
                 {
                     Placement = ImagePlacement.Background,
+                    HintOverlay = overlay,
                     Source = picturePath
                 });
 
                 tileModel.Visual.Bindings[2].Children.Add(new AdaptiveImage()
                 {
                     Placement = ImagePlacement.Background,
+                    HintOverlay = overlay,
                     Source = picturePath
                 });
             }
