@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Documents;
 using UWPCore.Framework.Launcher;
 using Windows.UI.Xaml;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.Views
 {
@@ -37,6 +38,20 @@ namespace ActionNote.App.Views
             DataContext = ViewModel;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            IntroArrowBlick.Begin();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            IntroArrowBlick.Stop();
+        }
+
         private void SwipeListView_ItemSwipe(object sender, ItemSwipeEventArgs e)
         {
             var item = e.SwipedItem as NoteItem;
@@ -51,20 +66,6 @@ namespace ActionNote.App.Views
                     ViewModel.RemoveCommand.Execute(item);
                 }
             }
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            IntroArrowBlick.Begin();
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-
-            IntroArrowBlick.Stop();
         }
 
         private void NoteListItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -118,7 +119,7 @@ namespace ActionNote.App.Views
             SyncAnimation.Begin();
         }
 
-        private async void RichTextTapped(object sender, TappedRoutedEventArgs e)
+        private void RichTextTapped(object sender, TappedRoutedEventArgs e)
         {
             var richTextBox = sender as RichTextBlock;
 
@@ -129,26 +130,16 @@ namespace ActionNote.App.Views
 
                 if (element is Run)
                 {
-                    var run = (Run)element;
-                    if (run.Text.StartsWith("#"))
+                    var text = ((Run)element).Text;
+                    RichTextBindingHelper.PerformRichTextAction(text,
+                    async (uri) =>
                     {
                         e.Handled = true;
-                    }
-                    else if (run.Text.StartsWith("http://") || run.Text.StartsWith("https://") || run.Text.StartsWith("www."))
+                        await SystemLauncher.LaunchUriAsync(uri);
+                    }, (tag) =>
                     {
-                        var link = run.Text;
-                        if (link.StartsWith("www."))
-                            link = "http://" + link;
-
-                        Uri uriResult;
-                        bool isValidUri = Uri.TryCreate(link, UriKind.Absolute, out uriResult);
-
-                        if (isValidUri)
-                        {
-                            e.Handled = true;
-                            await SystemLauncher.LaunchUriAsync(new Uri(link, UriKind.Absolute));
-                        }
-                    }
+                        e.Handled = true;
+                    });
                 }
             }
         }

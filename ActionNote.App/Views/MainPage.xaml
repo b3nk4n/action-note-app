@@ -50,9 +50,6 @@
                     <RichTextBlock localHelpers:RichTextBindingHelper.Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}"
                                    Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }"/>
                 </StackPanel>
-
-                <!--<Rectangle Grid.ColumnSpan="2" RightTapped="NoteListItem_RightTapped" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0.001"
-                           Tag="{Binding }"/>-->
             </Grid>
         </DataTemplate>
         <Storyboard x:Name="SyncAnimation">

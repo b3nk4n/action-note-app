@@ -104,5 +104,27 @@ namespace ActionNote.Common.Helpers
                 }
             }
         }
+
+        public static void PerformRichTextAction(string text, Action<Uri> linkExecuted, Action<string> tagExecuted)
+        {
+            if (text.StartsWith("#"))
+            {
+                tagExecuted?.Invoke(text);
+            }
+            else if (text.StartsWith("http://") || text.StartsWith("https://") || text.StartsWith("www."))
+            {
+                var link = text;
+                if (link.StartsWith("www."))
+                    link = "http://" + link;
+
+                Uri uriResult;
+                bool isValidUri = Uri.TryCreate(link, UriKind.Absolute, out uriResult);
+
+                if (isValidUri)
+                {
+                    linkExecuted?.Invoke(uriResult);
+                }
+            }
+        }
     }
 }
