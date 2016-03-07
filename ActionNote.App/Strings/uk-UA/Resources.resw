@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>Action Note - це не просто одна з багатьох програм для нотаток. Вона вбудована в Ваш центр сповіщень і дій та надає найшвидший доступ до всіх Ваших нотаток. Навіть на всіх ваших Windows 10 пристроях.</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>Автори:</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>Більше програм</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>Оцінки і відгуки</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>Зворотній зв'язок</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>Поділитися</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>Конфіденційність</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>Опис</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>Додати</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>Архівування</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>Прикріпити</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>Видалити</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>Вибрати</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>2 години</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>30 хвилин</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>45 хвилин</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>1 година</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>Видалити</value>
+    <comment>MainPage/EditPage</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>Видалити все</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>Відмінити</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>Відмінити зміни</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>Редагувати</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>Редагувати</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>у власності</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>Нотатки</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>Пусто, чи не так? Пуста нотатка не може бути збереженою.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>Видалення не відбулось, тому що інформація не може бути надіслана на сервер. Будь ласка перевірте ваше з'єднання і спробуйте пізніше.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>Ця нотатка вже була видалена на іншому пристрої. Схоже, що Ваш пристрій не синхронізується. Будь ласка, проведіть синхронізацію вручну.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>Онлайн синхронізація вимагає входу до облікового запису. Ми вимкнули цю функцію для Вас.
+Ви можете увімкнути її в настройках.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>Ви активували онлайн синхронізацію, але ваш логін все ще очікується.
+Бажаєте увійти до вашого аккаунту Microsoft?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>Ні</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>Так</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>Ви справді хочете видалити всі нотатки?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>Процес синхронізації не відбувся. Будь ласка перевірте Ваше з'єднання або спробуйте пізніше.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>Увага</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>Інформація</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>Попередження</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>З поверненням!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>Ми ввімкнули онлайн синхронізацію для Вас. Щоб скористатись цією функцією, Ви маєте увійти до свого аккаунту Microsoft. Бажаєте увійти негайно?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>Опис</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>Архів</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>Нотатки</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>Настройки</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>Вдосконалити</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>Нова нотатка</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>*Ця опція не може бути вимкнена у ПК версії, через помилку Windows 10. Ця опція буде активованою після оновлення "Redstone 1" яке заплановане на літо 2016 року. Дякуємо за терпіння!</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>Впорядкувати за</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>Прикріпити в меню Пуск</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>Видалення...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>Завантаження файлу...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>Збереження...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>Синхронізація...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>Відвантаження файлу...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>Метод вводу „Швидкі нотатки“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>Тільки деталі</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>Заголовок і деталі</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>Читати вголос</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>Більше…</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>QR-код</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>Відновлення</value>
+    <comment>ArchivePage</comment>
+  </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>Синхронізація на всіх пристроях</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>Центр сповіщення і дій (Action Center)</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowClear.Header" xml:space="preserve">
+    <value>Дозволити стирання нотаток</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>Дозволити видалення нотаток</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>Автозбереження нотаток</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>Періодичність синхронізації</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>Основне</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>Онлайн синхронізація</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>Персоналізація</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>Дозволити „Швидкі нотатки“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Стандартний заголовок</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Швидка нотатка</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>Показати нотатки</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>Синхронізувати в фоні</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>Синхронізувати коли програма ввімкнена</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>Колір теми</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>Настройки</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>Поділитись</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>Поділися нотаткою з друзями</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>Категорія</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>Змінити дату</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>Голосове введення</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>Синхронізувати</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>Відкріпити з меню Пуск</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>Вдосконалити</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>Для придбання PRO версії</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>Вдосконалити</value>
+    <comment>UpgradePage</comment>
+  </data>
+</root>

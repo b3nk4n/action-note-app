@@ -51,6 +51,7 @@
                                 <uwpcModels:ContributorModel Title="Jae-young Song" Icon="/Assets/Images/korea.png" />
                                 <uwpcModels:ContributorModel Title="Jan R Gustafsson" Icon="/Assets/Images/sweden.png" />
                                 <uwpcModels:ContributorModel Title="Isa Koçak" Icon="/Assets/Images/turkish.png" />
+                                <uwpcModels:ContributorModel Title="Volodymyr Bratko" Icon="/Assets/Images/ukrain.png" />
 
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
