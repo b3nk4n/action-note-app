@@ -159,6 +159,12 @@ namespace ActionNote.App.ViewModels
             set
             {
                 AppSettings.AllowClearNotes.Value = value;
+
+                if (!value)
+                {
+                    QuickNotesEnabled = true;
+                    RaisePropertyChanged("QuickNotesEnabled");
+                }
             }
         }
 

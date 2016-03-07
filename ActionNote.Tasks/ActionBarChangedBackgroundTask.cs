@@ -88,7 +88,7 @@ namespace ActionNote.Tasks
                         {
                             if (AppSettings.AllowClearNotes.Value ||
                                 diff.Count <= 1 && diff.Count != notes.Count || // either only one is deleted
-                                diff.Count > 1 && diff.Count != notes.Count || // many but not all not all
+                                diff.Count > 1 && diff.Count != notes.Count || // many but not all
                                 AppSettings.QuickNotesEnabled.Value && diff.Count == notes.Count && containsQuickNotesInActionCenter) // but allow when all are removed, but the quick notes is still there, which means there was no clear all
                                 // not working due to bug of SuppressPopup in PC version!!!
                             {
