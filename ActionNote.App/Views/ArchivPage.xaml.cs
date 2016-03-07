@@ -6,7 +6,6 @@ using UWPCore.Framework.Common;
 using UWPCore.Framework.Controls;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
@@ -64,16 +63,7 @@ namespace ActionNote.App.Views
 
             var item = (sender as FrameworkElement).Tag as NoteItem;
 
-            var menu = new PopupMenu();
-            menu.Commands.Add(new UICommand(_localizer.Get("Delete.Label"), (command) =>
-            {
-                ViewModel.RemoveCommand.Execute(item);
-            }));
-            menu.Commands.Add(new UICommand(_localizer.Get("Restore.Label"), (command) =>
-            {
-                ViewModel.RestoreCommand.Execute(item);
-            }));
-
+            var menu = CreateContextMenu(item);
             var point = e.GetPosition(null);
             point.X += 40;
             await menu.ShowAsync(point);
@@ -102,6 +92,39 @@ namespace ActionNote.App.Views
                     });
                 }
             }
+        }
+
+        private async void NoteListItem_Holding(object sender, HoldingRoutedEventArgs e) // TODO: context menu closes directly
+        {
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch ||
+                e.HoldingState != Windows.UI.Input.HoldingState.Completed)
+                return;
+
+            var item = (sender as FrameworkElement).Tag as NoteItem;
+
+            var menu = CreateContextMenu(item);
+            var point = e.GetPosition(null);
+            point.X += 40;
+            await menu.ShowAsync(point);
+        }
+
+        /// <summary>
+        /// Creates the context menu.
+        /// </summary>
+        /// <param name="item">The associated note item.</param>
+        /// <returns>The context menu popup.</returns>
+        private PopupMenu CreateContextMenu(NoteItem item)
+        {
+            var menu = new PopupMenu();
+            menu.Commands.Add(new UICommand(_localizer.Get("Delete.Label"), (command) =>
+            {
+                ViewModel.RemoveCommand.Execute(item);
+            }));
+            menu.Commands.Add(new UICommand(_localizer.Get("Restore.Label"), (command) =>
+            {
+                ViewModel.RestoreCommand.Execute(item);
+            }));
+            return menu;
         }
     }
 }

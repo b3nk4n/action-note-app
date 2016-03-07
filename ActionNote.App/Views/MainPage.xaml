@@ -28,7 +28,7 @@
         </Storyboard>
 
         <DataTemplate x:Key="NoteListDataTemplate">
-            <Grid Margin="4" Padding="16,0,8,0" RightTapped="NoteListItem_RightTapped" Tapped="NoteListItem_Tapped" Tag="{Binding }">
+            <Grid Margin="4" Padding="16,0,8,0" RightTapped="NoteListItem_RightTapped" Tapped="NoteListItem_Tapped" Holding="NoteListItem_Holding" Tag="{Binding }">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="16" />
                     <ColumnDefinition Width="*" />
