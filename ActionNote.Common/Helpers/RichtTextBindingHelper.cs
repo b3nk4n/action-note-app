@@ -58,11 +58,11 @@ namespace ActionNote.Common.Helpers
             var words = message.Split(new string[] {" ", "\t"}, StringSplitOptions.None);
             foreach (var word in words)
             {
-                if (word.StartsWith("#"))
-                {
-                    ret.Inlines.Add(new Run { Text = word + " ", Foreground = accentBrush });
-                    continue;
-                }
+                //if (word.StartsWith("#"))
+                //{
+                //    ret.Inlines.Add(new Run { Text = word + " ", Foreground = accentBrush });
+                //    continue;
+                //}
                 if (word.StartsWith("http://") || word.StartsWith("https://") || word.StartsWith("www."))
                 {
                     var link = word;
@@ -107,11 +107,12 @@ namespace ActionNote.Common.Helpers
 
         public static void PerformRichTextAction(string text, Action<Uri> linkExecuted, Action<string> tagExecuted)
         {
-            if (text.StartsWith("#"))
-            {
-                tagExecuted?.Invoke(text);
-            }
-            else if (text.StartsWith("http://") || text.StartsWith("https://") || text.StartsWith("www."))
+            //if (text.StartsWith("#"))
+            //{
+            //    tagExecuted?.Invoke(text);
+            //}
+            //else 
+            if (text.StartsWith("http://") || text.StartsWith("https://") || text.StartsWith("www."))
             {
                 var link = text;
                 if (link.StartsWith("www."))
