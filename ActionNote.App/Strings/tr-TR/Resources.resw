@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>Action Note diğer not uygulamarı gibi değildir. Bildirim merkeziniz ile entegre olur ve notlarınıza hızlı erişim sağlar. Fotoğraflı notları bile tüm Windows 10 cihazlarınızda görmenize olanak sağlar.</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>Emeği geçenler:</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>Daha fazla uygulama</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>Derecelendirme</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>Geri bildirim</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>Paylaş</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>Gizlilik bilgisi</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>HAKKINDA</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>Ekle</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>ARŞİV</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>Eklenti</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>Sil</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>Seç</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>2 saat</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>30 dakika</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>45 dakika</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>1 saat</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>Sil</value>
+    <comment>MainPage/EditPage</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>Hepsini sil</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>İptal</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>Değişikliği yapma</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>Düzenle</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>DÜZENLE</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>satın alındı</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>NOTLAR</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>Boş gözüküyor, değil mi? Bağlantısız bir not kayıt edilmez.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>Silme işlemi gerçekleştirilemedi, çünkü bilgi sunucuya yollanamıyor. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>Bu not daha önce başka bir cihazdan silindi. Cihazınız senkronize edilmemiş gözüküyor. Lütfen manuel olarak senkronize edin.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>Çevrimiçi senkronize kimliğiniz ile giriş gerektiriyor. Bu özelliği sizin için kapattık.
+Seçeneklerden tekrar aktifleştirebilirsiniz.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>Çevrimiçi senkronizasyonu aktifleştirdiniz, ancak girişiniz hala beklemede.
+Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>Hayır</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>Evet</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>Tüm notları silmek istiyor musunuz?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>Senkronize işlemi başarılı değil. Lütfen internet bağlantınızı kontrol edin veya daha sonra tekrar deneyin.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>Dikkat</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>Bilgi</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>Uyarı</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>Tekrar hoş geldiniz!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>Çevrimiçi senkronizasyonu sizin için tekrar aktifleştirdik. Bu özelliği kullanmak için Microsoft hesabınız ile giriş yapmalısınız. Şimdi yapmak ister misiniz?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>Hakkında</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>Arşiv</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>Notlar</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>Seçenekler</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>Yükselt</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>YENİ NOT</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>* Bu seçenek Windows 10'un bir hatası yüzünden PC sürümünde kapatılamaz. Bu seçenek 'Red Stone 1' güncellemesi ile 2016 yazında aktif olacak. İlginiz için teşekkürler!</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>Notları sırala</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>Başlangıca sabitle</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>Siliniyor...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>Dosya indiriliyor...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>Kaydediliyor...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>Senkronize ediliyor...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>Dosya yükleniyor...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>„Hızlı Notlar“ giriş yöntemi</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>Sadece detaylar</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>Başlık ve detaylar</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>Sesli oku</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>Daha fazla...</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>QR kodu</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>Onar</value>
+    <comment>ArchivePage</comment>
+  </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>Tüm cihazlar arası senkronize</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>Action Center</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowClear.Header" xml:space="preserve">
+    <value>Notları temizlemeye izin ver</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>Notları silmeye izin ver</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>Notları otomatik kaydet</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>Senkronizasyon aralığı</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>Genel</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>Çevrimiçi Senkronizasyon</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>Kişiselleştirme</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>“Hızlı Notlar“ izin ver</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>“Hızlı Notlar“ için varsayılan başlık</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Hızlı Not</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>Notları göster</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>Notları arka planda senkronize et</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>Uygulama başladığında senkronize et</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>Tema rengi</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>SEÇENEKLER</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>Paylaş</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>Notu arkadaşlarınızla paylaşın</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>Kategory</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>Değiştirilme tarihi</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>Konuşma girişi</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>Senkronize</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>Başlangıçtan kaldır</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>Yükselt</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>PRO SÜRÜM SATIN ALIMI İÇİN</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>YÜKSELT</value>
+    <comment>UpgradePage</comment>
+  </data>
+</root>
