@@ -50,7 +50,7 @@ namespace ActionNote.Tasks
                     if (syncResult.Result != SyncResult.Unchanged || downloadedAFile)
                     {
                         var noteItems = await _dataService.GetAllNotes();
-                        _actionCenterService.RefreshAsync(noteItems);
+                        _actionCenterService.Refresh(noteItems);
 
                         // delete unreferenced tiles
                         var noteIds = await _dataService.GetAllNoteIds();

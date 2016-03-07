@@ -235,11 +235,8 @@ namespace ActionNote.App
             await RegisterBackgroundTasks();
 
             var notes = await _dataService.GetAllNotes();
-            if (AppSettings.ShowNotesInActionCenter.Value)
-            {
-                if (notes != null)
-                    _actionCenterService.RefreshAsync(notes);
-            }
+            if (notes != null)
+                _actionCenterService.Refresh(notes);
 
             _tilePinService.UpdateMainTile(notes);
 
@@ -305,7 +302,7 @@ namespace ActionNote.App
         {
             if (await _backgroundTaskService.RequestAccessAsync())
             {
-                if (AppSettings.ShowNotesInActionCenter.Value)
+                if (AppSettings.ShowNotesInActionCenter.Value || AppSettings.QuickNotesEnabled.Value)
                 {
                     _backgroundTaskService.Register(BG_TASK_ACTIONCENTER, "ActionNote.Tasks.ActionBarChangedBackgroundTask", new ToastNotificationHistoryChangedTrigger());
                     _backgroundTaskService.Register(BG_TASK_TOAST_TRIGGERED, "ActionNote.Tasks.ActionTriggeredBackgroundTask", new ToastNotificationActionTrigger());

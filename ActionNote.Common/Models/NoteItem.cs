@@ -18,7 +18,7 @@ namespace ActionNote.Common.Models
         Orange,
         Violett,
         [DefaultValue(true)]
-        Neutral
+        Neutral,
     }
 
     [DataContract]

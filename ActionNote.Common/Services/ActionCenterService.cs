@@ -68,7 +68,7 @@ namespace ActionNote.Common.Services
             _toastService.ClearHistory();
         }
 
-        public void RefreshAsync(IList<NoteItem> noteItems)
+        public void Refresh(IList<NoteItem> noteItems)
         {
             if (IsRefreshBlocked())
                 return;
@@ -77,13 +77,16 @@ namespace ActionNote.Common.Services
 
             _toastService.ClearHistory();
 
-            var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
-
-            for (int i = 0; i < Math.Min(sorted.Count, MAX_NOTIFICATOINS); ++i)
+            if (AppSettings.ShowNotesInActionCenter.Value)
             {
-                var note = sorted[i];
+                var sorted = NoteUtils.Sort(noteItems, AppSettings.SortNoteInActionCenterBy.Value).Reverse().ToList();
 
-                AddNotification(note);
+                for (int i = 0; i < Math.Min(sorted.Count, MAX_NOTIFICATOINS); ++i)
+                {
+                    var note = sorted[i];
+
+                    AddNotification(note);
+                }
             }
 
             if (AppSettings.QuickNotesEnabled.Value)

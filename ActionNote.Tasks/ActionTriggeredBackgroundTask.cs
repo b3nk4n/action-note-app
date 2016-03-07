@@ -54,8 +54,7 @@ namespace ActionNote.Tasks
             Logger.WriteLine("ActionTriggeredTask: entered (waited: {0})", end - start);
 
             var details = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
-            if (details != null &&
-                AppSettings.ShowNotesInActionCenter.Value)
+            if (details != null)
             {
                 if (details.Argument == "quickNote")
                 {
@@ -92,7 +91,8 @@ namespace ActionNote.Tasks
                         var notes = getAllTask.Result;
                         notes.Add(noteItem);
 
-                        if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE)
+                        if (AppSettings.SortNoteInActionCenterBy.Value == AppConstants.SORT_DATE &&
+                            AppSettings.ShowNotesInActionCenter.Value)
                         {
                             // add it into the action center at the beginning when we order for date.
                             _actionCenterService.AddToTop(noteItem);//.Wait();
@@ -101,7 +101,7 @@ namespace ActionNote.Tasks
                         {
                             // refresh all, because new note could be not at the top of the list
                             if (notes != null)
-                                _actionCenterService.RefreshAsync(notes);//.Wait();
+                                _actionCenterService.Refresh(notes);//.Wait();
                         }
 
                         // add note physically after adding the notification

@@ -106,7 +106,7 @@ namespace ActionNote.Tasks
                             }
                             else
                             {
-                                _actionCenterService.RefreshAsync(notes);
+                                _actionCenterService.Refresh(notes);
                             }
                         }
 
@@ -136,10 +136,19 @@ namespace ActionNote.Tasks
                         var notes = getAllTask.Result;
 
                         if (notes != null)
-                            _actionCenterService.RefreshAsync(notes);
+                            _actionCenterService.Refresh(notes);
                     }
                 }
             }
+            else if (!AppSettings.ShowNotesInActionCenter.Value)
+            {
+                // when quick notes was removed, just re-add it
+                if (AppSettings.QuickNotesEnabled.Value && !_actionCenterService.ContainsQuickNotes())
+                {
+                    _actionCenterService.AddQuickNotes();
+                }
+            }
+
             if (hasMutex)
                 backgroundMutex.ReleaseMutex();
 

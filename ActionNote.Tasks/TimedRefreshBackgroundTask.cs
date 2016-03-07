@@ -24,13 +24,13 @@ namespace ActionNote.Tasks
         {
             var deferral = taskInstance.GetDeferral();
 
-            if (AppSettings.ShowNotesInActionCenter.Value &&
-                ActionCenterService.LastActionCenterRefresh.Value < DateTimeOffset.Now.AddDays(-2))
+            if (ActionCenterService.LastActionCenterRefresh.Value < DateTimeOffset.Now.AddDays(-2))
             {
-                if (AppSettings.ShowNotesInActionCenter.Value)
+                if (AppSettings.ShowNotesInActionCenter.Value ||
+                    AppSettings.QuickNotesEnabled.Value)
                 {
                     var noteItems = await _dataService.GetAllNotes();
-                    _actionCenterService.RefreshAsync(noteItems);
+                    _actionCenterService.Refresh(noteItems);
                 }
             }
 
