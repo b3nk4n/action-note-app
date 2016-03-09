@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -42,13 +41,14 @@ namespace ActionNote.Common.Helpers
 
         private static Paragraph ParseForRichTextParagrah(string message)
         {
-
             var ret = new Paragraph();
             var lines = message.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-            foreach (var line in lines)
+            for (int i = 0; i < lines.Length; ++i)
             {
-                FormatLine(line, ret);
-                ret.Inlines.Add(new LineBreak());
+                if (i != 0)
+                    ret.Inlines.Add(new LineBreak());
+
+                FormatLine(lines[i], ret);
             }
             return ret;
         }

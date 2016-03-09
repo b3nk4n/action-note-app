@@ -454,7 +454,8 @@ namespace ActionNote.App.ViewModels
             }
 
             // trim content end (not the beginning, because the user might have done intents, etc.)
-            noteItem.Content = noteItem.Content.TrimEnd();
+            if (noteItem.Content != null)
+                noteItem.Content = noteItem.Content.TrimEnd();
 
             var updateDeleted = false;
             if (await _dataService.ContainsNote(noteItem.Id))
