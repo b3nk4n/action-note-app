@@ -154,7 +154,7 @@
     <comment>MainPage</comment>
   </data>
   <data name="ArchiveTitle.Text" xml:space="preserve">
-    <value>Архівування</value>
+    <value>Архів</value>
     <comment>ArchivPage</comment>
   </data>
   <data name="Attachement.Label" xml:space="preserve">
@@ -436,11 +436,11 @@
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
-    <value>Категорія</value>
+    <value>За категорією</value>
     <comment>MainPage</comment>
   </data>
   <data name="SortByDate.Text" xml:space="preserve">
-    <value>Змінити дату</value>
+    <value>За датою</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">

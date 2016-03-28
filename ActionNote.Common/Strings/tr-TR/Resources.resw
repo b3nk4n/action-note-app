@@ -134,7 +134,7 @@
     <comment>BackgroundTask</comment>
   </data>
   <data name="QuickNotesDescription" xml:space="preserve">
-    <value>Yeni bir not yarat...</value>
+    <value>Yeni bir not oluştur...</value>
     <comment>BackgroundTask</comment>
   </data>
   <data name="Save.Label" xml:space="preserve">

@@ -122,7 +122,7 @@ namespace ActionNote.App.ViewModels
                 else if (ShareOperation.Data.Contains(StandardDataFormats.WebLink))
                 {
                     var uri = await ShareOperation.Data.GetWebLinkAsync();
-                    noteItem.Content = uri.AbsolutePath;
+                    noteItem.Content = uri.AbsoluteUri;
                 }
 
                 if (ShareOperation.Data.Contains(StandardDataFormats.StorageItems))
