@@ -173,6 +173,10 @@
     <value>2 години</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.240" xml:space="preserve">
+    <value>4 години</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="BackSyncInterval.30" xml:space="preserve">
     <value>30 хвилин</value>
     <comment>SettingsPage</comment>

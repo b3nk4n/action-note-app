@@ -173,6 +173,10 @@
     <value>שעתיים</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.240" xml:space="preserve">
+    <value>4 שעות</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="BackSyncInterval.30" xml:space="preserve">
     <value>30 דקות</value>
     <comment>SettingsPage</comment>

@@ -50,5 +50,6 @@ namespace ActionNote.Common
         public const string SYNC_INTERVAL_45 = "45";
         public const string SYNC_INTERVAL_60 = "60";
         public const string SYNC_INTERVAL_120 = "120";
+        public const string SYNC_INTERVAL_240 = "240";
     }
 }
