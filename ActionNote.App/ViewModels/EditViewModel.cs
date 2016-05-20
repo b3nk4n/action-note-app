@@ -103,6 +103,7 @@ namespace ActionNote.App.ViewModels
 
             DiscardCommand = new DelegateCommand(() =>
             {
+                _wasDiscared = true;
                 GoBackToMainPageWithoutBackEvent();
             });
 
@@ -572,11 +573,13 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        private bool _wasDiscared;
         private bool _savedInForwardNavigation = false;
         public async override void OnNavigatingFrom(NavigatingEventArgs args)
         {
             base.OnNavigatingFrom(args);
-            if (!_savedInForwardNavigation &&
+            if (!_wasDiscared &&
+                !_savedInForwardNavigation &&
                 args.NavigationMode == NavigationMode.New &&
                 args.PageType != typeof(ZXing.Mobile.ScanPage))
             {
@@ -595,6 +598,10 @@ namespace ActionNote.App.ViewModels
                         NavigationService.Navigate(args.PageType, args.Parameter); // UGLY workaround
                     }
                 }
+            }
+            else
+            {
+                _wasDiscared = false;
             }
 
             if (args.PageType == typeof(ZXing.Mobile.ScanPage))
