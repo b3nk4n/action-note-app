@@ -90,7 +90,8 @@ namespace ActionNote.App.ViewModels
             {
                 if (!noteItem.IsEmtpy)
                 {
-                    await SaveNoteAsync(noteItem);
+                    // Remember: saving will be performed in back navigation
+                    _doSave = true;
                     GoBackToMainPageWithoutBackEvent();
                 }
                 else
@@ -428,9 +429,9 @@ namespace ActionNote.App.ViewModels
         /// </summary>
         private void GoBackToMainPageWithoutBackEvent()
         {
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
-            else
+            //if (NavigationService.CanGoBack)
+            //    NavigationService.GoBack();
+            //else
                 NavigationService.Navigate(typeof(MainPage));
         }
 
@@ -573,12 +574,14 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        private bool _doSave;
         private bool _wasDiscared;
-        private bool _savedInForwardNavigation = false;
+        private bool _savedInForwardNavigation;
         public async override void OnNavigatingFrom(NavigatingEventArgs args)
         {
             base.OnNavigatingFrom(args);
-            if (!_wasDiscared &&
+            if (_doSave ||
+                !_wasDiscared &&
                 !_savedInForwardNavigation &&
                 args.NavigationMode == NavigationMode.New &&
                 args.PageType != typeof(ZXing.Mobile.ScanPage))
@@ -594,6 +597,7 @@ namespace ActionNote.App.ViewModels
                         await Task.Delay(50);
 
                         _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
+                        _doSave = false;
                         await SaveNoteAsync(SelectedNote);
                         NavigationService.Navigate(args.PageType, args.Parameter); // UGLY workaround
                     }
@@ -604,7 +608,7 @@ namespace ActionNote.App.ViewModels
                 _wasDiscared = false;
             }
 
-            if (args.PageType == typeof(ZXing.Mobile.ScanPage))
+            if (args.PageType == typeof(ScanPage))
                 _saveStateForQrScanner = true;
         }
 
