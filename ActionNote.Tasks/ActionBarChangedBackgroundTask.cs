@@ -102,6 +102,11 @@ namespace ActionNote.Tasks
                                 _dataService.FlagArchiveNeedsReload();
                                 _dataService.MoveRangeToArchiveAsync(diff).Wait();
 
+                                foreach (var note in diff)
+                                {
+                                    notes.Remove(note);
+                                }
+                                
                                 _tilePinService.UpdateMainTile(notes);
                             }
                             else
