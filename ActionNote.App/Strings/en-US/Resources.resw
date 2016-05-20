@@ -190,6 +190,10 @@ ment</value>
     <value>1 hour</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>Manually</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
     <comment>MainPage/EditPage</comment>

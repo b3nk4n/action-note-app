@@ -309,7 +309,8 @@ namespace ActionNote.App
                     _backgroundTaskService.Register(BG_TASK_TIMED_REFRESH, "ActionNote.Tasks.TimedRefreshBackgroundTask", new TimeTrigger(180, false), new SystemCondition(SystemConditionType.UserNotPresent));
                 }
 
-                if (_dataService.IsSynchronizationActive && AppSettings.SyncInBackground.Value)
+                if (_dataService.IsSynchronizationActive && AppSettings.SyncInBackground.Value &&
+                    AppSettings.BackgroundTaskSyncInterval.Value != AppConstants.SYNC_INTERVAL_MANUAL)
                 {
                     uint syncInterval = 60;
                     uint.TryParse(AppSettings.BackgroundTaskSyncInterval.Value, out syncInterval);

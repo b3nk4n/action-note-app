@@ -189,6 +189,10 @@
     <value>1 година</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>Bручну</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Видалити</value>
     <comment>MainPage/EditPage</comment>

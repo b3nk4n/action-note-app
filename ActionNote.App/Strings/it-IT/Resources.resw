@@ -189,6 +189,10 @@
     <value>1 ora</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>Manualmente</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Cancella</value>
     <comment>MainPage/EditPage</comment>

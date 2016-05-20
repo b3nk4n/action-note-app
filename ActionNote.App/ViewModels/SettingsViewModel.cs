@@ -54,7 +54,8 @@ namespace ActionNote.App.ViewModels
                 new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_45, _localizer.Get("BackSyncInterval.45")),
                 new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_60, _localizer.Get("BackSyncInterval.60")),
                 new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_120, _localizer.Get("BackSyncInterval.120")),
-                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_240, _localizer.Get("BackSyncInterval.240"))
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_240, _localizer.Get("BackSyncInterval.240")),
+                new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_MANUAL, _localizer.Get("BackSyncInterval.Manual"))
             });
         }
 

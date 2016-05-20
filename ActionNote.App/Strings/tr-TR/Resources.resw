@@ -189,6 +189,10 @@
     <value>1 saat</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>El ile</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Sil</value>
     <comment>MainPage/EditPage</comment>

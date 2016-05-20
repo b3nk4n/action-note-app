@@ -189,6 +189,10 @@
     <value>שעה</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>באופן ידני</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>מחק</value>
     <comment>MainPage/EditPage</comment>

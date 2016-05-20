@@ -189,6 +189,10 @@
     <value>1小时</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>手动</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>删除</value>
     <comment>MainPage/EditPage</comment>
