@@ -52,6 +52,7 @@
                                 <uwpcModels:ContributorModel Title="Jan R Gustafsson" Icon="/Assets/Images/sweden.png" />
                                 <uwpcModels:ContributorModel Title="Isa Koçak" Icon="/Assets/Images/turkish.png" />
                                 <uwpcModels:ContributorModel Title="Volodymyr Bratko" Icon="/Assets/Images/ukrain.png" />
+                                <uwpcModels:ContributorModel Title="Roie Karpo" Icon="/Assets/Images/israel.png" />
 
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
