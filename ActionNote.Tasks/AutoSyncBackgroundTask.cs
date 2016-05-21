@@ -11,7 +11,6 @@ namespace ActionNote.Tasks
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
         private ITilePinService _tilePinService;
-        //private IBadgeService _badgeService;
 
         public AutoSyncBackgroundTask()
         {
@@ -20,7 +19,6 @@ namespace ActionNote.Tasks
             _actionCenterService = injector.Get<IActionCenterService>();
             _dataService = injector.Get<IDataService>();
             _tilePinService = injector.Get<ITilePinService>();
-            //_badgeService = injector.Get<IBadgeService>();
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
