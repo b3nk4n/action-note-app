@@ -19,6 +19,7 @@ using UWPCore.Framework.Share;
 using UWPCore.Framework.Input;
 using Windows.System;
 using UWPCore.Framework.Logging;
+using Windows.UI.Xaml.Controls;
 
 namespace ActionNote.App.ViewModels
 {
@@ -218,6 +219,20 @@ namespace ActionNote.App.ViewModels
             {
                 return noteItem != null;
             });
+
+            ToggleNoteItemViewState = new DelegateCommand(() =>
+            {
+                var newValue = !AppSettings.IsNoteItemMaximized.Value;
+                AppSettings.IsNoteItemMaximized.Value = newValue;
+
+                UpdateNoteItemViewState(newValue);
+            });
+        }
+
+        private void UpdateNoteItemViewState(bool isMaximized)
+        {
+            RaisePropertyChanged("NoteItemMaxHeight");
+            RaisePropertyChanged("NotesExpandStateIcon");
         }
 
         private async Task ExecuteSync()
@@ -444,6 +459,33 @@ namespace ActionNote.App.ViewModels
             }
         }
 
+        public double NoteItemMaxHeight {
+            get
+            {
+                if (AppSettings.IsNoteItemMaximized.Value)
+                    return double.MaxValue;
+                else
+                    return AppConstants.MINIMIZED_NOTE_ITEM_HEIGHT;
+            }
+        }
+
+        public IconElement NotesExpandStateIcon
+        {
+            get
+            {
+                string glymph;
+                if (AppSettings.IsNoteItemMaximized.Value)
+                    glymph = "\uE73F"; // BackToWindow
+                else
+                    glymph = "\uE740"; // Fullscreen
+
+                return new FontIcon()
+                {
+                    Glyph = glymph
+                };
+            }
+        }
+
         public ICommand ClearCommand { get; private set; }
 
         public ICommand AddCommand { get; private set; }
@@ -461,5 +503,7 @@ namespace ActionNote.App.ViewModels
         public ICommand PinCommand { get; private set; }
 
         public ICommand UnpinCommand { get; private set; }
+
+        public ICommand ToggleNoteItemViewState { get; private set; }
     }
 }

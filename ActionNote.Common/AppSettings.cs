@@ -33,5 +33,9 @@ namespace ActionNote.Common
         public static StoredObjectBase<bool> SyncInBackground = new LocalObject<bool>("proSyncInBackground", true);
 
         public static StoredObjectBase<string> BackgroundTaskSyncInterval = new LocalObject<string>("proSyncBackInverval", AppConstants.SYNC_INTERVAL_60);
+
+        // *** View state settings: ****
+
+        public static StoredObjectBase<bool> IsNoteItemMaximized = new LocalObject<bool>("noteItemMaximized", true);
     }
 }

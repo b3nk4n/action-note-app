@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uwpcControls="using:UWPCore.Framework.Controls"
     xmlns:localHelpers="using:ActionNote.Common.Helpers"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Name="root">
 
     <Page.Resources>
 
@@ -33,7 +34,7 @@
                         <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                     </Grid>
                     <RichTextBlock localHelpers:RichTextBindingHelper.Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}"
-                                   Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }"/>
+                                   Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }"  MaxHeight="{Binding ElementName=root, Path=DataContext.NoteItemMaxHeight}" TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -53,9 +54,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Uid="ArchiveTitle" Text="ARCHIVE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    <AppBarButton Grid.Column="1" Width="62" Icon="Sort">
+                    <AppBarButton Grid.Column="1" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" />
+                    <AppBarButton Grid.Column="2" Width="62" Icon="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />

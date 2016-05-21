@@ -10,6 +10,7 @@ using UWPCore.Framework.Common;
 using UWPCore.Framework.Mvvm;
 using UWPCore.Framework.UI;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 namespace ActionNote.App.ViewModels
@@ -121,6 +122,20 @@ namespace ActionNote.App.ViewModels
             {
                 return NoteItems.Count > 0;
             });
+
+            ToggleNoteItemViewState = new DelegateCommand(() =>
+            {
+                var newValue = !AppSettings.IsNoteItemMaximized.Value;
+                AppSettings.IsNoteItemMaximized.Value = newValue;
+
+                UpdateNoteItemViewState(newValue);
+            });
+        }
+
+        private void UpdateNoteItemViewState(bool isMaximized)
+        {
+            RaisePropertyChanged("NoteItemMaxHeight");
+            RaisePropertyChanged("NotesExpandStateIcon");
         }
 
         public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -160,6 +175,34 @@ namespace ActionNote.App.ViewModels
         }
         private NoteItem _selectedNote;
 
+        public double NoteItemMaxHeight
+        {
+            get
+            {
+                if (AppSettings.IsNoteItemMaximized.Value)
+                    return double.MaxValue;
+                else
+                    return AppConstants.MINIMIZED_NOTE_ITEM_HEIGHT;
+            }
+        }
+
+        public IconElement NotesExpandStateIcon
+        {
+            get
+            {
+                string glymph;
+                if (AppSettings.IsNoteItemMaximized.Value)
+                    glymph = "\uE73F"; // BackToWindow
+                else
+                    glymph = "\uE740"; // Fullscreen
+
+                return new FontIcon()
+                {
+                    Glyph = glymph
+                };
+            }
+        }
+
         public ICommand ReadOnlyCommand { get; private set; }
 
         public ICommand ClearCommand { get; private set; }
@@ -169,5 +212,7 @@ namespace ActionNote.App.ViewModels
         public ICommand RestoreCommand { get; private set; }
 
         public ICommand SortCommand { get; private set; }
+
+        public ICommand ToggleNoteItemViewState { get; private set; }
     }
 }

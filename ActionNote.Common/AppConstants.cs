@@ -52,5 +52,7 @@ namespace ActionNote.Common
         public const string SYNC_INTERVAL_120 = "120";
         public const string SYNC_INTERVAL_240 = "240";
         public const string SYNC_INTERVAL_MANUAL = "MANUAL";
+
+        public static double MINIMIZED_NOTE_ITEM_HEIGHT = 32;
     }
 }
