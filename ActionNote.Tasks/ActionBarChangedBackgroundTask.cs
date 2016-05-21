@@ -111,7 +111,7 @@ namespace ActionNote.Tasks
                             }
                             else
                             {
-                                _actionCenterService.Refresh(notes);
+                                _actionCenterService.Refresh(notes).Wait();
                             }
                         }
 
@@ -141,7 +141,7 @@ namespace ActionNote.Tasks
                         var notes = getAllTask.Result;
 
                         if (notes != null)
-                            _actionCenterService.Refresh(notes);
+                            _actionCenterService.Refresh(notes).Wait();
                     }
                 }
             }

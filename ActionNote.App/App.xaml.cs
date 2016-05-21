@@ -236,7 +236,7 @@ namespace ActionNote.App
 
             var notes = await _dataService.GetAllNotes();
             if (notes != null)
-                _actionCenterService.Refresh(notes);
+                await _actionCenterService.Refresh(notes);
 
             _tilePinService.UpdateMainTile(notes);
 

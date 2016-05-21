@@ -50,7 +50,7 @@ namespace ActionNote.Tasks
                     if (syncResult.Result != SyncResult.Unchanged || downloadedAFile)
                     {
                         var noteItems = await _dataService.GetAllNotes();
-                        _actionCenterService.Refresh(noteItems);
+                        await _actionCenterService.Refresh(noteItems);
 
                         // delete unreferenced tiles
                         var noteIds = await _dataService.GetAllNoteIds();
@@ -63,8 +63,6 @@ namespace ActionNote.Tasks
                                 await _tilePinService.UpdateAsync(changedNote);
                         }
 
-                        //var badge = _badgeService.Factory.CreateBadgeNumber(_dataService.NotesCount);
-                        //_badgeService.GetBadgeUpdaterForApplication().Update(badge);
                         _tilePinService.UpdateMainTile(noteItems);
                     }
                 }

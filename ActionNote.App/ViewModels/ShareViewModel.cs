@@ -73,7 +73,7 @@ namespace ActionNote.App.ViewModels
                             WindowWrapper.ActiveWrappers.Count > 1 && _deviceInfoService.IsPhone) 
                         {
                             var notes = await _dataService.GetAllNotes();
-                            _actionCenterService.Refresh(notes);
+                            await _actionCenterService.Refresh(notes);
                             var badge = _badgeService.Factory.CreateBadgeNumber(notes.Count);
                             _badgeService.GetBadgeUpdaterForApplication().Update(badge);
                         }

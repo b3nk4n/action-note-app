@@ -30,7 +30,7 @@ namespace ActionNote.Tasks
                     AppSettings.QuickNotesEnabled.Value)
                 {
                     var noteItems = await _dataService.GetAllNotes();
-                    _actionCenterService.Refresh(noteItems);
+                    await _actionCenterService.Refresh(noteItems);
                 }
             }
 

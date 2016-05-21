@@ -9,6 +9,7 @@ using UWPCore.Framework.Storage;
 using System;
 using System.Collections.Generic;
 using UWPCore.Framework.Devices;
+using System.Threading.Tasks;
 
 namespace ActionNote.Common.Services
 {
@@ -68,7 +69,7 @@ namespace ActionNote.Common.Services
             _toastService.ClearHistory();
         }
 
-        public void Refresh(IList<NoteItem> noteItems)
+        public async Task Refresh(IList<NoteItem> noteItems)
         {
             if (IsRefreshBlocked())
                 return;
@@ -91,6 +92,7 @@ namespace ActionNote.Common.Services
 
             if (AppSettings.QuickNotesEnabled.Value)
             {
+                await Task.Delay(100);
                 AddQuickNotes();
             }
         }

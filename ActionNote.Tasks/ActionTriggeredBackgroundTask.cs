@@ -101,7 +101,7 @@ namespace ActionNote.Tasks
                         {
                             // refresh all, because new note could be not at the top of the list
                             if (notes != null)
-                                _actionCenterService.Refresh(notes);//.Wait();
+                                _actionCenterService.Refresh(notes).Wait();
                         }
 
                         // add note physically after adding the notification

@@ -24,7 +24,7 @@ namespace ActionNote.Common.Services
         /// Refreshes the whole action center.
         /// </summary>
         /// <param name="noteItems">The notes items that are in the repo and have to be in the action center.</param>
-        void Refresh(IList<NoteItem> noteItems);
+        Task Refresh(IList<NoteItem> noteItems);
 
         /// <summary>
         /// Gets whether the quick notes are in the action center or not.
