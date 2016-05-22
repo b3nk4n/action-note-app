@@ -25,6 +25,7 @@
     
     
     <!-- Add your application specific runtime directives here. -->
+    <Namespace Name="Windows.UI.Xaml" MarshalObject="Required All"/> <!-- Required because the app was crashing with ComTypeMarshalling_MissingInteropData since 1.14.30 in RELEASE mode -->
 
 
   </Application>
