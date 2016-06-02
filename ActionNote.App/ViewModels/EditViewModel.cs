@@ -582,25 +582,26 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatingFrom(args);
             if (_doSave ||
                 !_wasDiscared &&
+                AppSettings.SaveNoteOnBack.Value &&
                 !_savedInForwardNavigation &&
                 args.NavigationMode == NavigationMode.New &&
                 args.PageType != typeof(ZXing.Mobile.ScanPage))
             {
-                if (AppSettings.SaveNoteOnBack.Value)
+                if (SelectedNote != null && !SelectedNote.IsEmtpy)
                 {
-                    if (SelectedNote != null && !SelectedNote.IsEmtpy)
-                    {
-                        args.Cancel = true;
+                    args.Cancel = true;
 
-                        // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
-                        _callbacks.UnfocusTextBoxes();
-                        await Task.Delay(50);
+                    // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
+                    _callbacks.UnfocusTextBoxes();
+                    await Task.Delay(50);
 
-                        _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
-                        _doSave = false;
-                        await SaveNoteAsync(SelectedNote);
-                        NavigationService.Navigate(args.PageType, args.Parameter); // UGLY workaround
-                    }
+                    _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
+                    _doSave = false;
+                    await SaveNoteAsync(SelectedNote);
+
+                    // UGLY workaround to ensure we have saved the note before we navigate to the notes list,
+                    // so that the list gets with the new note content
+                    NavigationService.Navigate(args.PageType, args.Parameter);
                 }
             }
             else
@@ -717,17 +718,7 @@ namespace ActionNote.App.ViewModels
         {
             if (AppSettings.SaveNoteOnBack.Value)
             {
-                if (SelectedNote != null && !SelectedNote.IsEmtpy)
-                {
-                    e.Handled = true;
-
-                    // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
-
-                    await SaveNoteAsync(SelectedNote);
-                    GoBackToMainPageWithoutBackEvent();
-                }
+                _doSave = true;
             }
         }
 
