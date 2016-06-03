@@ -25,6 +25,12 @@ namespace ActionNote.Common
 
         public static StoredObjectBase<string> DefaultNoteColor = new LocalObject<string>("defaultNoteColor", ColorCategory.Neutral.ToString());
 
+        public static StoredObjectBase<bool> MainLiveTileEnabled = new LocalObject<bool>("liveTile", true);
+
+        public static StoredObjectBase<bool> ShowLiveTileCounter = new LocalObject<bool>("showTileCounter", false);
+
+        public static StoredObjectBase<string> LiveTileType = new LocalObject<string>("tileType", AppConstants.LIVE_TILE_FLIP_NOTES);
+
         // *** Pro Version only: ***
 
         public static StoredObjectBase<string> UserId = new LocalObject<string>("userId", null);

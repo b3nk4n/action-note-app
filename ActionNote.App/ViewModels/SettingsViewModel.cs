@@ -34,6 +34,8 @@ namespace ActionNote.App.ViewModels
 
         public EnumSource<ColorCategory> DefaultNoteColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
+        public StringComboBoxSource LiveTileTypeStringSource { get; private set; }
+
         private Localizer _localizer = new Localizer();
 
         public SettingsViewModel()
@@ -61,6 +63,12 @@ namespace ActionNote.App.ViewModels
                 new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_240, _localizer.Get("BackSyncInterval.240")),
                 new SourceComboBoxItem(AppConstants.SYNC_INTERVAL_MANUAL, _localizer.Get("BackSyncInterval.Manual"))
             });
+
+            LiveTileTypeStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>()
+            {
+                new SourceComboBoxItem(AppConstants.LIVE_TILE_FLIP_NOTES, _localizer.Get("LiveTileType.FlipNotes")),
+                new SourceComboBoxItem(AppConstants.LIVE_TILE_TITLE_LIST, _localizer.Get("LiveTileType.TitleList")),
+            });
         }
 
         public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
@@ -73,6 +81,7 @@ namespace ActionNote.App.ViewModels
             QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
             BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
             DefaultNoteColorEnumSource.SelectedValue = AppSettings.DefaultNoteColor.Value;
+            LiveTileTypeStringSource.SelectedValue = AppSettings.LiveTileType.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -86,6 +95,7 @@ namespace ActionNote.App.ViewModels
             AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
             AppSettings.BackgroundTaskSyncInterval.Value = BackgroundTaskSyncIntervalStringSource.SelectedValue;
             AppSettings.DefaultNoteColor.Value = DefaultNoteColorEnumSource.SelectedValue;
+            AppSettings.LiveTileType.Value = LiveTileTypeStringSource.SelectedValue;
 
         }
 
@@ -222,6 +232,30 @@ namespace ActionNote.App.ViewModels
             set
             {
                 AppSettings.DefaultNoteColor.Value = value.ToString();
+            }
+        }
+
+        public bool MainLiveTileEnabled
+        {
+            get
+            {
+                return AppSettings.MainLiveTileEnabled.Value;
+            }
+            set
+            {
+                AppSettings.MainLiveTileEnabled.Value = value;
+            }
+        }
+
+        public bool ShowLiveTileCounter
+        {
+            get
+            {
+                return AppSettings.ShowLiveTileCounter.Value;
+            }
+            set
+            {
+                AppSettings.ShowLiveTileCounter.Value = value;
             }
         }
 

@@ -286,6 +286,21 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
+                    <TextBlock x:Uid="SettingsLiveTile" Style="{StaticResource TitleTextBlockStyle}" Text="Live Tile" Margin="4,12,4,4" />
+                    <TextBlock x:Uid="SettingsLiveTileDescription" Text="These settings impact the main Live Tile only" TextWrapping="Wrap" FontSize="12" FontStyle="Normal" MaxWidth="500" HorizontalAlignment="Left"
+                                   Margin="4,0,4,8" Visibility="{Binding IsPhone, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" />
+                    <ToggleSwitch x:Name="SettingsUpdateLiveTile" x:Uid="SettingsUpdateLiveTile" Header="Update Live Tile" IsOn="{Binding MainLiveTileEnabled, Mode=TwoWay}" Margin="4" />
+                    <ComboBox x:Uid="SettingsLiveTileType" Header="Live Tile type" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=SettingsUpdateLiveTile, Path=IsOn}"
+                              ItemsSource="{x:Bind ViewModel.LiveTileTypeStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.LiveTileTypeStringSource.SelectedItem, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="uwpcData:SourceComboBoxItem">
+                                <TextBlock Text="{x:Bind Translation}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ToggleSwitch x:Name="SettingsShowLiveTileCounter" x:Uid="SettingsShowLiveTileCounter" Header="Show number of notes" IsOn="{Binding ShowLiveTileCounter, Mode=TwoWay}"
+                                  IsEnabled="{Binding ElementName=SettingsUpdateLiveTile, Path=IsOn}" Margin="4" />
+
                     <TextBlock x:Uid="SettingsOnlineSync" Style="{StaticResource TitleTextBlockStyle}" Text="Online Synchronization" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="SettingsSyncEnabledToggle" x:Uid="SettingsAcrossDevices" Header="Synchronize across all devices" IsOn="{Binding SyncEnabled, Mode=TwoWay}" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsSyncOnStart" Header="Synchronize when app is launched" IsOn="{Binding SyncOnStart, Mode=TwoWay}"

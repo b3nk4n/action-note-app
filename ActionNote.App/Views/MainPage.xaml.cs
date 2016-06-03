@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using ActionNote.Common.Services;
-using Windows.UI.Xaml.Shapes;
 using Windows.UI.Xaml.Documents;
 using UWPCore.Framework.Launcher;
 using Windows.UI.Xaml;

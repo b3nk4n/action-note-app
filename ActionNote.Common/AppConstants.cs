@@ -54,5 +54,8 @@ namespace ActionNote.Common
         public const string SYNC_INTERVAL_MANUAL = "MANUAL";
 
         public static double MINIMIZED_NOTE_ITEM_HEIGHT = 32;
+
+        public const string LIVE_TILE_FLIP_NOTES = "flip";
+        public const string LIVE_TILE_TITLE_LIST = "titleList";
     }
 }

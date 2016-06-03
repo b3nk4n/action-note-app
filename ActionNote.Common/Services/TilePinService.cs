@@ -4,6 +4,7 @@ using Ninject;
 using System.Threading.Tasks;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
+using UWPCore.Framework.Common;
 using System;
 using Windows.UI.StartScreen;
 using ActionNote.Common.Helpers;
@@ -11,17 +12,23 @@ using Windows.UI;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Windows.UI.Notifications;
+using UWPCore.Framework.Devices;
 
 namespace ActionNote.Common.Services
 {
     public class TilePinService : ITilePinService
     {
         private ITileService _tileService;
+        private IBadgeService _badgeService;
+        private IDeviceInfoService _deviceInfoService;
 
         [Inject]
-        public TilePinService(ITileService tileService)
+        public TilePinService(ITileService tileService, IBadgeService badgeService, IDeviceInfoService deviceInfoService)
         {
             _tileService = tileService;
+            _badgeService = badgeService;
+            _deviceInfoService = deviceInfoService;
         }
 
         public void UpdateMainTile(IList<NoteItem> noteItems)
@@ -31,42 +38,72 @@ namespace ActionNote.Common.Services
             // clear all
             updater.Clear();
 
-            if (noteItems.Count > 0)
+            if (AppSettings.MainLiveTileEnabled.Value)
             {
-                // add new notes to flip through
-                updater.EnableNotificationQueue(true);
-
-                // filter out 5 most important notes
-                var fiveMostImportantNotes = new List<NoteItem>();
-                var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
-                var importantNotes = sortedNotes.Where(n => n.IsImportant && !n.IsHidden).Take(5);
-                fiveMostImportantNotes.AddRange(importantNotes);
-                if (fiveMostImportantNotes.Count < 5)
+                if (noteItems.Count > 0)
                 {
-                    foreach (var item in sortedNotes)
+                    if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_FLIP_NOTES)
                     {
-                        if (item.IsHidden)
-                            continue;
+                        // add new notes to flip through
+                        updater.EnableNotificationQueue(true);
 
-                        if (!fiveMostImportantNotes.Contains(item))
+                        // filter out 5 most important notes
+                        var fiveMostImportantNotes = new List<NoteItem>();
+                        var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
+                        var importantNotes = sortedNotes.Where(n => n.IsImportant && !n.IsHidden).Take(5);
+                        fiveMostImportantNotes.AddRange(importantNotes);
+                        if (fiveMostImportantNotes.Count < 5)
                         {
-                            fiveMostImportantNotes.Add(item);
+                            foreach (var item in sortedNotes)
+                            {
+                                if (item.IsHidden)
+                                    continue;
 
-                            if (fiveMostImportantNotes.Count == 5)
+                                if (!fiveMostImportantNotes.Contains(item))
+                                {
+                                    fiveMostImportantNotes.Add(item);
+
+                                    if (fiveMostImportantNotes.Count == 5)
+                                        break;
+                                }
+                            }
+                        }
+
+                        // update the tile sequence
+                        foreach (var noteItem in fiveMostImportantNotes)
+                        {
+                            AdaptiveTileModel tileModel = GetMainTileFlipModel(noteItem);
+                            var tile = _tileService.AdaptiveFactory.Create(tileModel);
+                            tile.Tag = noteItem.ShortId;
+                            updater.Update(tile);
+                        }
+                    }
+                    else if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_TITLE_LIST)
+                    {
+                        var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
+                        var visibleNotes = sortedNotes.Where(n => !n.IsHidden).ToList();
+
+                        if (visibleNotes.Count > 3) // because when there are more than 3 notes (on PC!), we need a flip
+                            updater.EnableNotificationQueue(true);
+
+                        int sideIndex = 0;
+                        for (int i = 0; i < 5; ++i)
+                        {
+                            // update the tile side
+                            var tileModel = GetMainTileTitleListModel(visibleNotes, sideIndex++);
+
+                            if (tileModel == null)
                                 break;
+
+                            var tile = _tileService.AdaptiveFactory.Create(tileModel);
+                            // tile.Tag = noteItem.ShortId; no ID, because we have multiple notes
+                            updater.Update(tile);
                         }
                     }
                 }
-
-                // update the tile sequence
-                foreach (var noteItem in fiveMostImportantNotes)
-                {
-                    var tileModel = GetMainTileModel(noteItem);
-                    var tile = _tileService.AdaptiveFactory.Create(tileModel);
-                    tile.Tag = noteItem.ShortId;
-                    updater.Update(tile);
-                }
             }
+
+            UpdateBadgeInternal(noteItems);
         }
 
         public async Task PinOrUpdateAsync(NoteItem noteItem)
@@ -152,7 +189,20 @@ namespace ActionNote.Common.Services
             }
         }
 
-        private AdaptiveTileModel GetMainTileModel(NoteItem noteItem)
+        private void UpdateBadgeInternal(IList<NoteItem> noteItems)
+        {
+            var badgeCount = noteItems.Count;
+            if (!AppSettings.MainLiveTileEnabled.Value ||
+                !AppSettings.ShowLiveTileCounter.Value)
+            {
+                badgeCount = 0;
+            }
+
+            var badge = _badgeService.Factory.CreateBadgeNumber(badgeCount);
+            _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+        }
+
+        private AdaptiveTileModel GetMainTileFlipModel(NoteItem noteItem)
         {
             // trim the content to 3/9 lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
             var contentWith3Lines = new StringBuilder();
@@ -248,6 +298,91 @@ namespace ActionNote.Common.Services
             };
 
             TrySetAttachementAsBackground(noteItem, tileModel, true);
+
+            return tileModel;
+        }
+
+        /// <summary>
+        /// Gets the title tile list adaptive model.
+        /// </summary>
+        /// <param name="noteItems">All notes.</param>
+        /// <param name="loopIndex">Loop index to indentify which notes to select.</param>
+        /// <returns>Returns the adaptive tile, or NULL, when we are done.</returns>
+        private AdaptiveTileModel GetMainTileTitleListModel(IList<NoteItem> noteItems, int loopIndex)
+        {
+            int NOTES_NORMAL_WIDE = 3;
+            // there fits 1 more item on the phone
+            if (_deviceInfoService.IsPhone)
+                NOTES_NORMAL_WIDE = 4;
+
+            int NOTES_LARGE = 8;
+
+            int startNormalWide = loopIndex * NOTES_NORMAL_WIDE;
+            int startLarge = loopIndex * NOTES_LARGE;
+            int itemsOnNormalWide = noteItems.Count - startNormalWide;
+            int itemsOnLarge = noteItems.Count - startLarge;
+
+            // return NULL, when we are DONE!
+            if (itemsOnLarge <= 0 && itemsOnNormalWide <= 0)
+                return null;
+
+            var tileModel = new AdaptiveTileModel()
+            {
+                Visual = new AdaptiveVisual()
+            };
+
+            if (itemsOnNormalWide > 0)
+            {
+                var medium = new AdaptiveBinding()
+                {
+                    Template = VisualTemplate.TileMedium,
+                    Branding = VisualBranding.Name,
+                };
+                
+                var wide = new AdaptiveBinding()
+                {
+                    Template = VisualTemplate.TileWide,
+                    Branding = VisualBranding.Name,
+                };
+
+                var notesInThisIteration = Math.Min(itemsOnNormalWide, NOTES_NORMAL_WIDE);
+                for (int i = startNormalWide; i < startNormalWide + notesInThisIteration; ++i)
+                {
+                    medium.Children.Add(new AdaptiveText()
+                    {
+                        Content = noteItems[i].Title,
+                        HintStyle = TextStyle.Body,
+                    });
+                    wide.Children.Add(new AdaptiveText()
+                    {
+                        Content = noteItems[i].Title,
+                        HintStyle = TextStyle.Body,
+                    });
+                }
+
+                tileModel.Visual.Bindings.Add(medium);
+                tileModel.Visual.Bindings.Add(wide);
+            }
+
+            if (itemsOnLarge > 0)
+            {
+                var large = new AdaptiveBinding()
+                {
+                    Template = VisualTemplate.TileLarge,
+                    Branding = VisualBranding.Name,
+                };
+
+                var notesInThisIteration = Math.Min(itemsOnLarge, NOTES_LARGE);
+                for (int i = startLarge; i < startLarge + notesInThisIteration; ++i)
+                {
+                    large.Children.Add(new AdaptiveText()
+                    {
+                        Content = noteItems[i].Title,
+                        HintStyle = TextStyle.Body,
+                    });
+                }
+                tileModel.Visual.Bindings.Add(large);
+            }
 
             return tileModel;
         }

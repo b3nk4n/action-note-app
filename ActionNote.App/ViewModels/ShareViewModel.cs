@@ -17,7 +17,6 @@ using Windows.ApplicationModel.DataTransfer.ShareTarget;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using UWPCore.Framework.Notifications;
 
 namespace ActionNote.App.ViewModels
 {
@@ -29,7 +28,7 @@ namespace ActionNote.App.ViewModels
         private IActionCenterService _actionCenterService;
         private IDeviceInfoService _deviceInfoService;
         private IKeyboardService _keyboardService;
-        // private IBadgeService _badgeService;
+        private ITilePinService _tilePinService;
 
         private Localizer _localizer = new Localizer();
         private Localizer _commonLocalizer = new Localizer("ActionNote.Common");
@@ -46,7 +45,7 @@ namespace ActionNote.App.ViewModels
             _actionCenterService = Injector.Get<IActionCenterService>();
             _deviceInfoService = Injector.Get<IDeviceInfoService>();
             _keyboardService = Injector.Get<IKeyboardService>();
-            // _badgeService = Injector.Get<IBadgeService>();
+            _tilePinService = Injector.Get<ITilePinService>();
 
             SaveCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
@@ -74,8 +73,7 @@ namespace ActionNote.App.ViewModels
                         {
                             var notes = await _dataService.GetAllNotes();
                             await _actionCenterService.Refresh(notes);
-                            // var badge = _badgeService.Factory.CreateBadgeNumber(notes.Count);
-                            // _badgeService.GetBadgeUpdaterForApplication().Update(badge);
+                            _tilePinService.UpdateMainTile(notes);
                         }
                     });
 
@@ -133,7 +131,6 @@ namespace ActionNote.App.ViewModels
 
                     if (file != null)
                     {
-                        //var noteItem = await _dataService.GetNote(note.Id);
                         var canonicalPrefix = noteItem.Id + '-' + string.Format("{0:00000}", _random.Next(100000)) + '-';
                         var fileName = canonicalPrefix + file.Name;
 

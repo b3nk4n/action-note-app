@@ -308,7 +308,7 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <comment>EditPage</comment>
   </data>
   <data name="NotOnPcVersion.Text" xml:space="preserve">
-    <value>* Diese Optoin kann auf Grund eines Fehlers in Windows 10 nicht deaktiviert werden. Sobald das 'Red Stone 1' Update im Sommer 2016 veröffentlicht wurde, wird diese Option wieder freigegeben. Vielen Dank für Ihr Verständnis!</value>
+    <value>* Diese Option kann auf Grund eines Fehlers in Windows 10 nicht deaktiviert werden. Sobald das 'Red Stone 1' Update im Sommer 2016 veröffentlicht wurde, wird diese Option wieder freigegeben. Vielen Dank für Ihr Verständnis!</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
