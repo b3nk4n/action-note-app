@@ -123,7 +123,7 @@
 
             <!-- intro arrow -->
             <Image x:Name="image" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="64,8" Source="/Assets/Images/arrow.png" Width="80"
-                   Visibility="{Binding HasNoNotes, Converter={StaticResource boolToVisConv}}"/>
+                   Visibility="{Binding ShowIntoArrow, Converter={StaticResource boolToVisConv}}"/>
 
             <swipe:SwipeListView ItemsSource="{Binding NoteItems}" SelectedItem="{Binding SelectedNote, Mode=TwoWay}" Padding="0,16"
                       ItemTemplate="{StaticResource NoteListDataTemplate}" ItemSwipe="SwipeListView_ItemSwipe" SelectionMode="None" ItemLeftBehavior="Disabled">

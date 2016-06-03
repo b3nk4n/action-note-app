@@ -113,7 +113,7 @@ namespace ActionNote.App.ViewModels
 
                 SelectedNote = null;
 
-                RaisePropertyChanged("HasNoNotes");
+                RaisePropertyChanged("ShowIntoArrow");
 
                 await StopProgressAsync();
             },
@@ -148,7 +148,7 @@ namespace ActionNote.App.ViewModels
                     await _tilePinService.UnpinAsync(noteItem.Id);
                 }
 
-                RaisePropertyChanged("HasNoNotes");
+                RaisePropertyChanged("ShowIntoArrow");
 
                 await StopProgressAsync();
             },
@@ -391,7 +391,7 @@ namespace ActionNote.App.ViewModels
                     NoteItems.Clear();
                     NoteItems = new ObservableCollection<NoteItem>(sorted);
                     RaisePropertyChanged("NoteItems");
-                    RaisePropertyChanged("HasNoNotes");
+                    RaisePropertyChanged("ShowIntoArrow");
                 }
             }
             catch (Exception e)
@@ -451,11 +451,11 @@ namespace ActionNote.App.ViewModels
         }
         private bool _showProgress;
 
-        public bool HasNoNotes
+        public bool ShowIntoArrow
         {
             get
             {
-                return NoteItems.Count == 0;
+                return NoteItems.Count == 0 && !_dataService.IsProVersion;
             }
         }
 
