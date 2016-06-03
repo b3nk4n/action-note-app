@@ -13,6 +13,8 @@ using UWPCore.Framework.Devices;
 using UWPCore.Framework.UI;
 using System.Text;
 using System;
+using ActionNote.Common.Models;
+using ActionNote.Common.Helpers;
 
 namespace ActionNote.App.ViewModels
 {
@@ -29,6 +31,8 @@ namespace ActionNote.App.ViewModels
         public StringComboBoxSource QuickNoteContentTypeStringSource { get; private set; }
 
         public StringComboBoxSource BackgroundTaskSyncIntervalStringSource { get; private set; }
+
+        public EnumSource<ColorCategory> DefaultNoteColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
 
         private Localizer _localizer = new Localizer();
 
@@ -59,61 +63,16 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        public async override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        public override void OnNavigatedTo(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
             base.OnNavigatedTo(parameter, mode, state);
 
-            // we temporarily use pessimistic try-catch here, to find the SETTINGS BUG
-            var sb = new StringBuilder();
-            try
-            {
-                SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine("Error in SortNoteInActionCenterBy:");
-                sb.AppendLine(ex.Message);
-            }
+            ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
 
-            try
-            {
-                QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine("Error in QuickNotesContentType:");
-                sb.AppendLine(ex.Message);
-            }
-
-            try
-            {
-                BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine("Error in BackgroundTaskSyncInterval:");
-                sb.AppendLine(ex.Message);
-            }
-
-            try
-            {
-                ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine("Error in PageTheme:");
-                sb.AppendLine(ex.Message);
-            }
-
-            if (sb.Length > 0)
-            {
-                await _dialogService.ShowAsync(sb.ToString(), "Please send a screenshot to the developer");
-            }
-
-            //SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
-            //QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
-            //BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
-            //ThemeEnumSource.SelectedValue = UniversalPage.PageTheme.Value;
+            SortInActionCenterStringSource.SelectedValue = AppSettings.SortNoteInActionCenterBy.Value;
+            QuickNoteContentTypeStringSource.SelectedValue = AppSettings.QuickNotesContentType.Value;
+            BackgroundTaskSyncIntervalStringSource.SelectedValue = AppSettings.BackgroundTaskSyncInterval.Value;
+            DefaultNoteColorEnumSource.SelectedValue = AppSettings.DefaultNoteColor.Value;
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
@@ -126,6 +85,8 @@ namespace ActionNote.App.ViewModels
             AppSettings.SortNoteInActionCenterBy.Value = SortInActionCenterStringSource.SelectedValue;
             AppSettings.QuickNotesContentType.Value = QuickNoteContentTypeStringSource.SelectedValue;
             AppSettings.BackgroundTaskSyncInterval.Value = BackgroundTaskSyncIntervalStringSource.SelectedValue;
+            AppSettings.DefaultNoteColor.Value = DefaultNoteColorEnumSource.SelectedValue;
+
         }
 
         public bool ShowNotesInActionCenter
@@ -249,6 +210,18 @@ namespace ActionNote.App.ViewModels
             set
             {
                 AppSettings.QuickNotesDefaultTitle.Value = value;
+            }
+        }
+
+        public ColorCategory DefaultNoteColor
+        {
+            get
+            {
+                return ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
+            }
+            set
+            {
+                AppSettings.DefaultNoteColor.Value = value.ToString();
             }
         }
 

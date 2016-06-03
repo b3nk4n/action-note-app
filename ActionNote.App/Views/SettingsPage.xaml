@@ -245,7 +245,7 @@
                 <StackPanel Margin="16">
                     <TextBlock x:Uid="SettingsGeneral" Style="{StaticResource TitleTextBlockStyle}" Text="General" Margin="4" />
                     <ToggleSwitch x:Uid="SettingsAutoSave" Header="Auto save notes" IsOn="{Binding SaveNoteOnBack, Mode=TwoWay}" Margin="4" />
-                    
+
                     <TextBlock x:Uid="SettingsActionCenter" Style="{StaticResource TitleTextBlockStyle}" Text="Action Center" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="ShowNotesInActionCenterToggle" x:Uid="SettingsShowNotes" Header="Show notes" IsOn="{Binding ShowNotesInActionCenter, Mode=TwoWay}" Margin="4" />
                     <ToggleSwitch x:Name="SettingsAllowRemove" x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
@@ -272,9 +272,19 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox x:Uid="SettingsQuickNotesDefaultTitle" Header="Default title for QuickNotes" PlaceholderText="Quick Notes" Width="264" Margin="4" HorizontalAlignment="Left"
-                             Text="{Binding QuickNotesDefaultTitle, Mode=TwoWay}" TextWrapping="NoWrap" AcceptsReturn="False"
-                             IsEnabled="{Binding ElementName=QuickNotesEnabled, Path=IsOn}" />
+
+                    <TextBlock x:Uid="SettingsNotes" Style="{StaticResource TitleTextBlockStyle}" Text="Notes" Margin="4" />
+                    <TextBox x:Uid="SettingsNotesDefaultTitle" Header="Default title" PlaceholderText="Quick Note" Width="264" Margin="4" HorizontalAlignment="Left"
+                             Text="{Binding QuickNotesDefaultTitle, Mode=TwoWay}" TextWrapping="NoWrap" AcceptsReturn="False"/>
+                    <ComboBox x:Uid="SettingsDefaultNoteColor" Header="Default category" Margin="4,4,4,12" Width="264"
+                              ItemsSource="{x:Bind ViewModel.DefaultNoteColorEnumSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.DefaultNoteColorEnumSource.SelectedItem, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding Converter={StaticResource colorToBrushConv}}" Width="220" Height="18"
+                                           Margin="0,2,0,0" HorizontalAlignment="Left" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
                     <TextBlock x:Uid="SettingsOnlineSync" Style="{StaticResource TitleTextBlockStyle}" Text="Online Synchronization" Margin="4,12,4,4" />
                     <ToggleSwitch x:Name="SettingsSyncEnabledToggle" x:Uid="SettingsAcrossDevices" Header="Synchronize across all devices" IsOn="{Binding SyncEnabled, Mode=TwoWay}" Margin="4" />

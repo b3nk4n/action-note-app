@@ -1,4 +1,5 @@
-﻿using UWPCore.Framework.Storage;
+﻿using ActionNote.Common.Models;
+using UWPCore.Framework.Storage;
 
 namespace ActionNote.Common
 {
@@ -20,7 +21,9 @@ namespace ActionNote.Common
 
         public static StoredObjectBase<string> SortNoteInActionCenterBy = new LocalObject<string>("sortNotesInActionCenter", AppConstants.SORT_DATE);
 
-        public static StoredObjectBase<string> QuickNotesDefaultTitle = new LocalObject<string>("qickNotesDefaultTitle", string.Empty); // Emtpy means to use "QuickNotes"
+        public static StoredObjectBase<string> QuickNotesDefaultTitle = new LocalObject<string>("qickNotesDefaultTitle", string.Empty); // Emtpy means to use "Quick Note"
+
+        public static StoredObjectBase<string> DefaultNoteColor = new LocalObject<string>("defaultNoteColor", ColorCategory.Neutral.ToString());
 
         // *** Pro Version only: ***
 

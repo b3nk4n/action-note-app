@@ -392,9 +392,21 @@ Would you like to login with your Microsoft acount right now?</value>
     <value>Synchronization interval</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Default category</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>General</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notes</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Default title</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online Synchronization</value>
@@ -410,7 +422,7 @@ Would you like to login with your Microsoft acount right now?</value>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
     <value>Default title for “Quick Notes“</value>
-    <comment>SettingsPage</comment>
+    <comment>SettingsPage (Deprecated!)</comment>
   </data>
   <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
     <value>Quick Note</value>

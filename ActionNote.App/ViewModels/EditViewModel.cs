@@ -528,6 +528,7 @@ namespace ActionNote.App.ViewModels
             if (noteToEdit == null)
             {
                 noteToEdit = new NoteItem();
+                noteToEdit.Color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
                 IsEditMode = false;
             }
 

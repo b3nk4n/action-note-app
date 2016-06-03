@@ -1,4 +1,5 @@
 ﻿using ActionNote.Common;
+using ActionNote.Common.Helpers;
 using ActionNote.Common.Models;
 using ActionNote.Common.Modules;
 using ActionNote.Common.Services;
@@ -84,6 +85,7 @@ namespace ActionNote.Tasks
 
                         // store note according to sorting
                         var noteItem = new NoteItem(title, content);
+                        noteItem.Color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
 
                         // load notes
                         var getAllTask = _dataService.GetAllNotes();
