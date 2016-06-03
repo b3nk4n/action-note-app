@@ -41,6 +41,7 @@ namespace ActionNote.Common.Models
                 entity.Color = prototype.Color;
                 entity.AttachementFile = prototype.AttachementFile;
                 entity.IsImportant = prototype.IsImportant;
+                entity.IsHidden = prototype.IsHidden;
                 entity.ChangedDate = prototype.ChangedDate;
             }
         }

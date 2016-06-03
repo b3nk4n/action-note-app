@@ -39,12 +39,15 @@ namespace ActionNote.Common.Services
                 // filter out 5 most important notes
                 var fiveMostImportantNotes = new List<NoteItem>();
                 var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
-                var importantNotes = sortedNotes.Where(n => n.IsImportant).Take(5);
+                var importantNotes = sortedNotes.Where(n => n.IsImportant && !n.IsHidden).Take(5);
                 fiveMostImportantNotes.AddRange(importantNotes);
                 if (fiveMostImportantNotes.Count < 5)
                 {
                     foreach (var item in sortedNotes)
                     {
+                        if (item.IsHidden)
+                            continue;
+
                         if (!fiveMostImportantNotes.Contains(item))
                         {
                             fiveMostImportantNotes.Add(item);

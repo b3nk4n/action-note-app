@@ -28,10 +28,15 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontSize="24" FontWeight="SemiBold" Margin="4" />
                         <FontIcon Grid.Column="1" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
                         <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
+                        <Grid Grid.Column="3" VerticalAlignment="Top" Margin="4,4" Width="32" Height="32">
+                            <FontIcon Glyph="{StaticResource ActionCenter}" Visibility="{Binding IsHidden, Converter={StaticResource boolToVisConv}}" />
+                            <Path Width="20" Height="20" Stretch="Fill" Fill="{ThemeResource SystemBaseHighColor}" Data="F1 M 0,23 23,0 24,1 1,24 Z"/>
+                        </Grid>
                     </Grid>
                     <RichTextBlock localHelpers:RichTextBindingHelper.Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}"
                                    Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }"  MaxHeight="{Binding ElementName=root, Path=DataContext.NoteItemMaxHeight}" TextTrimming="CharacterEllipsis"/>

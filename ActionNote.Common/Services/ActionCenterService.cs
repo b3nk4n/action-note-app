@@ -99,6 +99,9 @@ namespace ActionNote.Common.Services
 
         private void AddNotification(NoteItem note)
         {
+            if (note.IsHidden)
+                return;
+
             var toastModel = GetToastModel(note);
             var toastNotification = _toastService.AdaptiveFactory.Create(toastModel);
             toastNotification.SuppressPopup = true;

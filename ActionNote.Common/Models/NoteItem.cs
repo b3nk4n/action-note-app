@@ -84,6 +84,18 @@ namespace ActionNote.Common.Models
         }
         private bool _isImportant;
 
+        [DataMember(Name = "hidden")]
+        public bool IsHidden
+        {
+            get { return _isHidden; }
+            set
+            {
+                Set(ref _isHidden, value);
+                _hasContentChanged = true;
+            }
+        }
+        private bool _isHidden;
+
         [DataMember(Name = "date")]
         public DateTimeOffset ChangedDate
         {
@@ -153,6 +165,7 @@ namespace ActionNote.Common.Models
             clone.Color = Color;
             clone.AttachementFile = AttachementFile;
             clone.IsImportant = IsImportant;
+            clone.IsHidden = IsHidden;
             clone.ChangedDate = ChangedDate;
             clone.MarkAsUnchanged();
             return clone;

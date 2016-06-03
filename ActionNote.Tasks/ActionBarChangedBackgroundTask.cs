@@ -80,6 +80,14 @@ namespace ActionNote.Tasks
                     {
                         var diff = _actionCenterService.DiffWithNotesInActionCenter(notes);
 
+                        // remove hidden notes from diff, because they are alwys included in this diff
+                        for (int i = diff.Count - 1; i >= 0; i--)
+                        {
+                            var note = diff[i];
+                            if (note.IsHidden)
+                                diff.RemoveAt(i);
+                        }
+
                         Logger.WriteLine("ActionBarChangedTask: delete {0} notes", diff.Count);
 
                         var containsQuickNotesInActionCenter = _actionCenterService.ContainsQuickNotes();
