@@ -4,7 +4,6 @@ using Ninject;
 using System.Threading.Tasks;
 using UWPCore.Framework.Notifications.Models;
 using UWPCore.Framework.Storage;
-using UWPCore.Framework.Common;
 using System;
 using Windows.UI.StartScreen;
 using ActionNote.Common.Helpers;
@@ -12,7 +11,6 @@ using Windows.UI;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Windows.UI.Notifications;
 using UWPCore.Framework.Devices;
 
 namespace ActionNote.Common.Services

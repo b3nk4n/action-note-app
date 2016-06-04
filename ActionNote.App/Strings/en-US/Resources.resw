@@ -218,6 +218,10 @@ ment</value>
     <value>EDIT</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Hide in Action Center</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>purchased</value>
     <comment>UpgradePage</comment>
@@ -233,6 +237,10 @@ ment</value>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTES</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Mark as important</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Looks empty, right? A note without content cannot be saved.</value>
@@ -375,6 +383,10 @@ Would you like to login with your Microsoft acount right now?</value>
   <data name="Restore.Label" xml:space="preserve">
     <value>Restore</value>
     <comment>ArchivePage</comment>
+  </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Set category</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synchronize across all devices</value>
