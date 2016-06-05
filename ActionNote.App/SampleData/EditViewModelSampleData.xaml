@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <localViewModels:EditViewModel.SelectedNote>
-        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note in the list rendered in design time." Color="Red" IsImportant="True">
+        <commonModels:NoteItem Title="Title line" Content="This is the sample content of a note in the list rendered in design time." Color="Red" IsImportant="True" IsHidden="True">
         </commonModels:NoteItem>
     </localViewModels:EditViewModel.SelectedNote>
 </localViewModels:EditViewModel>

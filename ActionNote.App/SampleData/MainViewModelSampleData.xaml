@@ -13,7 +13,7 @@
         <commonModels:NoteItem Title="Title line" Content="A short note." Color="Blue" />
         <commonModels:NoteItem Title="Title line with very much bla bla bla bla" Content="This is the sample content of a note." Color="Violett" IsImportant="True" AttachementFile="pseudopath" />
 
-        <commonModels:NoteItem Title="Title only" Content="" Color="Violett" IsImportant="True" AttachementFile="pseudopath" />
+        <commonModels:NoteItem Title="Title only" Content="" Color="Violett" IsImportant="True" IsHidden="True" AttachementFile="pseudopath" />
         <commonModels:NoteItem Title="" Content="Content only" Color="Red" IsImportant="True" AttachementFile="pseudopath" />
     </localViewModels:MainViewModel.NoteItems>
     

@@ -193,6 +193,10 @@
     <value>Manuell</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Notizgröße ändern</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Löschen</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>BEARBEITEN</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Im Action Center verbergen</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>gekauft</value>
     <comment>IAP</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Notizen durchflippen</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Titel-Liste</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTIZEN</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Als wichtig markieren</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Schaut etwas leer aus, nicht wahr? Eine Notiz ohne Inhalt kann leider nicht gespeichert werden.</value>
@@ -367,6 +387,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Wiederherstellen</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Kategorie festlegen</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synchronisiere mit allen Geräten</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Synchronisierungsintervall</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Standard-Kategory</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Allgemein</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Live Tile</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Diese Einstellungen betreffen nur die Haupt-Kachel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Aussehen der Haupt-Kachel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notizen</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Standard-Titel</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online-Synchronisation</value>
@@ -415,6 +463,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Kurznotiz</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Anzahl Notizen anzeigen</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Notizen anzeigen</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>EINSTELLUNGEN</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Live Kachel aktualisieren</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Teilen</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Notiz mit Freunden teilen</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sortieren nach</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategorie</value>

@@ -194,6 +194,10 @@ ment</value>
     <value>Manually</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximize / minimize</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
     <comment>MainPage/EditPage</comment>
@@ -495,6 +499,10 @@ Would you like to login with your Microsoft acount right now?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Share note with your friends</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sort by</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Category</value>
