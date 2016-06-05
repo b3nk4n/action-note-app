@@ -29,7 +29,8 @@
         </Storyboard>
 
         <DataTemplate x:Key="NoteListDataTemplate">
-            <Grid Margin="4" Padding="16,0,8,0" RightTapped="NoteListItem_RightTapped" Tapped="NoteListItem_Tapped" Holding="NoteListItem_Holding" Tag="{Binding }">
+            <Grid Margin="4" Padding="16,0,8,0" RightTapped="NoteListItem_RightTapped" Tapped="NoteListItem_Tapped" Holding="NoteListItem_Holding" Tag="{Binding }"
+                  Background="#01888888"> <!-- Give it a light color, because Transparent is BADLY clickable/touchable -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="16" />
                     <ColumnDefinition Width="*" />
