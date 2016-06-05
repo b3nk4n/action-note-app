@@ -48,7 +48,7 @@ $ npm install monk
 $ npm install filendir
 $ npm install mime
 $ npm install jade
-$ node
+$ node app.js
 ```
 
 Server is now running on [http://localhost:64302/notes/list/XXXXXXXXXX](Link URL)
