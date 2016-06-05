@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using ActionNote.Common.Helpers;
 using UWPCore.Framework.Launcher;
+using Windows.Foundation;
 
 namespace ActionNote.App.Views
 {
@@ -56,19 +57,6 @@ namespace ActionNote.App.Views
             }
         }
 
-        private async void NoteListItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Mouse)
-                return;
-
-            var item = (sender as FrameworkElement).Tag as NoteItem;
-
-            var menu = CreateContextMenu(item);
-            var point = e.GetPosition(null);
-            point.X += 40;
-            await menu.ShowAsync(point);
-        }
-
         private void RichTextTapped(object sender, TappedRoutedEventArgs e)
         {
             var richTextBox = sender as RichTextBlock;
@@ -94,18 +82,35 @@ namespace ActionNote.App.Views
             }
         }
 
-        private async void NoteListItem_Holding(object sender, HoldingRoutedEventArgs e) // TODO: context menu closes directly
+        #region Context menu
+
+        private void NoteListItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch ||
-                e.HoldingState != Windows.UI.Input.HoldingState.Completed)
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Mouse)
                 return;
 
             var item = (sender as FrameworkElement).Tag as NoteItem;
+            var position = e.GetPosition(null);
+            ShowContextMenu(item, null, position);
+            e.Handled = true;
+        }
 
-            var menu = CreateContextMenu(item);
-            var point = e.GetPosition(null);
-            point.X += 40;
-            await menu.ShowAsync(point);
+        private void NoteListItem_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch ||
+                e.HoldingState != Windows.UI.Input.HoldingState.Started)
+                return;
+
+            var item = (sender as FrameworkElement).Tag as NoteItem;
+            var position = e.GetPosition(null);
+            ShowContextMenu(item, null, position);
+            e.Handled = true;
+        }
+
+        private void ShowContextMenu(NoteItem item, UIElement target, Point offset)
+        {
+            var contextMenu = CreateContextMenu(item);
+            contextMenu.ShowAt(target, offset);
         }
 
         /// <summary>
@@ -113,18 +118,29 @@ namespace ActionNote.App.Views
         /// </summary>
         /// <param name="item">The associated note item.</param>
         /// <returns>The context menu popup.</returns>
-        private PopupMenu CreateContextMenu(NoteItem item)
+        private MenuFlyout CreateContextMenu(NoteItem item)
         {
-            var menu = new PopupMenu();
-            menu.Commands.Add(new UICommand(_localizer.Get("Delete.Label"), (command) =>
+            var style = (Style)Application.Current.Resources["MenuFlyoutItemIconTemplate"];
+            var menu = new MenuFlyout();
+            menu.Items.Add(new MenuFlyoutItem()
             {
-                ViewModel.RemoveCommand.Execute(item);
-            }));
-            menu.Commands.Add(new UICommand(_localizer.Get("Restore.Label"), (command) =>
+                Text = _localizer.Get("Delete.Label"),
+                Command = ViewModel.RemoveCommand,
+                CommandParameter = item,
+                Tag = Application.Current.Resources["Delete"],
+                Style = style
+            });
+            menu.Items.Add(new MenuFlyoutItem()
             {
-                ViewModel.RestoreCommand.Execute(item);
-            }));
+                Text = _localizer.Get("Restore.Label"),
+                Command = ViewModel.RestoreCommand,
+                CommandParameter = item,
+                Tag = Application.Current.Resources["Undo"],
+                Style = style
+            });
             return menu;
         }
+
+        #endregion
     }
 }

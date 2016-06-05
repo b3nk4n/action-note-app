@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Documents;
 using UWPCore.Framework.Launcher;
 using Windows.UI.Xaml;
 using ActionNote.Common.Helpers;
+using Windows.Foundation;
 
 namespace ActionNote.App.Views
 {
@@ -76,19 +77,6 @@ namespace ActionNote.App.Views
             }
         }
 
-        private async void NoteListItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Mouse)
-                return;
-
-            var item = (sender as FrameworkElement).Tag as NoteItem;
-
-            var menu = CreateContextMenu(item);
-            var point = e.GetPosition(null);
-            point.X += 66;
-            await menu.ShowAsync(point);
-        }
-
         public void SyncStarted()
         {
             SyncAnimation.Begin();
@@ -119,18 +107,35 @@ namespace ActionNote.App.Views
             }
         }
 
-        private async void NoteListItem_Holding(object sender, HoldingRoutedEventArgs e) // TODO: context menu closes directly
+        #region Context menu
+
+        private void NoteListItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch ||
-                e.HoldingState != Windows.UI.Input.HoldingState.Completed)
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Mouse)
                 return;
 
             var item = (sender as FrameworkElement).Tag as NoteItem;
+            var position = e.GetPosition(null);
+            ShowContextMenu(item, null, position);
+            e.Handled = true;
+        }
 
-            var menu = CreateContextMenu(item);
-            var point = e.GetPosition(null);
-            point.X += 40;
-            await menu.ShowAsync(point);
+        private void NoteListItem_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+            if (e.PointerDeviceType != Windows.Devices.Input.PointerDeviceType.Touch ||
+                e.HoldingState != Windows.UI.Input.HoldingState.Started)
+                return;
+
+            var item = (sender as FrameworkElement).Tag as NoteItem;
+            var position = e.GetPosition(null);
+            ShowContextMenu(item, null, position);
+            e.Handled = true;
+        }
+
+        private void ShowContextMenu(NoteItem item, UIElement target, Point offset)
+        {
+            var contextMenu = CreateContextMenu(item);
+            contextMenu.ShowAt(target, offset);
         }
 
         /// <summary>
@@ -138,34 +143,51 @@ namespace ActionNote.App.Views
         /// </summary>
         /// <param name="item">The associated note item.</param>
         /// <returns>The context menu popup.</returns>
-        private PopupMenu CreateContextMenu(NoteItem item)
+        private MenuFlyout CreateContextMenu(NoteItem item)
         {
-            var menu = new PopupMenu();
-            menu.Commands.Add(new UICommand(_localizer.Get("Delete.Label"), (command) =>
+            var style = (Style)Application.Current.Resources["MenuFlyoutItemIconTemplate"];
+            var menu = new MenuFlyout();
+            menu.Items.Add(new MenuFlyoutItem()
             {
-                ViewModel.RemoveCommand.Execute(item);
-            }));
-            menu.Commands.Add(new UICommand(_localizer.Get("Share.Label"), (command) =>
+                Text = _localizer.Get("Delete.Label"),
+                Command = ViewModel.RemoveCommand,
+                CommandParameter = item,
+                Tag = Application.Current.Resources["Delete"],
+                Style = style
+            });
+            menu.Items.Add(new MenuFlyoutItem()
             {
-                ViewModel.ShareCommand.Execute(item);
-            }));
-
+                Text = _localizer.Get("Share.Label"),
+                Command = ViewModel.ShareCommand,
+                CommandParameter = item,
+                Tag = Application.Current.Resources["Share"],
+                Style = style
+            });
             if (_tilePinService.Contains(item.Id))
             {
-                menu.Commands.Add(new UICommand(_localizer.Get("Unpin.Label"), (command) =>
+                menu.Items.Add(new MenuFlyoutItem()
                 {
-                    ViewModel.UnpinCommand.Execute(item);
-                }));
+                    Text = _localizer.Get("Unpin.Label"),
+                    Command = ViewModel.UnpinCommand,
+                    CommandParameter = item,
+                    Tag = Application.Current.Resources["Unpin"],
+                    Style = style
+                });
             }
             else
             {
-                menu.Commands.Add(new UICommand(_localizer.Get("Pin.Label"), (command) =>
+                menu.Items.Add(new MenuFlyoutItem()
                 {
-                    ViewModel.PinCommand.Execute(item);
-                }));
+                    Text = _localizer.Get("Pin.Label"),
+                    Command = ViewModel.PinCommand,
+                    CommandParameter = item,
+                    Tag = Application.Current.Resources["Pin"],
+                    Style = style
+                });
             }
-
             return menu;
         }
+
+        #endregion
     }
 }

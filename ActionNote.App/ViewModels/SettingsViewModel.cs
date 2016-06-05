@@ -11,8 +11,6 @@ using UWPCore.Framework.Common;
 using ActionNote.App.Views;
 using UWPCore.Framework.Devices;
 using UWPCore.Framework.UI;
-using System.Text;
-using System;
 using ActionNote.Common.Models;
 using ActionNote.Common.Helpers;
 
