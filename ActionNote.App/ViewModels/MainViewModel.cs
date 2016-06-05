@@ -250,7 +250,8 @@ namespace ActionNote.App.ViewModels
                     await _dataService.UploadMissingAttachements();
                     await _dataService.DownloadMissingAttachements();
 
-                    await ReloadDataAsync();
+                    if (syncResult.Result != SyncResult.Unchanged)
+                        await ReloadDataAsync();
 
                     // unpin deleted tiles
                     var allNoteIds = await _dataService.GetAllNoteIds();

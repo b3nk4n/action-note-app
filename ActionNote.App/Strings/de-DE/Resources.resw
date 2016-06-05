@@ -416,7 +416,7 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
-    <value>Standard-Kategory</value>
+    <value>Standard-Kategorie</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
