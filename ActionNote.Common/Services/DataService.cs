@@ -655,6 +655,7 @@ namespace ActionNote.Common.Services
             if (!Archive.HasLoaded)
                 await Archive.Load();
 
+            bool success = false;
             if (IsSynchronizationActive)
             {
                 if (_networkInfoService.HasInternet)
@@ -665,19 +666,25 @@ namespace ActionNote.Common.Services
                     if (res != null &&
                         res.IsSuccessStatusCode)
                     {
-                        Archive.Remove(item);
-                        return true;
+                        success = true;
                     }
                 }
-
-                // can not delete, because it can ensure the server is delete-synced
-                return false;
             }
             else
             {
+                // success, because if we are offline, we just can delete the file w.o. any problems (but only because the Archiv is not synced!
+                success = true;
+            }
+
+            if (success)
+            {
                 Archive.Remove(item);
+                await RemoveUnsyncedEntry(item);
                 return true;
             }
+
+            // can not delete, because it cannot ensure the server is delete-synced
+            return false;
         }
 
         public async Task<bool> RemoveAllFromArchiveAsync()
@@ -688,6 +695,7 @@ namespace ActionNote.Common.Services
 
             var items = Archive.GetAll();
 
+            bool success = false;
             if (IsSynchronizationActive)
             {
                 if (_networkInfoService.HasInternet)
@@ -705,25 +713,28 @@ namespace ActionNote.Common.Services
                     if (res != null &&
                         res.IsSuccessStatusCode)
                     {
-                        foreach (var item in items)
-                        {
-                            Archive.Remove(item);
-                        }
-                        return true;
+                        success = true;
                     }
-                }
-
-                // can not delete, because it can ensure the server is delete-synced
-                return false;
+                } 
             }
             else
+            {
+                // success, because if we are offline, we just can delete the file w.o. any problems (but only because the Archiv is not synced!
+                success = true;
+            }
+
+            if (success)
             {
                 foreach (var item in items)
                 {
                     Archive.Remove(item);
+                    await RemoveUnsyncedEntry(item);
                 }
                 return true;
             }
+
+            // can not delete, because it can ensure the server is delete-synced
+            return false;
         }
 
         public async Task CleanUpAttachementFilesAsync()
