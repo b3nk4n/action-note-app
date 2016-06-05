@@ -475,10 +475,13 @@ namespace ActionNote.App.ViewModels
 
             if (!updateDeleted &&
                 noteItem.HasAttachement &&
-                noteItem.HasAttachementChanged &&
-                _dataService.IsSynchronizationActive)
+                noteItem.HasAttachementChanged)
             {
-                await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
+                if (_dataService.IsSynchronizationActive)
+                {
+                    await StartProgressAsync(_localizer.Get("Progress.UploadingFile"));
+                }
+                
                 await _dataService.UploadAttachement(noteItem);
             }
 

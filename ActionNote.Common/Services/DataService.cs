@@ -350,22 +350,23 @@ namespace ActionNote.Common.Services
             if (!item.HasAttachement)
                 return true;
 
+            // save the unsynced change before upload, to make sure we realy do uploat it, even when the app is e.g. crashing / terminating inbetween
+            // New: Even when not in PRO version or when online-sync is disabled, so that it can be uploaded later.
+            await Unsynced.Load(); // ensure loaded
+            var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
+
+            if (createUnsyncItem)
+            {
+                if (Unsynced.Contains(item.Id))
+                    Unsynced.Update(unsyncedItem);
+                else
+                    Unsynced.Add(unsyncedItem);
+                await Unsynced.Save(unsyncedItem);
+            }
+
             if (IsSynchronizationActive &&
                 _networkInfoService.HasInternet)
             {
-                // save the unsynced change before upload, to make sure we realy do uploat it, even when the app is e.g. crashing / terminating inbetween
-                await Unsynced.Load(); // ensure loaded
-                var unsyncedItem = new UnsyncedItem(item.Id, UnsyncedType.FileUpload);
-
-                if (createUnsyncItem)
-                {
-                    if (Unsynced.Contains(item.Id))
-                        Unsynced.Update(unsyncedItem);
-                    else
-                        Unsynced.Add(unsyncedItem);
-                    await Unsynced.Save(unsyncedItem);
-                }
-
                 string filePath = AppConstants.ATTACHEMENT_BASE_PATH + item.AttachementFile;
                 var file = await _localStorageService.GetFileAsync(filePath);
 

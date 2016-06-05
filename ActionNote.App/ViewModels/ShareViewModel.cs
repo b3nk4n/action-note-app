@@ -195,8 +195,7 @@ namespace ActionNote.App.ViewModels
 
             if (!updateDeleted &&
                 noteItem.HasAttachement &&
-                noteItem.HasAttachementChanged &&
-                _dataService.IsSynchronizationActive)
+                noteItem.HasAttachementChanged)
             {
                 await _dataService.UploadAttachement(noteItem);
             }
