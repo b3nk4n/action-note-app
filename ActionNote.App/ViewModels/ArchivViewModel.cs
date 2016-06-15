@@ -80,7 +80,7 @@ namespace ActionNote.App.ViewModels
                     SelectedNote = null;
                 }
                 else
-                { // TODO: Currently we never get here, because the method returns TRUE even when we have no internet connection.
+                { // Currently we never get here, because the method returns TRUE even when we have no internet connection.
                     await _dialogService.ShowAsync(
                         _localizer.Get("Message.CouldNotDeleteArchive"),
                         _localizer.Get("Message.Title.Warning"));
@@ -97,12 +97,6 @@ namespace ActionNote.App.ViewModels
                 {
                     NoteItems.Remove(noteItem);
                     SelectedNote = null;
-                }
-                else
-                { // TODO: restore waring message?! Currently we never get here, because the method returns TRUE even when we have no internet connection.
-                    //await _dialogService.ShowAsync(
-                    //    _localizer.Get("Message.CouldNotDeleteArchive"),
-                    //    _localizer.Get("Message.Title.Warning"));
                 }
             },
             (noteItem) =>

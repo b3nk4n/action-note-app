@@ -193,6 +193,10 @@
     <value>El ile</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Büyült / küçült</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Sil</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>DÜZENLE</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Bildirim Merkezin'de gizle</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>satın alındı</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Dönen notlar</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Başlık listesi</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTLAR</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Önemli olarak işaretle</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Boş gözüküyor, değil mi? Bağlantısız bir not kayıt edilmez.</value>
@@ -367,6 +387,10 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
     <value>Onar</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Kategori ayarla</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Tüm cihazlar arası senkronize</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
     <value>Senkronizasyon aralığı</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Varsayılan kategori</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Genel</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Canlı Kutucuk (Live Tile)</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Bu seçenekler sadece ana Canlı Kutucuğa etki edecek</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Canlı Kutucuk tipi</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notlar</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Varsayılan başlık</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Çevrimiçi Senkronizasyon</value>
@@ -415,6 +463,10 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
     <value>Hızlı Not</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Notların sayısını göster</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Notları göster</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
     <value>SEÇENEKLER</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Canlı Kutucuğu Güncelle</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Paylaş</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Notu arkadaşlarınızla paylaşın</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sırala</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategory</value>

@@ -193,6 +193,10 @@
     <value>Manuellt</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximera / minimera</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Ta bort</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>REDIGERA</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Dölj i Action center</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>köpt</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Bläddra anteckningar</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Titellista</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>ANTECKNINGAR</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Markera som viktig</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Ser tomt ut? En anteckning utan innehåll är inte sparas.</value>
@@ -367,6 +387,10 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <value>Återskapa</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sätt kategori</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synkronisera över alla enheter</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <value>Synkroniseringsintervall</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Standardkategori</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Allmänt</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Levande bricka (Live Tile)</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Dessa inställningar påverkar enbart den levande brickan</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Typ av levande bricka</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Anteckningar</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Standardtitel</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Onlinesynkronisering</value>
@@ -415,6 +463,10 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <value>SnabbNot</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Visa antal anteckningar</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Visa anteckningar</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <value>INSTÄLLNINGAR</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Uppdatera levande bricka</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Dela</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Dela den med dina vänner</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sortera efter</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategori</value>

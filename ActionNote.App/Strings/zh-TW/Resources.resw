@@ -193,6 +193,10 @@
     <value>手動</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>最大化 / 最小化</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>刪除</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>編輯</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>在重要訊息中心隱藏</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>購買</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>翻動筆記</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>標題列表</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>筆記</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>標記為重要</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>看起來很空,是吧?沒有內容的筆記是不能保存的。</value>
@@ -367,6 +387,10 @@
     <value>還原</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>設定類別</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>在所有設備上同步</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@
     <value>同步間隔</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>默認分類</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>一般設定</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>動態磁貼</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>這些設定只影響到動態磁貼</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>動態磁貼類型</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>筆記</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>預設標題</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>線上同步設定</value>
@@ -415,6 +463,10 @@
     <value>快速筆記</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>顯示筆記編號</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>顯示筆記</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@
     <value>設定</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>更新動態磁貼</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>分享</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@
   <data name="ShareContentDescription" xml:space="preserve">
     <value>與您的朋友分享它</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>排序依據</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>類別</value>

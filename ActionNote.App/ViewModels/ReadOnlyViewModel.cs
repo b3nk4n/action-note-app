@@ -71,13 +71,6 @@ namespace ActionNote.App.ViewModels
 
                     GoBackToArchivePage();
                 }
-                else
-                {
-                    // TODO: also a message here?
-                    //await _dialogService.ShowAsync(
-                    //    _localizer.Get("Message.CouldNotDeleteArchive"),
-                    //    _localizer.Get("Message.Title.Warning"));
-                }
             },
             (noteItem) =>
             {

@@ -193,6 +193,10 @@
     <value>Manualmente</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Massimizza / minimizza</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Cancella</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>MODIFICA</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Nascondi nel Action Center</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>comprata</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Flip notes</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Titolo elenco</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>APPUNTI</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Seleziona come importante</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Un appunto senza contenuto non può essere salvato.</value>
@@ -367,6 +387,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>Ripristinare</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Categoria</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Sincronizza con tutti i dispositivi</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>intervallo di sincronizzazione</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Categoria standard</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Generale</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Live Tile</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Queste impostazioni riguardano solo la Live Tile principale</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Tipo Live Tile</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notes</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Titolo standard</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online-sincronizzazione</value>
@@ -415,6 +463,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>Appunto rapido</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Visualizza numero appunti</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Visualizza appunti</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>IMPOSTAZIONI</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Aggiorna Live Tile</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Condividi</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Condividi con i tuoi amici</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ordina per</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Categoria</value>

@@ -193,6 +193,10 @@
     <value>באופן ידני</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>הרחב / כווץ</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>מחק</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>ערוך</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>הסתר במרכז ההתראות</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>נרכש</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>סובב פתקים</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>רשימת כותרות</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>פתקים</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>סמן כחשוב</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>קצת ריק לא ? פתק ללא תוכן לא יכול להישמר</value>
@@ -366,6 +386,10 @@
     <value>שחזור</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>בחר קטגוריה</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>סנכרון על גבי כל המכשירים</value>
     <comment>SettingsPage</comment>
@@ -390,9 +414,33 @@
     <value>התערבות בסנכרון</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>צבע ברירת מחדל</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>כללי</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>אריח חי</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>ההגדרות הללו ישפיעו על האריח החי הראשי בלבד</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>סוג האריח החי</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>פתקים</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>כותרת ברירת מחדל</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>סנכרון אונליין</value>
@@ -414,6 +462,10 @@
     <value>פתק מהיר</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>הראה מספר של פתקים</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>הצג פתקים</value>
     <comment>SettingsPage</comment>
@@ -434,6 +486,10 @@
     <value>הגדרות</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>עדכן אריח חי</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>שתף</value>
     <comment>MainPage</comment>
@@ -441,6 +497,10 @@
   <data name="ShareContentDescription" xml:space="preserve">
     <value>שתף פתקים עם החברים שלך</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>מיין לפי</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>קטגוריה</value>

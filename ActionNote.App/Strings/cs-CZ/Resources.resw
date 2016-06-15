@@ -193,6 +193,10 @@
     <value>Ruční</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximalizovat / minimalizovat</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Odstranit</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>EDITACE</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Skrýt v Centru Akcí</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>zakoupeno</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Překlápět poznámky</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Seznam nadpisů</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>POZNÁMKY</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Označit jako důležité</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Vypadá to tady prázdně, že? Poznámku bez obsahu nelze uložit.</value>
@@ -367,6 +387,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Obnovit</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Nastavit kategorii</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Synchronizace všech zařízení</value>
     <comment>SettingsPage</comment>
@@ -391,9 +415,33 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Interval synchronizace</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Výchozí kategorie</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Obecné</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Živá dlaždice (Live Tile)</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Tato nastavení ovlivňují pouze živou dlaždici</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Typ živé dlaždice</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Poznámky</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Výchozí nadpis</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online synchronizace</value>
@@ -415,6 +463,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Rychlá poznámka</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Zobrazovat počet poznámek</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Zobrazit poznámky</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>NASTAVENÍ</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Aktualizovat živou dlaždici</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Sdílet</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Sdílejte se svými přáteli</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Seřadit podle</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategorie</value>
