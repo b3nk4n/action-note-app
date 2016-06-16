@@ -43,7 +43,16 @@ namespace ActionNote.Tasks
             taskInstance.Canceled += (s, e) =>
             {
                 if (hasMutex)
-                    backgroundMutex.ReleaseMutex();
+                {
+                    try
+                    {
+                        backgroundMutex.ReleaseMutex();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // catch it. Reported in DevCenter Health
+                    }
+                }
             };
 
             var start = DateTimeOffset.Now.Ticks;

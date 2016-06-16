@@ -429,10 +429,7 @@ namespace ActionNote.App.ViewModels
         /// </summary>
         private void GoBackToMainPageWithoutBackEvent()
         {
-            //if (NavigationService.CanGoBack)
-            //    NavigationService.GoBack();
-            //else
-                NavigationService.Navigate(typeof(MainPage));
+            NavigationService.Navigate(typeof(MainPage));
         }
 
         private async Task SaveNoteAsync(NoteItem noteItem)

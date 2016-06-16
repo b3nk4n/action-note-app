@@ -132,6 +132,8 @@ namespace ActionNote.Common.Services
                     _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
                 }
             }
+
+            UpdateSecondaryBadgeIcon(noteItem);
         }
 
         public async Task UpdateAsync(NoteItem noteItem)
@@ -147,6 +149,21 @@ namespace ActionNote.Common.Services
 
             await _tileService.UpdateAsync(noteItem.Id, secondaryTile);
             _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
+
+            UpdateSecondaryBadgeIcon(noteItem);
+        }
+
+        private void UpdateSecondaryBadgeIcon(NoteItem noteItem)
+        {
+            if (noteItem.IsImportant)
+            {
+                var icon = _badgeService.Factory.CreateBadgeNumber(BadgeGlyphIcon.Attention);
+                _badgeService.GetBadgeUpdaterForSecondaryTile(noteItem.Id).Update(icon);
+            }
+            else
+            {
+                _badgeService.GetBadgeUpdaterForSecondaryTile(noteItem.Id).Clear();
+            }
         }
 
         private static void UpdateSecondaryTileColor(NoteItem noteItem, SecondaryTileModel secondaryTile)
@@ -388,6 +405,12 @@ namespace ActionNote.Common.Services
         private AdaptiveTileModel GetSecondaryTileModel(NoteItem noteItem)
         {
             // trim the content lines, because for somehow no text will be displayed when there are too many lines (possible minor Windows 10 bug?)
+            // Since 10586.420, now only 3 lines fit on the screen? Windows PC?
+            int LINES_NORMAL_WIDE = 3;
+            // there fits 1 more item on the phone
+            if (_deviceInfoService.IsPhone)
+                LINES_NORMAL_WIDE = 4;
+
             var contentWith4Lines = new StringBuilder();
             if (!string.IsNullOrEmpty(noteItem.Content))
             {
@@ -398,7 +421,7 @@ namespace ActionNote.Common.Services
                     if (i >= 8)
                         break;
 
-                    if (i < 4)
+                    if (i < LINES_NORMAL_WIDE)
                     {
                         contentWith4Lines.Append(splitted[i].Trim());
                         contentWith4Lines.Append(Environment.NewLine);

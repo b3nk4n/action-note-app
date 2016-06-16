@@ -33,12 +33,17 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Title}" TextWrapping="Wrap" FontSize="24" FontWeight="SemiBold" Margin="4" />
-                        <FontIcon Grid.Column="1" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
-                        <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
-                        <Grid Grid.Column="3" Visibility="{Binding IsHidden, Converter={StaticResource boolToVisConv}}" VerticalAlignment="Top" Margin="4,4" Width="32" Height="32">
+                        <Grid Grid.Column="1" Visibility="{Binding IsHidden, Converter={StaticResource boolToVisConv}}" VerticalAlignment="Top" Margin="4,4" Width="32" Height="32">
                             <FontIcon Glyph="{StaticResource ActionCenter}" FontSize="21" Margin="0,-1,0,0" />
                             <Path Width="20" Height="20" Stretch="Fill" Opacity="0.8" Fill="{ThemeResource SystemBaseHighColor}" Data="F1 M 0,18 18,0 19,1 1,19 Z"/>
                         </Grid>
+                        <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8" />
+                        <FontIcon Grid.Column="3" Glyph="{StaticResource Info}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,8"
+                                  RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <RotateTransform Angle="180" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </Grid>
                     <RichTextBlock localHelpers:RichTextBindingHelper.Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}"
                                    Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }"  MaxHeight="{Binding ElementName=root, Path=DataContext.NoteItemMaxHeight}" TextTrimming="CharacterEllipsis"/>
@@ -64,8 +69,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Uid="ArchiveTitle" Text="ARCHIVE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
-                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="62" Icon="Sort" ToolTipService.ToolTip="Sort">
+                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Width="54" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
+                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="54" Icon="Sort" ToolTipService.ToolTip="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />

@@ -39,7 +39,16 @@ namespace ActionNote.Tasks
             taskInstance.Canceled += (s, e) =>
             {
                 if (hasMutex)
-                    backgroundMutex.ReleaseMutex();
+                {
+                    try
+                    {
+                        backgroundMutex.ReleaseMutex();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        // catch it. Reported in DevCenter Health
+                    }
+                }
             };
 
             // wait to ensure ActionTriggeredBackgroundTask is running first

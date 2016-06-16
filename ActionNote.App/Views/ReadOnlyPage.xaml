@@ -34,7 +34,15 @@
                             <Path Width="20" Height="20" Stretch="Fill" Opacity="0.8" Fill="{ThemeResource SystemBaseHighColor}" Data="F1 M 0,18 18,0 19,1 1,19 Z"/>
                         </Grid>
                     </AppBarToggleButton>
-                    <AppBarToggleButton x:Uid="MarkAsImportant" Grid.Column="2" Width="54" IsHitTestVisible="False" IsChecked="{Binding SelectedNote.IsImportant, Mode=TwoWay}" Icon="Flag" />
+                    <AppBarToggleButton x:Uid="MarkAsImportant" Grid.Column="2" Width="54" IsHitTestVisible="False" IsChecked="{Binding SelectedNote.IsImportant, Mode=TwoWay}" >
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="{StaticResource Info}" RenderTransformOrigin="0.5,0.5">
+                                <FontIcon.RenderTransform>
+                                    <RotateTransform Angle="180" />
+                                </FontIcon.RenderTransform>
+                            </FontIcon>
+                        </AppBarToggleButton.Icon>
+                    </AppBarToggleButton>
                     <AppBarButton x:Uid="SetNoteCategory" Grid.Column="3" Width="54" IsHitTestVisible="False" Foreground="{Binding SelectedNote.Color, Converter={StaticResource colorToBrushConv}}"  Style="{StaticResource ColorfulAppBarButtonStyle}">
                         <AppBarButton.Icon>
                             <PathIcon Width="20" Data="M10,0.5L11.9145803451538,0.693006455898285 13.697826385498,1.24655771255493 16.7175121307373,3.28248739242554 18.7534427642822,6.30217313766479 19.3069934844971,8.08541965484619 19.5,10 19.3069934844971,11.9145803451538 18.7534427642822,13.697826385498 16.7175121307373,16.7175121307373 13.697826385498,18.7534427642822 11.9145803451538,19.3069934844971 10,19.5 8.08541965484619,19.3069934844971 6.30217313766479,18.7534427642822 3.28248739242554,16.7175121307373 1.24655771255493,13.697826385498 0.693006455898285,11.9145803451538 0.5,10 0.693006455898285,8.08541965484619 1.24655771255493,6.30217313766479 3.28248739242554,3.28248739242554 6.30217313766479,1.24655771255493 8.08541965484619,0.693006455898285 10,0.5z" />
