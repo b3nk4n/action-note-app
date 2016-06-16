@@ -132,8 +132,6 @@ namespace ActionNote.Common.Services
                     _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
                 }
             }
-
-            UpdateSecondaryBadgeIcon(noteItem);
         }
 
         public async Task UpdateAsync(NoteItem noteItem)
@@ -149,21 +147,6 @@ namespace ActionNote.Common.Services
 
             await _tileService.UpdateAsync(noteItem.Id, secondaryTile);
             _tileService.GetUpdaterForSecondaryTile(noteItem.Id).Update(tile);
-
-            UpdateSecondaryBadgeIcon(noteItem);
-        }
-
-        private void UpdateSecondaryBadgeIcon(NoteItem noteItem)
-        {
-            if (noteItem.IsImportant)
-            {
-                var icon = _badgeService.Factory.CreateBadgeNumber(BadgeGlyphIcon.Attention);
-                _badgeService.GetBadgeUpdaterForSecondaryTile(noteItem.Id).Update(icon);
-            }
-            else
-            {
-                _badgeService.GetBadgeUpdaterForSecondaryTile(noteItem.Id).Clear();
-            }
         }
 
         private static void UpdateSecondaryTileColor(NoteItem noteItem, SecondaryTileModel secondaryTile)
@@ -246,6 +229,13 @@ namespace ActionNote.Common.Services
                 }
             }
 
+            // flag important notes
+            string title;
+            if (noteItem.IsImportant)
+                title = "⚐ " + noteItem.Title;
+            else
+                title = noteItem.Title;
+
             var tileModel = new AdaptiveTileModel()
             {
                 Visual = new AdaptiveVisual()
@@ -260,7 +250,7 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title,
+                                   Content = title,
                                    HintStyle = TextStyle.Base,
                                },
                                new AdaptiveText()
@@ -278,7 +268,7 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title,
+                                   Content = title,
                                    HintStyle = TextStyle.Base
                                },
                                new AdaptiveText()
@@ -297,7 +287,7 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title,
+                                   Content = title,
                                    HintStyle = TextStyle.Base
                                },
                                new AdaptiveText()
@@ -363,14 +353,21 @@ namespace ActionNote.Common.Services
                 var notesInThisIteration = Math.Min(itemsOnNormalWide, NOTES_NORMAL_WIDE);
                 for (int i = startNormalWide; i < startNormalWide + notesInThisIteration; ++i)
                 {
+                    // flag important notes
+                    string title;
+                    if (noteItems[i].IsImportant)
+                        title = "⚐ " + noteItems[i].Title;
+                    else
+                        title = noteItems[i].Title;
+
                     medium.Children.Add(new AdaptiveText()
                     {
-                        Content = noteItems[i].Title,
+                        Content = title,
                         HintStyle = TextStyle.Body,
                     });
                     wide.Children.Add(new AdaptiveText()
                     {
-                        Content = noteItems[i].Title,
+                        Content = title,
                         HintStyle = TextStyle.Body,
                     });
                 }
@@ -390,9 +387,16 @@ namespace ActionNote.Common.Services
                 var notesInThisIteration = Math.Min(itemsOnLarge, NOTES_LARGE);
                 for (int i = startLarge; i < startLarge + notesInThisIteration; ++i)
                 {
+                    // flag important notes
+                    string title;
+                    if (noteItems[i].IsImportant)
+                        title = "⚐ " + noteItems[i].Title;
+                    else
+                        title = noteItems[i].Title;
+
                     large.Children.Add(new AdaptiveText()
                     {
-                        Content = noteItems[i].Title,
+                        Content = title,
                         HintStyle = TextStyle.Body,
                     });
                 }
@@ -429,6 +433,13 @@ namespace ActionNote.Common.Services
                 }
             }
 
+            // flag important notes
+            string title;
+            if (noteItem.IsImportant)
+                title = "⚐ " + noteItem.Title;
+            else
+                title = noteItem.Title;
+
             var tileModel = new AdaptiveTileModel()
             {
                 Visual = new AdaptiveVisual()
@@ -442,7 +453,8 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title
+                                   Content = title,
+                                   HintWrap = true
                                }
                            }
                        },
@@ -454,7 +466,7 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title,
+                                   Content = title,
                                    HintStyle = TextStyle.Base,
                                },
                                new AdaptiveText()
@@ -472,7 +484,7 @@ namespace ActionNote.Common.Services
                            {
                                new AdaptiveText()
                                {
-                                   Content = noteItem.Title,
+                                   Content = title,
                                    HintStyle = TextStyle.Base
                                },
                                new AdaptiveText()

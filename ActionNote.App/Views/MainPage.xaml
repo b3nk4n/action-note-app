@@ -52,12 +52,7 @@
                             <Path Width="20" Height="20" Stretch="Fill" Opacity="0.8" Fill="{ThemeResource SystemBaseHighColor}" Data="F1 M 0,18 18,0 19,1 1,19 Z"/>
                         </Grid>
                         <FontIcon Grid.Column="2" Glyph="{StaticResource Attach}" Visibility="{Binding HasAttachement, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,4" />
-                        <FontIcon Grid.Column="3" Glyph="{StaticResource Info}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,4"
-                                  RenderTransformOrigin="0.5,0.5">
-                            <FontIcon.RenderTransform>
-                                <RotateTransform Angle="180" />
-                            </FontIcon.RenderTransform>
-                        </FontIcon>
+                        <FontIcon Grid.Column="3" Glyph="{StaticResource Flag}" Visibility="{Binding IsImportant, Converter={StaticResource boolToVisConv}}" Width="32" Height="32" VerticalAlignment="Top" Margin="4,4" />
                     </Grid>
                     <RichTextBlock localHelpers:RichTextBindingHelper.Text="{Binding Content}" TextWrapping="Wrap" Margin="4" Visibility="{Binding Content, Converter={StaticResource emptyStringToVisConv}}"
                                    Tapped="RichTextTapped" IsTapEnabled="True" IsTextSelectionEnabled="False" Tag="{Binding }" MaxHeight="{Binding ElementName=root, Path=DataContext.NoteItemMaxHeight}" TextTrimming="CharacterEllipsis"/>
