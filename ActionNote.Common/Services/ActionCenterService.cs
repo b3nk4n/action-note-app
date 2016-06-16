@@ -251,7 +251,7 @@ namespace ActionNote.Common.Services
                                 new AdaptiveImage()
                                 {
                                     Placement = ImagePlacement.AppLogoOverride,
-                                    Source = "Assets/StoreLogo_trans.png"
+                                    Source = "Assets/StoreLogo_trans.scale-200.png"
                                 },
                                 new AdaptiveText()
                                 {
