@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note não é apenas mais um aplicativo de notas. Ele esta integra no sua Centro de Açãos e permite ter o acesso mais rápido a todas as tuas notas. Inclusive entre todos os seus dispositivos Windows 10.</value>
+    <value>Action Note não é apenas mais um aplicativo de notas. Ele esta integra no sua Central de Ações  e permite ter o acesso mais rápido a todas as tuas notas. Inclusive entre todos os seus dispositivos Windows 10.</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
@@ -193,6 +193,10 @@
     <value>Manualmente</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximizar / Minimizar</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Apagar</value>
     <comment>MainPage/EditPage</comment>
@@ -217,13 +221,29 @@
     <value>EDITAR</value>
     <comment>EditPage</comment>
   </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ocultar na central de ações</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="IAP.Purchased" xml:space="preserve">
     <value>Comprado</value>
     <comment>UpgradePage</comment>
   </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Folhear notas</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Lista de títulos</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="MainTitle.Text" xml:space="preserve">
     <value>NOTAS</value>
     <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Marcar como importante</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
     <value>Parece vazio, certo? Uma nota sem conteúdo não pode ser salvo.</value>
@@ -367,12 +387,16 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <value>Restaurar</value>
     <comment>ArchivePage</comment>
   </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Definir categoria</value>
+    <comment>v2 MainPage</comment>
+  </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
     <value>Sincronizar em todos os dispositivos</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Centro de Açãos (Action Center)</value>
+    <value>Central de ações (Action Center)</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
@@ -391,9 +415,33 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <value>Intervalo de sincronização</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Categoria padrão</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
     <value>Geral</value>
     <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Bloco dinâmico</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Essas configurações afetam apenas o bloco dinâmico principal</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Visualização</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notas</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Título padrão</value>
+    <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Sincronização Online</value>
@@ -415,6 +463,10 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <value>Nota Rápida</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Exibir quantidade de notas</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
     <value>Exibir notas</value>
     <comment>SettingsPage</comment>
@@ -435,6 +487,10 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <value>CONFIGURAÇÕES</value>
     <comment>SettingsPage</comment>
   </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Atualizar bloco dinâmico</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="Share.Label" xml:space="preserve">
     <value>Compartilhar</value>
     <comment>MainPage</comment>
@@ -442,6 +498,10 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
   <data name="ShareContentDescription" xml:space="preserve">
     <value>Compartilhar com seus amigos</value>
     <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ordenar</value>
+    <comment>v2 MainPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Categoria</value>
