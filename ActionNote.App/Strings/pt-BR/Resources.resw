@@ -424,7 +424,7 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsLiveTile.Text" xml:space="preserve">
-    <value>Bloco dinâmico</value>
+    <value>Bloco dinâmico (Live Tile)</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
