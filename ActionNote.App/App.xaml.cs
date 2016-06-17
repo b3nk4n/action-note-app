@@ -36,7 +36,7 @@ namespace ActionNote.App
         private IBackgroundTaskService _backgroundTaskService;
         private IActionCenterService _actionCenterService;
         private IDataService _dataService;
-        private ISpeechService _speechService;
+        //private ISpeechService _speechService;
         private ISerializationService _serializationService;
         private ILicenseService _licenseService;
         private ITilePinService _tilePinService;
@@ -54,7 +54,7 @@ namespace ActionNote.App
 
             _backgroundTaskService = Injector.Get<IBackgroundTaskService>();
             _actionCenterService = Injector.Get<IActionCenterService>();
-            _speechService = Injector.Get<ISpeechService>();
+            //_speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
             _dataService = Injector.Get<IDataService>();
             _licenseService = Injector.Get<ILicenseService>();
@@ -79,7 +79,7 @@ namespace ActionNote.App
             ColorPropertiesDark = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.White, Colors.Black, Colors.White, Color.FromArgb(255, 31, 31, 31));
             ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White, Colors.Black, Color.FromArgb(255, 230, 230, 230));
 
-            _speechService = Injector.Get<ISpeechService>();
+            //_speechService = Injector.Get<ISpeechService>();
             //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // TODO: caused app not starting on phone (after Cortana setup !?!)
 
 #if DEBUG
@@ -173,7 +173,7 @@ namespace ActionNote.App
                     }
                 }
             }
-            else if (args.Kind == ActivationKind.VoiceCommand)
+            /*else if (args.Kind == ActivationKind.VoiceCommand)
             {
                 // check voice commands
                 var command = _speechService.GetVoiceCommand(args);
@@ -215,7 +215,7 @@ namespace ActionNote.App
                             break;
                     }
                 }
-            }
+            }*/
 
             // start the user experience
             NavigationService.Navigate(pageType, parameter);

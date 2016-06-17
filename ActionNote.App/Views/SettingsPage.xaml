@@ -280,8 +280,8 @@
                               ItemsSource="{x:Bind ViewModel.DefaultNoteColorEnumSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.DefaultNoteColorEnumSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <Rectangle Fill="{Binding Converter={StaticResource colorToBrushConv}}" Width="220" Height="18"
-                                           Margin="0,2,0,0" HorizontalAlignment="Left" />
+                                <Border Background="{Binding Converter={StaticResource colorToBrushConv}}" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
