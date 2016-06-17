@@ -44,7 +44,7 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock x:Uid="UpgradeTitle" Text="UPGRADE" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <TextBlock x:Uid="UpgradeTitle" Text="UPGRADE" Style="{ThemeResource NarrowPageTitleTextBlockStyle}" TextWrapping="NoWrap" />
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
 

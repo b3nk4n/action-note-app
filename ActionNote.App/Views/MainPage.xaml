@@ -106,9 +106,9 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" x:Uid="MainTitle" Text="NOTES" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
-                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Width="54" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
-                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="54" Icon="Sort" ToolTipService.ToolTip="Sort">
+                    <TextBlock Grid.Column="0" x:Uid="MainTitle" Text="NOTES" Style="{ThemeResource NarrowPageTitleTextBlockStyle}" TextWrapping="NoWrap" />
+                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Width="48" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
+                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="48" Icon="Sort" ToolTipService.ToolTip="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />

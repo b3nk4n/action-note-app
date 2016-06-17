@@ -236,7 +236,7 @@
 
         <uwpcControls:PageHeader>
             <uwpcControls:PageHeader.HeaderContent>
-                <TextBlock x:Uid="SettingsTitle" Text="SETTINGS" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                <TextBlock x:Uid="SettingsTitle" Text="SETTINGS" Style="{ThemeResource NarrowPageTitleTextBlockStyle}" TextWrapping="NoWrap" />
             </uwpcControls:PageHeader.HeaderContent>
         </uwpcControls:PageHeader>
 
