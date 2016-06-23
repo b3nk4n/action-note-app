@@ -276,7 +276,7 @@
                     <TextBlock x:Uid="SettingsNotes" Style="{StaticResource TitleTextBlockStyle}" Text="Notes" Margin="4" />
                     <TextBox x:Uid="SettingsNotesDefaultTitle" Header="Default title" PlaceholderText="Quick Note" Width="264" Margin="4" HorizontalAlignment="Left"
                              Text="{Binding QuickNotesDefaultTitle, Mode=TwoWay}" TextWrapping="NoWrap" AcceptsReturn="False"/>
-                    <ComboBox x:Uid="SettingsDefaultNoteColor" Header="Default category" Margin="4,4,4,12" Width="264"
+                    <!--<ComboBox x:Uid="SettingsDefaultNoteColor" Header="Default category" Margin="4,4,4,12" Width="264"
                               ItemsSource="{x:Bind ViewModel.DefaultNoteColorEnumSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.DefaultNoteColorEnumSource.SelectedItem, Mode=TwoWay}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -284,6 +284,52 @@
                                         Margin="0,2,0,0" HorizontalAlignment="Left" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
+                    </ComboBox>-->
+                    <ComboBox x:Uid="SettingsDefaultNoteColor" Header="Default category" Margin="4,4,4,12" Width="264"
+                              SelectedIndex="{x:Bind ViewModel.DefaultNoteColorEnumSource.SelectedIndex, Mode=TwoWay}">
+                        <ComboBoxItem Tag="Red">
+                            <Border Background="#FF4949" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Blue">
+                            <Border Background="#49BFFF" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Green">
+                            <Border Background="#17EB77" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Violett">
+                            <Border Background="#C849FF" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Orange">
+                            <Border Background="#FFA449" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Neutral">
+                            <Border Background="{ThemeResource SystemControlForegroundBaseHighBrush}" Width="220" Height="18" CornerRadius="9"
+                                        Margin="0,2,0,0" HorizontalAlignment="Left" />
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <Grid Margin="0,2,0,0" Height="18" Width="220" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Grid.ColumnSpan="2" Background="#FF4949" CornerRadius="9" />
+                                <Border Grid.Column="1" Background="#49BFFF" />
+                                <Border Grid.Column="2" Background="#17EB77" />
+                                <Border Grid.Column="3" Background="#C849FF" />
+                                <Border Grid.Column="4" Grid.ColumnSpan="2" Background="{ThemeResource SystemControlForegroundBaseHighBrush}" CornerRadius="9" />
+                                <Border Grid.Column="4" Background="#FFA449" />
+                                <TextBlock Grid.ColumnSpan="6" HorizontalAlignment="Center" VerticalAlignment="Center" Text="???" Foreground="White" />
+                            </Grid>
+                        </ComboBoxItem>
                     </ComboBox>
 
                     <TextBlock x:Uid="SettingsLiveTile" Style="{StaticResource TitleTextBlockStyle}" Text="Live Tile" Margin="4,12,4,4" />

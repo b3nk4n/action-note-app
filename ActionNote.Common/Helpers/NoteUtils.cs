@@ -1,4 +1,5 @@
 ﻿using ActionNote.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,8 @@ namespace ActionNote.Common.Helpers
 {
     public static class NoteUtils
     {
+        private static readonly Random random = new Random();
+
         /// <summary>
         /// Sorts the data depending on the sort type.
         /// </summary>
@@ -23,6 +26,17 @@ namespace ActionNote.Common.Helpers
                 var intermediate = noteItems.OrderByDescending(s => s.ChangedDate);
                 return intermediate.OrderBy(s => s.Color);
             }
+        }
+
+        /// <summary>
+        /// Gets a random color category, excluding <see cref="ColorCategory.Random"/>.
+        /// </summary>
+        /// <returns>Returns a random color.</returns>
+        public static ColorCategory GetRandomColor()
+        {
+            int rnd = random.Next(6);
+            ColorCategory enumValue = (ColorCategory)Enum.ToObject(typeof(ColorCategory), rnd);
+            return enumValue;
         }
     }
 }

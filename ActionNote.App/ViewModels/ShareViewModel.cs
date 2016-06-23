@@ -107,7 +107,14 @@ namespace ActionNote.App.ViewModels
             base.OnNavigatedTo(parameter, mode, state);
 
             var noteItem = new NoteItem();
-            noteItem.Color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
+
+            // set the initial color category
+            var color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
+            if (color == ColorCategory.Random)
+            {
+                color = NoteUtils.GetRandomColor();
+            }
+            noteItem.Color = color;
 
             ShareOperation = parameter as ShareOperation;
             if (ShareOperation != null)

@@ -94,7 +94,14 @@ namespace ActionNote.Tasks
 
                         // store note according to sorting
                         var noteItem = new NoteItem(title, content);
-                        noteItem.Color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
+
+                        // set the color category
+                        var color = ColorCategoryConverter.FromAnyString(AppSettings.DefaultNoteColor.Value);
+                        if (color == ColorCategory.Random)
+                        {
+                            color = NoteUtils.GetRandomColor();
+                        }
+                        noteItem.Color = color;
 
                         // load notes
                         var getAllTask = _dataService.GetAllNotes();

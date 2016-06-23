@@ -30,7 +30,8 @@ namespace ActionNote.App.ViewModels
 
         public StringComboBoxSource BackgroundTaskSyncIntervalStringSource { get; private set; }
 
-        public EnumSource<ColorCategory> DefaultNoteColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
+        //public EnumSource<ColorCategory> DefaultNoteColorEnumSource { get; private set; } = new EnumSource<ColorCategory>();
+        public EnumIndexSource<ColorCategory> DefaultNoteColorEnumSource { get; private set; } = new EnumIndexSource<ColorCategory>();
 
         public StringComboBoxSource LiveTileTypeStringSource { get; private set; }
 

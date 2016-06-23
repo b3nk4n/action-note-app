@@ -19,6 +19,7 @@ namespace ActionNote.Common.Models
         Violett,
         [DefaultValue(true)]
         Neutral,
+        Random
     }
 
     [DataContract]
