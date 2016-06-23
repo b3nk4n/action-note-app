@@ -547,7 +547,7 @@
             </Style>
 
             <Style x:Key="NarrowPageTitleTextBlockStyle" BasedOn="{StaticResource PageTitleTextBlockStyle}" TargetType="TextBlock">
-                <Setter Property="Margin" Value="4, 14, 0, 4" />
+                <Setter Property="Margin" Value="8, 14, 0, 4" />
                 <Setter Property="CharacterSpacing" Value="0" />
             </Style>
 
