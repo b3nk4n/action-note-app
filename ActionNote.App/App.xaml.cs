@@ -20,6 +20,8 @@ using UWPCore.Framework.UI;
 using System.Collections.Generic;
 using UWPCore.Framework.Store;
 using UWPCore.Framework.Notifications;
+using UWPCore.Framework.Logging;
+using ActionNote.Common.Services.Store;
 
 namespace ActionNote.App
 {
@@ -57,7 +59,7 @@ namespace ActionNote.App
             //_speechService = Injector.Get<ISpeechService>();
             _serializationService = Injector.Get<ISerializationService>();
             _dataService = Injector.Get<IDataService>();
-            _licenseService = Injector.Get<ILicenseService>();
+            _licenseService = Injector.Get<ICachedLicenseService>();
             _tilePinService = Injector.Get<ITilePinService>();
 
             ShareTargetPage = typeof(SharePage);

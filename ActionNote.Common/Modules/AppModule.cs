@@ -1,6 +1,8 @@
 ﻿using Ninject.Modules;
 using ActionNote.Common.Services;
 using ActionNote.Common.Models;
+using UWPCore.Framework.Store;
+using ActionNote.Common.Services.Store;
 
 namespace ActionNote.Common.Modules
 {
@@ -16,6 +18,8 @@ namespace ActionNote.Common.Modules
             // repositories
             Bind<INotesRepository>().To<NotesRepository>();
             Bind<IUnsyncedRepository>().To<UnsyncedRepository>();
+
+            Bind<ICachedLicenseService>().To<CachedLicenseService>().InSingletonScope();
         }
     }
 }

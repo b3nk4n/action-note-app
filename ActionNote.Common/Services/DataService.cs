@@ -1,5 +1,6 @@
 ﻿using ActionNote.Common.Models;
 using ActionNote.Common.Services.Communication;
+using ActionNote.Common.Services.Store;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace ActionNote.Common.Services
 
         [Inject]
         public DataService(INotesRepository notesRepository, INotesRepository archivRepository, IUnsyncedRepository unsyncedRepository, ILocalStorageService localStorageService,
-            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ILicenseService licenseService,
+            IHttpService httpService, ISerializationService serializationService, INetworkInfoService networkInfoService, ICachedLicenseService licenseService,
             IOnlineIdService onlineIdService)
         {
             Notes = notesRepository;

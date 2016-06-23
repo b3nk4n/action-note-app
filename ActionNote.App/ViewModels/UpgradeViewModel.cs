@@ -1,5 +1,6 @@
 ﻿using ActionNote.Common;
 using ActionNote.Common.Services;
+using ActionNote.Common.Services.Store;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace ActionNote.App.ViewModels
 {
     public class UpgradeViewModel : ViewModelBase
     {
-        private ILicenseService _licenseService;
+        private ICachedLicenseService _licenseService;
         private IDataService _dataService;
 
         private Localizer _localizer = new Localizer();
@@ -26,7 +27,7 @@ namespace ActionNote.App.ViewModels
 
         public UpgradeViewModel()
         {
-            _licenseService = Injector.Get<ILicenseService>();
+            _licenseService = Injector.Get<ICachedLicenseService>();
             _dataService = Injector.Get<IDataService>();
 
             ReadMoreCommand = new DelegateCommand(async () =>
@@ -53,7 +54,6 @@ namespace ActionNote.App.ViewModels
             if (!_dataService.IsProVersion)
             {
                 var items = await _licenseService.LoadProductsAsync(new[] { AppConstants.IAP_PRO_VERSION }, _localizer.Get("IAP.Purchased"));
-                // TODO: IAP simulation not working?!
 
                 if (items != null &&
                     items.Count > 0)
@@ -79,11 +79,18 @@ namespace ActionNote.App.ViewModels
                 // Show thank you!
                 ShowHeartBeat = true;
             }
+
+            // force to reload the Pro-Version status
+            // (also here to make sure that this method is called by 100%)
+            _licenseService.Invalidate();
         }
 
         public async override Task OnNavigatedFromAsync(IDictionary<string, object> state, bool suspending)
         {
             await base.OnNavigatedFromAsync(state, suspending);
+
+            // force to reload the Pro-Version status
+            _licenseService.Invalidate();
         }
 
         public bool ShowHeartBeat
