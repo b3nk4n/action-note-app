@@ -248,16 +248,6 @@ namespace ActionNote.Common.Services
                             Template = VisualTemplate.ToastGeneric,
                             Children =
                             {
-                                new AdaptiveImage()
-                                {
-                                    Placement = ImagePlacement.AppLogoOverride,
-                                    Source = "Assets/StoreLogo_trans.scale-200.png"
-                                },
-                                new AdaptiveText()
-                                {
-                                    Content = _localizer.Get("QuickNotes"),
-                                    HintStyle = TextStyle.Title
-                                },
                                 new AdaptiveText()
                                 {
                                     Content = _localizer.Get("QuickNotesDescription"),
