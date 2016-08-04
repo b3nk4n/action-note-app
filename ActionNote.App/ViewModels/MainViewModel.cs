@@ -59,7 +59,6 @@ namespace ActionNote.App.ViewModels
 
         // For sample data only
         public MainViewModel()
-            : this(null)
         { }
 
         public MainViewModel(IMainViewModelCallbacks callbacks)

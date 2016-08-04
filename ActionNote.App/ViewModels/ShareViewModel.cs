@@ -81,7 +81,7 @@ namespace ActionNote.App.ViewModels
                 }
                 else
                 {
-                    ShareOperation.ReportError(_localizer.Get("Message.CanNotSaveEmpty"));
+                    //ShareOperation.ReportError(_localizer.Get("Message.CanNotSaveEmpty"));
                 }
             });
 

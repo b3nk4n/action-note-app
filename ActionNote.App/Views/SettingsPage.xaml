@@ -251,9 +251,9 @@
                     <ToggleSwitch x:Name="SettingsAllowRemove" x:Uid="SettingsAllowRemove" Header="Allow to delete notes" IsOn="{Binding AllowRemoveNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}" Margin="4" />
                     <StackPanel Visibility="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn, Converter={StaticResource boolToVisConv}}">
                         <ToggleSwitch x:Name="SettingsAllowClear" x:Uid="SettingsAllowClear" Header="Allow to clear notes" IsOn="{Binding AllowClearNotes, Mode=TwoWay}" IsEnabled="{Binding ElementName=SettingsAllowRemove, Path=IsOn}"
-                                      IsHitTestVisible="{Binding IsPhone}" IsTabStop="False" Margin="4" />
-                        <TextBlock x:Uid="NotOnPcVersion" Text="* This option cannot be disabled in the PC version, due to a bug in Windows 10." TextWrapping="Wrap" FontSize="12" FontStyle="Italic" MaxWidth="500" HorizontalAlignment="Left"
-                                   Margin="4,-8,4,8" Visibility="{Binding IsPhone, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" />
+                                      Margin="4" />
+                        <!--<TextBlock x:Uid="NotOnPcVersion" Text="* This option cannot be disabled in the PC version, due to a bug in Windows 10." TextWrapping="Wrap" FontSize="12" FontStyle="Italic" MaxWidth="500" HorizontalAlignment="Left"
+                                   Margin="4,-8,4,8" Visibility="{Binding IsPhone, Converter={StaticResource boolToVisConv}, ConverterParameter=!}" Style="{StaticResource UWPCoreSubtleTextBlockStyle}" />-->
                     </StackPanel>
                     <ComboBox x:Uid="OrderNotesBy" Header="Order notes by" Width="264" Margin="4,4,4,12" IsEnabled="{Binding ElementName=ShowNotesInActionCenterToggle, Path=IsOn}"
                               ItemsSource="{x:Bind ViewModel.SortInActionCenterStringSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.SortInActionCenterStringSource.SelectedItem, Mode=TwoWay}">

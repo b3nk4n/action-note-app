@@ -238,7 +238,7 @@ namespace ZXing.Mobile
                     if (luminanceSource != null)
                         result = zxing.Decode(luminanceSource);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     
                 }

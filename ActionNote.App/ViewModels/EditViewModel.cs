@@ -723,7 +723,7 @@ namespace ActionNote.App.ViewModels
             });
         }
 
-        private async void BackRequested(object sender, HandledEventArgs e)
+        private void BackRequested(object sender, HandledEventArgs e)
         {
             if (AppSettings.SaveNoteOnBack.Value)
             {
