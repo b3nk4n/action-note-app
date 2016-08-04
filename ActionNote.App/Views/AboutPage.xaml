@@ -53,7 +53,7 @@
                                 <uwpcModels:ContributorModel Title="Isa Koçak" Icon="/Assets/Images/turkish.png" />
                                 <uwpcModels:ContributorModel Title="Volodymyr Bratko" Icon="/Assets/Images/ukrain.png" />
                                 <uwpcModels:ContributorModel Title="Roie Karpo" Icon="/Assets/Images/israel.png" />
-
+                                <uwpcModels:ContributorModel Title="Mohanad Ayyash" Icon="/Assets/Images/arabic.png" />
                             </uwpcViewModels:AboutViewModel.Contributors>
                         </uwpcViewModels:AboutViewModel>
                     </uwpcControls:AboutControl.DataContext>

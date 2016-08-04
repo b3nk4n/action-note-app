@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>تطبيق (Action note) ليس مجرد تطبيق لإنشاء مذكرة. انهُ مدمج مع مركز الإشعارات والإجراءات ليعطيك افضل تجربة لسرعة الوصول لمذكراتك. حتى عبر جميع اجهزتك العاملة بنظام ويندوز ١٠.</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>المساهمون</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>المزيد من التطبيقات</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>تقييم ومراجعة</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>إرسال الدعم</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>مشاركة التطبيق</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>معلومات الخصوصية</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>عن التطبيق</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>إضافة</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>الأرشيف</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>الملحقات</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>إزالة</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>إختيار</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>ساعتين</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.240" xml:space="preserve">
+    <value>أربع ساعات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>٣٠ دقيقة</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>٤٥ دقيقة</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>ساعة واحدة</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>يدويا</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>تكبير / تصغير</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>حذف</value>
+    <comment>MainPage/EditPage</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>حذف الكل</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>استبعاد</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>استبعاد التغييرات</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>تعديل</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>تعديل</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>إخفاء في مركز الإشعارات والإجراءات</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>تم شراؤه</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>قلب المذكرات</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>قائمة العنوان</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>مذكرات</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>وضع علامة مهم</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>يبدو فارغاً, صحيح؟ مذكرة بدون محتويات لا يمكن حفظها.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>لا يمكن الحذف. لم يتم إرسال المعلومات للخادم. الرجاء فحص إتصال الأنترنت الخاص بك او حاول مره أخرى.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>هذه المذكرة تم بالفعل حذفها على جهاز اخر. يبدو أن جهازك لم يتم مزامنته. الرجاء عمل مزامنة يدوياً.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>المزامنة الحية تحتاج الى تسجيل الدخول لتحديد هويتك. لفد تم تعطيل هذه الميزه لك.
+بإمكانك إعادة تفعيل هذه الميزه من الإعدادات.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>لقد قمت بتفعيل المزامنة الحية, لكن ما زالت معلومات تسجيلك معلقه.
+هل تود تسجيل الدخول عبر حسابك الخاص بمايكروسفت الأن؟</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>لا</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>نعم</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>هل تود فعلاً حذف جميع المذكرات؟</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>المزامنة لم تنجح. الرجاء فحص إتصال الأنترنت الخاص بك او حاول مرة أخرى</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>إنتباه</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>معلومات</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>تحذير</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>مرحباً بعودتك!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>لقد قمنا بإعادة تفعيل المزامنة الحية لك. حتى تستطيع استخدام هذه الميزه عليك تسجيل الدخول عبر حسابك الخاص بمايكروسفت. هل تود تسجيل الدخول الأن؟</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>عن التطبيق</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>الأرشيف</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>المذكرات</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>الإعدادات</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>ترقية</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>مذكرة جديدة</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>لا يمكن عرض هذا الخيار في نسخة جهاز الكمبيوتر نظراً لعلة في نظام ويندوز ١٠. هذا الاختيار سوف يتم تفعيله بعد تحديث (RedStone1) في صيف سنة ٢٠١٦. شكراً لصبركم!</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>ترتيب المذكرات حسب</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>تثبيت علئ شاشة البدء</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>يتم الحذف...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>يتم تحميل الملف...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>يتم الحفظ...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>تتم المزامنة...</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>يتم رفع الملف...</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>طريقة الإدخال  ل ”مذكرة سريعة“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>التفاصيل فقط</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>العنوان والتفاصيل</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>اقرأ بصوت مرتفع</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>إقرأ المزيد...</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>رمز استجابة سريعة</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>إستعاده</value>
+    <comment>ArchivePage</comment>
+  </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>تحديد الفئة</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>مزامنة عبر جميع الاجهزة</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>مركز الإشعارات والإجراءات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowClear.Header" xml:space="preserve">
+    <value>السماح بتنظيف المذكرات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>السماح بحذف مذكرات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>حفظ تلقائي للمذكرات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>الفاصل الزمني للمزامنة</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>الفئة الافتراضية</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>عام</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>البلاطة الحية</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>هذه الإعدادات تؤثر فقط على البلاطة الحية الرئيسية</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>نوع البلاطة الحية</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>مذكرات</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>العنوان الافتراضي</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>مزامنة حية</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>اضفاء الطابع الشخصي</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>تفعيل "مذكرة سريعه"</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
+    <value>العنوان الافتراضي ل "مذكرة سريعه"</value>
+    <comment>SettingsPage (Deprecated!)</comment>
+  </data>
+  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>مذكرة سريعه</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>أظهر ارقام المذكرات</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>عرض المذكرات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>مزامنة المذكرات في الخلفية</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>مزامنة عند فتح التطبيق</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>لون التمييز</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>الإعدادات</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>تحديث البلاطة الحية</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>مشاركة</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>شارك المذكرة مع اصدقائك</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>ترتيب حسب</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>الفئة</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>تغيير التاريخ</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>إدخال الكلام</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>المزامنة</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>ازالة التثبيت من شاشة البدء</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>ترقية</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>لشراء النسخة الكاملة</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>ترقية</value>
+    <comment>UpgradePage</comment>
+  </data>
+</root>

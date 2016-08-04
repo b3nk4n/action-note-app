@@ -99,6 +99,7 @@
     <None Include="ActionNote.App_StoreKey.pfx" />
     <None Include="Assets\Codes\Action Note Testing Promo Code.tsv" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\ar-SA\Resources.resw" />
     <PRIResource Include="Strings\he-IL\Resources.resw" />
     <PRIResource Include="Strings\uk-UA\Resources.resw" />
     <PRIResource Include="Strings\tr-TR\Resources.resw" />
@@ -160,6 +161,7 @@
     <None Include="ActionNote.App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\arabic.png" />
     <Content Include="Assets\Images\arrow.png" />
     <Content Include="Assets\Cortana\voicecommands.xml" />
     <Content Include="Assets\IAP\WindowsStoreProxy.xml" />
