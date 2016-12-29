@@ -108,6 +108,7 @@ namespace ActionNote.Common.Services
             toastNotification.Group = GROUP_NOTE;
             toastNotification.Tag = note.ShortId; // just to find the notificication within this service. Shortid because it has a limited size
             toastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // Does not solve anything, it is still 72h !!!
+            toastNotification.NotificationMirroring = Windows.UI.Notifications.NotificationMirroring.Disabled;
             _toastService.Show(toastNotification);
         }
 
@@ -125,6 +126,7 @@ namespace ActionNote.Common.Services
             quickNoteToastNotification.Group = GROUP_QUICK_NOTE;
             quickNoteToastNotification.Tag = "quickNote";
             quickNoteToastNotification.ExpirationTime = DateTimeOffset.Now.AddDays(31); // Does not solve anything, it is still 72h !!!
+            quickNoteToastNotification.NotificationMirroring = Windows.UI.Notifications.NotificationMirroring.Disabled;
             _toastService.Show(quickNoteToastNotification);
         }
 
