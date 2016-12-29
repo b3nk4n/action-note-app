@@ -499,6 +499,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Sortieren nach</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alphabetisch</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategorie</value>
     <comment>MainPage</comment>

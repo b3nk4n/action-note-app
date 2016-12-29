@@ -499,6 +499,10 @@ Le gustaría iniciar sesión con tu cuenta de Microsoft en este momento?</value>
     <value>Ordenar por</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alfabético</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Categoría</value>
     <comment>MainPage</comment>

@@ -499,6 +499,10 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <value>Sortera efter</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alfabetisk</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategori</value>
     <comment>MainPage</comment>

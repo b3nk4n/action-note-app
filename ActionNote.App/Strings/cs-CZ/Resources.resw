@@ -499,6 +499,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Seřadit podle</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Abecední</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Kategorie</value>
     <comment>MainPage</comment>

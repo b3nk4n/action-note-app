@@ -499,6 +499,10 @@
     <value>排序依据</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>按字母顺序排列</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>类别</value>
     <comment>MainPage</comment>

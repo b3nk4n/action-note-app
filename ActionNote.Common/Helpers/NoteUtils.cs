@@ -21,6 +21,10 @@ namespace ActionNote.Common.Helpers
             {
                 return noteItems.OrderByDescending(s => s.ChangedDate);
             }
+            if (sortType == AppConstants.SORT_ALPHABETICAL)
+            {
+                return noteItems.OrderBy(s => s.Title);
+            }
             else
             {
                 var intermediate = noteItems.OrderByDescending(s => s.ChangedDate);

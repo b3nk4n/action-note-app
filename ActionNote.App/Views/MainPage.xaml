@@ -113,6 +113,7 @@
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" IsTabStop="False" />
                                 <MenuFlyoutItem x:Uid="SortByCategory" Command="{Binding SortCommand}" CommandParameter="category" IsTabStop="False" />
+                                <MenuFlyoutItem x:Uid="SortByAlphabetical" Command="{Binding SortCommand}" CommandParameter="alphabetical" IsTabStop="False" />
                             </MenuFlyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>

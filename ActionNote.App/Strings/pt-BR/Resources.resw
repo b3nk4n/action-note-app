@@ -499,6 +499,10 @@ Gostaria de fazer login com a sua conta da Microsoft agora?</value>
     <value>Ordenar</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alfabética</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Categoria</value>
     <comment>MainPage</comment>

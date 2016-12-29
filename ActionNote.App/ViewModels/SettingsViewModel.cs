@@ -46,7 +46,8 @@ namespace ActionNote.App.ViewModels
             // localize string source
             SortInActionCenterStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){
                 new SourceComboBoxItem(AppConstants.SORT_DATE, _localizer.Get("SortByDate.Text")),
-                new SourceComboBoxItem(AppConstants.SORT_CATEGORY, _localizer.Get("SortByCategory.Text"))
+                new SourceComboBoxItem(AppConstants.SORT_CATEGORY, _localizer.Get("SortByCategory.Text")),
+                new SourceComboBoxItem(AppConstants.SORT_ALPHABETICAL, _localizer.Get("SortByAlphabetical.Text"))
             });
 
             QuickNoteContentTypeStringSource = new StringComboBoxSource(new List<SourceComboBoxItem>(){

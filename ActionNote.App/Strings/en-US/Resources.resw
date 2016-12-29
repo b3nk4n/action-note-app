@@ -500,6 +500,10 @@ Would you like to login with your Microsoft acount right now?</value>
     <value>Sort by</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alphabetical</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Category</value>
     <comment>MainPage</comment>

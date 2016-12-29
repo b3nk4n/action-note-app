@@ -499,6 +499,10 @@ Vuoi collegarti adesso con il tuo account Microsoft?</value>
     <value>Ordina per</value>
     <comment>v2 MainPage</comment>
   </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alfabetico</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
   <data name="SortByCategory.Text" xml:space="preserve">
     <value>Categoria</value>
     <comment>MainPage</comment>
