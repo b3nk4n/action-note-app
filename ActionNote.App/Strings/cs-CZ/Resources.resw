@@ -443,6 +443,10 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
     <value>Výchozí nadpis</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Rychlá poznámka</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online synchronizace</value>
     <comment>SettingsPage</comment>
@@ -453,14 +457,6 @@ Přejete si Vás ihned přihlásit pomocí Vašeho Microsoft účtu?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>Povolit 'Rychlé poznámky'</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Výchozí nadpis</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Rychlá poznámka</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

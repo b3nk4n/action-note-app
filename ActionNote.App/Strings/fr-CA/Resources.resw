@@ -443,6 +443,10 @@ Voulez-vous connecter à votre compte Microsoft?</value>
     <value>Titre par défaut</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Note rapide</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Synchronisation</value>
     <comment>SettingsPage</comment>
@@ -453,14 +457,6 @@ Voulez-vous connecter à votre compte Microsoft?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>Activer les notes rapides</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Titre par défaut</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Note rapide</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

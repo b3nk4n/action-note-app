@@ -274,7 +274,7 @@
                     </ComboBox>
 
                     <TextBlock x:Uid="SettingsNotes" Style="{StaticResource TitleTextBlockStyle}" Text="Notes" Margin="4" />
-                    <TextBox x:Uid="SettingsNotesDefaultTitle" Header="Default title" PlaceholderText="Quick Note" Width="264" Margin="4" HorizontalAlignment="Left"
+                    <TextBox x:Uid="SettingsNotesDefaultTitle" Header="Default titleX" PlaceholderText="Quick Note" Width="264" Margin="4" HorizontalAlignment="Left"
                              Text="{Binding QuickNotesDefaultTitle, Mode=TwoWay}" TextWrapping="NoWrap" AcceptsReturn="False"/>
                     <!--<ComboBox x:Uid="SettingsDefaultNoteColor" Header="Default category" Margin="4,4,4,12" Width="264"
                               ItemsSource="{x:Bind ViewModel.DefaultNoteColorEnumSource.ItemsSource}" SelectedItem="{x:Bind ViewModel.DefaultNoteColorEnumSource.SelectedItem, Mode=TwoWay}">

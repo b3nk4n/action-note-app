@@ -443,6 +443,10 @@ Microsoft 계정으로 로그인을 시도하시겠습니까?</value>
     <value>기본 제목</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>빠른 노트</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>온라인 동기화</value>
     <comment>SettingsPage</comment>
@@ -453,14 +457,6 @@ Microsoft 계정으로 로그인을 시도하시겠습니까?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>“빠른 노트“ 활성화</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>“빠른 노트“의 기본 제목</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>빠른 노트</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

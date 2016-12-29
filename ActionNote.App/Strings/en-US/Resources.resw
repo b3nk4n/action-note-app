@@ -444,6 +444,10 @@ Would you like to login with your Microsoft acount right now?</value>
     <value>Default title</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Quick Note</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online Synchronization</value>
     <comment>SettingsPage</comment>
@@ -454,14 +458,6 @@ Would you like to login with your Microsoft acount right now?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>Enable “Quick Notes“</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Default title for “Quick Notes“</value>
-    <comment>SettingsPage (Deprecated!)</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Quick Note</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

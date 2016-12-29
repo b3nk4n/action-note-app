@@ -443,6 +443,10 @@
     <value>默认标题</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>快速笔记</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>同步设定</value>
     <comment>SettingsPage</comment>
@@ -452,14 +456,6 @@
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>快速笔记</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>预设标题</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
     <value>快速笔记</value>
     <comment>SettingsPage</comment>
   </data>

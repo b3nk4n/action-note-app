@@ -442,6 +442,10 @@
     <value>כותרת ברירת מחדל</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>פתק מהיר</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>סנכרון אונליין</value>
     <comment>SettingsPage</comment>
@@ -452,14 +456,6 @@
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>אפשר פתק מהיר</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>כותרת ברירת מחדל ל פתקים מהירים</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>פתק מהיר</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

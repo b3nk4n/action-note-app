@@ -443,6 +443,10 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
     <value>Varsayılan başlık</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Hızlı Not</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Çevrimiçi Senkronizasyon</value>
     <comment>SettingsPage</comment>
@@ -453,14 +457,6 @@ Microsoft hesabınız ile giriş yapmak ister misiniz?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>“Hızlı Notlar“ izin ver</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>“Hızlı Notlar“ için varsayılan başlık</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Hızlı Not</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">

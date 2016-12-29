@@ -443,6 +443,10 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
     <value>Standard-Titel</value>
     <comment>v2 SettingsPage</comment>
   </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Kurznotiz</value>
+    <comment>SettingsPage</comment>
+  </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
     <value>Online-Synchronisation</value>
     <comment>SettingsPage</comment>
@@ -453,14 +457,6 @@ Wollen Sie sich jetzt ihrem Microsoft-Konto anmelden?</value>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
     <value>„Kurznotizen“ für schnelle Notizen</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Standard-Titel für Kurznotizen</value>
-    <comment>SettingsPage</comment>
-  </data>
-  <data name="SettingsQuickNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Kurznotiz</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
