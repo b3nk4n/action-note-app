@@ -222,7 +222,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Dölj i Action center</value>
+    <value>Dölj Action center</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
@@ -230,7 +230,7 @@
     <comment>UpgradePage</comment>
   </data>
   <data name="LiveTileType.FlipNotes" xml:space="preserve">
-    <value>Bläddra anteckningar</value>
+    <value>Flippa mellan anteckningar</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="LiveTileType.TitleList" xml:space="preserve">
@@ -242,7 +242,7 @@
     <comment>MainPage</comment>
   </data>
   <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Markera som viktig</value>
+    <value>Markera som viktigt</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
@@ -388,7 +388,7 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <comment>ArchivePage</comment>
   </data>
   <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Sätt kategori</value>
+    <value>Ange kategori</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
@@ -424,15 +424,15 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsLiveTile.Text" xml:space="preserve">
-    <value>Levande bricka (Live Tile)</value>
+    <value>Levande panel (Live Tile)</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
-    <value>Dessa inställningar påverkar enbart den levande brickan</value>
+    <value>Dessa inställningar påverkar endast den levande panelen</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileType.Header" xml:space="preserve">
-    <value>Typ av levande bricka</value>
+    <value>Typ av levande panel</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsNotes.Text" xml:space="preserve">
@@ -484,7 +484,7 @@ Vill du logga in med ditt Microsoftkonto nu?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
-    <value>Uppdatera levande bricka</value>
+    <value>Uppdatera levande panel</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="Share.Label" xml:space="preserve">
