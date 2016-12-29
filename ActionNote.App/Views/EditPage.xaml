@@ -111,8 +111,8 @@
             <AppBarButton x:Uid="Attachement" Width="62" Icon="Attach">
                 <AppBarButton.Flyout>
                     <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterBottomStyle}">
-                        <MenuFlyoutItem x:Uid="AttachementSelect" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
-                        <MenuFlyoutItem x:Uid="AttachementRemove" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" />
+                        <MenuFlyoutItem x:Uid="AttachementSelect" Command="{Binding SelectAttachementCommand}" CommandParameter="{Binding SelectedNote}" IsTabStop="False" />
+                        <MenuFlyoutItem x:Uid="AttachementRemove" Command="{Binding RemoveAttachementCommand}" CommandParameter="{Binding SelectedNote}" IsTabStop="False" />
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>

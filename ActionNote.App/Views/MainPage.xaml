@@ -111,8 +111,8 @@
                     <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="48" Icon="Sort" ToolTipService.ToolTip="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
-                                <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" />
-                                <MenuFlyoutItem x:Uid="SortByCategory" Command="{Binding SortCommand}" CommandParameter="category" />
+                                <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" IsTabStop="False" />
+                                <MenuFlyoutItem x:Uid="SortByCategory" Command="{Binding SortCommand}" CommandParameter="category" IsTabStop="False" />
                             </MenuFlyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
