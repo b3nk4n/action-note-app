@@ -194,7 +194,7 @@
     <comment>SettingsPage</comment>
   </data>
   <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Zmaksymalixuj / zminimalizować</value>
+    <value>Maksymalizuj / minimalizuj</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="Delete.Label" xml:space="preserve">
@@ -222,7 +222,7 @@
     <comment>EditPage</comment>
   </data>
   <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Hide in Action Center</value>
+    <value>Schowaj w Centrum akcji</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
@@ -230,11 +230,11 @@
     <comment>UpgradePage</comment>
   </data>
   <data name="LiveTileType.FlipNotes" xml:space="preserve">
-    <value>Flip notes</value>
+    <value>Przerzucaj notatki</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="LiveTileType.TitleList" xml:space="preserve">
-    <value>Title list</value>
+    <value>Lista tytułów notatek</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
@@ -242,7 +242,7 @@
     <comment>MainPage</comment>
   </data>
   <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Mark as important</value>
+    <value>Zaznacz jako ważne</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
@@ -388,7 +388,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>ArchivePage</comment>
   </data>
   <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Set category</value>
+    <value>Nadaj kategorię</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
@@ -416,7 +416,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
-    <value>Default category</value>
+    <value>Domyślny kolor</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
@@ -424,15 +424,15 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsLiveTile.Text" xml:space="preserve">
-    <value> (Live Tile)</value>
+    <value>Żywy kafelek (Live Tile)</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
-    <value>These settings impact the main Live Tile only</value>
+    <value>Te ustawienia wpływają tylko na główny żywy kafelek</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileType.Header" xml:space="preserve">
-    <value>Live Tile type</value>
+    <value>Typ żywego kafelka</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsNotes.Text" xml:space="preserve">
@@ -460,7 +460,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
-    <value>Show number of notes</value>
+    <value>Pokaż ilość notatek</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
@@ -484,7 +484,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
-    <value>Update Live Tile</value>
+    <value>Aktualizauj kafelek</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="Share.Label" xml:space="preserve">
@@ -496,7 +496,7 @@ Czy chcesz teraz się zalogować używając swojego konta Microsoft?</value>
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Sort by</value>
+    <value>Sortuj według</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="SortByAlphabetical.Text" xml:space="preserve">
