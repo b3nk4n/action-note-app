@@ -55,6 +55,7 @@
                                 <uwpcModels:ContributorModel Title="Roie Karpo" Icon="/Assets/Images/israel.png" />
                                 <uwpcModels:ContributorModel Title="Mohanad Ayyash" Icon="/Assets/Images/arabic.png" />
                                 <uwpcModels:ContributorModel Title="Charlie Poels" Icon="/Assets/Images/dutch.png" />
+                                <uwpcModels:ContributorModel Title="IntoMedia [into.hu]" Icon="/Assets/Images/hungary.png" />
                             </uwpcViewModels:AboutViewModel.Contributors>
                             <uwpcViewModels:AboutViewModel.ThirdParties>
                                 <uwpcModels:ThirdPartyModel Title="Ninject for Portable Class Libraries" Author="Oren Novotny"

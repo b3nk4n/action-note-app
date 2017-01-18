@@ -118,217 +118,217 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note is niet zomaar een notitie app. Het integreert zich in het Action Center en biedt je de mogelijkheid om snel bij al je notities te komen, zelfs op je overige Windows 10 apparaten.</value>
+    <value>Az Action Note nem csak egy jegyzetelő alkalmazás. A leggyorsabb jegyzetelés érdekében az alkalmazás beépül az értesítések közé, ahol az eddigi jegyzeteidet is elérheted - akár az összes Windows 10-es eszközödön is.</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
-    <value>Contribuanten:</value>
+    <value>Közreműködők:</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.MoreAppsText" xml:space="preserve">
-    <value>Meer apps</value>
+    <value>Még több alkalmazás</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.RateAndReviewText" xml:space="preserve">
-    <value>Beoordeel en review</value>
+    <value>Értékelés és vélemény</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.SendFeedbackEmailText" xml:space="preserve">
-    <value>Stuur feedback</value>
+    <value>Visszajelzés küldése</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShareAppText" xml:space="preserve">
-    <value>Deel app</value>
+    <value>Alkalmazás megosztása</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
-    <value>Privacy &amp; gegevens</value>
+    <value>Adatvédelmi Információk</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ThirdPartiesTitle" xml:space="preserve">
-    <value>Software van Derden:</value>
+    <value>Harmadik Fél Szoftver:</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">
-    <value>OVER</value>
+    <value>RÓLUNK</value>
     <comment>AboutPage</comment>
   </data>
   <data name="Add.Label" xml:space="preserve">
-    <value>Toevoegen</value>
+    <value>Hozzáadás</value>
     <comment>MainPage</comment>
   </data>
   <data name="ArchiveTitle.Text" xml:space="preserve">
-    <value>ARCHIEF</value>
+    <value>ARHÍVUM</value>
     <comment>ArchivPage</comment>
   </data>
   <data name="Attachement.Label" xml:space="preserve">
-    <value>Bijlage</value>
+    <value>Melléklet</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementRemove.Text" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value>Eltávolítás</value>
     <comment>EditPage</comment>
   </data>
   <data name="AttachementSelect.Text" xml:space="preserve">
-    <value>Selecteren</value>
+    <value>Hozzáadás</value>
     <comment>EditPage</comment>
   </data>
   <data name="BackSyncInterval.120" xml:space="preserve">
-    <value>2 uur</value>
+    <value>2 óra</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.240" xml:space="preserve">
-    <value>4 uur</value>
+    <value>4 óra</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.30" xml:space="preserve">
-    <value>30 minuten</value>
+    <value>30 perc</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.45" xml:space="preserve">
-    <value>45 minuten</value>
+    <value>45 perc</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.60" xml:space="preserve">
-    <value>1 uur</value>
+    <value>1 óra</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="BackSyncInterval.Manual" xml:space="preserve">
-    <value>Handmatig</value>
+    <value>Manuálisan</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Maximaliseren / minimaliseren</value>
+    <value>Maximalizál / minimalizál</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="Delete.Label" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value>Törlés</value>
     <comment>MainPage/EditPage</comment>
   </data>
   <data name="DeleteAll.Label" xml:space="preserve">
-    <value>Alles verwijderen</value>
+    <value>Összes törlése</value>
     <comment>MainPage</comment>
   </data>
   <data name="Discard.Label" xml:space="preserve">
-    <value>Negeren</value>
+    <value>Elvetés</value>
     <comment>EditPage</comment>
   </data>
   <data name="DiscardChanges.Label" xml:space="preserve">
-    <value>Aanpassingen negeren</value>
+    <value>Változások elvetése</value>
     <comment>EditPage</comment>
   </data>
   <data name="Edit.Label" xml:space="preserve">
-    <value>Bewerken</value>
+    <value>Szerkesztés</value>
     <comment>MainPage</comment>
   </data>
   <data name="EditTitle.Text" xml:space="preserve">
-    <value>BEWERKEN</value>
+    <value>SZERKESZTÉS</value>
     <comment>EditPage</comment>
   </data>
   <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Niet tonen in Action Center</value>
+    <value>Elrejtés a műveletközpontban</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="IAP.Purchased" xml:space="preserve">
-    <value>Aangeschaft</value>
+    <value>Megvett</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="LiveTileType.FlipNotes" xml:space="preserve">
-    <value>Bladeren door notities</value>
+    <value>Jegyzetek az élőcsempén</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="LiveTileType.TitleList" xml:space="preserve">
-    <value>Notitie titels</value>
+    <value>Cím lista az élőcsempén</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="MainTitle.Text" xml:space="preserve">
-    <value>NOTITIES</value>
+    <value>JEGYZETEK</value>
     <comment>MainPage</comment>
   </data>
   <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Markeer als belangrijk</value>
+    <value>Mejelölés fontosként</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="Message.CanNotSaveEmpty" xml:space="preserve">
-    <value>Ziet er leeg uit hé? Een notitie zonder inhoud kan je niet bewaren.</value>
+    <value>Ez üresnek tűnik. A jegyzetet nem lehet tartalom nélkül menteni.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
-    <value>De opdracht voor het verwijderen kon niet worden volbracht omdat de informatie niet naar de server verstuurd kon worden. Controleer je verbinding en probeer het later nog eens.</value>
+    <value>A törlési folyamat nem lehet végrehajtani, mivel nem sikerült a szerverrel való kommunikáció. Kérlek, ellenőrizd az internetkapcsolatod, majd próbáld újra.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.DeletedOutside" xml:space="preserve">
-    <value>Deze notitie is al verwijderd op een ander apparaat. Het lijkt er op dat dit apparaat niet gesynchroniseerd is. Voer een handmatige synchronisatie uit.</value>
+    <value>Ezt a jegyzetet már törölték egy másik eszközön. A készülék úgy tűnik, hogy rég nem szinkronizált. Kérlek, végezz el egy szinkronizálást manuálisan.</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.LoginFailedInfo" xml:space="preserve">
-    <value>Online synchronisatie vereist dat je inlogt voor verificatie. We hebben deze functie voor je gedeactiveerd.
-Deze kan je reactiveren onder instellingen.</value>
+    <value>A szinkronizáláshoz bejelnetkezés szükséges. Ez a funkció nem érhető el számodra.
+Bármikor újra tudod aktíválni a beállításokban.</value>
     <comment>Message Dialog</comment>
   </data>
   <data name="Message.LoginPending" xml:space="preserve">
-    <value>Je hebt online synchronisatie aangevraagd maar je login is nog niet voltooid.
-Wil je inloggen met je Microsoft account?</value>
+    <value>Aktiváltad az online szinkronizálást, de a bejelentkezés még folyamatban van.
+Be szeretnél lépni a Microsoft fiókoddal?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.No" xml:space="preserve">
-    <value>Nee</value>
+    <value>Nem</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Option.Yes" xml:space="preserve">
-    <value>Ja</value>
+    <value>Igen</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.ReallyDeleteAll" xml:space="preserve">
-    <value>Wil je al je notities verwijderen?</value>
+    <value>Biztosan törlöd az összes jegyzetet?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.SyncFailed" xml:space="preserve">
-    <value>De synchronisatie was onsuccesvol. Controleer je internet verbinding of probeer het later nog eens.</value>
+    <value>A szinkronizálás sikertelen. Kérlek, ellenőrizd az internetkapcsolatod, vagy próbáld később.</value>
     <comment>MainPage</comment>
   </data>
   <data name="Message.Title.Attention" xml:space="preserve">
-    <value>Opgelet</value>
+    <value>Figyelem</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Info" xml:space="preserve">
-    <value>Informatie</value>
+    <value>Információó</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.Warning" xml:space="preserve">
-    <value>Waarschuwing</value>
+    <value>Figyelmeztetés</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.Title.WelcomeBack" xml:space="preserve">
-    <value>Welkom terug!</value>
+    <value>Üdv újra itt!</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Message.WelcomeLoginPending" xml:space="preserve">
-    <value>We hebben de online synchronisatie gereactiveerd. Om hier gebruik van te kunnen maken moet je inloggen met je Microsoft account. Wil je dat nu doen?</value>
+    <value>Az online szinkronizálást újra aktíváltuk. Ahhoz, hogy ezt a funkciót használni tudd, be kepp lépj a Microsoft-fiókodba. Szeretnél most bejelentkezni?</value>
     <comment>MessageDialog</comment>
   </data>
   <data name="Nav.About" xml:space="preserve">
-    <value>Over</value>
+    <value>Rólunk</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Archive" xml:space="preserve">
-    <value>Archiveer</value>
+    <value>Arhívum</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Notes" xml:space="preserve">
-    <value>Notities</value>
+    <value>Jegyzetek</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Settings" xml:space="preserve">
-    <value>Instellingen</value>
+    <value>Beállítások</value>
     <comment>Navigation</comment>
   </data>
   <data name="Nav.Upgrade" xml:space="preserve">
-    <value>Upgraden</value>
+    <value>Előfizetés</value>
     <comment>Navigation</comment>
   </data>
   <data name="NewTitle.Text" xml:space="preserve">
-    <value>NIEUWE NOTITIE</value>
+    <value>ÚJ JEGYZET</value>
     <comment>EditPage</comment>
   </data>
   <data name="NotOnPcVersion.Text" xml:space="preserve">
@@ -336,207 +336,207 @@ Wil je inloggen met je Microsoft account?</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="OrderNotesBy.Header" xml:space="preserve">
-    <value>Sorteer notities op</value>
+    <value>Jegyzetek rendezése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="Pin.Label" xml:space="preserve">
-    <value>Vastmaken aan start</value>
+    <value>Kitűzés a kezdőlapra</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.Deleting" xml:space="preserve">
-    <value>Verwijderen…</value>
+    <value>Törlés...</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.DownloadingFile" xml:space="preserve">
-    <value>Bestand downloaden…</value>
+    <value>Fájlok letöltése...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Saving" xml:space="preserve">
-    <value>Opslaan…</value>
+    <value>Mentés...</value>
     <comment>EditPage</comment>
   </data>
   <data name="Progress.Syncing" xml:space="preserve">
-    <value>Synchroniseren…</value>
+    <value>Szinkronizálás...</value>
     <comment>MainPage</comment>
   </data>
   <data name="Progress.UploadingFile" xml:space="preserve">
-    <value>Bestand Uploaden…</value>
+    <value>Fájlok feltöltése...</value>
     <comment>EditPage</comment>
   </data>
   <data name="QuickNotesInputType.Header" xml:space="preserve">
-    <value>Input-methode van „Snelle notities“</value>
+    <value>Beviteli módszer a "Gyors jegyzetek"-hez</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeContent.Text" xml:space="preserve">
-    <value>Enkel inhoud</value>
+    <value>Csak a részletek</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
-    <value>Titel en inhoud</value>
+    <value>Cím és részletek</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="ReadAloud.Label" xml:space="preserve">
-    <value>Hardop lezen</value>
+    <value>Felolvasás</value>
     <comment>EditPage</comment>
   </data>
   <data name="ReadMore.Content" xml:space="preserve">
-    <value>Meer informatie…</value>
+    <value>Tudj meg többet...</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="ReadQR.Label" xml:space="preserve">
-    <value>QR-code</value>
+    <value>Read QR code</value>
     <comment>EditPage</comment>
   </data>
   <data name="Restore.Label" xml:space="preserve">
-    <value>Herstellen</value>
+    <value>Visszaállítás</value>
     <comment>ArchivePage</comment>
   </data>
   <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Kies categorie</value>
+    <value>Kategória beállítása</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="SettingsAcrossDevices.Header" xml:space="preserve">
-    <value>Synchroniseer bij alle apparaten</value>
+    <value>Ezközök közötti szinkronizálás</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsActionCenter.Text" xml:space="preserve">
-    <value>Action Center</value>
+    <value>Műveletközpont (Action Center)</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowClear.Header" xml:space="preserve">
-    <value>Toestemming voor verwijderen van notities</value>
+    <value>Jegyzetek eltávolításának engedélyezése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAllowRemove.Header" xml:space="preserve">
-    <value>Toestaan notities te verwijderen</value>
+    <value>Jegyzetek törlésének engedélyezése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsAutoSave.Header" xml:space="preserve">
-    <value>Sta toe automatisch notities op te slaan</value>
+    <value>Jegyzetek automatikus mentése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
-    <value>Synchronisatie periode</value>
+    <value>Szinkronizálási időköz</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
-    <value>Standaard categorie</value>
+    <value>Alapértelmezett szín</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsGeneral.Text" xml:space="preserve">
-    <value>Algemeen</value>
+    <value>Általános</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsLiveTile.Text" xml:space="preserve">
-    <value>Live Tegel</value>
+    <value>Élőcsempe (Live Tile)</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
-    <value>Deze instellingen hebben enkel invloed op de Live Tegel</value>
+    <value>Csak a fő élőcsempére alkalmazza</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsLiveTileType.Header" xml:space="preserve">
-    <value>Soort Live Tegel</value>
+    <value>Élőcsempe típusa</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsNotes.Text" xml:space="preserve">
-    <value>Notities</value>
+    <value>Jegyzetek</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
-    <value>Standaard titel</value>
+    <value>Alapértelmezett cím</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
-    <value>Snelle notitie</value>
+    <value>Gyors jegyzet</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsOnlineSync.Text" xml:space="preserve">
-    <value>Online synchronisatie</value>
+    <value>Online szinkronizáció</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsPersonalization.Text" xml:space="preserve">
-    <value>Personalisatie</value>
+    <value>Személyre szabás</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsQuickNotes.Header" xml:space="preserve">
-    <value>Gebruik "Snelle notities"</value>
+    <value>"Gyors jegyzetek" engedélyezése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
-    <value>Aantal notities</value>
+    <value>Jegyzetek sorszámának megjelenítése</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SettingsShowNotes.Header" xml:space="preserve">
-    <value>Laat notities zien</value>
+    <value>Jegyzetek megjelenítése</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncInBackground.Header" xml:space="preserve">
-    <value>Synchroniseer notities in de achtergrond</value>
+    <value>Szinkronizálás a háttérben</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsSyncOnStart.Header" xml:space="preserve">
-    <value>Synchroniseer wanneer app start</value>
+    <value>Szinkronizálás ha az alkalmazás fut</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsThemeColor.Header" xml:space="preserve">
-    <value>Thema kleur</value>
+    <value>Témaszín</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
-    <value>INSTELLINGEN</value>
+    <value>BEÁLLÍTÁSOK</value>
     <comment>SettingsPage</comment>
   </data>
   <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
-    <value>Update Live Tegel</value>
+    <value>Élőcsempe frissítése</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="Share.Label" xml:space="preserve">
-    <value>Delen</value>
+    <value>Megosztás</value>
     <comment>MainPage</comment>
   </data>
   <data name="ShareContentDescription" xml:space="preserve">
-    <value>Deel notities met vrienden</value>
+    <value>Megosztom a barátaimmal</value>
     <comment>ShareCharmsBar</comment>
   </data>
   <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
-    <value>Ordenen op</value>
+    <value>Rendezés</value>
     <comment>v2 MainPage</comment>
   </data>
   <data name="SortByAlphabetical.Text" xml:space="preserve">
-    <value>Alfabetisch</value>
+    <value>Betűrendben</value>
     <comment>v2 SettingsPage</comment>
   </data>
   <data name="SortByCategory.Text" xml:space="preserve">
-    <value>Categorie</value>
+    <value>Kategória</value>
     <comment>MainPage</comment>
   </data>
   <data name="SortByDate.Text" xml:space="preserve">
-    <value>Verander datum</value>
+    <value>Dátummódosítás</value>
     <comment>MainPage</comment>
   </data>
   <data name="SpeechInput.Label" xml:space="preserve">
-    <value>Taal invoer</value>
+    <value>Szövegbevitel beszéddel</value>
     <comment>EditPage</comment>
   </data>
   <data name="Sync.Label" xml:space="preserve">
-    <value>Synchroniseer</value>
+    <value>Szinkronizálás</value>
     <comment>MainPage</comment>
   </data>
   <data name="Unpin.Label" xml:space="preserve">
-    <value>Losmaken van start</value>
+    <value>Levétel</value>
     <comment>MainPage</comment>
   </data>
   <data name="Upgrade.Content" xml:space="preserve">
-    <value>Upgraden</value>
+    <value>Megveszem</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeLove.Text" xml:space="preserve">
-    <value>VOOR AAFSCHAF VAN DE PRO EDITIE</value>
+    <value>MEGVÁSÁROLTAD A PRO VERZIÓT</value>
     <comment>UpgradePage</comment>
   </data>
   <data name="UpgradeTitle.Text" xml:space="preserve">
-    <value>UPGRADEN</value>
+    <value>MEGVESZEM</value>
     <comment>UpgradePage</comment>
   </data>
 </root>
