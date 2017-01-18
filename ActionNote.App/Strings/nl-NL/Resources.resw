@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About.AppDescription" xml:space="preserve">
+    <value>Action Note is niet zomaar een notitie app. Het integreert zich in het Action Center en biedt je de mogelijkheid om snel bij al je notities te komen, zelfs op je overige Windows 10 apparaten.</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ContributorsTitle" xml:space="preserve">
+    <value>Contribuanten:</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.MoreAppsText" xml:space="preserve">
+    <value>Meer apps</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.RateAndReviewText" xml:space="preserve">
+    <value>Beoordeel en review</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.SendFeedbackEmailText" xml:space="preserve">
+    <value>Stuur feedback</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShareAppText" xml:space="preserve">
+    <value>Deel app</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ShowPrivacyInfoText" xml:space="preserve">
+    <value>Privacy &amp; gegevens</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>Software van Derden:</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="AboutTitle.Text" xml:space="preserve">
+    <value>OVER</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="Add.Label" xml:space="preserve">
+    <value>Toevoegen</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ArchiveTitle.Text" xml:space="preserve">
+    <value>ARCHIEF</value>
+    <comment>ArchivPage</comment>
+  </data>
+  <data name="Attachement.Label" xml:space="preserve">
+    <value>Bijlage</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementRemove.Text" xml:space="preserve">
+    <value>Verwijderen</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="AttachementSelect.Text" xml:space="preserve">
+    <value>Selecteren</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="BackSyncInterval.120" xml:space="preserve">
+    <value>2 uur</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.240" xml:space="preserve">
+    <value>4 uur</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.30" xml:space="preserve">
+    <value>30 minuten</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.45" xml:space="preserve">
+    <value>45 minuten</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.60" xml:space="preserve">
+    <value>1 uur</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="BackSyncInterval.Manual" xml:space="preserve">
+    <value>Manually</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ChangeSize.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximaliseren / minimaliseren</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>Verwijderen</value>
+    <comment>MainPage/EditPage</comment>
+  </data>
+  <data name="DeleteAll.Label" xml:space="preserve">
+    <value>Alles verwijderen</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Discard.Label" xml:space="preserve">
+    <value>Negeren</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="DiscardChanges.Label" xml:space="preserve">
+    <value>Aanpassingen negeren</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Edit.Label" xml:space="preserve">
+    <value>Bewerken</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="EditTitle.Text" xml:space="preserve">
+    <value>BEWERKEN</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="HideNoteInActionCenter.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Niet tonen in Action Center</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="IAP.Purchased" xml:space="preserve">
+    <value>Aangeschaft</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="LiveTileType.FlipNotes" xml:space="preserve">
+    <value>Bladeren door notities</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="LiveTileType.TitleList" xml:space="preserve">
+    <value>Notitie titels</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="MainTitle.Text" xml:space="preserve">
+    <value>NOTITIES</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="MarkAsImportant.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Markeer als belangrijk</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="Message.CanNotSaveEmpty" xml:space="preserve">
+    <value>Ziet er leeg uit hé? Een notitie zonder inhoud kan je niet bewaren.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.CouldNotDeleteArchive" xml:space="preserve">
+    <value>De opdracht voor het verwijderen kon niet worden volbracht omdat de informatie niet naar de server verstuurd kon worden. Controleer je verbinding en probeer het later nog eens.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.DeletedOutside" xml:space="preserve">
+    <value>Deze notitie is al verwijderd op een ander apparaat. Het lijkt er op dat dit apparaat niet gesynchroniseerd is. Voer een handmatige synchronisatie uit.</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.LoginFailedInfo" xml:space="preserve">
+    <value>Online synchronisatie vereist dat je inlogt voor verificatie. We hebben deze functie voor je gedeactiveerd.
+Deze kan je reactiveren onder instellingen.</value>
+    <comment>Message Dialog</comment>
+  </data>
+  <data name="Message.LoginPending" xml:space="preserve">
+    <value>Je hebt online synchronisatie aangevraagd maar je login is nog niet voltooid.
+Wil je inloggen met je Microsoft account?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.No" xml:space="preserve">
+    <value>Nee</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Option.Yes" xml:space="preserve">
+    <value>Ja</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.ReallyDeleteAll" xml:space="preserve">
+    <value>Wil je al je notities verwijderen?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.SyncFailed" xml:space="preserve">
+    <value>De synchronisatie was onsuccesvol. Controleer je internet verbinding of probeer het later nog eens.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Message.Title.Attention" xml:space="preserve">
+    <value>Opgelet</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Info" xml:space="preserve">
+    <value>Informatie</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.Title.WelcomeBack" xml:space="preserve">
+    <value>Welkom terug!</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Message.WelcomeLoginPending" xml:space="preserve">
+    <value>We hebben de online synchronisatie gereactiveerd. Om hier gebruik van te kunnen maken moet je inloggen met je Microsoft account. Wil je dat nu doen?</value>
+    <comment>MessageDialog</comment>
+  </data>
+  <data name="Nav.About" xml:space="preserve">
+    <value>Over</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Archive" xml:space="preserve">
+    <value>Archiveer</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Notes" xml:space="preserve">
+    <value>Notities</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Settings" xml:space="preserve">
+    <value>Instellingen</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="Nav.Upgrade" xml:space="preserve">
+    <value>Upgraden</value>
+    <comment>Navigation</comment>
+  </data>
+  <data name="NewTitle.Text" xml:space="preserve">
+    <value>NIEUWE NOTITIE</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="NotOnPcVersion.Text" xml:space="preserve">
+    <value>* This option cannot be disabled in the PC version, due to a bug in Windows 10. This option will be activated after the 'Red Stone 1' update in summer 2016. Thank you for your patience!</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="OrderNotesBy.Header" xml:space="preserve">
+    <value>Sorteer notities op</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Pin.Label" xml:space="preserve">
+    <value>Vastmaken aan start</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.Deleting" xml:space="preserve">
+    <value>Verwijderen…</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.DownloadingFile" xml:space="preserve">
+    <value>Bestand downloaden…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Saving" xml:space="preserve">
+    <value>Opslaan…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Progress.Syncing" xml:space="preserve">
+    <value>Synchroniseren…</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Progress.UploadingFile" xml:space="preserve">
+    <value>Bestand Uploaden…</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="QuickNotesInputType.Header" xml:space="preserve">
+    <value>Input-methode van „Snelle notities“</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeContent.Text" xml:space="preserve">
+    <value>Enkel inhoud</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="QuickNotesTypeTitleAndContent.Text" xml:space="preserve">
+    <value>Titel en inhoud</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReadAloud.Label" xml:space="preserve">
+    <value>Hardop lezen</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="ReadMore.Content" xml:space="preserve">
+    <value>Meer informatie…</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="ReadQR.Label" xml:space="preserve">
+    <value>QR-code</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Restore.Label" xml:space="preserve">
+    <value>Herstellen</value>
+    <comment>ArchivePage</comment>
+  </data>
+  <data name="SetNoteCategory.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Kies categorie</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="SettingsAcrossDevices.Header" xml:space="preserve">
+    <value>Synchroniseer bij alle apparaten</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsActionCenter.Text" xml:space="preserve">
+    <value>Action Center</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowClear.Header" xml:space="preserve">
+    <value>Toestemming voor verwijderen van notities</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAllowRemove.Header" xml:space="preserve">
+    <value>Toestaan notities te verwijderen</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsAutoSave.Header" xml:space="preserve">
+    <value>Sta toe automatisch notities op te slaan</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsBackSyncInterval.Header" xml:space="preserve">
+    <value>Synchronisatie periode</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsDefaultNoteColor.Header" xml:space="preserve">
+    <value>Standaard categorie</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsGeneral.Text" xml:space="preserve">
+    <value>Algemeen</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTile.Text" xml:space="preserve">
+    <value>Live Tegel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileDescription.Text" xml:space="preserve">
+    <value>Deze instellingen hebben enkel invloed op de Live Tegel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsLiveTileType.Header" xml:space="preserve">
+    <value>Soort Live Tegel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotes.Text" xml:space="preserve">
+    <value>Notities</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.Header" xml:space="preserve">
+    <value>Standaard titel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsNotesDefaultTitle.PlaceholderText" xml:space="preserve">
+    <value>Snelle notitie</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsOnlineSync.Text" xml:space="preserve">
+    <value>Online synchronisatie</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsPersonalization.Text" xml:space="preserve">
+    <value>Personalisatie</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsQuickNotes.Header" xml:space="preserve">
+    <value>Gebruik "Snelle notities"</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsShowLiveTileCounter.Header" xml:space="preserve">
+    <value>Aantal notities</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SettingsShowNotes.Header" xml:space="preserve">
+    <value>Laat notities zien</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncInBackground.Header" xml:space="preserve">
+    <value>Synchroniseer notities in de achtergrond</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsSyncOnStart.Header" xml:space="preserve">
+    <value>Synchroniseer wanneer app start</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsThemeColor.Header" xml:space="preserve">
+    <value>Thema kleur</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>INSTELLINGEN</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="SettingsUpdateLiveTile.Header" xml:space="preserve">
+    <value>Update Live Tegel</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>Delen</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ShareContentDescription" xml:space="preserve">
+    <value>Deel notities met vrienden</value>
+    <comment>ShareCharmsBar</comment>
+  </data>
+  <data name="SortBy.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Ordenen op</value>
+    <comment>v2 MainPage</comment>
+  </data>
+  <data name="SortByAlphabetical.Text" xml:space="preserve">
+    <value>Alfabetisch</value>
+    <comment>v2 SettingsPage</comment>
+  </data>
+  <data name="SortByCategory.Text" xml:space="preserve">
+    <value>Categorie</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SortByDate.Text" xml:space="preserve">
+    <value>Verander datum</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SpeechInput.Label" xml:space="preserve">
+    <value>Taal invoer</value>
+    <comment>EditPage</comment>
+  </data>
+  <data name="Sync.Label" xml:space="preserve">
+    <value>Synchroniseer</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Unpin.Label" xml:space="preserve">
+    <value>Losmaken van start</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Upgrade.Content" xml:space="preserve">
+    <value>Upgraden</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeLove.Text" xml:space="preserve">
+    <value>VOOR AAFSCHAF VAN DE PRO EDITIE</value>
+    <comment>UpgradePage</comment>
+  </data>
+  <data name="UpgradeTitle.Text" xml:space="preserve">
+    <value>UPGRADEN</value>
+    <comment>UpgradePage</comment>
+  </data>
+</root>
