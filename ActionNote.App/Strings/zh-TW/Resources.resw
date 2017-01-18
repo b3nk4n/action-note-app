@@ -145,6 +145,10 @@
     <value>隱私權資訊</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>協力廠商軟體:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>關於</value>
     <comment>AboutPage</comment>

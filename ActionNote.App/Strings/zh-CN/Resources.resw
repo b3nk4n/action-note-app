@@ -145,6 +145,10 @@
     <value>隐私信息</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>第三方软件:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>关于</value>
     <comment>AboutPage</comment>

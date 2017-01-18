@@ -145,6 +145,10 @@
     <value>معلومات الخصوصية</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>مصدر الطرف الثالث:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>عن التطبيق</value>
     <comment>AboutPage</comment>

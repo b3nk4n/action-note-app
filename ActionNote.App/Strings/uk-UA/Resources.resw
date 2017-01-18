@@ -145,6 +145,10 @@
     <value>Конфіденційність</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>Програмне забезпечення сторонніх постачальників:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>Опис</value>
     <comment>AboutPage</comment>

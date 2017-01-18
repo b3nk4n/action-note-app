@@ -145,6 +145,10 @@
     <value>מידע פרטיות</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>תוכנה של צד שלישי:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>אודות</value>
     <comment>AboutPage</comment>

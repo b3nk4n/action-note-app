@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About.AppDescription" xml:space="preserve">
-    <value>Action Note ist nicht nur ein einfaches Notizbuch. Es integriert sich in dein Action Center und bietet dir so den schnellsten Zugriff auf all deine Notizen. Und das quer über all deine Windows 10 Geräte.</value>
+    <value>Action Note ist alles andere als nur ein einfaches Notizbuch. Es integriert sich in dein Action Center und bietet dir so den schnellsten Zugriff auf all deine Notizen. Und das quer über all deine Windows 10 Geräte.</value>
     <comment>AboutPage</comment>
   </data>
   <data name="About.ContributorsTitle" xml:space="preserve">
@@ -143,6 +143,10 @@
   </data>
   <data name="About.ShowPrivacyInfoText" xml:space="preserve">
     <value>Datenschutzerklärung</value>
+    <comment>AboutPage</comment>
+  </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>Drittanbieter-Software:</value>
     <comment>AboutPage</comment>
   </data>
   <data name="AboutTitle.Text" xml:space="preserve">

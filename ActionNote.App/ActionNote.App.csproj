@@ -184,6 +184,7 @@
     <Content Include="Assets\Images\neutral_att.png" />
     <Content Include="Assets\Images\neutral_att_flag.png" />
     <Content Include="Assets\Images\neutral_flag.png" />
+    <Content Include="Assets\Images\ninject-logo.png" />
     <Content Include="Assets\Images\noun_project.png" />
     <Content Include="Assets\Images\orange.png" />
     <Content Include="Assets\Images\orange_att.png" />

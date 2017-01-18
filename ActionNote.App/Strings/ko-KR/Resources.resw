@@ -145,6 +145,10 @@
     <value>개인정보 보호 정보</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>타사 소프트웨어:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>정보</value>
     <comment>AboutPage</comment>

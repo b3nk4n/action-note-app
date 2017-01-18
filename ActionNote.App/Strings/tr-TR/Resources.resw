@@ -145,6 +145,10 @@
     <value>Gizlilik bilgisi</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>Üçüncü parti yazılım:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>HAKKINDA</value>
     <comment>AboutPage</comment>

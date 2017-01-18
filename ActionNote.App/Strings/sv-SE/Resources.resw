@@ -145,6 +145,10 @@
     <value>Sekretessinfo</value>
     <comment>AboutPage</comment>
   </data>
+  <data name="About.ThirdPartiesTitle" xml:space="preserve">
+    <value>Programvara från tredje part:</value>
+    <comment>AboutPage</comment>
+  </data>
   <data name="AboutTitle.Text" xml:space="preserve">
     <value>OM</value>
     <comment>AboutPage</comment>
