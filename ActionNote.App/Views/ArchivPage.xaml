@@ -64,8 +64,8 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" x:Uid="ArchiveTitle" Text="ARCHIVE" Style="{ThemeResource NarrowPageTitleTextBlockStyle}" TextWrapping="NoWrap" />
-                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Width="48" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
-                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="48" Icon="Sort" ToolTipService.ToolTip="Sort">
+                    <AppBarButton Grid.Column="1" x:Uid="ChangeSize" Width="52" Icon="{Binding NotesExpandStateIcon}" Command="{Binding ToggleNoteItemViewState}" ToolTipService.ToolTip="Change size" />
+                    <AppBarButton Grid.Column="2" x:Uid="SortBy" Width="52" Icon="Sort" ToolTipService.ToolTip="Sort">
                         <AppBarButton.Flyout>
                             <MenuFlyout x:Name="ColorFlyout" MenuFlyoutPresenterStyle="{StaticResource CommandBarMenuFlyoutPresenterTopStyle}">
                                 <MenuFlyoutItem x:Uid="SortByDate" Command="{Binding SortCommand}" CommandParameter="date" IsTabStop="False" />
