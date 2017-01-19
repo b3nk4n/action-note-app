@@ -28,6 +28,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI;
 using Windows.UI.Xaml.Shapes;
+using Windows.ApplicationModel;
 
 namespace ActionNote.App.ViewModels
 {

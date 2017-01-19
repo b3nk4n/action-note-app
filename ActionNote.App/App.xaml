@@ -328,7 +328,7 @@
                                                                 </VisualState>
                                                             </VisualStateGroup>
                                                         </VisualStateManager.VisualStateGroups>
-                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="{ThemeResource SystemControlForegroundChromeBlackMediumBrush}" FontStyle="Normal" FontSize="12" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE10A;" VerticalAlignment="Center"/>
+                                                        <TextBlock x:Name="GlyphElement" AutomationProperties.AccessibilityView="Raw" Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" FontStyle="Normal" FontSize="12" FontFamily="{ThemeResource SymbolThemeFontFamily}" HorizontalAlignment="Center" Text="&#xE10A;" VerticalAlignment="Center"/>
                                                     </Grid>
                                                 </ControlTemplate>
                                             </Setter.Value>
