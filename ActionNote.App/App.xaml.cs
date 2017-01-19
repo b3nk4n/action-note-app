@@ -82,7 +82,7 @@ namespace ActionNote.App
             ColorPropertiesLight = new AppColorProperties(AppConstants.COLOR_ACCENT, Colors.Black, Colors.White, Colors.Black, Color.FromArgb(255, 230, 230, 230), null, null);
 
             //_speechService = Injector.Get<ISpeechService>();
-            //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // TODO: caused app not starting on phone (after Cortana setup !?!)
+            //await _speechService.InstallCommandSets("/Assets/Cortana/voicecommands.xml"); // OS still uses OneNote for any command that contains "note", not this app :(
 
 #if DEBUG
             await _licenseService.RefeshSimulator();
@@ -173,6 +173,15 @@ namespace ActionNote.App
                             pageType = DefaultPage;
                         }
                     }
+                }
+            }
+            else if (args.Kind == ActivationKind.Protocol)
+            {
+                var protocolArgs = args as ProtocolActivatedEventArgs;
+
+                if (protocolArgs != null)
+                {
+                    pageType = typeof(EditPage);
                 }
             }
             /*else if (args.Kind == ActivationKind.VoiceCommand)
