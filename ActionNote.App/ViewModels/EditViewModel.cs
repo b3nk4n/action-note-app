@@ -28,14 +28,13 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI;
 using Windows.UI.Xaml.Shapes;
-using Windows.ApplicationModel;
+using UWPCore.Framework.Controls;
 
 namespace ActionNote.App.ViewModels
 {
     public interface EditViewModelCallbacks
     {
         void SelectTitle();
-        void UnfocusTextBoxes();
     }
 
     public class EditViewModel : ViewModelBase
@@ -101,6 +100,12 @@ namespace ActionNote.App.ViewModels
                         _localizer.Get("Message.CanNotSaveEmpty"),
                         _localizer.Get("Message.Title.Info"));
                 }
+            }, (noteItem) =>
+            {
+                // force to update the textbox bindings in case this is needed
+                ControlBindingHelper.FocusedTextBoxUpdateSource();
+
+                return noteItem != null;
             });
 
             DiscardCommand = new DelegateCommand(() =>
@@ -188,6 +193,9 @@ namespace ActionNote.App.ViewModels
             },
             (noteItem) =>
             {
+                // force to update the textbox bindings in case this is needed
+                ControlBindingHelper.FocusedTextBoxUpdateSource();
+
                 return noteItem != null && !string.IsNullOrWhiteSpace(noteItem.Content) && !string.IsNullOrWhiteSpace(noteItem.Content);
             });
 
@@ -205,21 +213,31 @@ namespace ActionNote.App.ViewModels
             // TODO: redundand with MainPageViewModel
             ShareCommand = new DelegateCommand<NoteItem>(async (noteItem) =>
             {
-                var content = string.Format("{0}\r{1}", noteItem.Title, noteItem.Content);
+                var title = noteItem.Title;
+
+                if (string.IsNullOrWhiteSpace(title))
+                {
+                    title = GetDefaultTitle();
+                }
+
+                var content = string.Format("{0}\r{1}", title, noteItem.Content);
                 var description = _localizer.Get("ShareContentDescription");
                 if (noteItem.HasAttachement)
                 {
                     var file = await _localStorageService.GetFileAsync(AppConstants.ATTACHEMENT_BASE_PATH + noteItem.AttachementFile);
                     if (file != null)
-                        _shareContentService.ShareImage(noteItem.Title, file, null, content, description);
+                        _shareContentService.ShareImage(title, file, null, content, description);
                 }
                 else
                 {
-                    _shareContentService.ShareText(noteItem.Title, content, description);
+                    _shareContentService.ShareText(title, content, description);
                 }
             },
             (noteItem) =>
             {
+                // force to update the textbox bindings in case this is needed
+                ControlBindingHelper.FocusedTextBoxUpdateSource();
+
                 return noteItem != null && !noteItem.IsEmtpy;
             });
 
@@ -230,6 +248,9 @@ namespace ActionNote.App.ViewModels
             },
             (noteItem) =>
             {
+                // force to update the textbox bindings in case this is needed
+                ControlBindingHelper.FocusedTextBoxUpdateSource();
+
                 return noteItem != null && !noteItem.IsEmtpy;
             });
 
@@ -291,6 +312,20 @@ namespace ActionNote.App.ViewModels
             {
                 return SelectedNote != null;
             });
+        }
+
+        /// <summary>
+        /// Gets the default title of a note.
+        /// </summary>
+        /// <returns>Returns the default title.</returns>
+        private string GetDefaultTitle()
+        {
+            var quickNotesDefaultTitle = AppSettings.QuickNotesDefaultTitle.Value;
+            if (string.IsNullOrEmpty(quickNotesDefaultTitle))
+            {
+                quickNotesDefaultTitle = _commonLocalizer.Get("QuickNote");
+            }
+            return quickNotesDefaultTitle;
         }
 
         private UIElement CreateCustomOverlay(bool showCancelButton)
@@ -601,9 +636,7 @@ namespace ActionNote.App.ViewModels
                 {
                     args.Cancel = true;
 
-                    // WAIT! To ensure all text-input fields lose their focus and the bindings are fired!
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
+                    ControlBindingHelper.FocusedTextBoxUpdateSource();
 
                     _savedInForwardNavigation = true; // set to true, to prevent endless OnNavigatingFrom loop
                     _doSave = false;
@@ -648,12 +681,10 @@ namespace ActionNote.App.ViewModels
 
         private void RegisterForKeyboard()
         {
-            _keyboardService.RegisterForKeyDown(async (e) =>
+            _keyboardService.RegisterForKeyDown((e) =>
             {
                 if (e.ControlKey && e.VirtualKey == VirtualKey.S)
                 {
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
                     SaveCommand.Execute(SelectedNote);
                 }
                 else if (e.ControlKey && e.VirtualKey == VirtualKey.D) // NOT X! Because Ctrl-X is used cut CUT the content!
@@ -662,20 +693,14 @@ namespace ActionNote.App.ViewModels
                 }
                 else if (e.AltKey && e.VirtualKey == VirtualKey.S)
                 {
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
                     ShareCommand.Execute(SelectedNote);
                 }
                 else if (e.AltKey && e.VirtualKey == VirtualKey.R)
                 {
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
                     ReadNoteCommand.Execute(SelectedNote);
                 }
                 else if (e.AltKey && e.VirtualKey == VirtualKey.P)
                 {
-                    _callbacks.UnfocusTextBoxes();
-                    await Task.Delay(50);
                     if (IsSelectedNotePinned)
                     {
                         UnpinCommand.Execute(SelectedNote);
@@ -726,6 +751,9 @@ namespace ActionNote.App.ViewModels
 
         private void BackRequested(object sender, HandledEventArgs e)
         {
+            // Force to update the textbox bindings
+            ControlBindingHelper.FocusedTextBoxUpdateSource();
+
             if (AppSettings.SaveNoteOnBack.Value)
             {
                 _doSave = true;

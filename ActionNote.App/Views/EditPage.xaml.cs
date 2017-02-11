@@ -36,12 +36,6 @@ namespace ActionNote.App.Views
             TitleTextBox.Focus(FocusState.Programmatic);
         }
 
-        public void UnfocusTextBoxes()
-        {
-            // we have to ensure that all text boxes are unfocused, because the bindings are trigger on unfocus!
-            FocusElement.Focus(FocusState.Programmatic);
-        }
-
         private void ColorFlyoutClicked(object sender, RoutedEventArgs e)
         {
             ColorFlyout.Hide();
