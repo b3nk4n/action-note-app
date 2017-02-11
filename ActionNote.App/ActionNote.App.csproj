@@ -292,18 +292,6 @@
       <Project>{76136e33-9309-4b1c-9c38-93857c5eaa35}</Project>
       <Name>ActionNote.Tasks</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libs\ZXing.Net.Mobile.Core\ZXing.Net.Mobile.Core.csproj">
-      <Project>{7528dd0a-1781-47f4-adbf-eeddb011f6bb}</Project>
-      <Name>ZXing.Net.Mobile.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libs\ZXing.Net.Mobile.WindowsUniversal\ZXing.Net.Mobile.WindowsUniversal.csproj">
-      <Project>{1b000bca-4895-4acf-a0c6-3adf3a9bedf2}</Project>
-      <Name>ZXing.Net.Mobile.WindowsUniversal</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Libs\ZXing.Net\zxing.portable.csproj">
-      <Project>{24b441f2-cbe9-4405-9fd0-72ebcbea0ec3}</Project>
-      <Name>zxing.portable</Name>
-    </ProjectReference>
     <ProjectReference Include="C:\Projects\UWP\UWPCore.Framework\Framework\UWPCore.Framework\UWPCore.Framework.csproj">
       <Project>{a730354a-b009-4392-8d04-e065347e548a}</Project>
       <Name>UWPCore.Framework</Name>

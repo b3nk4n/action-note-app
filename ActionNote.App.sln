@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionNote.App", "ActionNote.App\ActionNote.App.csproj", "{A163AB6D-1A2D-4E76-973D-A5FB651305E9}"
 EndProject
@@ -10,14 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionNote.Common", "ActionNote.Common\ActionNote.Common.csproj", "{3B907FCB-917E-494B-835B-AA0FE427D661}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionNote.Tasks", "ActionNote.Tasks\ActionNote.Tasks.csproj", "{76136E33-9309-4B1C-9C38-93857C5EAA35}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{9D0D4F1E-29C6-437D-B406-F2A8E1D99C0C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXing.Net.Mobile.Core", "Libs\ZXing.Net.Mobile.Core\ZXing.Net.Mobile.Core.csproj", "{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZXing.Net.Mobile.WindowsUniversal", "Libs\ZXing.Net.Mobile.WindowsUniversal\ZXing.Net.Mobile.WindowsUniversal.csproj", "{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zxing.portable", "Libs\ZXing.Net\zxing.portable.csproj", "{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,85 +129,8 @@ Global
 		{76136E33-9309-4B1C-9C38-93857C5EAA35}.Release|x64.Build.0 = Release|x64
 		{76136E33-9309-4B1C-9C38-93857C5EAA35}.Release|x86.ActiveCfg = Release|x86
 		{76136E33-9309-4B1C-9C38-93857C5EAA35}.Release|x86.Build.0 = Release|x86
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|x64.Build.0 = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug .NET Native|x86.Build.0 = Debug .NET Native|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|ARM.Build.0 = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|x64.Build.0 = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Debug|x86.Build.0 = Debug|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|ARM.ActiveCfg = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|ARM.Build.0 = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|x64.ActiveCfg = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|x64.Build.0 = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|x86.ActiveCfg = Release|Any CPU
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB}.Release|x86.Build.0 = Release|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|x64.Build.0 = Debug .NET Native|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|x86
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug .NET Native|x86.Build.0 = Debug .NET Native|x86
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|ARM.ActiveCfg = Debug|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|ARM.Build.0 = Debug|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|x64.ActiveCfg = Debug|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|x64.Build.0 = Debug|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|x86.ActiveCfg = Debug|x86
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Debug|x86.Build.0 = Debug|x86
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|ARM.ActiveCfg = Release|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|ARM.Build.0 = Release|ARM
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|x64.ActiveCfg = Release|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|x64.Build.0 = Release|x64
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|x86.ActiveCfg = Release|x86
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2}.Release|x86.Build.0 = Release|x86
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|Any CPU.ActiveCfg = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|Any CPU.Build.0 = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|ARM.ActiveCfg = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|ARM.Build.0 = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|x64.ActiveCfg = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|x64.Build.0 = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|x86.ActiveCfg = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug .NET Native|x86.Build.0 = Debug .NET Native|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|ARM.Build.0 = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|x64.Build.0 = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Debug|x86.Build.0 = Debug|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|ARM.ActiveCfg = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|ARM.Build.0 = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|x64.ActiveCfg = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|x64.Build.0 = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|x86.ActiveCfg = Release|Any CPU
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7528DD0A-1781-47F4-ADBF-EEDDB011F6BB} = {9D0D4F1E-29C6-437D-B406-F2A8E1D99C0C}
-		{1B000BCA-4895-4ACF-A0C6-3ADF3A9BEDF2} = {9D0D4F1E-29C6-437D-B406-F2A8E1D99C0C}
-		{24B441F2-CBE9-4405-9FD0-72EBCBEA0EC3} = {9D0D4F1E-29C6-437D-B406-F2A8E1D99C0C}
 	EndGlobalSection
 EndGlobal
