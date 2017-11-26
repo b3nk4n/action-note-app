@@ -644,7 +644,9 @@ namespace ActionNote.App.ViewModels
 
                     // UGLY workaround to ensure we have saved the note before we navigate to the notes list,
                     // so that the list gets with the new note content
-                    NavigationService.Navigate(args.PageType, args.Parameter);
+                    // Use a dispatcher, because otherwise Frame.Navigate() could fail: https://stackoverflow.com/questions/15739996/frame-navigation-in-xaml-return-false
+                    await Dispatcher.CoreDispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                        () => NavigationService.Navigate(args.PageType, args.Parameter));
                 }
             }
             else
@@ -756,11 +758,7 @@ namespace ActionNote.App.ViewModels
 
             if (AppSettings.SaveNoteOnBack.Value)
             {
-                if (SelectedNote != null &&
-                    SelectedNote.HasAttachementChanged || SelectedNote.HasContentChanged)
-                    _doSave = true;
-                else
-                    _wasDiscared = true;
+                _doSave = true;
             }
         }
 
