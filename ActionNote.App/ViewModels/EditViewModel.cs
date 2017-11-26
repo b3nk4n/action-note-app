@@ -756,7 +756,11 @@ namespace ActionNote.App.ViewModels
 
             if (AppSettings.SaveNoteOnBack.Value)
             {
-                _doSave = true;
+                if (SelectedNote != null &&
+                    SelectedNote.HasAttachementChanged || SelectedNote.HasContentChanged)
+                    _doSave = true;
+                else
+                    _wasDiscared = true;
             }
         }
 
