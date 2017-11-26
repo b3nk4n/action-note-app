@@ -18,7 +18,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>ActionNote.App_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>1B97FE3E91887DD41D01A0990EE93ECE932337FA</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>ECAA80721035EB9002B5EEAD85FE94A88ED186F6</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Never</AppxBundle>
   </PropertyGroup>
