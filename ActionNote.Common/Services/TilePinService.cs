@@ -31,77 +31,86 @@ namespace ActionNote.Common.Services
 
         public void UpdateMainTile(IList<NoteItem> noteItems)
         {
-            var updater = _tileService.GetUpdaterForApplication();
-
-            // clear all
-            updater.Clear();
-
-            if (AppSettings.MainLiveTileEnabled.Value)
+            try
             {
-                if (noteItems.Count > 0)
+                var updater = _tileService.GetUpdaterForApplication();
+
+                // clear all
+                updater.Clear();
+
+                if (AppSettings.MainLiveTileEnabled.Value)
                 {
-                    if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_FLIP_NOTES)
+                    if (noteItems.Count > 0)
                     {
-                        // add new notes to flip through
-                        updater.EnableNotificationQueue(true);
-
-                        // filter out 5 most important notes
-                        var fiveMostImportantNotes = new List<NoteItem>();
-                        var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
-                        var importantNotes = sortedNotes.Where(n => n.IsImportant && !n.IsHidden).Take(5);
-                        fiveMostImportantNotes.AddRange(importantNotes);
-                        if (fiveMostImportantNotes.Count < 5)
+                        if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_FLIP_NOTES)
                         {
-                            foreach (var item in sortedNotes)
-                            {
-                                if (item.IsHidden)
-                                    continue;
-
-                                if (!fiveMostImportantNotes.Contains(item))
-                                {
-                                    fiveMostImportantNotes.Add(item);
-
-                                    if (fiveMostImportantNotes.Count == 5)
-                                        break;
-                                }
-                            }
-                        }
-
-                        // update the tile sequence
-                        foreach (var noteItem in fiveMostImportantNotes)
-                        {
-                            AdaptiveTileModel tileModel = GetMainTileFlipModel(noteItem);
-                            var tile = _tileService.AdaptiveFactory.Create(tileModel);
-                            tile.Tag = noteItem.ShortId;
-                            updater.Update(tile);
-                        }
-                    }
-                    else if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_TITLE_LIST)
-                    {
-                        var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
-                        var visibleNotes = sortedNotes.Where(n => !n.IsHidden).ToList();
-
-                        if (visibleNotes.Count > 3) // because when there are more than 3 notes (on PC!), we need a flip
+                            // add new notes to flip through
                             updater.EnableNotificationQueue(true);
 
-                        int sideIndex = 0;
-                        for (int i = 0; i < 5; ++i)
+                            // filter out 5 most important notes
+                            var fiveMostImportantNotes = new List<NoteItem>();
+                            var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
+                            var importantNotes = sortedNotes.Where(n => n.IsImportant && !n.IsHidden).Take(5);
+                            fiveMostImportantNotes.AddRange(importantNotes);
+                            if (fiveMostImportantNotes.Count < 5)
+                            {
+                                foreach (var item in sortedNotes)
+                                {
+                                    if (item.IsHidden)
+                                        continue;
+
+                                    if (!fiveMostImportantNotes.Contains(item))
+                                    {
+                                        fiveMostImportantNotes.Add(item);
+
+                                        if (fiveMostImportantNotes.Count == 5)
+                                            break;
+                                    }
+                                }
+                            }
+
+                            // update the tile sequence
+                            foreach (var noteItem in fiveMostImportantNotes)
+                            {
+                                AdaptiveTileModel tileModel = GetMainTileFlipModel(noteItem);
+                                var tile = _tileService.AdaptiveFactory.Create(tileModel);
+                                tile.Tag = noteItem.ShortId;
+                                updater.Update(tile);
+                            }
+                        }
+                        else if (AppSettings.LiveTileType.Value == AppConstants.LIVE_TILE_TITLE_LIST)
                         {
-                            // update the tile side
-                            var tileModel = GetMainTileTitleListModel(visibleNotes, sideIndex++);
+                            var sortedNotes = NoteUtils.Sort(noteItems, AppConstants.SORT_DATE);
+                            var visibleNotes = sortedNotes.Where(n => !n.IsHidden).ToList();
 
-                            if (tileModel == null)
-                                break;
+                            if (visibleNotes.Count > 3) // because when there are more than 3 notes (on PC!), we need a flip
+                                updater.EnableNotificationQueue(true);
 
-                            var tile = _tileService.AdaptiveFactory.Create(tileModel);
-                            // tile.Tag = noteItem.ShortId; no ID, because we have multiple notes
-                            updater.Update(tile);
+                            int sideIndex = 0;
+                            for (int i = 0; i < 5; ++i)
+                            {
+                                // update the tile side
+                                var tileModel = GetMainTileTitleListModel(visibleNotes, sideIndex++);
+
+                                if (tileModel == null)
+                                    break;
+
+                                var tile = _tileService.AdaptiveFactory.Create(tileModel);
+                                // tile.Tag = noteItem.ShortId; no ID, because we have multiple notes
+                                updater.Update(tile);
+                            }
                         }
                     }
                 }
-            }
 
-            UpdateBadgeInternal(noteItems);
+                UpdateBadgeInternal(noteItems);
+            }
+            catch (Exception)
+            {
+                // pessimistic try-catch block, since there have been lots of crashes in Action Note on some devices. Unfortunately, this behavior was
+                // not reproducable yet.
+            }
+            
         }
 
         public async Task PinOrUpdateAsync(NoteItem noteItem)
