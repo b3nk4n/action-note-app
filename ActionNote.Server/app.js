@@ -11,10 +11,10 @@ var mongo = require('mongodb');
 var monk = require('monk');
 
 // LOCAL
-var db = monk('actionnote-user:***REMOVED***@localhost:27017/actionnote');
+var db = monk('actionnote-user:PASSWORD@localhost:27017/actionnote');
 
 // PRODUCTIVE
-//var db = monk('actionnote-user:***REMOVED***@localhost:20984/actionnote');
+//var db = monk('actionnote-user:cyactionnote89@localhost:20984/actionnote');
 
 var routes = require('./routes/index');
 var notes = require('./routes/notes');

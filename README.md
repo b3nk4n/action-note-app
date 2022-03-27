@@ -28,7 +28,7 @@ use actionnote
 db.createUser(
    {
      user: "actionnote-user",
-     pwd: "***REMOVED***",
+     pwd: "PASSWORD",
      roles: [ {role: "readWrite", db: "actionnote"} ]
    }
 )
