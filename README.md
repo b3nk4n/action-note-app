@@ -3,6 +3,10 @@
 
 This innovative note taking app is freely available for the Windows 10 platform.
 
+<p align="center">
+    <img alt="App Logo" src="ActionNote.App/Assets/actionnote.jpg">
+</p>
+
 Action Note is not just another note taking app. It integrates with your Action Center and gives you the fastest access to all of your notes. Even with photos and across all your Windows 10 devices.
 
 Check out the must-have app for your Windows device.
@@ -25,7 +29,7 @@ Check out the must-have app for your Windows device.
 
 ### Reviews
 
-What did users think about Action Note? Here are just a few out of 5000+ reviews:
+What did users think about Action Note? Here are just a few out of **more than 1,500 reviews** with an average **4.4** ★ rating:
 
 > "The first great 3rd party app in windows. Maybe the new paradigm of windows note apps."
 >
@@ -93,8 +97,19 @@ Server is now running on http://localhost:64302.
 To get all notes of user `XXXXXXXXXX`, simply navigate to
 http://localhost:64302/notes/list/XXXXXXXXXX
 
+>
+> _Lorenzo, USA_
+
+> "Great concept ... Will see how much it worth."
+>
+> _Inocencio, USA_
+
+## Framework
+
+This app was created and bootstrapped using my [UWPCore Framework](https://github.com/b3nk4n/uwpcore.framework).
+
 ## License
 
 This work is published under [MIT][mit] License.
 
-[mit]: https://github.com/b3nk4n/action-note-app/blob/master/LICENSE
+[mit]: https://github.com/b3nk4n/action-note-app/blob/main/LICENSE
